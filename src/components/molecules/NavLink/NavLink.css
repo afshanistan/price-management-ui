@@ -60,7 +60,7 @@
   --nav-link-ink: var(--text-default);
 }
 
-/* Active: fully neutral, filled icon. Stays Active on hover and press (open-questions.md, placeholder). */
+/* Active: fully neutral, filled icon. Stays Active on hover and press (decision log, Oct 17). */
 .nav-link[aria-current='page'] {
   --nav-link-fill: var(--fill-nav-active);
   --nav-link-ink: var(--text-default);

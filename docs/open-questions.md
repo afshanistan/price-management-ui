@@ -18,4 +18,4 @@ Format: **Question** · Where · Options · Sources · Status
 - **Effective date: typed field vs no typed input** · Global presets (step 3) · code-backlog has both "Effective date: one value, three inputs" (typed field) and "Custom date flow" (no typed input, decided Oct 16) · The later decision is "no typed input" · Confirm before building step 3
 
 ## From building NavLink (Oct 17)
-- **Active nav link on hover and press** · NavLink, `isActive` · (a) stays Active (`--fill-nav-active`, filled icon) with no hover or press change, (b) shows Hover / Pressed fills over Active · The spec's state table has no Active + Hover or Active + Pressed row · Open. Placeholder in code: (a)
+- **Active nav link on hover and press** · NavLink, `isActive` · (a) stays Active (`--fill-nav-active`, filled icon) with no hover or press change, (b) shows Hover / Pressed fills over Active · The spec's state table has no Active + Hover or Active + Pressed row · **Resolved Oct 17:** (a), for now (decision log, "An active nav link doesn't react to hover or press, for now")

@@ -457,6 +457,8 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **Code finds gaps; Figma gets fixed first.** Will: do the right thing, not the quick one. Tokens flow one way, Figma → tokens.css → components. When code needs something Figma lacks, Claude Code logs it in `docs/figma-sync.md`, uses a stand-in in `tokens.pending.css`, and the queue is applied in Figma in batches with Will's approval, then tokens.css is re-exported. First case: the Secondary button's 1.5px border was a raw value in Figma — now `border/1-5` (Primitives/Dimension, `--border-width-1-5`), bound to all 15 Secondary variants. Figma doesn't allow dots in variable names, hence `1-5`.
 
+**An active nav link doesn't react to hover or press, for now.** The NavLink spec had no Active + Hover or Active + Pressed row. Options: (a) stay Active (`--fill-nav-active`, filled icon), (b) show the Hover / Pressed fills over Active. Will chose (a), for now.
+
 ---
 
 ## Build plan
