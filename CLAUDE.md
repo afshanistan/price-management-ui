@@ -62,11 +62,11 @@ Each component gets its own folder: `Button/Button.tsx`, `Button/Button.css`, `B
 - Color roles: Teal = actions · Plum = structure and labels (never interactive, except header controls on brand) · Neutral = content · Vermilion = error/destructive · Citron = "complete" status (never interactive, never text color, never color alone).
 
 ## Stories
-For every component:
+For every component (autodocs is on globally in `.storybook/preview.tsx`, so each gets a Docs page):
 - One story per meaningful variant (each size × hierarchy, each tone), plus an **"All states"** story that shows the states side by side. Force a state with a static wrapper or a `data-*` attribute only in that story; real hover and press must still work in the others.
 - A story **on brand**: wrap it in `<div data-mode="on-brand" style="background: var(--surface-brand)">`, or use the toolbar's Mode switch.
 - The a11y panel must show **no violations**. If one can't be fixed without a design change, log it in `docs/open-questions.md`.
-- Write a short `parameters.docs.description` from the spec (what it is, when to use it).
+- `parameters.docs.description.component` starts with the Figma component description from the spec (the `>` line under **Figma:**), verbatim, then a short summary from the spec (what it is, when to use it).
 
 ## Workflow per component
 1. Read its spec in `design/specs/` and its sections in `docs/code-backlog.md`.

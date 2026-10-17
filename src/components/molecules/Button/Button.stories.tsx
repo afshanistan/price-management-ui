@@ -27,6 +27,8 @@ const meta = {
     docs: {
       description: {
         component:
+          // Figma component description, verbatim.
+          'Button — the one action control. Primary = forward, Secondary = tonal teal (plum on brand), Tertiary = text. Min width 64; min-height, not height.\n\n' +
           'The one action control. **Primary** = forward, **Secondary** = tonal teal (plum "Save and exit" on brand), **Tertiary** = text. ' +
           'Sizes: XSmall 24, Medium 32, XLarge 56 (min-height, so text can grow). Icons are always the filled drawing and share the label color. ' +
           'The accessible name is the visible label; when it needs more ("Edit" → "Edit vendors"), `aria-label` starts with the label. ' +

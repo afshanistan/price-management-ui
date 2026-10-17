@@ -24,6 +24,8 @@ const meta = {
     docs: {
       description: {
         component:
+          // Figma component description, verbatim.
+          'Icon — 24px UI icon. Stroke/Fill drawings switched by the Figma/Icon style mode; color from the Semantic/Icon mode. Code: `<Icon name filled />`, color = currentColor.\n\n' +
           '24px UI icon drawn on a 24 grid. `filled` switches between the Stroke and Fill drawings (Figma "Icon style" mode). ' +
           'Color is always `currentColor`: the container sets `color` (for example a button label), never the icon. ' +
           'Decorative by default (`aria-hidden`); give it an `aria-label` only when it stands alone and means something. ' +

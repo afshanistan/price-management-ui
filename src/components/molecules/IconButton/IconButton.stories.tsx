@@ -25,6 +25,8 @@ const meta = {
     docs: {
       description: {
         component:
+          // Figma component description, verbatim.
+          'IconButton — square/round icon-only action; needs aria-label naming action + object.\n\n' +
           'Icon-only action, a fixed 32×32 square with a 24px icon. **Default** tone fills its icon on hover and stays filled on press (no hover background). ' +
           '**Destructive** is the vendor-card trash: filled teal at rest, crimson over a light crimson circle on hover. ' +
           '`aria-label` is required and names action + object ("Remove Cargill"); the icon itself is hidden from screen readers.',

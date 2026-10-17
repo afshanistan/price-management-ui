@@ -12,6 +12,8 @@ const meta = {
     docs: {
       description: {
         component:
+          // Figma component description, verbatim.
+          'Logo — two-tone "produce bars" mark; layers bound to logo-primary / logo-accent (citron bars on brand).\n\n' +
           'Two-tone "produce bars" mark. Bars use `--logo-primary` (Teal/500, Citron/300 on brand); the stem and leaf use `--logo-accent` (Plum/600, Plum/300 on brand). ' +
           'The logo never sets a mode: it turns citron because its container has `data-mode="on-brand"` (the header). ' +
           'In the header it sits in a 36×36 frame with 2px padding, so the drawing is 32px. ' +

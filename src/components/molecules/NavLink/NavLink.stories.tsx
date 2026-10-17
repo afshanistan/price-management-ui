@@ -29,6 +29,8 @@ const meta = {
     docs: {
       description: {
         component:
+          // Figma component description, verbatim.
+          'NavLink — top-nav tab on the brand header; icon slot reserved in every state so nothing reflows.\n\n' +
           'Top-nav tab on the brand header (Main navigation, Variant=Default only). A pill whose 16px icon slot is reserved in every state, so nothing reflows: ' +
           'the icon is hidden when inactive, fades in as a stroke on hover, fills on press and stays filled when active. ' +
           'The active link is fully neutral and sets `aria-current="page"`.',
