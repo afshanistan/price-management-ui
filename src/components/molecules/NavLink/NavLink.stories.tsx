@@ -87,8 +87,8 @@ export const OnBrand: Story = {
   decorators: [(Story) => <Story />],
   render: () => (
     <nav aria-label="Main" data-mode="on-brand" className="nav-link-story__on-brand">
-      <NavLink href="#" icon="placeholder" isActive>Templates</NavLink>
-      <NavLink href="#" icon="placeholder">Submissions</NavLink>
+      <NavLink href="#" icon="create" isActive>Templates</NavLink>
+      <NavLink href="#" icon="upload">Submissions</NavLink>
       <NavLink href="#" icon="messages">Messages</NavLink>
     </nav>
   ),
@@ -97,7 +97,7 @@ export const OnBrand: Story = {
     docs: {
       description: {
         story:
-          'The three links as they sit in the Default header (gap 4 in Figma). Templates and Submissions use the placeholder icon until their icons are chosen.',
+          'The three links as they sit in the Default header (gap 4 in Figma).',
       },
     },
   },
