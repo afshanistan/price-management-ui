@@ -459,7 +459,7 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **An active nav link doesn't react to hover or press, for now.** The NavLink spec had no Active + Hover or Active + Pressed row. Options: (a) stay Active (`--fill-nav-active`, filled icon), (b) show the Hover / Pressed fills over Active. Will chose (a), for now.
 
-**Nav link icons: Templates = `create`, Submissions = `upload`, Messages = `messages`.** The Main navigation spec named the links but not their icons. Will picked from the existing icon set.
+**Nav link icons follow Figma: Templates = `tag`, Submissions = `upload`, Messages = `messages`.** The Main navigation spec export named the links but not their icons, so code briefly used Will's pick of `create` for Templates. Checking Figma (Main-Navigation `642:156`, Variant=Default) showed the icons were already set there, with `tag` for Templates. Will kept Figma's `tag`.
 
 ---
 

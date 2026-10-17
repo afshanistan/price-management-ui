@@ -18,6 +18,8 @@ Sources of truth, in this order:
 
 **If sources conflict, or something isn't decided:** don't resolve it yourself and don't invent a design. Add an entry to `docs/open-questions.md` (what, where, the options, which source says what), tell Will, and use the most recent decision as a placeholder only if he says to continue. Rejected options in the decision log stay rejected.
 
+**A detail missing from a spec isn't necessarily undecided.** Specs are exports and can leave things out (e.g. which icon each nav link uses). Check the Figma file itself (via the Figma connection) before calling something a gap or asking Will to pick.
+
 ## Stack
 - React + TypeScript + Vite
 - Storybook (React-Vite) with `@storybook/addon-a11y`, which runs axe on every story

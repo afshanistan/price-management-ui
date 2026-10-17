@@ -87,7 +87,7 @@ export const OnBrand: Story = {
   decorators: [(Story) => <Story />],
   render: () => (
     <nav aria-label="Main" data-mode="on-brand" className="nav-link-story__on-brand">
-      <NavLink href="#" icon="create" isActive>Templates</NavLink>
+      <NavLink href="#" icon="tag" isActive>Templates</NavLink>
       <NavLink href="#" icon="upload">Submissions</NavLink>
       <NavLink href="#" icon="messages">Messages</NavLink>
     </nav>

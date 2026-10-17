@@ -15,4 +15,4 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 
 Format: **Item** · Where in Figma · What to set · Used by · Found while (date)
 
-- [ ] **Nav link icons in the Default header** · Main-Navigation `642:156`, Variant=Default → the three Nav link `624:108` instances · Set the icon slot: Templates = `create`, Submissions = `upload`, Messages = `messages` (decision log, "Nav link icons") · NavLink, On brand story · NavLink (Oct 17)
+- [x] **Nav link icons in the Default header** · Main-Navigation `642:156`, Variant=Default → the three Nav link `624:108` instances · Nothing to change: Figma already has Templates = `tag`, Submissions = `upload`, Messages = `messages`; code now matches (decision log, "Nav link icons follow Figma") · NavLink, On brand story · NavLink (Oct 17). **Closed Oct 17:** no Figma change needed.
