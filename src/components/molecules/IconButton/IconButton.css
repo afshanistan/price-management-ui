@@ -1,0 +1,112 @@
+/* Icon button (design/specs/icon-button.md)
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-disabled].
+   [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
+
+.icon-button {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  /* The icon follows with currentColor. */
+  color: var(--icon-button-ink);
+  background-color: var(--icon-button-fill);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+}
+
+/* Icon-only squares stay a fixed size (not min-height). */
+.icon-button--medium {
+  width: var(--size-32);
+  height: var(--size-32);
+}
+
+.icon-button:focus {
+  outline: none;
+}
+
+/* The ring follows the radius: square for Default, round for Destructive. */
+.icon-button:is([data-focus-visible], [data-state='focus']) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+.icon-button:is([data-pressed], [data-state='pressed']) {
+  transform: scale(0.97);
+}
+
+.icon-button[data-disabled] {
+  cursor: default;
+}
+
+/* Stacked drawings for the stroke → filled crossfade. */
+.icon-button__icons {
+  display: grid;
+}
+
+.icon-button__icons > .icon {
+  grid-area: 1 / 1;
+  transition: opacity var(--motion-duration) var(--motion-ease);
+}
+
+.icon-button__filled {
+  opacity: 0;
+}
+
+/* ---------- Default tone: no hover background, the icon fills ---------- */
+
+.icon-button--default {
+  border-radius: var(--radius-4);
+  --icon-button-fill: transparent;
+  --icon-button-ink: var(--icon-on-tertiary);
+}
+
+.icon-button--default:is([data-hovered], [data-pressed], [data-state='hover'], [data-state='pressed']) .icon-button__stroke {
+  opacity: 0;
+}
+
+.icon-button--default:is([data-hovered], [data-pressed], [data-state='hover'], [data-state='pressed']) .icon-button__filled {
+  opacity: 1;
+}
+
+.icon-button--default:is([data-pressed], [data-state='pressed']) {
+  --icon-button-fill: var(--fill-tertiary-pressed);
+}
+
+.icon-button--default[data-disabled] {
+  --icon-button-fill: transparent;
+  --icon-button-ink: var(--icon-disabled);
+}
+
+/* ---------- Destructive tone: filled teal at rest, crimson over a circle on hover ---------- */
+
+.icon-button--destructive {
+  border-radius: var(--radius-full);
+  --icon-button-fill: transparent;
+  --icon-button-ink: var(--icon-on-tertiary);
+}
+
+.icon-button--destructive:is([data-hovered], [data-state='hover']) {
+  --icon-button-fill: var(--fill-destructive-hover);
+  --icon-button-ink: var(--icon-destructive);
+}
+
+.icon-button--destructive:is([data-pressed], [data-state='pressed']) {
+  --icon-button-fill: var(--fill-destructive-pressed);
+  --icon-button-ink: var(--icon-destructive);
+}
+
+.icon-button--destructive[data-disabled] {
+  --icon-button-fill: transparent;
+  --icon-button-ink: var(--icon-disabled);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .icon-button:is([data-pressed], [data-state='pressed']) {
+    transform: none;
+  }
+}
