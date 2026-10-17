@@ -1,0 +1,17 @@
+/* Global base styles: tokens, fonts and page defaults. */
+@import './tokens.css';
+@import './fonts.css';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-default);
+  background: var(--surface-page);
+}

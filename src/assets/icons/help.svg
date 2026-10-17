@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+  <path transform="translate(2.5 2.5)" d="M 19 9.5 C 19 14.75 14.75 19 9.5 19 C 4.25 19 0 14.75 0 9.5 C 0 4.25 4.25 0 9.5 0 C 14.75 0 19 4.25 19 9.5 Z"/>
+  <path transform="translate(2.5 2.5)" d="M 10 13.8 C 10 14.08 9.78 14.3 9.5 14.3 C 9.22 14.3 9 14.08 9 13.8 C 9 13.52 9.22 13.3 9.5 13.3 C 9.78 13.3 10 13.52 10 13.8 Z"/>
+  <path transform="translate(2.5 2.5)" d="M 7 6.75 C 7 5.45 8.1 4.75 9.5 4.75 C 10.9 4.75 12 5.5 12 6.75 C 12 7.9 11.1 8.35 10.4 8.9 C 9.8 9.35 9.5 9.8 9.5 10.75"/>
+</g>
+</svg>

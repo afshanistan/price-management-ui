@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+<g fill="none" stroke="currentColor" stroke-width="1">
+  <path transform="translate(6 6)" d="M 12 0 L 0 12"/>
+  <path transform="translate(6 6)" d="M 0 0 L 12 12"/>
+</g>
+</svg>

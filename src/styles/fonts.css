@@ -1,0 +1,4 @@
+/* Fonts via Fontsource. Family names match --font-family-* in tokens.css. */
+@import '@fontsource-variable/bricolage-grotesque';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/jetbrains-mono';
