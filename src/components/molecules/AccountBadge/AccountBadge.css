@@ -1,0 +1,61 @@
+/* Account badge (design/specs/account-badge.md)
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible].
+   [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
+
+.account-badge {
+  position: relative;
+  display: inline-block;
+  flex-shrink: 0;
+  /* Icon-only square: fixed size, not min-height. */
+  width: var(--size-36);
+  height: var(--size-36);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: none;
+  cursor: pointer;
+  --account-badge-rim-width: var(--border-width-1);
+  --account-badge-rim-color: var(--border-avatar-default);
+}
+
+.account-badge__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  object-fit: cover;
+}
+
+/* The rim is drawn over the photo, inside the box, so the badge never grows. */
+.account-badge::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: var(--account-badge-rim-width) solid var(--account-badge-rim-color);
+  pointer-events: none;
+  transition:
+    border-color var(--motion-duration) var(--motion-ease),
+    border-width var(--motion-duration) var(--motion-ease);
+}
+
+.account-badge:is([data-hovered], [data-state='hover']) {
+  --account-badge-rim-width: var(--border-width-2);
+  --account-badge-rim-color: var(--border-avatar-hover);
+}
+
+.account-badge:is([data-pressed], [data-state='pressed']) {
+  --account-badge-rim-width: var(--border-width-2);
+  --account-badge-rim-color: var(--border-avatar-pressed);
+}
+
+.account-badge:focus {
+  outline: none;
+}
+
+/* Focus keeps the 1px default rim and adds the round offset ring (44px). */
+.account-badge:is([data-focus-visible], [data-state='focus']) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 72 72">
+  <!-- Stand-in photo for stories only. Product code passes the person's real photo URL. -->
+  <rect width="72" height="72" fill="#d9d4de"/>
+  <circle cx="36" cy="28" r="13" fill="#8f8698"/>
+  <path d="M10 72c2-15 13-24 26-24s24 9 26 24z" fill="#8f8698"/>
+</svg>
