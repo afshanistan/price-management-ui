@@ -1,0 +1,82 @@
+/* Nav link (design/specs/nav-link.md)
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible]; Active is [aria-current='page'].
+   [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: var(--size-32);
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-full);
+  font: var(--type-label-lg);
+  letter-spacing: var(--type-label-lg-tracking);
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  color: var(--nav-link-ink);
+  background-color: var(--nav-link-fill);
+  --nav-link-fill: transparent;
+  --nav-link-ink: var(--text-subtle);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease);
+}
+
+.nav-link:focus {
+  outline: none;
+}
+
+.nav-link:is([data-focus-visible], [data-state='focus']) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+/* Reserved 16px slot with both drawings stacked. Hidden (opacity 0) when inactive. */
+.nav-link__icons {
+  display: grid;
+  color: var(--icon-default);
+}
+
+.nav-link__icons > .icon {
+  grid-area: 1 / 1;
+  opacity: 0;
+  transition: opacity var(--motion-duration) var(--motion-ease);
+}
+
+/* Hover: stroke icon fades in. */
+.nav-link:is([data-hovered], [data-state='hover']) {
+  --nav-link-fill: var(--fill-nav-hover);
+  --nav-link-ink: var(--text-default);
+}
+
+.nav-link:is([data-hovered], [data-state='hover']) .nav-link__stroke {
+  opacity: 1;
+}
+
+/* Pressed: filled icon. */
+.nav-link:is([data-pressed], [data-state='pressed']) {
+  --nav-link-fill: var(--fill-nav-pressed);
+  --nav-link-ink: var(--text-default);
+}
+
+/* Active: fully neutral, filled icon. Stays Active on hover and press (open-questions.md, placeholder). */
+.nav-link[aria-current='page'] {
+  --nav-link-fill: var(--fill-nav-active);
+  --nav-link-ink: var(--text-default);
+}
+
+.nav-link:is([data-pressed], [data-state='pressed'], [aria-current='page']) .nav-link__stroke {
+  opacity: 0;
+}
+
+.nav-link:is([data-pressed], [data-state='pressed'], [aria-current='page']) .nav-link__filled {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-link,
+  .nav-link__icons > .icon {
+    transition: none;
+  }
+}

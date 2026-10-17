@@ -8,4 +8,5 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 
 ---
 
-- [x] **1.5px border token** · `border/1-5` (Primitives/Dimension) → `--border-width-1-5`, bound to the 15 Secondary button variants · was `--border-width-1-5` in a stand-in file, now removed · Button (Oct 17). **Done Oct 17:** in `tokens.css` v2.
+- [x] **`--border-width-1-5`** (Figma `border/1-5`) · Primitives/Dimension · Light 1.5px · On brand 1.5px (dimensions have no modes) · Button, Secondary hierarchy · Bind as the stroke weight of the 15 Secondary button variants · Stand-in removed · Button (Oct 17). **Done Oct 17:** in `tokens.css` v2.
+
