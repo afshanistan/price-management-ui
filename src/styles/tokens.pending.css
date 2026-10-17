@@ -1,9 +1,11 @@
 /* ==========================================================================
    tokens.pending.css: stand-ins for tokens code needs but Figma lacks yet.
    Tokens flow one way: Figma → tokens.css → components (decision log,
-   "Code finds gaps; Figma gets fixed first"). Each stand-in here has an
-   entry in docs/figma-sync.md. Once Figma has the variable and tokens.css
-   is re-exported, delete the stand-in and tick the entry.
+   "Code finds gaps; Figma gets fixed first"). Imported after tokens.css.
+   Each stand-in has a comment pointing to its entry in docs/figma-sync.md,
+   e.g.  --border-width-1-5: 1.5px; /- figma-sync: "1.5px border token" -/
+   Once Figma has the variable and tokens.css is re-exported, delete the
+   stand-in and tick the entry.
    ========================================================================== */
 
 :root {

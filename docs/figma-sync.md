@@ -4,7 +4,7 @@ Gaps code found that Figma has to fix first (decision log, "Code finds gaps; Fig
 
 **How it works:** Claude Code adds an entry here and, if a token is needed to keep building, a stand-in in `src/styles/tokens.pending.css`. Will applies the queue in Figma in batches, then re-exports `tokens.css`. Then the stand-in is deleted and the entry ticked.
 
-Format: **Item** · What Figma needs · Stand-in · Found while
+Format: **Token name** · Collection · Light value · On brand value · Used by (component) · What to bind in Figma · Stand-in (in `tokens.pending.css`, or none) · Found while (date)
 
 ---
 

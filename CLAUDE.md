@@ -45,7 +45,12 @@ Each component gets its own folder: `Button/Button.tsx`, `Button/Button.css`, `B
 - Spacing, sizes and radii use the dimension tokens (`--space-12`, `--size-32`, `--radius-4`, `--border-width-1`, `--focus-width-2`, `--focus-offset-2`).
 - Text uses the text-style shorthands: `font: var(--type-label-lg); letter-spacing: var(--type-label-lg-tracking);` (or the `.type-*` classes).
 - **Modes are places:** a container sets `data-mode="on-brand"` (header, plum stage), and every token inside re-resolves. Components never set a mode, and never take a "dark" or "on-brand" prop. `data-mode="light"` opts a nested element back out.
-- If a component needs a token that doesn't exist, **Figma gets fixed first**: log it in `docs/figma-sync.md` and tell Will. If it's needed to keep building, add a stand-in in `src/styles/tokens.pending.css` (never in `tokens.css`, never a hardcoded value in a component). Will applies the queue in Figma and re-exports; then delete the stand-in and tick the entry.
+- **Figma is the source of truth for tokens and components.** Never add tokens to `tokens.css` by hand. When code needs something Figma doesn't have:
+  1. Log it in `docs/figma-sync.md`: collection, token name, Light and On brand values, which component uses it, and what to bind in Figma.
+  2. Put a stand-in in `src/styles/tokens.pending.css` (imported after `tokens.css`), with a comment pointing to the sync entry. Never hardcode the value in a component.
+  3. Tell Will, and keep going.
+
+  Will applies the queue in Figma and re-exports `tokens.css`; then delete the stand-in and tick the entry.
 
 ## Component rules (from the decision log and code backlog)
 - Props read like the Figma properties (`size`, `hierarchy`, `tone`, `leadingIcon`). Figma's **State** property is never a prop. States are pseudo-classes or React Aria data attributes.
