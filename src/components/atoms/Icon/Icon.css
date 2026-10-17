@@ -1,0 +1,7 @@
+/* Icon: color always comes from the container (currentColor). Never set it here. */
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  color: inherit;
+}

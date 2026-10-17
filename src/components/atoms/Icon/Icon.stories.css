@@ -1,0 +1,40 @@
+/* Layout for the Icon stories only. */
+.icon-story__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-32);
+  color: var(--icon-default);
+}
+
+.icon-story__cell {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-8);
+  margin: 0;
+}
+
+.icon-story__caption {
+  color: var(--text-subtle);
+}
+
+.icon-story__table {
+  border-collapse: collapse;
+  color: var(--text-default);
+}
+
+.icon-story__table th,
+.icon-story__table td {
+  padding: var(--space-8) var(--space-16);
+  border-bottom: var(--border-width-1) solid var(--border-structural);
+  text-align: left;
+}
+
+.icon-story__table thead th {
+  font-weight: inherit;
+}
+
+.icon-story__table td {
+  color: var(--icon-default);
+  text-align: center;
+}
