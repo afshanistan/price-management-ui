@@ -28,7 +28,7 @@ Sources of truth, in this order:
 ## Folder structure (mirrors the Figma library pages)
 ```
 src/
-  styles/        tokens.css (generated), tokens-code.css (decided, not in Figma yet), fonts.css, global.css
+  styles/        tokens.css (generated), tokens.pending.css (stand-ins until Figma has them), fonts.css, global.css
   assets/        icons/*.svg (stroke + -filled), logo.svg
   components/
     atoms/       Icon, Logo, Checkbox, Radio, StatusMark, ...
@@ -45,7 +45,7 @@ Each component gets its own folder: `Button/Button.tsx`, `Button/Button.css`, `B
 - Spacing, sizes and radii use the dimension tokens (`--space-12`, `--size-32`, `--radius-4`, `--border-width-1`, `--focus-width-2`, `--focus-offset-2`).
 - Text uses the text-style shorthands: `font: var(--type-label-lg); letter-spacing: var(--type-label-lg-tracking);` (or the `.type-*` classes).
 - **Modes are places:** a container sets `data-mode="on-brand"` (header, plum stage), and every token inside re-resolves. Components never set a mode, and never take a "dark" or "on-brand" prop. `data-mode="light"` opts a nested element back out.
-- If a component needs a color that has no token, **stop and log it** in `docs/open-questions.md`. Don't add a token or hardcode a color.
+- If a component needs a token that doesn't exist, **Figma gets fixed first**: log it in `docs/figma-sync.md` and tell Will. If it's needed to keep building, add a stand-in in `src/styles/tokens.pending.css` (never in `tokens.css`, never a hardcoded value in a component). Will applies the queue in Figma and re-exports; then delete the stand-in and tick the entry.
 
 ## Component rules (from the decision log and code backlog)
 - Props read like the Figma properties (`size`, `hierarchy`, `tone`, `leadingIcon`). Figma's **State** property is never a prop. States are pseudo-classes or React Aria data attributes.

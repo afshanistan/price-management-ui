@@ -1,6 +1,6 @@
 /* Global base styles: tokens, fonts and page defaults. */
 @import './tokens.css';
-@import './tokens-code.css';
+@import './tokens.pending.css';
 @import './fonts.css';
 
 *,

@@ -453,6 +453,10 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **XLarge button = 56px, confirmed.** Figma, this log and Foundations said 56; one line in code-backlog said 48 (with 20px padding). Will confirmed 56; the backlog line now follows Figma (56 tall, 24px side padding).
 
+**On the plum header, interaction states get darker, not lighter.** Storybook's axe check found two On brand contrast failures: Secondary hover (Neutral/50 on Plum/500, 3.66:1 — "Save and exit", on every screen) and Tertiary pressed (Teal/300 on Neutral/700, 4.48:1 — no on-brand Tertiary text button exists yet). Cause: on the dark header the labels are light, so lightening the fill on hover/press moves it toward the label. Fix, one rule for both: `fill-secondary-hover` → Plum/700 (6.78:1), `fill-secondary-pressed` → Plum/800 (9.30:1), `fill-tertiary-pressed` → Neutral/1000 (10.48:1); On brand only, Light unchanged. Trade-off: the darker hover sits closer to the stage (1.85:1), so the cue becomes "border lights up (Plum/400, 5.35:1 vs stage), body sinks in." Options rejected: border-only hover on a Plum/600 body (passes at 4.96 but faint); accepting the Tertiary miss because it's unused (the same rule fixes it for free). *Reverses Oct 16's "Plum/600, hover 500, pressed 700."*
+
+**Code finds gaps; Figma gets fixed first.** Will: do the right thing, not the quick one. Tokens flow one way, Figma → tokens.css → components. When code needs something Figma lacks, Claude Code logs it in `docs/figma-sync.md`, uses a stand-in in `tokens.pending.css`, and the queue is applied in Figma in batches with Will's approval, then tokens.css is re-exported. First case: the Secondary button's 1.5px border was a raw value in Figma — now `border/1-5` (Primitives/Dimension, `--border-width-1-5`), bound to all 15 Secondary variants. Figma doesn't allow dots in variable names, hence `1-5`.
+
 ---
 
 ## Build plan

@@ -1,6 +1,6 @@
 /* ==========================================================================
    tokens.css — Price Management 2.0
-   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-17.
+   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-17 (v2: on-brand state fix + border/1-5).
    DO NOT EDIT BY HAND. Change the variable in Figma, then re-export.
 
    Layers:
@@ -193,6 +193,7 @@
   --radius-full: 999px;
   --border-width-0: 0;
   --border-width-1: 1px;
+  --border-width-1-5: 1.5px;
   --border-width-2: 2px;
   --border-width-3: 3px;
   --focus-width-1: 1px;
@@ -436,14 +437,14 @@
   --fill-primary-pressed: var(--color-teal-400);
   --text-on-primary: var(--color-teal-1000);
   --fill-secondary-default: var(--color-plum-600);
-  --fill-secondary-hover: var(--color-plum-500);
-  --fill-secondary-pressed: var(--color-plum-700);
+  --fill-secondary-hover: var(--color-plum-700);
+  --fill-secondary-pressed: var(--color-plum-800);
   --border-secondary-default: var(--color-plum-500);
   --border-secondary-hover: var(--color-plum-400);
   --text-on-secondary: var(--color-neutral-50);
   --fill-tertiary-default: var(--color-base-transparent);
   --fill-tertiary-hover: var(--color-neutral-800);
-  --fill-tertiary-pressed: var(--color-neutral-700);
+  --fill-tertiary-pressed: var(--color-neutral-1000);
   --text-on-tertiary: var(--color-teal-300);
   --fill-disabled: var(--color-neutral-800);
   --border-disabled: var(--color-neutral-700);
