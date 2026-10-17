@@ -1,0 +1,44 @@
+/* Layout for the Button stories only. */
+.button-story__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.button-story__on-brand {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-24);
+  background: var(--surface-brand);
+}
+
+.button-story__states {
+  display: grid;
+  gap: var(--space-32);
+}
+
+.button-story__table {
+  border-collapse: collapse;
+}
+
+.button-story__table caption {
+  text-align: left;
+  padding-bottom: var(--space-8);
+}
+
+.button-story__table th,
+.button-story__table td {
+  padding: var(--space-8) var(--space-12);
+  text-align: left;
+}
+
+.button-story__table thead th {
+  font-weight: inherit;
+}
+
+.button-story__caption {
+  color: var(--text-subtle);
+}

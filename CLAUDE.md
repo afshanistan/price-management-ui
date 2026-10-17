@@ -28,7 +28,7 @@ Sources of truth, in this order:
 ## Folder structure (mirrors the Figma library pages)
 ```
 src/
-  styles/        tokens.css (generated), fonts.css, global.css
+  styles/        tokens.css (generated), tokens-code.css (decided, not in Figma yet), fonts.css, global.css
   assets/        icons/*.svg (stroke + -filled), logo.svg
   components/
     atoms/       Icon, Logo, Checkbox, Radio, StatusMark, ...

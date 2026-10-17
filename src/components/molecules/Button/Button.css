@@ -1,0 +1,151 @@
+/* Button (design/specs/button.md)
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-disabled].
+   [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  border: var(--border-width-1) solid transparent;
+  font: var(--type-button-label);
+  letter-spacing: var(--type-button-label-tracking);
+  white-space: nowrap;
+  cursor: pointer;
+  /* Label and icons share one color; icons follow with currentColor. */
+  color: var(--button-ink);
+  background-color: var(--button-fill);
+  border-color: var(--button-border);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+}
+
+.button__label {
+  min-width: 0;
+}
+
+/* Focus: keyboard only, outline instead of the Figma ring frame. */
+.button:focus {
+  outline: none;
+}
+
+.button:is([data-focus-visible], [data-state='focus']) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+.button:is([data-pressed], [data-state='pressed']) {
+  transform: scale(0.97);
+}
+
+.button[data-disabled] {
+  cursor: default;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .button:is([data-pressed], [data-state='pressed']) {
+    transform: none;
+  }
+}
+
+/* ---------- Sizes: min-height, never height ---------- */
+
+.button--xsmall {
+  min-height: var(--size-24);
+  padding: 0 var(--space-8);
+  gap: var(--space-4);
+  border-radius: var(--radius-4);
+}
+
+.button--medium {
+  min-height: var(--size-32);
+  min-width: var(--size-64);
+  padding: 0 var(--space-12);
+  gap: var(--space-6);
+  border-radius: var(--radius-4);
+}
+
+.button--xlarge {
+  min-height: var(--size-56);
+  min-width: var(--size-64);
+  padding: 0 var(--space-24);
+  gap: var(--space-8);
+  border-radius: var(--radius-6);
+  /* No text style in Figma yet; Geist SemiBold 16/24 for now (docs/open-questions.md). */
+  font: 600 16px/24px var(--font-family-body);
+  letter-spacing: 0;
+}
+
+/* ---------- Primary ---------- */
+
+.button--primary {
+  --button-fill: var(--fill-primary-default);
+  --button-border: var(--fill-primary-default);
+  --button-ink: var(--text-on-primary);
+}
+
+.button--primary:is([data-hovered], [data-state='hover']) {
+  --button-fill: var(--fill-primary-hover);
+  --button-border: var(--fill-primary-hover);
+}
+
+.button--primary:is([data-pressed], [data-state='pressed']) {
+  --button-fill: var(--fill-primary-pressed);
+  --button-border: var(--fill-primary-pressed);
+}
+
+.button--primary[data-disabled] {
+  --button-fill: var(--fill-disabled);
+  --button-border: var(--border-disabled);
+  --button-ink: var(--text-disabled);
+}
+
+/* ---------- Secondary: tonal fill + 1.5px border ---------- */
+
+.button--secondary {
+  border-width: var(--border-width-1-5);
+  --button-fill: var(--fill-secondary-default);
+  --button-border: var(--border-secondary-default);
+  --button-ink: var(--text-on-secondary);
+}
+
+.button--secondary:is([data-hovered], [data-state='hover']) {
+  --button-fill: var(--fill-secondary-hover);
+  --button-border: var(--border-secondary-hover);
+}
+
+/* Pressed keeps the default border, not the hover one. */
+.button--secondary:is([data-pressed], [data-state='pressed']) {
+  --button-fill: var(--fill-secondary-pressed);
+  --button-border: var(--border-secondary-default);
+}
+
+.button--secondary[data-disabled] {
+  --button-fill: var(--surface-card);
+  --button-border: var(--border-disabled);
+  --button-ink: var(--text-disabled);
+}
+
+/* ---------- Tertiary: text only ---------- */
+
+.button--tertiary {
+  --button-fill: transparent;
+  --button-border: transparent;
+  --button-ink: var(--text-on-tertiary);
+}
+
+.button--tertiary:is([data-hovered], [data-state='hover']) {
+  --button-fill: var(--fill-tertiary-hover);
+}
+
+.button--tertiary:is([data-pressed], [data-state='pressed']) {
+  --button-fill: var(--fill-tertiary-pressed);
+}
+
+.button--tertiary[data-disabled] {
+  --button-fill: transparent;
+  --button-ink: var(--text-disabled);
+}
