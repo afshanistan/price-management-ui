@@ -1,4 +1,4 @@
-/* Result row, Single (design/specs/result-row.md)
+/* Result row, Single and Multi (design/specs/result-row.md)
    States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-selected].
    [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
 
@@ -60,4 +60,26 @@
 
 .result-row__selected > .type-label-sm {
   color: var(--text-selected);
+}
+
+/* ---------- Multi (brand list): checkbox box, square corners (docs/open-questions.md) ---------- */
+
+.result-row--multi {
+  border-radius: 0;
+}
+
+/* SKU count turns teal once the row is pressed or selected. */
+.result-row--multi:is([data-selected], [data-pressed], [data-state='pressed']) .result-row__meta {
+  color: var(--text-selected);
+}
+
+/* The box's Hover look follows the row (hovered, keyboard active or pressed), not the pointer on the box. */
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) .checkbox-box {
+  --checkbox-fill: var(--fill-input-hover);
+  --checkbox-border: var(--border-input-hover);
+}
+
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) .checkbox-box:is([data-checked], [data-mixed]) {
+  --checkbox-fill: var(--fill-primary-hover);
+  --checkbox-border: var(--fill-primary-hover);
 }

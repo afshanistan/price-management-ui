@@ -29,7 +29,28 @@ Format: **Question** · Where · Options · Sources · Status
 - **Input Clear hover circle** · Input, Clear button · Figma doesn't draw it; the spec says pick a neutral hover token · Open. Built with `--fill-tertiary-hover`; no new token added
 - **Disabled helper text contrast** · Text field, Disabled · axe flags the helper: `--text-disabled` on the page background is 3.38:1 (needs 4.5:1). WCAG exempts text that's part of a disabled control, and axe already exempts the label, but it can't tell the helper belongs to the field · (a) accept the exemption and turn the check off for disabled Text field stories, (b) keep the helper `--text-subtle` when disabled (a Figma change) · Open. Storybook shows the violation on the Disabled and All states stories until Will picks
 - **Picking an already-added vendor** · Results panel · (a) does nothing, (b) removes it (toggle) · Figma only shows it as Selected · Open. Built as (a), a no-op; removing is the trash on its card
-- **Multi Result rows have no corner radius** · Result row, Select=Multi (step 2) · Single rows have radius 6; Multi rows have none in Figma · Probably unintended · Open. Answer before building step 2
+- **Multi Result rows have no corner radius** · Result row, Select=Multi (step 2) · Single rows have radius 6; Multi rows have none in Figma · Probably unintended; the batch 3 spec notes multi rows sit edge to edge inside the Brand list's border, so square corners may be intended · Open. Built with radius 0 (Oct 17)
 - **Focus after removing a vendor** · Select vendors card, Remove · Not in Figma or the annotations · Open. Built as the spec suggests: the next card's Remove (the previous one if it was the last), or the search when none are left; announced "Cargill removed"
 - **"Selected vendors (N)": heading or not?** · Select vendors card · (a) a label for the list (Figma's label style), (b) an H2 (code-backlog: "H2 = panel / section titles") · Spec says build (a) · Open. Built as (a): `.type-label-lg`, names the `<ul>` with `aria-labelledby`
 - **Results panel after a pick** · Select vendors card · (a) stays open so several vendors can be added in a row, (b) closes after each pick · Not drawn; the helper text ("Select a vendor to add it immediately") suggests (a) · Open. Built as (a): query and focus stay
+
+## From the step 2–4 spec export (Oct 17, night)
+*Logged by the spec export so Claude Code doesn't have to. Each spec says what to build until Will answers. Multi Result row radius and Effective date typed field are already above.*
+
+**Step 2 (Select brands)**
+- **Brand list shadow** · Brand list `744:777` · Figma has `Elevation/2 – floating` on a list that sits inline in the card · Probably left from when it was a dropdown · Open. Build without the shadow (`brand-list.md`)
+- **Incomplete vendor: note or empty state** · Selected brands panel, Incomplete · code-backlog: a "Sysco needs at least one brand." note; Figma: inline Empty selection "No Kraft Heinz brands yet", no note · Open. Build Figma's (`selected-brands-panel.md`)
+- **Undo toast for "All N brands" ×** · Select brands card · code-backlog asks for an undo toast; there's no Toast component in Figma · Open. Build the clear + a live-region announcement, no toast (`select-brands-card.md`)
+- **Focus after removing a chip** · Selected brands panel · Not in Figma or the annotations (same question as step 1's vendor remove) · Open. Build: next chip's ×, else previous, else the vendor's H3 (`selected-brands-panel.md`)
+- **General Mills wordmark** · Vendor logo / coverage tile · `vendors.ts` (step 1) "GIS"; Figma step 2 coverage tile "GMI" · Open. Keep `vendors.ts` as the one source
+- **Status mark To do center** · Status mark · Figma fills it white (`--surface-card`); code-backlog suggests transparent once real logos exist · Open. Build Figma's
+
+**Step 3 (Global presets)**
+- **Option tile label weight** · Option tile · code-backlog "Radio labels": always 600; Figma Label/LG = 500 in every state · Open. Build 500 (`option-tile.md`)
+- **Preset grid** · Global presets card · code-backlog "Grid": 2 columns, Dates spans both; Figma: 3 equal columns, gap 32, Effective date first · Figma is later · Open. Build Figma's (`global-presets-card.md`)
+- **Is today selectable?** · Date picker · "past days disabled" vs "Choose a date after today" · Open. Build with today disabled (`date-picker.md`)
+- **Today + Selected day** · Calendar day · Not drawn · Open. Keep the today dot, in `--text-on-primary` (`calendar-day.md`)
+
+**Step 4 (Review)**
+- **Review card pictogram** · Review template card header · Figma uses Pictograms Type=Placeholder; there's no review pictogram · Open. Build `placeholder`
+- **Scrolling list max height** · Review template card, Vendors | Brands lists · code-backlog ~266px (6½ brand rows); Figma lists are now 230, which fits the fixed 644 card · Open. Build 230

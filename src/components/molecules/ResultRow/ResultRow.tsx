@@ -1,20 +1,23 @@
 import { ListBoxItem, type ListBoxItemProps } from 'react-aria-components'
+import { CheckboxBox } from '../../atoms/Checkbox'
 import { Icon } from '../../atoms/Icon'
 import { VendorLogo } from '../../atoms/VendorLogo'
 import './ResultRow.css'
 
-export type ResultRowSelect = 'single'
+export type ResultRowSelect = 'single' | 'multi'
 
 export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'className' | 'style' | 'textValue'> {
-  /** Vendor name. */
+  /** Vendor name (single) or brand name (multi). */
   name: string
-  /** ESN, "DEMO-0022". */
-  meta: string
-  /** For the Vendor logo. */
-  wordmark: string
+  /** Single: ESN, "DEMO-0022". */
+  meta?: string
+  /** Single: for the Vendor logo. */
+  wordmark?: string
+  /** Multi: shown as "SKUs: 4", read as "4 SKUs". */
+  skuCount?: number
   /** Bolds the matched part of the name. */
   query?: string
-  /** Only `single` (vendor search) for now; `multi` comes with the Checkbox spec in step 2. */
+  /** single = vendor search (logo, ESN, "Selected"); multi = brand list (checkbox, SKU count). */
   select?: ResultRowSelect
   /** Forces a state for the "All states" story only. Never set it in product code. */
   'data-state'?: 'hover' | 'keyboard' | 'pressed'
@@ -24,7 +27,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta, wordmark, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
@@ -32,7 +35,21 @@ export function ResultRow({ name, meta, wordmark, query, select = 'single', 'dat
       className={`result-row result-row--${select}`}
       data-state={state}
     >
-      {({ isSelected, isPressed }) => (
+      {({ isSelected, isPressed }) =>
+        select === 'multi' ? (
+          <>
+            {/* Decoration only: the row is the option and carries aria-selected. Pressed shows checked. */}
+            <CheckboxBox checked={isSelected || isPressed || state === 'pressed'} />
+            <span className="result-row__name" title={name}>
+              <Highlight text={name} query={query} />
+            </span>
+            {/* Read as "Truvia, 4 SKUs"; shown as "SKUs: 4". */}
+            <span className="visually-hidden">{`, ${skuCount} ${skuCount === 1 ? 'SKU' : 'SKUs'}`}</span>
+            <span className="result-row__meta type-data-sm" aria-hidden="true">
+              SKUs: {skuCount}
+            </span>
+          </>
+        ) : (
         <>
           <VendorLogo vendor={name} wordmark={wordmark} isSelected={isSelected || isPressed || state === 'pressed'} />
           {/* One line with an ellipsis; the full name in the tooltip. */}
@@ -50,7 +67,8 @@ export function ResultRow({ name, meta, wordmark, query, select = 'single', 'dat
             </span>
           )}
         </>
-      )}
+        )
+      }
     </ListBoxItem>
   )
 }
