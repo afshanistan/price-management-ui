@@ -1,0 +1,7 @@
+/* Pictogram: color always comes from the container (currentColor), like Icon. */
+.pictogram {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  color: inherit;
+}

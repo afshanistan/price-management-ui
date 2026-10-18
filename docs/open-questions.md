@@ -22,3 +22,7 @@ Format: **Question** · Where · Options · Sources · Status
 
 ## From building the Stepper (Oct 17)
 - **Current step label weight** · Stepper, in-progress label · (a) Geist **Bold** 700, Figma's `Stepper/Active` text style, (b) **SemiBold** 600, code-backlog "Progress stepper" ("current Neutral/50 semibold") · Spec says build with the Figma style · Open. Built with (a) `.type-stepper-active`; if (b), change the text style in Figma and re-export
+
+## From building step 1 (Oct 17)
+- **Vendor logo wordmark on the teal tile** · Vendor logo, Selected (set by Result row / Selected item card) · Figma doesn't bind the wordmark color in that state · Spec says use `--text-on-primary` · Open. Built with `--text-on-primary`; bind it in Figma if that's right
+- **Vendor logo hover** · Vendor logo · white tile + teal border + teal ink on hover (proposed in code-backlog) · Not decided · Open. Not built

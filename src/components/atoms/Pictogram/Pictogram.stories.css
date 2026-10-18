@@ -1,0 +1,19 @@
+/* Layout for the Pictogram stories only. */
+.pictogram-story__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--space-32);
+  color: var(--icon-brand);
+}
+
+.pictogram-story__cell {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-8);
+  margin: 0;
+}
+
+.pictogram-story__caption {
+  color: var(--text-subtle);
+}

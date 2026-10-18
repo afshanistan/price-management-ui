@@ -1,5 +1,7 @@
 # Component specs (exported from Figma, Oct 17)
 
+Batch 1 (afternoon): header + wizard footer. Batch 2 (evening): Stepper + step 1 (Add vendors).
+
 One file per component, read straight from the Figma main components (file `Iz1cbfAMKHnHopr6wgXZCa`). Each spec has the same sections:
 
 - **Figma**: node ID and the description written on the component in Figma
@@ -14,6 +16,17 @@ Build order for the first organism (header + wizard footer):
 1. `icon.md`, `logo.md` (atoms)
 2. `button.md`, `icon-button.md`, `nav-link.md`, `account-badge.md` (molecules)
 3. `main-navigation.md`, `wizard-navigation.md` (navigation & wayfinding)
+
+Batch 2 build order (stepper + step 1):
+4. `stepper.md` (Stepper, Stepper step, Stepper line in one file)
+5. `pictogram.md`, `vendor-logo.md` (atoms; pictogram SVGs in `src/assets/pictograms/`)
+6. `icon-tile.md`, `tag.md`, `card-header.md`
+7. `input.md`, `text-field.md`
+8. `result-row.md` (**Single only**; Multi waits for the Checkbox spec in step 2), `results-panel.md`
+9. `selected-item-card.md`, `empty-selection.md`
+10. `select-vendors-card.md` (combines 6–9)
+
+Not exported yet (step 2 onward): Checkbox, Group header, Selection summary, Brand chip, Vendor coverage tile, Status mark, Brand list, Selected brands panel, Select brands card, and steps 3–4.
 
 Figma-only machinery you must **not** reproduce in code:
 - The **Semantic/Icon** and **Figma/Icon style** variable modes. In code, icons use `currentColor` and a `filled` prop.

@@ -1,0 +1,39 @@
+/* Vendor logo (design/specs/vendor-logo.md)
+   A fixed tile (icon-like: fixed size, not min-height). [data-selected] is set by the parent row or card. */
+
+.vendor-logo {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-4);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-4);
+  background: var(--fill-vendor-logo);
+  color: var(--text-subtle);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease);
+}
+
+.vendor-logo--sm {
+  width: var(--size-56);
+  height: var(--size-36);
+}
+
+.vendor-logo--lg {
+  width: var(--size-80);
+  height: var(--size-48);
+}
+
+/* Teal tile when the parent is pressed or selected.
+   The wordmark color isn't bound in Figma: --text-on-primary for now (docs/open-questions.md). */
+.vendor-logo[data-selected] {
+  background: var(--fill-row-indicator);
+  border-color: var(--fill-row-indicator);
+  color: var(--text-on-primary);
+}
+
+.vendor-logo__wordmark {
+  white-space: nowrap;
+}

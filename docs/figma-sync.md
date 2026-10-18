@@ -12,6 +12,10 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 
 - [x] **`--layout-content-width`** (Figma `layout/content-width`) · Primitives/Dimension · Light 960px · On brand 960px (dimensions have no modes) · Wizard navigation (and later the card, stepper and page shell: the 960 content column) · Bind as the width of Wizard navigation `853:184`, the card and the Stepper `879:293` · Stand-in removed · Wizard navigation (Oct 17). **Done Oct 17:** in `tokens.css` v3, bound in Figma.
 
+- [ ] **`--space-10`** (Figma `space/10`) · Primitives/Dimension · 10px (no modes) · Empty selection, Inline layout (padding 10 / 12) · Bind as the vertical padding of Empty selection `903:616` Layout=Inline · Stand-in in `tokens.pending.css` · Empty selection (Oct 17)
+- [ ] **`--size-80`** (Figma `size/80`) · Primitives/Dimension · 80px (no modes) · Vendor logo lg (80×48, Selected item card) · Bind as the width of the lg Vendor logo `677:34` instance in Selected item card `707:717` · Stand-in in `tokens.pending.css` · Vendor logo (Oct 17)
+- [ ] **`--focus-offset-4`** (Figma `focus/offset-4`) · Primitives/Dimension · 4px (no modes) · Input focus ring (sits 4px outside the field) · Bind as the offset of the Input `661:56` Focus ring frame · Stand-in in `tokens.pending.css` · Input (Oct 17)
+
 ## Components
 
 Format: **Item** · Where in Figma · What to set · Used by · Found while (date)
