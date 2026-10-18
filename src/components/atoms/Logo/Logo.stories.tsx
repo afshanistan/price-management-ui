@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Logo } from './Logo'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/logo.md?raw'
 
 const meta = {
   title: 'Atoms/Logo',
@@ -9,6 +11,8 @@ const meta = {
     title: 'Price Management',
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Logo 637:25).
     design: {
       type: 'figma',

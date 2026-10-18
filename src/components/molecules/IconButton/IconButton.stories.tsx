@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { iconNames } from '../../atoms/Icon'
 import { IconButton, type IconButtonTone } from './IconButton'
 import './IconButton.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/icon-button.md?raw'
 
 const tones: IconButtonTone[] = ['default', 'destructive']
 const states = ['default', 'hover', 'pressed', 'focus', 'disabled'] as const
@@ -22,6 +24,8 @@ const meta = {
     size: { control: 'inline-radio', options: ['medium'] },
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Icon button 603:52).
     design: {
       type: 'figma',

@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { iconNames } from '../../atoms/Icon'
 import { Button, type ButtonHierarchy, type ButtonSize } from './Button'
 import './Button.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/button.md?raw'
 
 const sizes: ButtonSize[] = ['xsmall', 'medium', 'xlarge']
 const hierarchies: ButtonHierarchy[] = ['primary', 'secondary', 'tertiary']
@@ -24,6 +26,8 @@ const meta = {
     trailingIcon: { control: 'select', options: [undefined, ...iconNames] },
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Button 580:26).
     design: {
       type: 'figma',

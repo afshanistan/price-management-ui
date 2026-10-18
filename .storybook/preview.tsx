@@ -1,11 +1,15 @@
 import type { Preview } from '@storybook/react-vite'
 import '../src/styles/global.css'
+import { DocsPage } from './DocsPage'
 
 const preview: Preview = {
   // A Docs page for every component, built from its stories, props and description.
   tags: ['autodocs'],
 
   parameters: {
+    // Every Docs page shows the component's spec above its stories (see DocsPage.tsx).
+    docs: { page: DocsPage },
+
     controls: {
       matchers: {
        color: /(background|color)$/i,

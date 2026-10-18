@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import avatar from '../../../assets/avatar-placeholder.svg'
 import { AccountBadge } from './AccountBadge'
 import './AccountBadge.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/account-badge.md?raw'
 
 const states = ['default', 'hover', 'pressed', 'focus'] as const
 
@@ -13,6 +15,8 @@ const meta = {
     name: 'Will Norris',
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Account-Badge 617:107).
     design: {
       type: 'figma',

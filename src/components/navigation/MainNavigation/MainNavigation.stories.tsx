@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import avatar from '../../../assets/avatar-placeholder.svg'
 import { MainNavigation, type MainNavigationPage } from './MainNavigation'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/main-navigation.md?raw'
 
 const meta = {
   title: 'Navigation/MainNavigation',
@@ -13,6 +15,8 @@ const meta = {
     currentPage: { control: 'inline-radio', options: ['templates', 'submissions', 'messages'] satisfies MainNavigationPage[] },
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Main-Navigation 642:156).
     design: {
       type: 'figma',

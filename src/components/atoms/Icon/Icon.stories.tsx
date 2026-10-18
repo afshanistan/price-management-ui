@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Icon } from './Icon'
 import { iconNames, type IconSize } from './iconNames'
 import './Icon.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/icon.md?raw'
 
 const sizes: IconSize[] = [14, 16, 20, 24]
 
@@ -21,6 +23,8 @@ const meta = {
     size: { control: 'inline-radio', options: sizes },
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Icons 563:12460).
     design: {
       type: 'figma',

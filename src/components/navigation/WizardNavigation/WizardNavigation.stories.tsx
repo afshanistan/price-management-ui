@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 import { WizardNavigation } from './WizardNavigation'
 import './WizardNavigation.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/wizard-navigation.md?raw'
 
 // Two footers on one canvas is a story-only artifact: a real page has exactly one.
 const twoFooters = {
@@ -23,6 +25,8 @@ const meta = {
     hint: 'Add at least one brand for every vendor to continue.',
   },
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Wizard navigation 853:184).
     design: {
       type: 'figma',

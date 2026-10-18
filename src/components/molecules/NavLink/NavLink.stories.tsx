@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { iconNames } from '../../atoms/Icon'
 import { NavLink } from './NavLink'
 import './NavLink.stories.css'
+// Raw import: the Docs page shows the spec and updates whenever it changes.
+import spec from '../../../../design/specs/nav-link.md?raw'
 
 const states = ['inactive', 'hover', 'pressed', 'active', 'focus'] as const
 
@@ -26,6 +28,8 @@ const meta = {
     ),
   ],
   parameters: {
+    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    spec,
     // Design tab: the main component in Figma (Nav link 624:108).
     design: {
       type: 'figma',
