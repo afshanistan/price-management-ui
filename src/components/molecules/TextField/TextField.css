@@ -19,7 +19,9 @@
   color: var(--text-subtle);
 }
 
-.text-field[data-disabled] :is(.text-field__label, .text-field__helper) {
+/* Only the label greys out. The helper keeps --text-subtle: it's often the only line saying why
+   the field is disabled (open questions, "Disabled helper text contrast", answered (b)). */
+.text-field[data-disabled] .text-field__label {
   color: var(--text-disabled);
 }
 

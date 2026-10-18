@@ -1,6 +1,7 @@
 /* ==========================================================================
    tokens.css — Price Management 2.0
-   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-17 (v3: + layout/content-width).
+   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-18 (v4: + space/10, space/14, size/18, size/80, size/126, size/230,
+   focus/offset/4, layout/panel-width).
    DO NOT EDIT BY HAND. Change the variable in Figma, then re-export.
 
    Layers:
@@ -163,7 +164,9 @@
   --space-4: 4px;
   --space-6: 6px;
   --space-8: 8px;
+  --space-10: 10px;
   --space-12: 12px;
+  --space-14: 14px;
   --space-16: 16px;
   --space-20: 20px;
   --space-24: 24px;
@@ -174,6 +177,7 @@
   --size-12: 12px;
   --size-14: 14px;
   --size-16: 16px;
+  --size-18: 18px;
   --size-20: 20px;
   --size-24: 24px;
   --size-28: 28px;
@@ -184,6 +188,9 @@
   --size-48: 48px;
   --size-56: 56px;
   --size-64: 64px;
+  --size-80: 80px;
+  --size-126: 126px;
+  --size-230: 230px;
   --radius-0: 0;
   --radius-4: 4px;
   --radius-6: 6px;
@@ -200,9 +207,11 @@
   --focus-width-2: 2px;
   --focus-offset-1: 1px;
   --focus-offset-2: 2px;
+  --focus-offset-4: 4px;
   --layout-max-width: 1440px;
   --layout-min-width: 1024px;
   --layout-content-width: 960px; /* Figma layout/content-width (Oct 17): card, stepper, wizard navigation */
+  --layout-panel-width: 360px; /* Figma layout/panel-width (Oct 18): Selected brands panel */
   --layout-gutter: var(--space-24);
 
   /* ---------- 1c. Typography primitives ---------- */

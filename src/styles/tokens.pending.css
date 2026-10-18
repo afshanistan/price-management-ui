@@ -9,12 +9,5 @@
    ========================================================================== */
 
 :root {
-  --space-10: 10px;        /* figma-sync: "--space-10" (Empty selection inline padding, Oct 17) */
-  --size-80: 80px;         /* figma-sync: "--size-80" (Vendor logo lg width, Oct 17) */
-  --size-126: 126px;       /* figma-sync: "--size-126" (Empty selection min height, Oct 17) */
-  --focus-offset-4: 4px;
-  --space-14: 14px;        /* figma-sync: "--space-14" (Brand chip, All brands left padding, Oct 17) */
-  --size-18: 18px;         /* figma-sync: "--size-18" (Checkbox, Oct 17) */
-  --size-230: 230px;       /* figma-sync: "--size-230" (Review lists max height, Oct 17) */
-  --layout-panel-width: 360px; /* figma-sync: "--layout-panel-width" (Selected brands panel, Oct 17) */   /* figma-sync: "--focus-offset-4" (Input focus ring offset, Oct 17) */
+  /* Empty: the Oct 17 queue is in tokens.css v4 (Oct 18). */
 }

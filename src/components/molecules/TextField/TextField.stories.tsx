@@ -50,10 +50,6 @@ export const Error: Story = {
 
 export const Disabled: Story = {
   args: { isDisabled: true },
-  parameters: {
-    // Known exception: disabled helper text contrast (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
-  },
 }
 
 export const AllStates: Story = {
@@ -82,8 +78,6 @@ export const AllStates: Story = {
     </table>
   ),
   parameters: {
-    // Known exception: disabled helper text contrast (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     controls: { disable: true },
     docs: { description: { story: 'The 6 Figma states. Hover and focus are forced for this story only; in the others they\'re real.' } },
   },
