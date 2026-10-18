@@ -1,0 +1,35 @@
+/* Wizard navigation (design/specs/wizard-navigation.md)
+   Pinned 24px below the card, aligned to its edges; Next never moves. */
+
+.wizard-navigation {
+  box-sizing: border-box;
+  /* The card column. */
+  width: var(--layout-content-width);
+  max-width: 100%;
+  /* Text-bearing: min-height, never height. */
+  min-height: var(--size-56);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-8);
+}
+
+.wizard-navigation__left {
+  display: flex;
+  align-items: center;
+}
+
+.wizard-navigation__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-16);
+  min-width: 0;
+}
+
+.wizard-navigation__hint {
+  margin: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-subtle);
+}

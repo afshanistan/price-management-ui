@@ -10,6 +10,7 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 
 - [x] **`--border-width-1-5`** (Figma `border/1-5`) · Primitives/Dimension · Light 1.5px · On brand 1.5px (dimensions have no modes) · Button, Secondary hierarchy · Bind as the stroke weight of the 15 Secondary button variants · Stand-in removed · Button (Oct 17). **Done Oct 17:** in `tokens.css` v2.
 
+- [ ] **`--layout-content-width`** (Figma `layout/content-width`) · Primitives/Dimension · Light 960px · On brand 960px (dimensions have no modes) · Wizard navigation (and later the card, stepper and page shell: the 960 content column) · Bind as the width of Wizard navigation `853:184`, the card and the Stepper `879:293` · Stand-in in `tokens.pending.css` · Wizard navigation (Oct 17)
 
 ## Components
 

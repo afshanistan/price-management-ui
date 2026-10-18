@@ -1,5 +1,5 @@
 /* Button (design/specs/button.md)
-   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-disabled].
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-disabled]; a button blocked with aria-disabled="true" looks the same.
    [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
 
 .button {
@@ -41,8 +41,9 @@
   transform: scale(0.97);
 }
 
-.button[data-disabled] {
+.button:is([data-disabled], [aria-disabled='true']) {
   cursor: default;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -97,7 +98,7 @@
   --button-border: var(--fill-primary-pressed);
 }
 
-.button--primary[data-disabled] {
+.button--primary:is([data-disabled], [aria-disabled='true']) {
   --button-fill: var(--fill-disabled);
   --button-border: var(--border-disabled);
   --button-ink: var(--text-disabled);
@@ -123,7 +124,7 @@
   --button-border: var(--border-secondary-default);
 }
 
-.button--secondary[data-disabled] {
+.button--secondary:is([data-disabled], [aria-disabled='true']) {
   --button-fill: var(--surface-card);
   --button-border: var(--border-disabled);
   --button-ink: var(--text-disabled);
@@ -145,7 +146,7 @@
   --button-fill: var(--fill-tertiary-pressed);
 }
 
-.button--tertiary[data-disabled] {
+.button--tertiary:is([data-disabled], [aria-disabled='true']) {
   --button-fill: transparent;
   --button-ink: var(--text-disabled);
 }

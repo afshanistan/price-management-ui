@@ -1,0 +1,10 @@
+/* Layout for the WizardNavigation stories only. */
+.wizard-navigation-story__stack {
+  display: grid;
+  gap: var(--space-32);
+}
+
+.wizard-navigation-story__caption {
+  margin: 0 0 var(--space-8);
+  color: var(--text-subtle);
+}
