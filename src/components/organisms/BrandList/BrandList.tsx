@@ -129,7 +129,7 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
               </div>
             </Header>
             {brands.map((brand) => (
-              <ResultRow key={brand.id} id={brand.id} select="multi" name={brand.name} skuCount={brand.skuCount} query={query} />
+              <ResultRow key={brand.id} id={brand.id} select="multi" name={brand.name} vendor={vendor.name} skuCount={brand.skuCount} query={query} />
             ))}
           </ListBoxSection>
         )

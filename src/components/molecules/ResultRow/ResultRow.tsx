@@ -15,6 +15,9 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   wordmark?: string
   /** Multi: shown as "SKUs: 4", read as "4 SKUs". */
   skuCount?: number
+  /** Multi: the brand's vendor. Not shown; read after the name, because the section label is skipped
+      when the row is reached with aria-activedescendant ("Diamond Crystal, Cargill, 4 SKUs"). */
+  vendor?: string
   /** Bolds the matched part of the name. */
   query?: string
   /** single = vendor search (logo, ESN, "Selected"); multi = brand list (checkbox, SKU count). */
@@ -27,7 +30,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
@@ -43,7 +46,8 @@ export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, query,
             <span className="result-row__name" title={name}>
               <Highlight text={name} query={query} />
             </span>
-            {/* Read as "Truvia, 4 SKUs"; shown as "SKUs: 4". */}
+            {vendor && <span className="visually-hidden">{`, ${vendor}`}</span>}
+            {/* Read as "Truvia, Cargill, 4 SKUs"; shown as "SKUs: 4". */}
             <span className="visually-hidden">{`, ${skuCount} ${skuCount === 1 ? 'SKU' : 'SKUs'}`}</span>
             <span className="result-row__meta type-data-sm" aria-hidden="true">
               SKUs: {skuCount}

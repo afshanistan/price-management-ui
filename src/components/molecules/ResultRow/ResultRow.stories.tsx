@@ -27,7 +27,7 @@ const meta = {
           'ResultRow — option in a listbox (vendor search single, brand list multi). Keyboard active = fill + 2px inset focus outline; mouse hover = fill only.\n\n' +
           'A vendor in the search results: logo, name and ESN. Hover, keyboard highlight and press share one light fill; only the keyboard highlight adds the inset ring. ' +
           'Pressing turns the logo teal; once added, the row shows "Selected" instead of the ESN. Its accessible name is "Cargill, DEMO-0022". ' +
-          '**Multi** (step 2 brand list) swaps the logo for a decorative checkbox and the ESN for the SKU count, read as "Truvia, 4 SKUs".',
+          '**Multi** (step 2 brand list) swaps the logo for a decorative checkbox and the ESN for the SKU count, read as "Truvia, Cargill, 4 SKUs" (the hidden vendor name, because the section label is skipped when the row is reached from the search).',
       },
     },
   },
@@ -70,8 +70,8 @@ export const AllStates: Story = {
 /* ---------- Multi (brand list, step 2) ---------- */
 
 export const Multi: Story = {
-  args: { select: 'multi', id: 'truvia', name: 'Truvia', skuCount: 4, meta: undefined, wordmark: undefined },
-  parameters: { docs: { description: { story: 'A brand in the Brand list: decorative checkbox, name, "SKUs: 4". Read as "Truvia, 4 SKUs". Click to toggle.' } } },
+  args: { select: 'multi', id: 'truvia', name: 'Truvia', vendor: 'Cargill', skuCount: 4, meta: undefined, wordmark: undefined },
+  parameters: { docs: { description: { story: 'A brand in the Brand list: decorative checkbox, name, "SKUs: 4". Read as "Truvia, Cargill, 4 SKUs". Click to toggle.' } } },
 }
 
 export const MultiAllStates: Story = {
