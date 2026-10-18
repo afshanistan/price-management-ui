@@ -1,0 +1,542 @@
+[
+ {
+  "id": "nestle-usa",
+  "name": "Nestlé USA",
+  "file": "Nestlé.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/d/d8/Nestl%C3%A9.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 14733,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "pepsico",
+  "name": "PepsiCo",
+  "file": "PEP BIG.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/PEP_BIG.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 3534,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "coca-cola",
+  "name": "The Coca-Cola Company",
+  "file": "The Coca-Cola Company (2020).svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/09/The_Coca-Cola_Company_%282020%29.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 9257,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "coca-cola-consolidated",
+  "name": "Coca-Cola Consolidated",
+  "file": "Coca-Cola Bottling Co. Consolidated logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/0/0e/Coca-Cola_Bottling_Co._Consolidated_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 41020,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "general-mills",
+  "name": "General Mills",
+  "file": "General Mills logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/General_Mills_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 11366,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "kraft-heinz",
+  "name": "The Kraft Heinz Company",
+  "file": "KraftHeinz.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/55/KraftHeinz.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 9811,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "mondelez",
+  "name": "Mondelēz International",
+  "file": "Mondelez International.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/3b/Mondelez_International.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 12291,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "kellanova",
+  "name": "Kellanova",
+  "file": "Kellanova logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/59/Kellanova_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 3785,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "wk-kellogg",
+  "name": "WK Kellogg Co",
+  "file": "WK Kellogg logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/WK_Kellogg_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 808333,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "conagra",
+  "name": "Conagra Brands",
+  "file": "Conagra brands logo17.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/4/44/Conagra_brands_logo17.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 56597,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "campbells",
+  "name": "The Campbell's Company",
+  "file": "Campbell's 2021.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/Campbell%27s_2021.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 5945,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "smucker",
+  "name": "The J.M. Smucker Company",
+  "file": "The J.M. Smucker Company logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/c/c6/The_J.M._Smucker_Company_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 29231,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "hormel",
+  "name": "Hormel Foods",
+  "file": "Hormel_Foods_logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/9/9a/Hormel_Foods_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 12117,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "tyson",
+  "name": "Tyson Foods",
+  "file": "Tyson Foods corporate logo (2024).svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/4/40/Tyson_Foods_corporate_logo_%282024%29.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 9134,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "smithfield",
+  "name": "Smithfield Foods",
+  "file": "Smithfield Foods logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Smithfield_Foods_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10098,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "cargill",
+  "name": "Cargill",
+  "file": "Cargill logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Cargill_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 11061,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "mars",
+  "name": "Mars, Incorporated",
+  "file": "Mars Incorporated 2019 logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/9/9c/Mars_Incorporated_2019_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 3083,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "hershey",
+  "name": "The Hershey Company",
+  "file": "HersheyCo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/8/81/HersheyCo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 39915,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "unilever",
+  "name": "Unilever",
+  "file": "Unilever.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/e/e4/Unilever.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 27645,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "danone-na",
+  "name": "Danone North America",
+  "file": "DANONE_LOGO_HORIZONTAL.png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/DANONE_LOGO_HORIZONTAL.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 172312,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "keurig-dr-pepper",
+  "name": "Keurig Dr Pepper",
+  "file": "Keurig Dr Pepper.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Keurig_Dr_Pepper.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 7351,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "molson-coors",
+  "name": "Molson Coors Beverage Company",
+  "file": "Molson_Coors_Beverage_Company_logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/7/75/Molson_Coors_Beverage_Company_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 19461,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "anheuser-busch",
+  "name": "Anheuser-Busch",
+  "file": "Anheuser Busch logo 2022.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/8/82/Anheuser_Busch_logo_2022.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 30423,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "constellation",
+  "name": "Constellation Brands",
+  "file": "Constellation Brands Logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/7/7f/Constellation_Brands_Logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 6302,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "heineken-usa",
+  "name": "Heineken USA",
+  "file": "Heineken Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Heineken_Logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 2064,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "post-holdings",
+  "name": "Post Holdings",
+  "file": "Post Holdings logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/Post_Holdings_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 6228,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "mccormick",
+  "name": "McCormick & Company",
+  "file": "McCormick.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/e/ec/McCormick.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 3520,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "lamb-weston",
+  "name": "Lamb Weston",
+  "file": "Lamb Weston logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Lamb_Weston_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 18308,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "bg-foods",
+  "name": "B&G Foods",
+  "file": "B&G Foods logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/f/fc/B%26G_Foods_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 109682,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "flowers-foods",
+  "name": "Flowers Foods",
+  "file": "Flowers Foods logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/2/21/Flowers_Foods_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 15126,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "bimbo-usa",
+  "name": "Bimbo Bakeries USA",
+  "file": "Logo Grupo BIMBO.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Logo_Grupo_BIMBO.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 6174,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "pilgrims",
+  "name": "Pilgrim's Pride",
+  "file": "Pilgrim's Pride logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/3/37/Pilgrim%27s_Pride_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10774,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "perdue",
+  "name": "Perdue Farms",
+  "file": "Perdue logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/3a/Perdue_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10770,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "dole",
+  "name": "Dole Food Company",
+  "file": "Dole Foods Logo Green Leaf.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/d/d5/Dole_Foods_Logo_Green_Leaf.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 7322,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "del-monte-foods",
+  "name": "Del Monte Foods",
+  "file": "Logo_Del_Monte.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Logo_Del_Monte.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 23022,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "fresh-del-monte",
+  "name": "Fresh Del Monte Produce",
+  "file": "Fresh Del Monte logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/f/fa/Fresh_Del_Monte_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 24443,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "chiquita",
+  "name": "Chiquita Brands International",
+  "file": "Chiquita logo 2019.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/2/2b/Chiquita_logo_2019.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 21473,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "ocean-spray",
+  "name": "Ocean Spray Cranberries",
+  "file": "Ocean Spray logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Ocean_Spray_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 6574,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "land-o-lakes",
+  "name": "Land O'Lakes",
+  "file": "Land O’Lakes Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/0/0e/Land_O%E2%80%99Lakes_Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10085,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "dfa",
+  "name": "Dairy Farmers of America",
+  "file": "Dairy Farmers of America logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/5/5c/Dairy_Farmers_of_America_logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 7220,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "chobani",
+  "name": "Chobani",
+  "file": "Chobani 2017 logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Chobani_2017_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 7868,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "sargento",
+  "name": "Sargento Foods",
+  "file": "Sargento foods logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/1/1b/Sargento_foods_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 72527,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "tillamook",
+  "name": "Tillamook County Creamery Association",
+  "file": "Tillamook County Creamery Association logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/f/f5/Tillamook_County_Creamery_Association_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10434,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "barilla",
+  "name": "Barilla America",
+  "file": "Barilla brand logo (2022-present).svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/b/b2/Barilla_brand_logo_%282022-present%29.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 9792,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "ferrero",
+  "name": "Ferrero North America",
+  "file": "Ferrero logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/b/b9/Ferrero_logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 11445,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "lindt",
+  "name": "Lindt & Sprüngli (USA)",
+  "file": "Lindt & Sprüngli.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/8/8e/Lindt_%26_Spr%C3%BCngli.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 22465,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "blue-diamond",
+  "name": "Blue Diamond Growers",
+  "file": null,
+  "url": null,
+  "bytes": 0,
+  "type": null,
+  "via": null
+ },
+ {
+  "id": "sun-maid",
+  "name": "Sun-Maid Growers of California",
+  "file": "Sun-Maid_emblem_2020.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/a/a3/Sun-Maid_emblem_2020.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 81995,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "welchs",
+  "name": "Welch's",
+  "file": "Welchs Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/30/Welchs_Logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 10094,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "hain-celestial",
+  "name": "The Hain Celestial Group",
+  "file": "Hain Celestial Group.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/c/cf/Hain_Celestial_Group.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 46627,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "bobs-red-mill",
+  "name": "Bob's Red Mill Natural Foods",
+  "file": "Bob's Red Mill logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/b/b1/Bob%27s_Red_Mill_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 65066,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "king-arthur",
+  "name": "King Arthur Baking Company",
+  "file": "King_Arthur_Baking_Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/32/King_Arthur_Baking_Logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 12243,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "kikkoman",
+  "name": "Kikkoman Sales USA",
+  "file": "Kikkoman-Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Kikkoman-Logo.svg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 7861,
+  "type": "svg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "goya",
+  "name": "Goya Foods",
+  "file": "Goya logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/0/0b/Goya_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 2430,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "blue-bell",
+  "name": "Blue Bell Creameries",
+  "file": "Blue bell logo.jpg",
+  "url": "https://upload.wikimedia.org/wikipedia/en/c/cd/Blue_bell_logo.jpg?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 11876,
+  "type": "jpeg",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "red-bull",
+  "name": "Red Bull North America",
+  "file": "Logo of Red bull.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/9/91/Logo_of_Red_bull.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 2873,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "monster",
+  "name": "Monster Beverage Corporation",
+  "file": "Monster Beverage logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/e/e2/Monster_Beverage_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 15532,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "celsius",
+  "name": "Celsius Holdings",
+  "file": "Celsius Energy Drink logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/3c/Celsius_Energy_Drink_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 14250,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ },
+ {
+  "id": "utz",
+  "name": "Utz Brands",
+  "file": "Utz-Logo.svg",
+  "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Utz-Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 13227,
+  "type": "svg",
+  "via": "Commons search"
+ },
+ {
+  "id": "treehouse",
+  "name": "TreeHouse Foods",
+  "file": "TreeHouse Foods Logo.png",
+  "url": "https://upload.wikimedia.org/wikipedia/en/f/f3/TreeHouse_Foods_Logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original",
+  "bytes": 32187,
+  "type": "png",
+  "via": "Wikipedia infobox"
+ }
+]

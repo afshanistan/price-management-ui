@@ -1,0 +1,5 @@
+logos-raw/
+logos-out/
+__pycache__/
+logo_sources.json
+commons_candidates.json

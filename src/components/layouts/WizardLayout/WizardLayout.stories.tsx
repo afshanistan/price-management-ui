@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { expect, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 import { vendors, type Vendor } from '../../../data/vendors'
+import { mockVendors } from '../../../data/mockVendors'
 import { SelectVendorsCard } from '../../cards/SelectVendorsCard'
 import { MainNavigation } from '../../navigation/MainNavigation'
 import { Stepper } from '../../navigation/Stepper'
@@ -9,7 +10,7 @@ import { WizardNavigation } from '../../navigation/WizardNavigation'
 import { WizardLayout } from './WizardLayout'
 
 /* Step 1 as the app shows it: real header, stepper, card and footer. No wizard state yet. */
-function Step1({ initial = [] }: { initial?: Vendor[] }) {
+function Step1({ initial = [], list = vendors }: { initial?: Vendor[]; list?: Vendor[] }) {
   const [selected, setSelected] = useState<Vendor[]>(initial)
   return (
     <WizardLayout
@@ -23,7 +24,7 @@ function Step1({ initial = [] }: { initial?: Vendor[] }) {
         />
       }
     >
-      <SelectVendorsCard vendors={vendors} selected={selected} onChange={setSelected} />
+      <SelectVendorsCard vendors={list} selected={selected} onChange={setSelected} />
     </WizardLayout>
   )
 }
@@ -87,4 +88,49 @@ export const Step1Selected: Story = {
   parameters: {
     docs: { description: { story: 'All 7 sample vendors: the card stays 644; only the selected vendors grid scrolls, under its label. The footer doesn\'t move.' } },
   },
+}
+
+/* ---------- Pressure test: the 60 mock vendors (src/data/mockVendors.ts) ---------- */
+
+export const MockSearch: Story = {
+  name: 'Mock: 60 vendors, search',
+  args: placeholderArgs,
+  render: () => <Step1 list={mockVendors} />,
+  parameters: { docs: { description: { story: '60 real suppliers to search: try "co", "del monte", "foods", or part of an 8-digit ESN.' } } },
+}
+
+export const MockCrowded: Story = {
+  name: 'Mock: 25 selected',
+  args: placeholderArgs,
+  render: () => <Step1 list={mockVendors} initial={mockVendors.slice(0, 25)} />,
+  parameters: { docs: { description: { story: '25 vendors in the template: long names, 4-letter wordmarks, near-duplicates side by side.' } } },
+}
+
+const typeInSearch = (text: string): Story['play'] => async ({ canvasElement }) => {
+  await userEvent.type(within(canvasElement).getByRole('searchbox', { name: 'Vendor name or ESN' }), text)
+}
+
+export const MockSearchCo: Story = {
+  name: 'Mock: search "co" (17 results)',
+  args: placeholderArgs,
+  render: () => <Step1 list={mockVendors} />,
+  // Known exception: the Results panel scrolls past 6 results; axe scrollable-region-focusable (docs/open-questions.md, "Results panel scroll check"). Reported, not failed.
+  parameters: { a11y: { test: 'todo' } },
+  play: typeInSearch('co'),
+}
+
+export const MockSearchDelMonte: Story = {
+  name: 'Mock: search "del monte" (near-duplicates)',
+  args: placeholderArgs,
+  render: () => <Step1 list={mockVendors} />,
+  // Known exception: the Results panel scrolls past 6 results; axe scrollable-region-focusable (docs/open-questions.md, "Results panel scroll check"). Reported, not failed.
+  parameters: { a11y: { test: 'todo' } },
+  play: typeInSearch('del monte'),
+}
+
+export const MockSearchNestle: Story = {
+  name: 'Mock: search "nestle" (no accent)',
+  args: placeholderArgs,
+  render: () => <Step1 list={mockVendors} />,
+  play: typeInSearch('nestle'),
 }

@@ -9,6 +9,8 @@ export interface Vendor {
   esn: string
   /** Placeholder wordmark for the Vendor logo until real logos exist. */
   wordmark: string
+  /** Logo file URLs (mock vendors only): brand colors, and single color when the artwork allows it. */
+  logo?: { color: string; mono?: string }
 }
 
 export const vendors: Vendor[] = [

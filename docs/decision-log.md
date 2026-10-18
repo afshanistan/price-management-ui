@@ -475,6 +475,34 @@ Figma can't position an overlay under an element via its API, so the Effective d
 **Step 1: the empty box fills the card, as in Figma.** In the fixed 644 card, the Selected vendors section takes the rest of the height and the Empty selection stretches to fill it (Figma: the section and the empty box are both fill). Rejected: keeping it at its 126 minimum, which left blank card below it.
 
 **Step 1: only the selected vendors grid scrolls.** The card title, the search and the "Selected vendors (N)" label stay put; the grid of vendor cards scrolls under the label once it outgrows the card. Rejected: scrolling the whole card (the title and search scroll away) and scrolling the section with its label (the count leaves view). The shell's own scroll on the card stays only as a fallback, e.g. at 200% text.
+
+## Oct 18 · Mock vendor data for the design review
+
+**A 60-vendor mock set beside the Final Comps set.** Will's review pattern after each build: look at the data, build mock data if it's too kind, pressure-test, then commit. The 7 comp vendors stay in `vendors.ts` (stories keep the comp data); `mockVendors.ts` holds 60 real food and beverage suppliers to a US grocer, with near-duplicates on purpose (Coca-Cola / Coca-Cola Consolidated, Del Monte Foods / Fresh Del Monte, Kellanova / WK Kellogg) and long legal-style names.
+
+**ESNs in the mock set are 8-digit numbers.** Will's assumption until the real format is known. The comps still show "DEMO-0022".
+
+**Real logos, two versions each: brand color and single color.** Chosen over wordmark tiles only and over fictional brands; the trademark question is set aside for now (Will). Single color is generated (filter + mask, `currentColor`), so it takes the color of its place, like icons. Vendors with no usable logo keep the wordmark tile, which is now a real state to design for. Where each version appears in the UI is for the design review. Sources and adjustments: `docs/vendor-logo-sources.md`.
+
+## Oct 18 · Step 1 pressure test: decisions
+
+From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recommended option unless noted.
+
+**Vendor search ignores accents, punctuation and hyphens.** "nestle" finds Nestlé, "campbells" finds Campbell's, "coca cola" finds Coca-Cola. Rejected: exact matching (users don't type é, ' or .).
+
+**Results are ordered by best match.** Names starting with the query, then names with a word starting with it, then matches anywhere. Rejected: A–Z, and the vendor master's order (put PepsiCo above "Co…" names for "co").
+
+**An ESN matches from its first digit, and the matched digits are bold.** Rejected: digits anywhere ("0" matched 32 of 60) and bold-only.
+
+**A quiet result count in the Results panel** ("17 vendors"), so people know to keep typing. New UI, designed in Figma first. Rejected: relying on the scrollbar.
+
+**Long vendor names wrap to two lines in the Selected item card**, then an ellipsis. Figma first. Rejected: one line with a hover-only tooltip.
+
+**Big templates keep the card layout for now.** Revisit with real usage (25 vendors = 9 rows of cards). Rejected for now: a compact layout past a threshold.
+
+**The Results panel's scroll check is accepted, as for the Brand list.** Keyboard users reach every row with arrows from the search (`aria-activedescendant`). Rejected: an extra Tab stop.
+
+**Logos: single color in the results, brand color in the selected cards.** Will's own option, chosen over single color everywhere and brand color on white in the results. In the results the logo is single color (ink on white; white on teal for a vendor already added). In the Selected item card the logo is in its brand colors, so the tile becomes white with a thin border instead of teal: inside "Selected vendors" the teal tile wasn't signaling anything the list doesn't, and the brand colors confirm the right company. Brand color stays contained to one place. Vendors with no logo, or no single-color version (Sun-Maid, Blue Bell), show the wordmark there. Figma first. *Changes the Oct 17 Vendor logo Selected state for the Selected item card.*
 ---
 
 ## Build plan
