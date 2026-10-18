@@ -19,6 +19,7 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 - [ ] **`--space-14`** (Figma `space/14`) · Primitives/Dimension · 14px (no modes) · Brand chip, Type=All brands (left padding) · Bind as the left padding of Brand chip `891:629` All brands variants · Stand-in in `tokens.pending.css` · Brand chip (Oct 17)
 - [ ] **`--size-18`** (Figma `size/18`) · Primitives/Dimension · 18px (no modes) · Checkbox (18×18) · Bind as the width and height of Checkbox `728:38` · Stand-in in `tokens.pending.css` · Checkbox (Oct 17)
 - [ ] **`--layout-panel-width`** (Figma `layout/panel-width`) · Primitives/Dimension · 360px (no modes) · Selected brands panel (fixed width beside the Brand list) · Bind as the width of Selected brands panel `756:1494` · Stand-in in `tokens.pending.css` · Selected brands panel (Oct 17)
+- [ ] **`--size-230`** (Figma `size/230`) · Primitives/Dimension · 230px (no modes) · Review template card, the Vendors and Brands lists' max height (what fits in the fixed 644 card) · Bind as the max height of the two lists in Review template card `830:2654` · Stand-in in `tokens.pending.css` · Review template card (Oct 17)
 
 ## Components
 

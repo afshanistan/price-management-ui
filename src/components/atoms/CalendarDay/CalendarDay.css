@@ -1,0 +1,63 @@
+/* Calendar day (design/specs/calendar-day.md). Fixed 36 circle. */
+.calendar-day {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: var(--size-36);
+  height: var(--size-36);
+  border-radius: var(--radius-full);
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-default);
+  cursor: pointer;
+  outline: none;
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease);
+}
+
+.calendar-day:is([data-hovered], [data-state='hover']) {
+  background: var(--fill-row-highlight);
+}
+
+.calendar-day[data-selected] {
+  background: var(--fill-primary-default);
+  color: var(--text-on-primary);
+}
+
+/* Past days (and today; docs/open-questions.md). */
+.calendar-day[data-disabled] {
+  background: none;
+  color: var(--text-disabled);
+  cursor: default;
+}
+
+/* Other-month days: the cell stays for the grid, the number hides. */
+.calendar-day[data-outside-month] {
+  visibility: hidden;
+}
+
+.calendar-day[data-focus-visible] {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+/* Today: a 4px dot, 3px above the bottom edge. On the teal Selected circle it turns white (not drawn; docs/open-questions.md). */
+.calendar-day__today {
+  position: absolute;
+  bottom: calc(var(--space-2) + var(--border-width-1));
+  left: 50%;
+  width: var(--space-4);
+  height: var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--icon-subtle);
+  transform: translateX(-50%);
+}
+
+.calendar-day[data-selected] .calendar-day__today {
+  background: var(--text-on-primary);
+}
+
+.calendar-day[data-disabled] .calendar-day__today {
+  background: var(--text-disabled);
+}

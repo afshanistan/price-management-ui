@@ -1,0 +1,41 @@
+/* Radio (design/specs/radio.md). Fixed 18 circle; checked = an 8px dot.
+   Hover comes from the Option tile (OptionTile.css sets the same variables).
+   [data-state="hover"] forces it for the "All states" story only. */
+.radio-circle {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--size-18);
+  height: var(--size-18);
+  border-radius: var(--radius-full);
+  border: var(--border-width-1-5) solid var(--radio-border);
+  background: var(--radio-fill);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease);
+  --radio-fill: var(--fill-input);
+  --radio-border: var(--border-input);
+}
+
+.radio-circle[data-checked] {
+  --radio-fill: var(--fill-primary-default);
+  --radio-border: var(--fill-primary-default);
+}
+
+.radio-circle[data-checked]::after {
+  content: '';
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-full);
+  background: var(--icon-on-primary);
+}
+
+.radio-circle[data-state='hover'] {
+  --radio-fill: var(--fill-input-hover);
+  --radio-border: var(--border-input-hover);
+}
+
+.radio-circle[data-checked][data-state='hover'] {
+  --radio-fill: var(--fill-primary-hover);
+  --radio-border: var(--fill-primary-hover);
+}
