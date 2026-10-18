@@ -1,0 +1,71 @@
+/* Wizard layout (Final Comps 01a 879:4657; code-backlog "Page layout" and "Landmarks + headings").
+   Column: header 56 · stage band 80 · card 644 · 24 · footer 56 · 24. Desktop-only, min width 1024. */
+.wizard-layout {
+  /* The stage's plum (z-index -1 below) stays inside this page, above its background. */
+  isolation: isolate;
+  min-width: var(--layout-min-width);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: var(--space-24);
+  background: var(--surface-page);
+}
+
+/* ---------- Stage: the stepper band, with the plum running on behind the card ---------- */
+
+.wizard-layout__stage {
+  position: relative;
+  width: 100%;
+  min-height: var(--size-80);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: var(--space-32);
+}
+
+/* The plum is taller than the band: the card rises out of it (decision log, "Plum stage"). */
+.wizard-layout__stage::before {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: var(--layout-stage-height);
+  z-index: -1;
+  background: var(--surface-brand);
+}
+
+/* ---------- Main: the fixed card in the 960 column ---------- */
+
+.wizard-layout__main {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-inline: var(--space-32);
+}
+
+/* Every step's card is the same fixed height, so the footer never moves (Rule ID 6: the card
+   stays fixed; its content scrolls). The cards hug their content; here they fill the frame. */
+.wizard-layout__card {
+  width: var(--layout-content-width);
+  max-width: 100%;
+  height: var(--layout-card-height);
+  display: flex;
+  flex-direction: column;
+}
+
+.wizard-layout__card > * {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  box-shadow: var(--elevation-stage-card);
+}
+
+/* ---------- Footer: 24 below the card, aligned to its edges ---------- */
+
+.wizard-layout__footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-24);
+  padding-inline: var(--space-32);
+}

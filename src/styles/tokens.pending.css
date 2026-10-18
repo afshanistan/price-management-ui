@@ -9,5 +9,6 @@
    ========================================================================== */
 
 :root {
-  /* Empty: the Oct 17 queue is in tokens.css v4 (Oct 18). */
+  --layout-card-height: 644px;  /* figma-sync: "--layout-card-height" (Wizard layout card, Oct 18) */
+  --layout-stage-height: 306px; /* figma-sync: "--layout-stage-height" (Wizard layout plum stage, Oct 18) */
 }
