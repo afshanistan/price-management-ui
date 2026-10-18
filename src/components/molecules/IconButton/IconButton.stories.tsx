@@ -22,6 +22,11 @@ const meta = {
     size: { control: 'inline-radio', options: ['medium'] },
   },
   parameters: {
+    // Design tab: the main component in Figma (Icon button 603:52).
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=603-52',
+    },
     docs: {
       description: {
         component:

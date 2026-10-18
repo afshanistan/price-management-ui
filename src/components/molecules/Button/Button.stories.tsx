@@ -24,6 +24,11 @@ const meta = {
     trailingIcon: { control: 'select', options: [undefined, ...iconNames] },
   },
   parameters: {
+    // Design tab: the main component in Figma (Button 580:26).
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=580-26',
+    },
     docs: {
       description: {
         component:
