@@ -27,8 +27,6 @@
   --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
   --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   --motion-ease: var(--motion-ease-out);
-  /* figma-sync: "--focus-halo" (Search focus halo, Oct 18). */
-  --focus-halo: var(--color-teal-500-a20);
 }
 
 .type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */

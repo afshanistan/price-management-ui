@@ -34,12 +34,15 @@
   }
 }
 
+/* backwards, not both: each holds its start state through its delay, then lets go when it ends.
+   Holding the end state would keep every group on its own layer, and the later selected area
+   would paint over the search's Results panel (docs/bugs.md). */
 .wizard-layout__card {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) both;
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .select-vendors-card > :is(.card-header, .select-vendors-card__search, .select-vendors-card__divider, .select-vendors-card__selected) {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) both;
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .select-vendors-card > .card-header {

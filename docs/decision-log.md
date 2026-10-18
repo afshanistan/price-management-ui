@@ -549,6 +549,12 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Reduced motion keeps fades.** Under the OS setting (or Storybook's toolbar) movement goes, short opacity fades stay, so state changes are still visible. *Refines the Oct 17 rule "everything that moves turns off".*
 
 **Kept from earlier today: one pick per search.** The motion prompt assumed the panel stays open after a pick; Will kept the newer behavior (the pick clears the search and closes the results).
+
+## Oct 18 · Motion bug pass
+
+**The search focus halo is dropped; the ring keeps its ease-in.** The Teal/500 20% halo added about 4px around a ring that already reads clearly (5.8:1), crowded the Results panel 12px below, and no other focus ring in the system has one. What worked was the easing, which stays. Rejected: tinting the gap between field and ring (softer, same footprint), for consistency with the other rings.
+
+**Page-load animations let go when they end.** Holding their end state kept each staggered group on its own layer, so the Selected vendors area painted over the search's Results panel (docs/bugs.md).
 ---
 
 ## Build plan

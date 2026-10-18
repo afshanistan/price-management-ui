@@ -79,7 +79,7 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 
 ## From the Step 1 motion pass (Oct 18)
 - [ ] **Toast needs Figma design** · Toast (new, `src/components/molecules/Toast`) · Placeholder from existing tokens: surface-card, border-structural, elevation-3, radius 8, Body/MD message, Tertiary XSmall "Undo". Placed bottom-center over the Selected vendors grid. Needs: visual design (light or inverse), placement (in the card or the page), width, and how it sits over the cards · Not in Figma · Open. Built as above
-- [ ] **Search focus halo size** · Input focus · Teal/500 at 20%, as decided; its width isn't specified. Built as a 4px band just outside the ring (offset 4 + ring 2 + 4) · Not in Figma · Open
+- [x] **Search focus halo size** · Input focus · Teal/500 at 20%, as decided; its width isn't specified. Built as a 4px band just outside the ring (offset 4 + ring 2 + 4) · Not in Figma · **Closed Oct 18:** the halo was dropped (motion bug pass)
 - [ ] **Toast exit timing** · Toast · The prompt says "fade, ~250ms"; there's no 250 token, so it uses `layout` (225ms) with ease-in. Add a token if 250 matters · Open
 - [ ] **Select vendors card spec is out of date** · `design/specs/select-vendors-card.md` · Still says the panel stays open after a pick and vendors are listed oldest first. Re-export after Figma reflects one pick per search, newest first, the Undo toast and no row logos · Open
 
