@@ -1,8 +1,10 @@
+import { motion } from 'motion/react'
 import { ListBoxItem, type ListBoxItemProps } from 'react-aria-components'
 import { CheckboxBox } from '../../atoms/Checkbox'
 import { Icon } from '../../atoms/Icon'
 import { findMatch, findPrefix } from '../../../data/search'
 import { ESN_PREFIX } from '../../../data/vendors'
+import { duration, ease } from '../../../styles/motion'
 import './ResultRow.css'
 
 export type ResultRowSelect = 'single' | 'multi'
@@ -21,6 +23,8 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   query?: string
   /** single = vendor search (name, ESN, "Selected"; no logo tile); multi = brand list (checkbox, SKU count). */
   select?: ResultRowSelect
+  /** Single: a shared id for the keyboard highlight, so it slides from row to row (one per panel and query). */
+  highlightId?: string
   /** Forces a state for the "All states" story only. Never set it in product code. */
   'data-state'?: 'hover' | 'keyboard' | 'pressed'
 }
@@ -29,15 +33,16 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select = 'single', highlightId, 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
       textValue={name}
       className={`result-row result-row--${select}`}
       data-state={state}
+      data-slide={(select === 'single' && highlightId) || undefined}
     >
-      {({ isSelected, isPressed }) =>
+      {({ isSelected, isPressed, isFocusVisible }) =>
         select === 'multi' ? (
           <>
             {/* Decoration only: the row is the option and carries aria-selected. Pressed shows checked. */}
@@ -54,6 +59,15 @@ export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select
           </>
         ) : (
         <>
+          {/* Keyboard highlight: one shared shape that slides to the active row (fast, ease-out). */}
+          {highlightId && isFocusVisible && (
+            <motion.span
+              layoutId={highlightId}
+              className="result-row__highlight"
+              aria-hidden="true"
+              transition={{ layout: { duration: duration.fast, ease: ease.out } }}
+            />
+          )}
           {/* No logo tile (decision log, Oct 18): the name and ESN identify the vendor. One line with an ellipsis; the full name in the tooltip. */}
           <span className="result-row__name" title={name}>
             <Highlight text={name} query={query} />

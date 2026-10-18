@@ -8,6 +8,8 @@
 }
 
 .toast {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   gap: var(--space-12);
@@ -23,4 +25,33 @@
 
 .toast__message {
   white-space: nowrap;
+}
+
+/* The countdown line along the bottom edge (placeholder look, like the rest of the toast). */
+.toast__countdown {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--border-width-2);
+  background: var(--icon-subtle);
+  transform-origin: left;
+  animation: toast-countdown linear forwards;
+}
+
+@keyframes toast-countdown {
+  to {
+    transform: scaleX(0);
+  }
+}
+
+/* Reduced motion: no moving line (the toast still times out and pauses the same way). */
+@media (prefers-reduced-motion: reduce) {
+  .toast__countdown {
+    display: none;
+  }
+}
+
+:root[data-motion='reduced'] .toast__countdown {
+  display: none;
 }

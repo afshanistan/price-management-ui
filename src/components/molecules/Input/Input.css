@@ -118,6 +118,8 @@
   color: var(--icon-subtle);
   cursor: pointer;
   transition: var(--transition-interactive);
+  /* Fades in when the field gets a value (it returns from display: none, so this replays). */
+  animation: motion-fade-in var(--motion-duration-fast) var(--motion-ease-out) backwards;
 }
 
 /* Not drawn in Figma: a light neutral circle (docs/open-questions.md). */

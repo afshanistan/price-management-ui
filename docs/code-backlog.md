@@ -54,6 +54,13 @@ Format: **Item** · Where · What to do in code · Why it's not in Figma
 - **Hover** · Selected item card · No hover on the card (not clickable or draggable). Only the trash reacts (Icon button Destructive, fast, ease-out).
 - **Next** · Wizard navigation · Eases between blocked and enabled over base, ease-out: background, border and label color only (no scale or pulse); stays `aria-disabled` while blocked. The hint fades out as it enables and back in when it blocks again.
 - **Stepper** · Stepper · Static; the in-progress ring doesn't pulse. Step-to-step transition not built: `TODO(step-transition)` in `Stepper.tsx` and `App.tsx`.
+- **Search field: no helper text** (Oct 18) · Select vendors card · The line under the field is gone: the open results covered it, and the empty state and the add feedback teach the same thing. Label + placeholder only.
+- **Results panel opens and closes** (Oct 18) · Results panel · Opens with a fade and a 4px drop (fast, ease-out). Closing: the live list unmounts at once (React Aria keeps one list per search) and a non-interactive copy fades out (fast, ease-in). Results inside still update instantly while typing. The Clear × fades in when the field gets a value.
+- **Keyboard highlight slides** (Oct 18) · Result row (single) · One shared highlight (fill + inset ring) slides between rows on arrow keys (fast, ease-out; Motion `layoutId`). Mouse hover keeps the instant row fill.
+- **The pick flies to its card** (Oct 18) · Select vendors card · A copy of the picked name travels from its results row to the new card's name (layout, ease-in-out), then fades as the card fades in; the new card (or, on the first add, the grid) waits for it to land. Skipped under reduced motion.
+- **Re-picking an added vendor points at its card** (Oct 18) · Select vendors card · The results close, the existing card scrolls into view and gets the add highlight again; announced "Cargill is already added".
+- **The count ticks** (Oct 18) · "Selected vendors (N)" · The number slides up as it grows, down as it shrinks (fast); screen readers get the plain text.
+- **Toast countdown** (Oct 18) · Toast · A 2px line shrinks over the 5 seconds and pauses with the timer on hover and focus. Hidden under reduced motion.
 - **Reduced motion** · everything above · The OS setting or the Storybook toolbar: no translate, scale or layout glide; opacity fades at fast; color transitions stay; the add highlight is an instant tint that fades. CSS media query + `data-motion`, and Motion's `MotionConfig` (`src/foundations/MotionProvider.tsx`).
 
 ## Select brands card (step 2)

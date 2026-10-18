@@ -86,6 +86,13 @@ function Toast({ toast, onDismiss, timeout }: { toast: ToastMessage; onDismiss: 
           {toast.actionLabel}
         </Button>
       )}
+      {/* Countdown: a line that shrinks over the timeout and pauses with the timer. Decorative. */}
+      <span
+        className="toast__countdown"
+        aria-hidden="true"
+        // Inline style: the timeout and paused state, not design values.
+        style={{ animationDuration: `${timeout}ms`, animationPlayState: paused ? 'paused' : 'running' }}
+      />
     </motion.div>
   )
 }

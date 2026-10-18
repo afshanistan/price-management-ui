@@ -1,4 +1,4 @@
-import type { CSSProperties } from 'react'
+import { useId, type CSSProperties } from 'react'
 import { ListBox, type Selection } from 'react-aria-components'
 import type { Vendor } from '../../../data/vendors'
 import { ResultRow } from '../../molecules/ResultRow'
@@ -11,8 +11,10 @@ export interface ResultsPanelProps {
   query: string
   /** Vendors already added show as Selected. */
   selectedKeys: Set<string>
-  /** Picking a vendor adds it immediately. Picking one that's already added does nothing. */
+  /** Picking a vendor adds it immediately. */
   onSelect: (vendor: Vendor) => void
+  /** Picking one that's already added (Will, Oct 18: point at its card instead of doing nothing). */
+  onReselect?: (vendor: Vendor) => void
   /** Names the listbox; the field's label. */
   'aria-label': string
   className?: string
@@ -25,12 +27,16 @@ export interface ResultsPanelProps {
   (same width, over the content below). Inside an Autocomplete, focus stays in the
   search input and rows are reached with aria-activedescendant: arrows move, Enter picks.
 */
-export function ResultsPanel({ items, query, selectedKeys, onSelect, className, style, ...rest }: ResultsPanelProps) {
-  // Only additions count: re-picking a selected vendor is a no-op (docs/open-questions.md).
+export function ResultsPanel({ items, query, selectedKeys, onSelect, onReselect, className, style, ...rest }: ResultsPanelProps) {
+  // One shared keyboard highlight per panel: it slides from row to row.
+  const highlightId = `${useId()}-highlight`
+  // A pick toggles the listbox's selection: a new key is an add; a key that disappears is a re-pick.
   function handleSelectionChange(keys: Selection) {
     if (keys === 'all') return
     const added = items.find((vendor) => keys.has(vendor.id) && !selectedKeys.has(vendor.id))
-    if (added) onSelect(added)
+    if (added) return onSelect(added)
+    const repicked = items.find((vendor) => selectedKeys.has(vendor.id) && !keys.has(vendor.id))
+    if (repicked) onReselect?.(repicked)
   }
 
   return (
@@ -49,7 +55,7 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, className, 
           <p className="results-panel__empty">No vendors match “{query.trim()}”.</p>
         )}
       >
-        {(vendor) => <ResultRow id={vendor.id} name={vendor.name} meta={vendor.esn} query={query} />}
+        {(vendor) => <ResultRow id={vendor.id} name={vendor.name} meta={vendor.esn} query={query} highlightId={highlightId} />}
       </ListBox>
     </div>
   )

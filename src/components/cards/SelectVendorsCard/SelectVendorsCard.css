@@ -18,6 +18,8 @@
 }
 
 .select-vendors-card__results {
+  /* Opens with a fade and a 4px drop (fast, ease-out). Closing fades a snapshot (see the component). */
+  animation: select-vendors-card-panel-in var(--motion-duration-fast) var(--motion-ease-out) backwards;
   position: absolute;
   left: 0;
   right: 0;
@@ -126,4 +128,50 @@
 
 :root[data-motion='reduced'] .select-vendors-card__list > .is-added > .selected-item-card {
   animation-delay: 0ms;
+}
+
+@keyframes select-vendors-card-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(calc(var(--space-4) * -1));
+  }
+}
+
+/* The closing panel: a non-interactive copy that fades out where the panel was. */
+.select-vendors-card__results-closing {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .select-vendors-card__results {
+    animation-name: motion-fade-in;
+  }
+}
+
+:root[data-motion='reduced'] .select-vendors-card__results {
+  animation-name: motion-fade-in;
+}
+
+/* The count in "Selected vendors (3)": a clipped slot the number ticks through. */
+.count-tick {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.count-tick__value {
+  display: inline-block;
+}
+
+/* The name flying from its results row to its new card (a copy, outside the card's scroll area). */
+.select-vendors-card__flight {
+  position: fixed;
+  z-index: 10;
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transform-origin: left top;
+  pointer-events: none;
 }

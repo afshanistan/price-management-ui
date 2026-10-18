@@ -3,6 +3,7 @@
    [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
 
 .result-row {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-12);
@@ -82,4 +83,29 @@
 .result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) .checkbox-box:is([data-checked], [data-mixed]) {
   --checkbox-fill: var(--fill-primary-hover);
   --checkbox-border: var(--fill-primary-hover);
+}
+
+/* Sliding keyboard highlight (single rows in the Results panel): the row's own fill and ring step
+   aside and one shared shape draws them, sliding between rows. Mouse hover keeps the row fill. */
+.result-row[data-slide][data-focus-visible] {
+  background: var(--fill-tertiary-default);
+  outline: none;
+}
+
+.result-row[data-slide][data-focus-visible][data-hovered] {
+  background: var(--fill-row-highlight);
+}
+
+.result-row__highlight {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--fill-row-highlight);
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: calc(var(--focus-width-2) * -1);
+  pointer-events: none;
+}
+
+.result-row--single > :not(.result-row__highlight, .visually-hidden) {
+  position: relative;
 }

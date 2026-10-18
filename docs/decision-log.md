@@ -555,6 +555,12 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **The search focus halo is dropped; the ring keeps its ease-in.** The Teal/500 20% halo added about 4px around a ring that already reads clearly (5.8:1), crowded the Results panel 12px below, and no other focus ring in the system has one. What worked was the easing, which stays. Rejected: tinting the gap between field and ring (softer, same footprint), for consistency with the other rings.
 
 **Page-load animations let go when they end.** Holding their end state kept each staggered group on its own layer, so the Selected vendors area painted over the search's Results panel (docs/bugs.md).
+
+## Oct 18 · Step 1: helper text dropped, small interactions that explain
+
+**The helper text under the vendor search is gone.** It said what type-ahead already shows, the empty state repeated it, and the results panel covered it the moment it applied. Rejected: moving it between the label and the field (GOV.UK hint style), and shortening it.
+
+**Seven small interactions, each showing cause and effect:** the pick flies from its results row to its card; re-picking an added vendor points at its card instead of doing nothing; the results panel fades open and closed; the toast shows a countdown that pauses with its timer; the count ticks; the keyboard highlight slides between rows; the Clear × fades in. All under 300ms except the 5s countdown, nothing loops or flashes, and each has a reduced-motion fallback (fade or nothing). Skipped on purpose: a glow or pulse on Next (information, not celebration), a shake on No results (nothing went wrong), and animating logos inside new cards (too many moving parts). *Answers the Oct 17 open question "Picking an already-added vendor": it now points at the card.*
 ---
 
 ## Build plan

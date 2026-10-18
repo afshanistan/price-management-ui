@@ -4,13 +4,14 @@ import { Autocomplete } from 'react-aria-components'
 import type { Vendor } from '../../../data/vendors'
 import { searchVendors } from '../../../data/search'
 import { useReducedMotionSetting } from '../../../foundations/useReducedMotionSetting'
-import { duration, ease } from '../../../styles/motion'
+import { duration, ease, cssEase } from '../../../styles/motion'
 import { CardHeader } from '../../molecules/CardHeader'
 import { EmptySelection } from '../../molecules/EmptySelection'
 import { SelectedItemCard } from '../../molecules/SelectedItemCard'
 import { TextField } from '../../molecules/TextField'
 import { ToastRegion, type ToastMessage } from '../../molecules/Toast'
 import { ResultsPanel } from '../../organisms/ResultsPanel'
+import { CountTick } from './CountTick'
 import './SelectVendorsCard.css'
 
 export interface SelectVendorsCardProps {
@@ -56,6 +57,12 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   const nextGeneration = (id: string) => (generation.current[id] = (generation.current[id] ?? 0) + 1)
   const listLabelId = useId()
   const reduced = useReducedMotionSetting()
+  // The open panel's element, kept so its look can fade out after the live list unmounts.
+  const panelEl = useRef<HTMLElement | null>(null)
+  const wasOpen = useRef(false)
+  // A pick in flight: the name's spot in the results row, flown to the new card once it renders.
+  const flight = useRef<{ vendor: Vendor; from: DOMRect } | null>(null)
+  const [flyingId, setFlyingId] = useState<string | null>(null)
 
   const selectedKeys = new Set(selected.map((vendor) => vendor.id))
   // Best match first; ignores accents and punctuation; ESNs match from their first digit.
@@ -76,6 +83,62 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
     const input = searchRef.current?.querySelector('.input')
     if (isOpen && input instanceof HTMLElement) setPanelTop(input.offsetTop + input.offsetHeight)
   }, [isOpen])
+
+  // Closing the panel: the live list unmounts at once (React Aria keeps one list per search), and a
+  // non-interactive copy of it fades out in its place (fast, ease-in).
+  useLayoutEffect(() => {
+    const container = searchRef.current
+    if (isOpen) {
+      panelEl.current = container?.querySelector<HTMLElement>('.select-vendors-card__results') ?? null
+    } else if (wasOpen.current && panelEl.current && container) {
+      const ghost = panelEl.current.cloneNode(true) as HTMLElement
+      ghost.removeAttribute('id')
+      ghost.querySelectorAll('[id]').forEach((el) => el.removeAttribute('id'))
+      ghost.setAttribute('aria-hidden', 'true')
+      ghost.inert = true
+      ghost.classList.add('select-vendors-card__results-closing')
+      ghost.style.animation = 'none'
+      container.appendChild(ghost)
+      const fade = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: duration.fast * 1000, easing: cssEase(ease.in) })
+      fade.onfinish = () => ghost.remove()
+      fade.oncancel = () => ghost.remove()
+    }
+    wasOpen.current = isOpen
+  }, [isOpen])
+
+  // The pick flies to its card: a copy of the name travels from its results row to the new card's
+  // name (layout, ease-in-out), then fades as the card fades in. Skipped under reduced motion.
+  useLayoutEffect(() => {
+    const pending = flight.current
+    if (!pending) return
+    flight.current = null
+    const target = listRef.current?.querySelector<HTMLElement>(
+      `li[data-vendor-id="${CSS.escape(pending.vendor.id)}"]:not([data-exiting]) .selected-item-card__name`,
+    )
+    if (!target) return
+    const to = target.getBoundingClientRect()
+    const ghost = document.createElement('span')
+    ghost.className = 'select-vendors-card__flight type-body-lg-strong'
+    ghost.textContent = pending.vendor.name
+    ghost.setAttribute('aria-hidden', 'true')
+    Object.assign(ghost.style, { left: `${to.left}px`, top: `${to.top}px`, maxWidth: `${to.width}px` })
+    document.body.appendChild(ghost)
+    const dx = pending.from.left - to.left
+    const dy = pending.from.top + (pending.from.height - to.height) / 2 - to.top
+    const scale = pending.from.height / to.height
+    const fly = ghost.animate(
+      [{ transform: `translate(${dx}px, ${dy}px) scale(${scale})` }, { transform: 'none' }],
+      { duration: duration.layout * 1000, easing: cssEase(ease.inOut), fill: 'forwards' },
+    )
+    fly.onfinish = () => {
+      const fade = ghost.animate([{ opacity: 1 }, { opacity: 0 }], { duration: duration.base * 1000, easing: cssEase(ease.out), fill: 'forwards' })
+      fade.onfinish = () => {
+        ghost.remove()
+        setFlyingId(null)
+      }
+    }
+    // The copy removes itself when it has landed and faded; nothing to clean up on re-render.
+  }, [selected])
 
   // After an add, the search keeps focus. A mouse pick happens on pointer down, and the browser then
   // focuses the clicked row, which the closed results just removed: so wait a frame, then focus the search.
@@ -100,6 +163,11 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   function add(vendor: Vendor) {
     // One pick per search (Will, Oct 18): the search clears, which closes the results; focus stays
     // in the search for the next name. The announcement isn't replaced (an empty query skips it).
+    const from = searchRef.current?.querySelector(`[data-key="${CSS.escape(vendor.id)}"] .result-row__name`)?.getBoundingClientRect()
+    if (from && !reduced) {
+      flight.current = { vendor, from }
+      setFlyingId(vendor.id)
+    }
     nextGeneration(vendor.id)
     onChange([vendor, ...selected])
     setAddedIds((ids) => new Set(ids).add(vendor.id))
@@ -108,6 +176,24 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
     focusSearchAfterAdd.current = true
     // The newest card is top-left: bring it into view if the grid is scrolled.
     listRef.current?.scrollTo({ top: 0, behavior: reduced ? 'auto' : 'smooth' })
+  }
+
+  // Picking a vendor that's already added: the results close and its card is pointed out (scrolled
+  // into view, the add highlight again) instead of nothing happening.
+  function reselect(vendor: Vendor) {
+    setQuery('')
+    setAnnouncement(`${vendor.name} is already added`)
+    requestAnimationFrame(() => {
+      searchRef.current?.querySelector('input')?.focus()
+      const card = listRef.current?.querySelector<HTMLElement>(`li[data-vendor-id="${CSS.escape(vendor.id)}"]:not([data-exiting]) .selected-item-card`)
+      if (!card) return
+      card.scrollIntoView({ block: 'nearest', behavior: reduced ? 'auto' : 'smooth' })
+      const styles = getComputedStyle(card)
+      card.animate([{ backgroundColor: styles.getPropertyValue('--fill-row-highlight') }, { backgroundColor: styles.backgroundColor }], {
+        duration: duration.highlight * 1000,
+        easing: cssEase(ease.out),
+      })
+    })
   }
 
   function remove(vendor: Vendor) {
@@ -154,6 +240,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
 
   const glide: Transition = { duration: duration.layout, ease: ease.inOut }
   const hadCards = selected.length > 1
+  // The new card waits (layout) when others glide out of its slot, or when its name is flying in.
+  const waits = (id: string) => !reduced && (hadCards || flyingId === id)
 
   return (
     <div className={className ? `select-vendors-card ${className}` : 'select-vendors-card'}>
@@ -162,11 +250,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
       <div ref={searchRef} className="select-vendors-card__search" onFocus={() => setSearchHasFocus(true)} onBlur={handleBlur}>
         {/* Focus stays in the input; arrows move through results (aria-activedescendant), Enter adds and clears the search, Esc clears. */}
         <Autocomplete inputValue={query} onInputChange={setQuery}>
-          <TextField
-            label={label}
-            placeholder="Search by vendor name or ESN"
-            helper="Results appear as you type. Select a vendor to add it immediately."
-          />
+          {/* No helper text (Will, Oct 18): the open results covered it, and the empty state and the add feedback teach the same thing. */}
+          <TextField label={label} placeholder="Search by vendor name or ESN" />
           {isOpen && (
             <ResultsPanel
               aria-label={label}
@@ -174,6 +259,7 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
               query={query}
               selectedKeys={selectedKeys}
               onSelect={add}
+              onReselect={reselect}
               className="select-vendors-card__results"
               // Inline style: a measured position, not a design value.
               style={{ top: panelTop }}
@@ -187,7 +273,11 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
       <section className="select-vendors-card__selected">
         {/* A label for the list, not a heading (docs/open-questions.md). */}
         <span id={listLabelId} className="select-vendors-card__label type-label-lg">
-          Selected vendors ({selected.length})
+          {/* Screen readers get the plain text; the ticking number is visual only. */}
+          <span className="visually-hidden">Selected vendors ({selected.length})</span>
+          <span aria-hidden="true">
+            Selected vendors (<CountTick value={selected.length} />)
+          </span>
         </span>
         {/* Empty state and grid share one cell, so they cross-fade without the area changing size. */}
         <div className="select-vendors-card__stage">
@@ -214,7 +304,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
                 className="select-vendors-card__list"
                 aria-labelledby={listLabelId}
                 initial={{ opacity: 0 }}
-                animate={{ opacity: 1, transition: { duration: duration.base, ease: ease.out } }}
+                // On the first add, the grid waits for the flying name to land, like a new card does.
+                animate={{ opacity: 1, transition: { duration: duration.base, ease: ease.out, delay: flyingId && !reduced ? duration.layout : 0 } }}
                 exit={{ opacity: 0, transition: { duration: duration.base, ease: ease.in } }}
               >
                 <AnimatePresence initial={false} mode="popLayout">
@@ -223,9 +314,9 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
                       key={`${vendor.id}#${generation.current[vendor.id] ?? 0}`}
                       vendorId={vendor.id}
                       // A class, not a state: the highlight runs once when the card mounts and never restarts.
-                      className={addedIds.has(vendor.id) ? (hadCards ? 'is-added is-added-after-glide' : 'is-added') : undefined}
+                      className={addedIds.has(vendor.id) ? (waits(vendor.id) ? 'is-added is-added-after-glide' : 'is-added') : undefined}
                       glide={glide}
-                      enter={{ duration: reduced ? duration.fast : duration.base, ease: ease.out, delay: hadCards && !reduced ? duration.layout : 0 }}
+                      enter={{ duration: reduced ? duration.fast : duration.base, ease: ease.out, delay: waits(vendor.id) ? duration.layout : 0 }}
                     >
                       <SelectedItemCard name={vendor.name} meta={vendor.esn} logo={vendor.logo} onRemove={() => remove(vendor)} />
                     </SelectedVendorItem>
