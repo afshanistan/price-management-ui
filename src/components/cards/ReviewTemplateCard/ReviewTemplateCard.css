@@ -1,0 +1,87 @@
+/* Review template card, step 4 (design/specs/review-template-card.md). Hugs; the page shell fixes 644. */
+.review-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  width: var(--layout-content-width);
+  max-width: 100%;
+  padding: var(--space-24);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-16);
+  background: var(--surface-card);
+}
+
+/* Summary and presets strips: three equal columns with dividers, aligned with each other. */
+.review-card__strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0;
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-12);
+}
+
+.review-card__strip > * + * {
+  border-left: var(--border-width-1) solid var(--border-structural);
+}
+
+/* Vendors | Brands: equal columns; the shorter list stretches so the bottoms align. */
+.review-card__scope {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-24);
+  align-items: stretch;
+}
+
+.review-card__section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.review-card__section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.review-card__section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.review-card__pictogram {
+  color: var(--icon-brand);
+}
+
+.review-card__h2 {
+  margin: 0;
+  font: var(--type-heading-sm);
+  letter-spacing: var(--type-heading-sm-tracking);
+  color: var(--text-heading);
+}
+
+.review-card__list {
+  flex: 1;
+  max-height: var(--size-230);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-12);
+  overflow-y: auto;
+}
+
+.review-card__list:focus {
+  outline: none;
+}
+
+.review-card__list:focus-visible {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+.review-card__list > li + li {
+  border-top: var(--border-width-1) solid var(--border-structural);
+}

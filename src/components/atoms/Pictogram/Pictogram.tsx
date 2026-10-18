@@ -1,11 +1,11 @@
 import './Pictogram.css'
 
 export type PictogramType = 'vendor' | 'brand' | 'presets' | 'placeholder'
-export type PictogramSize = 24 | 40
+export type PictogramSize = 20 | 24 | 40
 
 export interface PictogramProps {
   type: PictogramType
-  /** 24 in Empty selection and the 32 Icon tile; 40 in the Card header's 48 tile. */
+  /** 20 in Review's section headers; 24 in Empty selection and the 32 Icon tile; 40 in the Card header's 48 tile. */
   size?: PictogramSize
   className?: string
 }

@@ -15,7 +15,7 @@ Format: **Question** · Where · Options · Sources · Status
 - **Edit icon** · Button XSmall "Edit" on Review · There's no edit icon in the set yet · code-backlog ("edit icon to come") · Open (use `placeholder`)
 - **No token for the 1.5px border** · Button Secondary · Spec and decision log say 1.5px; `tokens.css` had only `--border-width-0/1/2/3` · **Resolved Oct 17:** `border/1-5` added in Figma, `--border-width-1-5` in `tokens.css` v2; stand-in removed (decision log, "Code finds gaps; Figma gets fixed first"; `docs/figma-sync.md`)
 - **On brand button contrast: Secondary hover and Tertiary pressed** · Button in `data-mode="on-brand"` · axe (Storybook, Oct 17) flags two label-on-fill pairs below 4.5:1: Secondary **hover** = `--text-on-secondary` Neutral/50 on `--fill-secondary-hover` Plum/500 (#f8f7f9 on #a26db3) **3.65:1**; Tertiary **pressed** = `--text-on-tertiary` Teal/300 on `--fill-tertiary-pressed` Neutral/700 (#a5d1cc on #595263) **4.47:1**. Applies to all three sizes (XLarge 16px SemiBold isn't "large text" either). Options: (a) darker on-brand Secondary hover fill (e.g. Plum/700 range) or a darker label, (b) Tertiary pressed fill Neutral/800 or lighter label (Teal/200), (c) accept as transient states. Light mode passes · Tokens from Figma; code can't fix without a design change · **Resolved Oct 17:** on brand, interaction states get darker: `fill-secondary-hover` → Plum/700, `fill-secondary-pressed` → Plum/800, `fill-tertiary-pressed` → Neutral/1000 (decision log, "On the plum header, interaction states get darker, not lighter"; `tokens.css` v2)
-- **Effective date: typed field vs no typed input** · Global presets (step 3) · code-backlog has both "Effective date: one value, three inputs" (typed field) and "Custom date flow" (no typed input, decided Oct 16) · The later decision is "no typed input" · Confirm before building step 3
+- **Effective date: typed field vs no typed input** · Global presets (step 3) · code-backlog has both "Effective date: one value, three inputs" (typed field) and "Custom date flow" (no typed input, decided Oct 16) · The later decision is "no typed input" · Open. Built the later decision: no typed input, OK / Cancel picker (Oct 17). Confirm
 
 ## From building NavLink (Oct 17)
 - **Active nav link on hover and press** · NavLink, `isActive` · (a) stays Active (`--fill-nav-active`, filled icon) with no hover or press change, (b) shows Hover / Pressed fills over Active · The spec's state table has no Active + Hover or Active + Pressed row · **Resolved Oct 17:** (a), for now (decision log, "An active nav link doesn't react to hover or press, for now")
@@ -49,11 +49,12 @@ Format: **Question** · Where · Options · Sources · Status
 - **Search placeholder on step 2** · Select brands card · Spec: "Placeholder optional; don't invent one"; the Final Comps show "Search brands" · Built with Figma's "Search brands" · FYI
 
 **Step 3 (Global presets)**
-- **Option tile label weight** · Option tile · code-backlog "Radio labels": always 600; Figma Label/LG = 500 in every state · Open. Build 500 (`option-tile.md`)
-- **Preset grid** · Global presets card · code-backlog "Grid": 2 columns, Dates spans both; Figma: 3 equal columns, gap 32, Effective date first · Figma is later · Open. Build Figma's (`global-presets-card.md`)
-- **Is today selectable?** · Date picker · "past days disabled" vs "Choose a date after today" · Open. Build with today disabled (`date-picker.md`)
-- **Today + Selected day** · Calendar day · Not drawn · Open. Keep the today dot, in `--text-on-primary` (`calendar-day.md`)
+- **Option tile label weight** · Option tile · code-backlog "Radio labels": always 600; Figma Label/LG = 500 in every state · Open. Built 500 (Oct 17)
+- **Preset grid** · Global presets card · code-backlog "Grid": 2 columns, Dates spans both; Figma: 3 equal columns, gap 32, Effective date first · Figma is later · Open. Built Figma's 3 columns (Oct 17)
+- **Is today selectable?** · Date picker · "past days disabled" vs "Choose a date after today" · Open. Built with today disabled: the first selectable day is tomorrow (Oct 17)
+- **Today + Selected day** · Calendar day · Not drawn · Open. Built: the today dot stays, in `--text-on-primary` on the teal circle (Oct 17)
 
 **Step 4 (Review)**
-- **Review card pictogram** · Review template card header · Figma uses Pictograms Type=Placeholder; there's no review pictogram · Open. Build `placeholder`
-- **Scrolling list max height** · Review template card, Vendors | Brands lists · code-backlog ~266px (6½ brand rows); Figma lists are now 230, which fits the fixed 644 card · Open. Build 230
+- **Review card pictogram** · Review template card header · Figma uses Pictograms Type=Placeholder; there's no review pictogram · Open. Built with `placeholder` (Oct 17)
+- **Scrolling list max height** · Review template card, Vendors | Brands lists · code-backlog ~266px (6½ brand rows); Figma lists are now 230, which fits the fixed 644 card · Open. Built 230 (`--size-230`, queued in figma-sync) (Oct 17)
+- **Review's "1 of 3" sample** · Review template card · The spec's sample and Figma 04 show Effective date Nov 1, 2026 + Currency USD + Pricing model No default as "1 of 3", but that's two presets set · The card counts from the data (`presetsSetCount`), so it shows "2 of 3" for that sample · FYI: is the count right, or should Effective date not count?
