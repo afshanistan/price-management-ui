@@ -22,3 +22,8 @@
   --status-mark-border: var(--border-status-todo);
   border-style: dashed;
 }
+
+/* Summary stat's check badge: the same circle without the ring. */
+.status-mark--borderless {
+  border-color: transparent;
+}

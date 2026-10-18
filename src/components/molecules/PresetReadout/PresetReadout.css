@@ -1,0 +1,23 @@
+/* Preset readout (design/specs/preset-readout.md). Fills its third of the strip. */
+.preset-readout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-12) var(--space-16);
+}
+
+.preset-readout__label {
+  color: var(--text-subtle);
+}
+
+.preset-readout__value {
+  margin: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-heading);
+}
+
+.preset-readout__value[data-empty] {
+  color: var(--text-subtle);
+}

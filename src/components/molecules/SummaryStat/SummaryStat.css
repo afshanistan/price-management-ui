@@ -1,0 +1,28 @@
+/* Summary stat (design/specs/summary-stat.md). Fills its third of the strip. */
+.summary-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-width: 0;
+  padding: var(--space-16);
+}
+
+.summary-stat__value {
+  font: var(--type-display-number);
+  letter-spacing: var(--type-display-number-tracking);
+  color: var(--text-heading);
+}
+
+.summary-stat__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+}
+
+.summary-stat__label {
+  color: var(--text-subtle);
+}
+
+.summary-stat__check {
+  color: var(--text-on-status-complete);
+}

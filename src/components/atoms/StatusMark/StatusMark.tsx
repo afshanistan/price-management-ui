@@ -4,12 +4,14 @@ export type StatusMarkStatus = 'complete' | 'todo'
 
 export interface StatusMarkProps {
   status: StatusMarkStatus
+  /** false = no ring (Summary stat's check badge). Complete only. */
+  bordered?: boolean
   className?: string
 }
 
 /** Complete (citron + check) or to do (dashed ring). Always decorative: the status is in nearby text. */
-export function StatusMark({ status, className }: StatusMarkProps) {
-  const classes = ['status-mark', `status-mark--${status}`, className].filter(Boolean).join(' ')
+export function StatusMark({ status, bordered = true, className }: StatusMarkProps) {
+  const classes = ['status-mark', `status-mark--${status}`, !bordered && 'status-mark--borderless', className].filter(Boolean).join(' ')
 
   return (
     <span className={classes} aria-hidden="true">

@@ -1,0 +1,51 @@
+/* Review row (design/specs/review-row.md). Read-only: no hover, no focus. min-height (Figma's 48 / 40 are fixed). */
+.review-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-12);
+  padding: 0 var(--space-12);
+}
+
+.review-row--vendor {
+  min-height: var(--size-48);
+}
+
+.review-row--brand {
+  min-height: var(--size-40);
+}
+
+.review-row__start {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-width: 0;
+}
+
+.review-row__names {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  min-width: 0;
+}
+
+.review-row__name {
+  min-width: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-row__count {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}
+
+/* ESN or the brand's vendor: mono, like an ID (as drawn). */
+.review-row__end {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}
