@@ -565,6 +565,12 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 ## Oct 18 · Text fields: the border is the focus state
 
 **A focused input's own border goes 2px teal; no ring around it.** Will: the ring outside the border read as a double outline. Inputs are large and obviously the active thing, so the field itself can carry focus; rings stay for small controls (buttons, chips, checkboxes, calendar days) where the control alone doesn't show it well. Teal/700 is 5.8:1 on white, and 1px grey → 2px teal is a clear change. The extra pixel is drawn inside the 1px border, so the field doesn't change size or shift its text; it eases in (fast). Errors thicken the same way in the error color. Forced colors (which drop box-shadow) get a 2px system outline. *An exception to the Oct 17 rule "focus ring = outline + offset on every component"; Figma's Input Focus ring frame goes.*
+
+## Oct 18 · Empty state fades through; the label stays black
+
+**Removing the last vendor is a fade-through, not a cross-fade.** The cross-fade overlapped a mostly solid card with a mostly solid dashed box for about 150ms (opposite curves made it worse). Now the last card leaves exactly like any other removal, then the empty state fades in: about 420ms in all, never both on screen.
+
+**The text field label no longer turns teal on focus.** The field's 2px teal border already shows focus; a teal label added color without information. *Changes Figma's Text field Focus state (label `text-label-focus`).*
 ---
 
 ## Build plan

@@ -45,4 +45,5 @@ Format: **Item** · Where in Figma · What to set · Used by · Found while (dat
 - [ ] **ESN format "ESN-########"** · Result row `678:174`, Selected item card `707:705`, and the step 1 Final Comps (01b, 01c) · The ESN reads "ESN-" + the 8-digit number (e.g. ESN-70441642). The comps still show "DEMO-0022" · ResultRow, SelectedItemCard · Will, Oct 18
 - [ ] **No helper text under the vendor search** · Select vendors card `689:358` (and the step 1 Final Comps 01a–01c) · Turn off Show helper on the Text field (label + placeholder only) · SelectVendorsCard · Will, Oct 18
 - [ ] **Input focus: 2px border, no ring** · Input `661:56` State=Focus (and Text field `672:182` Focus) · Delete the "Focus ring" frame; set the border to 2px `border-input-focus`. `focus/offset/4` then has no user (keep or retire) · Input, TextField · Will, Oct 18 (decision log, "Text fields: the border is the focus state")
+- [ ] **Text field label stays text-heading on focus** · Text field `672:182` State=Focus · Rebind the label from `text-label-focus` to `text-heading` (`text-label-focus` may then have no user) · TextField · Will, Oct 18
 

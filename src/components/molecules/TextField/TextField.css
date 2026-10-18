@@ -11,9 +11,7 @@
   transition: var(--transition-interactive);
 }
 
-.text-field:is(:focus-within, :has([data-state='focus'])) .text-field__label {
-  color: var(--text-label-focus);
-}
+/* The label stays text-heading on focus (Will, Oct 18): the field's 2px border already shows focus. */
 
 .text-field__helper {
   color: var(--text-subtle);

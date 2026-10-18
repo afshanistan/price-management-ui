@@ -63,6 +63,10 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   // A pick in flight: the name's spot in the results row, flown to the new card once it renders.
   const flight = useRef<{ vendor: Vendor; from: DOMRect } | null>(null)
   const [flyingId, setFlyingId] = useState<string | null>(null)
+  // The empty state shows only after the last card has finished leaving (a fade-through, not a
+  // cross-fade): removing the last vendor keeps the grid up until its card is gone. Adding hides it at once.
+  const [showEmpty, setShowEmpty] = useState(selected.length === 0)
+  if (selected.length > 0 && showEmpty) setShowEmpty(false)
 
   const selectedKeys = new Set(selected.map((vendor) => vendor.id))
   // Best match first; ignores accents and punctuation; ESNs match from their first digit.
@@ -282,7 +286,7 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
         {/* Empty state and grid share one cell, so they cross-fade without the area changing size. */}
         <div className="select-vendors-card__stage">
           <AnimatePresence initial={false}>
-            {selected.length === 0 ? (
+            {showEmpty ? (
               <motion.div
                 key="empty"
                 className="select-vendors-card__empty"
@@ -306,9 +310,15 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
                 initial={{ opacity: 0 }}
                 // On the first add, the grid waits for the flying name to land, like a new card does.
                 animate={{ opacity: 1, transition: { duration: duration.base, ease: ease.out, delay: flyingId && !reduced ? duration.layout : 0 } }}
-                exit={{ opacity: 0, transition: { duration: duration.base, ease: ease.in } }}
+                // By now its last card has already faded out, so the empty grid just goes.
+                exit={{ opacity: 0, transition: { duration: 0 } }}
               >
-                <AnimatePresence initial={false} mode="popLayout">
+                <AnimatePresence
+                  initial={false}
+                  mode="popLayout"
+                  // The last card has left: now the empty state fades in.
+                  onExitComplete={() => latest.current.length === 0 && setShowEmpty(true)}
+                >
                   {selected.map((vendor) => (
                     <SelectedVendorItem
                       key={`${vendor.id}#${generation.current[vendor.id] ?? 0}`}
