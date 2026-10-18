@@ -2,6 +2,7 @@ import { ListBoxItem, type ListBoxItemProps } from 'react-aria-components'
 import { CheckboxBox } from '../../atoms/Checkbox'
 import { Icon } from '../../atoms/Icon'
 import { VendorLogo } from '../../atoms/VendorLogo'
+import { findMatch, findPrefix } from '../../../data/search'
 import './ResultRow.css'
 
 export type ResultRowSelect = 'single' | 'multi'
@@ -63,7 +64,10 @@ export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor
           {/* The accessible name comes from the text: "Cargill, DEMO-0022" (selection is aria-selected). */}
           <span className="visually-hidden">, </span>
           {/* Once added, "Selected" replaces the ESN on screen; screen readers still get the ESN. */}
-          <span className={isSelected ? 'visually-hidden' : 'result-row__meta type-data-sm'}>{meta}</span>
+          <span className={isSelected ? 'visually-hidden' : 'result-row__meta type-data-sm'}>
+            {/* ESNs match from their first digit, so only a leading match is bold. */}
+            <Highlight text={meta} query={query} prefixOnly />
+          </span>
           {isSelected && (
             <span className="result-row__selected" aria-hidden="true">
               <Icon name="check-circle" size={16} filled />
@@ -77,17 +81,16 @@ export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor
   )
 }
 
-/** Bolds the first match of the query in the name (not drawn in Figma; spec flag 3). */
-function Highlight({ text, query }: { text: string; query?: string }) {
-  const q = query?.trim()
-  const start = q ? text.toLowerCase().indexOf(q.toLowerCase()) : -1
-  if (!q || start < 0) return <>{text}</>
+/** Bolds the best match of the query in the text, ignoring accents and punctuation (src/data/search.ts). */
+function Highlight({ text, query, prefixOnly = false }: { text: string; query?: string; prefixOnly?: boolean }) {
+  const match = query ? (prefixOnly ? findPrefix(text, query) : findMatch(text, query)) : null
+  if (!match) return <>{text}</>
 
   return (
     <>
-      {text.slice(0, start)}
-      <mark className="result-row__match">{text.slice(start, start + q.length)}</mark>
-      {text.slice(start + q.length)}
+      {text.slice(0, match.start)}
+      <mark className="result-row__match">{text.slice(match.start, match.end)}</mark>
+      {text.slice(match.end)}
     </>
   )
 }

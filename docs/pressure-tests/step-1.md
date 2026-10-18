@@ -29,3 +29,17 @@ Step 1 (Select vendors) in the page shell, run against `src/data/mockVendors.ts`
 - **Brand names.** "kellogg" finds WK Kellogg Co but not Kellanova (owner of the Kellogg's brand). Searching by brand would need brand data on vendors; real-data question.
 - **Single-letter wordmark.** Kellanova's ticker is "K"; fine as a fallback, and it has a real logo.
 - The first result is highlighted as you type, so Enter adds it. My first script assumed otherwise and added the wrong Del Monte; the card is right.
+
+## Outcome (Oct 18)
+
+Will's decisions are in the decision log ("Step 1 pressure test: decisions").
+
+**Built:**
+- #1–3: `src/data/search.ts`. Matching ignores accents, punctuation, hyphens and spaces; results are ordered by best match; ESNs match from their first digit, and the matched digits are bold. See `after-search-co`, `after-search-nestle`, `after-search-coca-cola`, `after-search-esn`. Side effect: the comp vendors' ESNs are "DEMO-0022", so on the comp data an ESN search now has to start with "DEMO".
+- #7: the Results panel's scroll check is accepted (rule off in the WizardLayout, SelectVendorsCard and ResultsPanel stories, with the reason). No known exceptions are left in Storybook.
+
+**Two existing bugs the test exposed, fixed:**
+- **Bold stuck on the first letter.** React Aria caches each result row, so a row kept the bold from the first letter typed ("**C**oca-Cola" for "co"). The Results panel now redraws its rows when the query changes (`dependencies`).
+- Not a bug: typed fast, the input's `aria-activedescendant` briefly points at a row the new query dropped. React Aria waits 500 ms before moving it, so screen readers finish announcing the typed letter, then it settles on a real row. The "Mock: search" stories now wait for that before axe runs.
+
+**Waiting on Figma** (`figma-sync.md`): #4 result count, #5 two-line names, #8 logos. **Parked:** #6 big templates.

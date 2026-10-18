@@ -22,6 +22,10 @@ const meta = {
     return <SelectVendorsCard {...args} selected={selected} onChange={setSelected} />
   },
   parameters: {
+    a11y: {
+      // The Results panel scrolls past 6 results; it's reached via arrow keys from the search (aria-activedescendant), which axe can't detect. Answered Oct 18.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
     layout: 'padded',
     // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,

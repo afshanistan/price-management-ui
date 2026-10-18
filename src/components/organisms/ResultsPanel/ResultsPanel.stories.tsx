@@ -18,6 +18,10 @@ const meta = {
   },
   decorators: [(Story) => <div style={{ width: 640 }}><Story /></div>],
   parameters: {
+    a11y: {
+      // The Results panel scrolls past 6 results; it's reached via arrow keys from the search (aria-activedescendant), which axe can't detect. Answered Oct 18.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
     // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Results panel 688:249).

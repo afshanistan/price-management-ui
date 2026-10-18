@@ -2,6 +2,8 @@
   Sample vendors, shared by the stories and the app.
   Taken from the Final Comps screens 01b (searching) and 01c (selected). Illustrative only.
 */
+import { searchVendors } from './search'
+
 export interface Vendor {
   id: string
   name: string
@@ -23,8 +25,7 @@ export const vendors: Vendor[] = [
   { id: 'kraft-heinz', name: 'Kraft Heinz', esn: 'DEMO-0005', wordmark: 'KHC' },
 ]
 
-/** Live filter: vendor name or ESN contains the query, ignoring case. */
+/** Live filter by name or ESN, ignoring accents and punctuation (src/data/search.ts). */
 export function matchesVendor(vendor: Vendor, query: string) {
-  const q = query.trim().toLowerCase()
-  return q === '' || vendor.name.toLowerCase().includes(q) || vendor.esn.toLowerCase().includes(q)
+  return searchVendors([vendor], query).length > 0
 }

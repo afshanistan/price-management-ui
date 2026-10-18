@@ -1,6 +1,7 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState, type FocusEvent } from 'react'
 import { Autocomplete } from 'react-aria-components'
-import { matchesVendor, type Vendor } from '../../../data/vendors'
+import type { Vendor } from '../../../data/vendors'
+import { searchVendors } from '../../../data/search'
 import { CardHeader } from '../../molecules/CardHeader'
 import { EmptySelection } from '../../molecules/EmptySelection'
 import { SelectedItemCard } from '../../molecules/SelectedItemCard'
@@ -35,7 +36,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   const listLabelId = useId()
 
   const selectedKeys = new Set(selected.map((vendor) => vendor.id))
-  const results = vendors.filter((vendor) => matchesVendor(vendor, query))
+  // Best match first; ignores accents and punctuation; ESNs match from their first digit.
+  const results = searchVendors(vendors, query)
   const isOpen = searchHasFocus && query.trim() !== ''
 
   // Polite announcements while typing: "7 vendors found" / "No vendors match “xyz”".

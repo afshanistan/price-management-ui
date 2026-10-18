@@ -33,6 +33,10 @@ const meta = {
   title: 'Layouts/WizardLayout',
   component: WizardLayout,
   parameters: {
+    a11y: {
+      // The Results panel scrolls past 6 results; it's reached via arrow keys from the search (aria-activedescendant), which axe can't detect. Answered Oct 18.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
     layout: 'fullscreen',
     // Design tab: no Layouts component in Figma yet, so this links the Final Comps screen 01a (879:4657).
     design: {
@@ -108,14 +112,14 @@ export const MockCrowded: Story = {
 
 const typeInSearch = (text: string): Story['play'] => async ({ canvasElement }) => {
   await userEvent.type(within(canvasElement).getByRole('searchbox', { name: 'Vendor name or ESN' }), text)
+  // React Aria moves the highlight 500ms after typing (so screen readers finish the letter); let it settle before axe runs.
+  await new Promise((resolve) => setTimeout(resolve, 600))
 }
 
 export const MockSearchCo: Story = {
   name: 'Mock: search "co" (17 results)',
   args: placeholderArgs,
   render: () => <Step1 list={mockVendors} />,
-  // Known exception: the Results panel scrolls past 6 results; axe scrollable-region-focusable (docs/open-questions.md, "Results panel scroll check"). Reported, not failed.
-  parameters: { a11y: { test: 'todo' } },
   play: typeInSearch('co'),
 }
 
@@ -123,8 +127,6 @@ export const MockSearchDelMonte: Story = {
   name: 'Mock: search "del monte" (near-duplicates)',
   args: placeholderArgs,
   render: () => <Step1 list={mockVendors} />,
-  // Known exception: the Results panel scrolls past 6 results; axe scrollable-region-focusable (docs/open-questions.md, "Results panel scroll check"). Reported, not failed.
-  parameters: { a11y: { test: 'todo' } },
   play: typeInSearch('del monte'),
 }
 

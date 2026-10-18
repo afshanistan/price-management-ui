@@ -38,6 +38,9 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, className, 
       <ListBox
         {...rest}
         items={items}
+        // React Aria caches rows by item; the query isn't part of an item, so without this
+        // a row kept the bold from the first letter typed ("C" of Coca-Cola for "coca cola").
+        dependencies={[query]}
         selectionMode="multiple"
         selectedKeys={selectedKeys}
         onSelectionChange={handleSelectionChange}
