@@ -7,7 +7,7 @@ const preview: Preview = {
   tags: ['autodocs'],
 
   parameters: {
-    // Every Docs page shows the component's spec above its stories (see DocsPage.tsx).
+    // Every Docs page shows the component's spec below its stories (see DocsPage.tsx).
     docs: { page: DocsPage },
 
     controls: {

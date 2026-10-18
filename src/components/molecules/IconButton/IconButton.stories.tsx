@@ -24,7 +24,7 @@ const meta = {
     size: { control: 'inline-radio', options: ['medium'] },
   },
   parameters: {
-    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Icon button 603:52).
     design: {

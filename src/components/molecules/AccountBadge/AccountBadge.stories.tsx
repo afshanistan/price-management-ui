@@ -15,7 +15,7 @@ const meta = {
     name: 'Will Norris',
   },
   parameters: {
-    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Account-Badge 617:107).
     design: {

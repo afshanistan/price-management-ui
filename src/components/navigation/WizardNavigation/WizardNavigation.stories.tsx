@@ -25,7 +25,7 @@ const meta = {
     hint: 'Add at least one brand for every vendor to continue.',
   },
   parameters: {
-    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Wizard navigation 853:184).
     design: {

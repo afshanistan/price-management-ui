@@ -28,7 +28,7 @@ const meta = {
     ),
   ],
   parameters: {
-    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Nav link 624:108).
     design: {

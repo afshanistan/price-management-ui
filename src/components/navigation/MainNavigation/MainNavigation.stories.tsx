@@ -15,7 +15,7 @@ const meta = {
     currentPage: { control: 'inline-radio', options: ['templates', 'submissions', 'messages'] satisfies MainNavigationPage[] },
   },
   parameters: {
-    // Shown on the Docs page above the stories (.storybook/DocsPage.tsx).
+    // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Main-Navigation 642:156).
     design: {

@@ -69,7 +69,7 @@ For every component (autodocs is on globally in `.storybook/preview.tsx`, so eac
 - A story **on brand**: wrap it in `<div data-mode="on-brand" style="background: var(--surface-brand)">`, or use the toolbar's Mode switch.
 - The a11y panel must show **no violations**. If one can't be fixed without a design change, log it in `docs/open-questions.md`.
 - **Design tab** (`@storybook/addon-designs`): the meta's `parameters.design` links to the component's main component in Figma: `{ type: 'figma', url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=580-26' }` (node ID from `docs/handoff.md` → Components, with `:` written as `-`). Set it once in the meta so every story inherits it. If the component has no node ID there, ask Will.
-- **Spec on the Docs page:** import the component's spec raw (`import spec from '../../../../design/specs/button.md?raw'`) and set `parameters.spec` in the meta. `.storybook/DocsPage.tsx` shows it between the description and the stories, and the page updates whenever the spec changes.
+- **Spec on the Docs page:** import the component's spec raw (`import spec from '../../../../design/specs/button.md?raw'`) and set `parameters.spec` in the meta. `.storybook/DocsPage.tsx` shows it after the stories, under a "Spec" heading, and the page updates whenever the spec changes.
 - `parameters.docs.description.component` starts with the Figma component description from the spec (the `>` line under **Figma:**), verbatim, then a short summary from the spec (what it is, when to use it).
 
 ## Workflow per component
