@@ -18,10 +18,10 @@ const preview: Preview = {
     },
 
     a11y: {
-      // 'todo' - show a11y violations in the test UI only
-      // 'error' - fail CI on a11y violations
-      // 'off' - skip a11y checks entirely
-      test: 'todo'
+      // Every story's axe check fails its test on a violation (npm run test-storybook).
+      // A story with a known exception that needs Will's decision sets test: 'todo' and points
+      // to its entry in docs/open-questions.md; the a11y panel still shows the violation.
+      test: 'error',
     }
   },
 
