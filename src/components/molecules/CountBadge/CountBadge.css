@@ -1,0 +1,36 @@
+/* CountBadge (design/specs/selection-summary.md). Pill, hugs (28 at rest). */
+.count-badge {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: var(--space-4) var(--space-10);
+  border-radius: var(--radius-full);
+  background: var(--count-badge-fill);
+  color: var(--count-badge-ink);
+}
+
+.count-badge--todo {
+  --count-badge-fill: var(--fill-status-todo);
+  --count-badge-ink: var(--text-on-status-todo);
+}
+
+.count-badge--complete {
+  --count-badge-fill: var(--fill-status-complete);
+  --count-badge-ink: var(--text-on-status-complete);
+}
+
+.count-badge[data-pop] {
+  animation: count-badge-pop var(--motion-duration) var(--motion-ease);
+}
+
+@keyframes count-badge-pop {
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .count-badge[data-pop] {
+    animation: none;
+  }
+}

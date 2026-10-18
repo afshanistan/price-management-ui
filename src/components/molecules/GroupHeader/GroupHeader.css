@@ -1,0 +1,30 @@
+/* Group header, Subtle (design/specs/group-header.md). The Brand list version:
+   13 top (12 + the list's 1px border), 12 sides, 8 bottom. */
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: var(--size-40);
+  padding: calc(var(--space-12) + var(--border-width-1)) var(--space-12) var(--space-8);
+  border-bottom: var(--border-width-1) solid var(--border-brand);
+  /* Sticky in the list, so rows mustn't show through. */
+  background: var(--surface-card);
+}
+
+/* The name lines up with the row names: checkbox 18 + 12. */
+.group-header__select-all {
+  margin-right: calc(var(--space-12) - var(--space-6));
+}
+
+.group-header__vendor {
+  min-width: 0;
+  color: var(--text-brand);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.group-header__count {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}

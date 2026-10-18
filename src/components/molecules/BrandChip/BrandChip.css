@@ -1,0 +1,64 @@
+/* Brand chip (design/specs/brand-chip.md). Hugs: 30 (brand) / 34 (all) at rest, grows with text. */
+.brand-chip {
+  display: inline-flex;
+  align-items: center;
+  max-width: 100%;
+  border: var(--border-width-1) solid var(--border-chip);
+  border-radius: var(--radius-full);
+  background: var(--fill-chip);
+  color: var(--text-on-chip);
+}
+
+.brand-chip--brand {
+  gap: var(--space-4);
+  padding: var(--space-2) var(--space-2) var(--space-2) var(--space-10);
+}
+
+/* "All N brands": fills the panel width. */
+.brand-chip--all {
+  display: flex;
+  width: 100%;
+  gap: var(--space-8);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-14);
+}
+
+.brand-chip__label {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brand-chip--all .brand-chip__label {
+  flex: 1;
+}
+
+/* The ×: a 24 round target. Hover and pressed share one circle. */
+.brand-chip__remove {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--size-24);
+  height: var(--size-24);
+  margin: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--radius-full);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background-color var(--motion-duration) var(--motion-ease);
+}
+
+.brand-chip__remove:is([data-hovered], [data-pressed], [data-state='hover']) {
+  background: var(--fill-chip-remove-hover);
+}
+
+.brand-chip__remove:focus {
+  outline: none;
+}
+
+.brand-chip__remove[data-focus-visible] {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-1);
+}
