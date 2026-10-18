@@ -54,6 +54,10 @@ const meta = {
   title: 'Organisms/BrandList',
   component: BrandList,
   parameters: {
+    a11y: {
+      // List is reached via arrow keys from the search (aria-activedescendant); axe can't detect this. Answered Oct 18.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
     // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
     // Design tab: the main component in Figma (Brand list 744:777).
@@ -80,8 +84,6 @@ export const Default: Story = {
   args: placeholderArgs,
   render: () => <Interactive query="" initial={new Set()} />,
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Nothing checked. Scroll: the group headers stick.' } },
   },
 }
@@ -90,8 +92,6 @@ export const Selected: Story = {
   args: placeholderArgs,
   render: () => <Interactive query="" initial={selectedSample} />,
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Cargill 4 of 5 (Mixed), General Mills 9 of 9, Kraft Heinz 3 of 8.' } },
   },
 }

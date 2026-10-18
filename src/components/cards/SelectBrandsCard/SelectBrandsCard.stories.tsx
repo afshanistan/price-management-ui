@@ -23,6 +23,10 @@ const meta = {
     )
   },
   parameters: {
+    a11y: {
+      // List is reached via arrow keys from the search (aria-activedescendant); axe can't detect this. Answered Oct 18.
+      config: { rules: [{ id: 'scrollable-region-focusable', enabled: false }] },
+    },
     layout: 'padded',
     // Shown on the Docs page below the stories (.storybook/DocsPage.tsx).
     spec,
@@ -49,8 +53,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Figma State=Default (02a): nothing checked.' } },
   },
 }
@@ -58,8 +60,6 @@ export const Default: Story = {
 export const Selected: Story = {
   args: { selectedIds: selectedSample },
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Figma State=Selected (02b): Cargill 4 of 5, General Mills all 9, Kraft Heinz 3 of 8.' } },
   },
 }
@@ -67,8 +67,6 @@ export const Selected: Story = {
 export const Incomplete: Story = {
   args: { selectedIds: incompleteSample },
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Figma State=Incomplete (02d/02e): Kraft Heinz has none, so the badge stays to-do.' } },
   },
 }
@@ -110,8 +108,6 @@ export const FlowBrands: Story = {
     await expect(await canvas.findByText('No brands selected yet')).toBeInTheDocument()
   },
   parameters: {
-    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
-    a11y: { test: 'todo' },
     docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, then remove the "All 5 brands" chip.' } },
   },
 }
