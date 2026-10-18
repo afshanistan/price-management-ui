@@ -1,6 +1,7 @@
 import type { Preview } from '@storybook/react-vite'
 import '../src/styles/global.css'
 import { DocsPage } from './DocsPage'
+import { MotionProvider } from '../src/foundations/MotionProvider'
 
 const preview: Preview = {
   // A Docs page for every component, built from its stories, props and description.
@@ -62,7 +63,12 @@ const preview: Preview = {
     // Motion toolbar: mark <html> so motion.css can apply the reduced-motion rules.
     (Story, context) => {
       document.documentElement.dataset.motion = context.globals.motion ?? 'full'
-      return <Story />
+      // Motion library components follow the same switch (and the OS setting).
+      return (
+        <MotionProvider>
+          <Story />
+        </MotionProvider>
+      )
     },
     (Story, context) =>
       context.globals.mode === 'on-brand' ? (

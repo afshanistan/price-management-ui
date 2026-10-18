@@ -35,8 +35,10 @@
 }
 
 /* In the page shell's fixed card, this section takes the rest of the height (decision log,
-   "Step 1: only the selected vendors scroll"). The label stays; the grid scrolls under it. */
+   "Step 1: only the selected vendors scroll"). The label stays; the grid scrolls under it.
+   Adding or removing never changes its size. */
 .select-vendors-card__selected {
+  position: relative;
   flex: 1;
   min-height: 0;
   display: flex;
@@ -44,8 +46,25 @@
   gap: var(--space-12);
 }
 
+/* The empty state and the grid share one cell, so they cross-fade in place. */
+.select-vendors-card__stage {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+}
+
+.select-vendors-card__stage > * {
+  grid-area: 1 / 1;
+  min-height: 0;
+}
+
 /* Nothing selected: the empty box fills the section, as in Figma. */
-.select-vendors-card__selected > .empty-selection {
+.select-vendors-card__empty {
+  display: flex;
+  flex-direction: column;
+}
+
+.select-vendors-card__empty > .empty-selection {
   flex: 1;
 }
 
@@ -53,8 +72,10 @@
   color: var(--text-heading);
 }
 
-/* Three across, wrapping. Scrolls inside the section once the rows outgrow it. */
+/* Three across, wrapping. Scrolls inside the section once the rows outgrow it.
+   Relative: a removed card is lifted out of the grid (Motion popLayout) while it fades. */
 .select-vendors-card__list {
+  position: relative;
   min-height: 0;
   overflow-y: auto;
   align-content: start;
@@ -68,4 +89,41 @@
 
 .select-vendors-card__list > li {
   min-width: 0;
+}
+
+/* A newly added (or restored) card: a highlight tint that fades over --motion-duration-highlight,
+   after the card has faded in (and after the others glided, when there were others). */
+@keyframes select-vendors-card-added {
+  from {
+    background-color: var(--fill-row-highlight);
+  }
+}
+
+.select-vendors-card__list > .is-added > .selected-item-card {
+  animation: select-vendors-card-added var(--motion-duration-highlight) var(--motion-ease-out) backwards;
+  animation-delay: var(--motion-duration-base);
+}
+
+.select-vendors-card__list > .is-added-after-glide > .selected-item-card {
+  animation-delay: calc(var(--motion-duration-layout) + var(--motion-duration-base));
+}
+
+/* Undo toast: bottom center of the selected area, over the grid (placement to come from Figma). */
+.select-vendors-card__toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-16);
+  z-index: 1;
+}
+
+/* Reduced motion: the highlight is an instant tint that fades, with no wait. */
+@media (prefers-reduced-motion: reduce) {
+  .select-vendors-card__list > .is-added > .selected-item-card {
+    animation-delay: 0ms;
+  }
+}
+
+:root[data-motion='reduced'] .select-vendors-card__list > .is-added > .selected-item-card {
+  animation-delay: 0ms;
 }

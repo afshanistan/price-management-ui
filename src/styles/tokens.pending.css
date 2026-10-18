@@ -15,6 +15,20 @@
   /* figma-sync: "Body/LG Strong" (Selected item card name, Oct 18). Same as Body/LG, SemiBold. */
   --type-body-lg-strong: 600 16px/24px var(--font-family-body);
   --type-body-lg-strong-tracking: 0;
+
+  /* figma-sync: "Motion tokens" (Step 1 motion pass, Oct 18). Same values as src/styles/motion.ts.
+     --motion-ease redefines the generated ease-out keyword as the system standard curve. */
+  --motion-duration-fast: 150ms;
+  --motion-duration-base: 200ms;
+  --motion-duration-layout: 225ms;
+  --motion-duration-highlight: 1000ms;
+  --motion-stagger: 35ms;
+  --motion-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --motion-ease: var(--motion-ease-out);
+  /* figma-sync: "--focus-halo" (Search focus halo, Oct 18). */
+  --focus-halo: var(--color-teal-500-a20);
 }
 
 .type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */

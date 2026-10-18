@@ -2,6 +2,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { expect, userEvent, within } from 'storybook/test'
 import { vendors, type Vendor } from '../../../data/vendors'
+import { mockVendors } from '../../../data/mockVendors'
 import { SelectVendorsCard } from './SelectVendorsCard'
 // Raw import: the Docs page shows the spec and updates whenever it changes.
 import spec from '../../../../design/specs/select-vendors-card.md?raw'
@@ -79,28 +80,74 @@ export const FlowAddAndRemove: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const search = canvas.getByRole('searchbox', { name: 'Vendor name or ESN' })
+    // Two polite regions: the card's (results, added, restored) and the toast's (removed).
+    const cardStatus = () => canvasElement.querySelector('.select-vendors-card > [role="status"]')!
+    const toastStatus = () => canvasElement.querySelector('.toast-region')!
+    const order = () => [...canvasElement.querySelectorAll('.select-vendors-card__list > li:not([data-exiting])')].map((li) => li.getAttribute('data-vendor-id'))
+
     // Type, then Enter adds the highlighted match; the search clears, the results close, focus stays.
     await userEvent.click(search)
     await userEvent.keyboard('Cargill')
     await userEvent.keyboard('{Enter}')
     await expect(await canvas.findByRole('button', { name: 'Remove Cargill' })).toBeInTheDocument()
-    await expect(canvas.getByRole('status')).toHaveTextContent('Cargill added')
+    await expect(cardStatus()).toHaveTextContent('Cargill added')
     await expect(search).toHaveValue('')
     await expect(canvas.queryByRole('listbox')).not.toBeInTheDocument()
     await expect(search).toHaveFocus()
-    // A mouse pick does the same: the results close and focus is back in the search.
+
+    // A mouse pick does the same, and the newest vendor goes first.
     await userEvent.keyboard('General')
     await userEvent.click(await canvas.findByRole('option', { name: /^General Mills/ }))
     await expect(await canvas.findByRole('button', { name: 'Remove General Mills' })).toBeInTheDocument()
-    await expect(search).toHaveValue('')
     await expect(search).toHaveFocus()
+    await expect(order()).toEqual(['general-mills', 'cargill'])
+
+    // Remove: the toast says so (once) and offers Undo; focus moves to the next card's Remove.
     await userEvent.click(canvas.getByRole('button', { name: 'Remove General Mills' }))
-    await expect(canvas.getByRole('status')).toHaveTextContent('General Mills removed')
-    // Remove: the empty state returns and focus goes back to the search.
+    await expect(toastStatus()).toHaveTextContent('General Mills removed')
+    await expect(canvas.getByRole('button', { name: 'Remove Cargill' })).toHaveFocus()
+
+    // Undo puts it back in its original slot and focuses its Remove.
+    await userEvent.click(canvas.getByRole('button', { name: 'Undo' }))
+    await expect(await canvas.findByRole('button', { name: 'Remove General Mills' })).toHaveFocus()
+    await expect(order()).toEqual(['general-mills', 'cargill'])
+    await expect(cardStatus()).toHaveTextContent('General Mills restored')
+
+    // Remove both: the empty state returns and focus goes back to the search.
+    await userEvent.click(canvas.getByRole('button', { name: 'Remove General Mills' }))
     await userEvent.click(canvas.getByRole('button', { name: 'Remove Cargill' }))
     await expect(await canvas.findByText('No vendors selected yet')).toBeInTheDocument()
-    await expect(canvas.getByRole('status')).toHaveTextContent('Cargill removed')
+    await expect(toastStatus()).toHaveTextContent('Cargill removed')
     await expect(search).toHaveFocus()
+    // Let the fades finish before the a11y check: half-faded text would fail contrast.
+    await new Promise((resolve) => setTimeout(resolve, 1300))
   },
-  parameters: { docs: { description: { story: 'Automated: type "Cargill", Enter to add it (the search clears and the results close), then Remove; checks the announcements and where focus goes.' } } },
+  parameters: {
+    docs: { description: { story: 'Automated: add with Enter and with a click (newest first), remove, Undo back to the same slot, remove all; checks announcements and where focus goes.' } },
+  },
+}
+
+/* ---------- Motion (Step 1 motion pass) ---------- */
+
+export const MotionDemo: Story = {
+  name: 'Motion: add and remove',
+  args: { vendors: mockVendors, selected: mockVendors.slice(0, 5) },
+  render: function Render(args) {
+    const [selected, setSelected] = useState<Vendor[]>(args.selected)
+    return (
+      <div style={{ height: 644, display: 'flex' }}>
+        <SelectVendorsCard {...args} selected={selected} onChange={setSelected} className="motion-demo-card" />
+      </div>
+    )
+  },
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'In the fixed 644 frame, with the 60 mock vendors. Add one: the others glide one slot along, the new card fades in top-left, then its highlight fades. ' +
+          'Remove one (trash): it fades and shrinks, the rest glide into the gap, and a toast offers Undo for 5 seconds (paused while hovered or focused). ' +
+          'Remove all five for the cross-fade to the empty state. Switch the toolbar\'s Motion to Reduced: fades only.',
+      },
+    },
+  },
 }

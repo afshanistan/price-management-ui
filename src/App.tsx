@@ -21,6 +21,7 @@ function App() {
       stepper={<Stepper currentStep={1} />}
       footer={
         <WizardNavigation
+          // TODO(step-transition): go to step 2 with the stepper charge-up and card transition (Stepper.tsx).
           next={{ label: 'Select brands', onPress: () => {} }}
           canContinue={selectedVendors.length > 0}
           hint="Add at least one vendor to continue."

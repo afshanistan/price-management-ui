@@ -1,0 +1,26 @@
+/* Toast: a placeholder look from existing tokens until Figma has a design
+   (docs/open-questions.md, "Toast needs Figma design"). The region places it. */
+.toast-region {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.toast {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: var(--size-40);
+  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-16);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-8);
+  background: var(--surface-card);
+  box-shadow: var(--elevation-3);
+  color: var(--text-default);
+  pointer-events: auto;
+}
+
+.toast__message {
+  white-space: nowrap;
+}

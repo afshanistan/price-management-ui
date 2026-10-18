@@ -18,6 +18,42 @@
   --transition-press: transform var(--motion-duration) var(--motion-ease);
 }
 
+/* ---------- Page load (Step 1 motion pass, Oct 18) ----------
+   Header, stepper band and stage stay still. The step's card fades in and rises 8px; inside it,
+   at most three groups follow, one stagger apart: header, search, selected area. */
+@keyframes motion-enter {
+  from {
+    opacity: 0;
+    transform: translateY(var(--space-8));
+  }
+}
+
+@keyframes motion-fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+.wizard-layout__card {
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) both;
+}
+
+.wizard-layout__card .select-vendors-card > :is(.card-header, .select-vendors-card__search, .select-vendors-card__divider, .select-vendors-card__selected) {
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) both;
+}
+
+.wizard-layout__card .select-vendors-card > .card-header {
+  animation-delay: var(--motion-stagger);
+}
+
+.wizard-layout__card .select-vendors-card > .select-vendors-card__search {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+
+.wizard-layout__card .select-vendors-card > :is(.select-vendors-card__divider, .select-vendors-card__selected) {
+  animation-delay: calc(var(--motion-stagger) * 3);
+}
+
 /* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).
    The same rules twice, because a media query and an attribute can't share one block. */
 @media (prefers-reduced-motion: reduce) {
@@ -30,6 +66,13 @@
 
   .count-badge[data-pop] {
     animation: none;
+  }
+
+  /* Page load: opacity only, at fast. */
+  .wizard-layout__card,
+  .wizard-layout__card .select-vendors-card > * {
+    animation-name: motion-fade-in;
+    animation-duration: var(--motion-duration-fast);
   }
 }
 
@@ -45,5 +88,12 @@
 
   & .count-badge[data-pop] {
     animation: none;
+  }
+
+  /* Page load: opacity only, at fast. */
+  & .wizard-layout__card,
+  & .wizard-layout__card .select-vendors-card > * {
+    animation-name: motion-fade-in;
+    animation-duration: var(--motion-duration-fast);
   }
 }

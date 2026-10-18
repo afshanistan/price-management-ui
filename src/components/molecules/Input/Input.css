@@ -16,6 +16,10 @@
   background: var(--input-fill);
   color: var(--icon-default);
   cursor: text;
+  /* The focus ring is always there but transparent, so it eases in (outline-color and the halo
+     are in --transition-interactive: fast, ease-out) and reverses on blur. */
+  outline: var(--focus-width-2) solid transparent;
+  outline-offset: var(--focus-offset-4);
   transition: var(--transition-interactive);
   --input-fill: var(--fill-input);
   --input-border: var(--border-input);
@@ -61,12 +65,21 @@
   --input-border: var(--border-input-hover);
 }
 
-/* Clicking in is focus, so the ring shows on any focus, not only keyboard. Figma's ring sits 4px outside. */
+/* Clicking in is focus, so the ring shows on any focus, not only keyboard. Figma's ring sits 4px outside.
+   A soft halo (Teal/500 at 20%) sits just outside the ring; its 4px width is a placeholder
+   (docs/open-questions.md, "Search focus halo size"). */
 .input:is(:has(.input__control:focus), [data-state='focus']) {
   --input-fill: var(--fill-input);
   --input-border: var(--border-input-focus);
-  outline: var(--focus-width-2) solid var(--focus-ring);
-  outline-offset: var(--focus-offset-4);
+  outline-color: var(--focus-ring);
+  box-shadow: 0 0 0 calc(var(--focus-offset-4) + var(--focus-width-2) + var(--space-4)) var(--focus-halo);
+}
+
+/* Forced colors draw even a transparent outline: no ring at rest there. */
+@media (forced-colors: active) {
+  .input:not(:has(.input__control:focus), [data-state='focus']) {
+    outline-style: none;
+  }
 }
 
 .input:has(.input__control[data-invalid]) {

@@ -33,3 +33,15 @@
   letter-spacing: var(--type-body-md-tracking);
   color: var(--text-subtle);
 }
+
+/* Next eases between blocked and enabled over base, ease-out: background, border and label color only
+   (no scale, no pulse). Press and focus keep the fast timing. */
+.wizard-navigation__next {
+  transition:
+    background-color var(--motion-duration-base) var(--motion-ease-out),
+    border-color var(--motion-duration-base) var(--motion-ease-out),
+    color var(--motion-duration-base) var(--motion-ease-out),
+    box-shadow var(--motion-duration-fast) var(--motion-ease-out),
+    outline-color var(--motion-duration-fast) var(--motion-ease-out),
+    transform var(--motion-duration-fast) var(--motion-ease-out);
+}

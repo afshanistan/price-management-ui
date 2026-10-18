@@ -535,6 +535,20 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **ESNs read "ESN-70441642" in the results and the cards.** One identifier, one format; the data keeps the bare number. Search accepts "ESN-0561", "esn0561" or "0561", and bolds the matched digits.
 
 **One pick per search.** Picking a result (click or Enter) adds the vendor, clears the search and closes the results; focus stays in the search for the next name. *Reverses the original step 1 behavior, where focus and the query stayed so several vendors could be added from one search.* Why: the results aren't a multi-select; adding another vendor means typing another name.
+
+## Oct 18 · Step 1 motion: functional and calm
+
+**People are here to do a job, so motion only shows cause and effect.** No bounce, no springs on color, nothing that loops. One set of timings (fast 150, base 200, layout 225, highlight 1000; stagger 35) and three curves (ease-out `0.2,0,0,1` for entrances and state changes, now the system standard; ease-in for exits; ease-in-out for layout moves), shared by CSS and the Motion library. CSS does what it can (color, focus, page load, the highlight); Motion only does what CSS can't (grid glides and exits).
+
+**The newest vendor goes first.** Added vendors appear top-left and the rest shift one slot along, so each choice visibly lands where the eye already is. *Changes the order from oldest-first.*
+
+**Removing offers Undo in a toast instead of asking first.** Five seconds, paused on hover and focus, one at a time; Undo puts the vendor back in its slot. The toast's look and placement wait for Figma.
+
+**Next eases into its enabled state; the hint fades.** Colors only, no scale or pulse: the change is information, not celebration.
+
+**Reduced motion keeps fades.** Under the OS setting (or Storybook's toolbar) movement goes, short opacity fades stay, so state changes are still visible. *Refines the Oct 17 rule "everything that moves turns off".*
+
+**Kept from earlier today: one pick per search.** The motion prompt assumed the panel stays open after a pick; Will kept the newer behavior (the pick clears the search and closes the results).
 ---
 
 ## Build plan

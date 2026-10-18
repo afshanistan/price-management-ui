@@ -20,6 +20,13 @@ function stateOf(step: number, currentStep: number): StepState {
   return 'not-started'
 }
 
+/*
+  Static: the current step's in-progress ring and dot don't pulse (Step 1 motion pass, Oct 18).
+  TODO(step-transition): the step-to-step transition isn't built yet: on a valid Next, the current node
+  fills and glows into Complete, the line charges citron to the next node, and the card content moves to
+  the next step (code-backlog "Progress stepper" → "Charge-up on Next"). Hook it in where App handles
+  Next (search "TODO(step-transition)").
+*/
 export function Stepper({ steps = defaultSteps, currentStep = 1, className }: StepperProps) {
   const classes = ['stepper', className].filter(Boolean).join(' ')
 
