@@ -1,0 +1,63 @@
+/* Result row, Single (design/specs/result-row.md)
+   States come from React Aria: [data-hovered], [data-pressed], [data-focus-visible], [data-selected].
+   [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
+
+.result-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  /* Text-bearing: min-height, never height. */
+  min-height: var(--size-48);
+  padding: 0 var(--space-12);
+  border-radius: var(--radius-6);
+  background: var(--fill-tertiary-default);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--motion-duration) var(--motion-ease);
+}
+
+/* Hover, keyboard active and pressed share one fill. Selected keeps the default fill. */
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) {
+  background: var(--fill-row-highlight);
+}
+
+/* Keyboard active only: an inset ring that takes no space. Mouse hover never shows it. */
+.result-row:is([data-focus-visible], [data-state='keyboard']) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: calc(var(--focus-width-2) * -1);
+}
+
+.result-row__name {
+  flex: 1;
+  min-width: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* The matched part of the name: bold, no highlighter background. */
+.result-row__match {
+  background: none;
+  color: inherit;
+  font-weight: 600;
+}
+
+.result-row__meta {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}
+
+.result-row__selected {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-4);
+  color: var(--icon-on-tertiary);
+}
+
+.result-row__selected > .type-label-sm {
+  color: var(--text-selected);
+}
