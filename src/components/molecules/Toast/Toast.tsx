@@ -33,8 +33,9 @@ export interface ToastRegionProps {
 export function ToastRegion({ toast, onDismiss, timeout = 5000, className }: ToastRegionProps) {
   return (
     <div role="status" className={className ? `toast-region ${className}` : 'toast-region'}>
-      {/* popLayout: a replaced toast fades out on top, without pushing the new one aside. */}
-      <AnimatePresence mode="popLayout">
+      {/* popLayout: a replaced toast fades out on top, without pushing the new one aside.
+          initial={false}: a toast already there when the region appears doesn't animate in. */}
+      <AnimatePresence mode="popLayout" initial={false}>
         {toast && <Toast key={toast.id} toast={toast} onDismiss={onDismiss} timeout={timeout} />}
       </AnimatePresence>
     </div>
