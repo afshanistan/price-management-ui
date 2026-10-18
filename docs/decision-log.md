@@ -461,6 +461,10 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **Nav link icons follow Figma: Templates = `tag`, Submissions = `upload`, Messages = `messages`.** The Main navigation spec export named the links but not their icons, so code briefly used Will's pick of `create` for Templates. Checking Figma (Main-Navigation `642:156`, Variant=Default) showed the icons were already set there, with `tag` for Templates. Will kept Figma's `tag`.
 
+**The Default header button says "Upload CSV."** Figma said "Upload CSV"; the surface-studies plan said "Upload pricing." Will kept Figma's label.
+
+**The Default header's first Settings icon button is Help.** Figma names both icon button layers "Button-Settings", though the first already shows the help icon. Will confirmed: the first one is Help, so the order is Upload CSV · divider · Help · Settings · Account badge. Figma gets the layer rename (`docs/figma-sync.md`).
+
 ---
 
 ## Build plan
