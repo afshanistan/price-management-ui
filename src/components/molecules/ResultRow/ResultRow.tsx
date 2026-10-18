@@ -3,7 +3,6 @@ import { CheckboxBox } from '../../atoms/Checkbox'
 import { Icon } from '../../atoms/Icon'
 import { VendorLogo } from '../../atoms/VendorLogo'
 import { findMatch, findPrefix } from '../../../data/search'
-import type { VendorLogoFiles } from '../../../data/vendors'
 import './ResultRow.css'
 
 export type ResultRowSelect = 'single' | 'multi'
@@ -13,10 +12,8 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   name: string
   /** Single: ESN, "DEMO-0022". */
   meta?: string
-  /** Single: for the Vendor logo (the fallback when there's no logo file). */
+  /** Single: the wordmark in the Vendor logo tile. Rows show no logos (decision log, Oct 18: logos live in the cards). */
   wordmark?: string
-  /** Single: the vendor's logo files. The row shows the single-color logo. */
-  logo?: VendorLogoFiles
   /** Multi: shown as "SKUs: 4", read as "4 SKUs". */
   skuCount?: number
   /** Multi: the brand's vendor. Not shown; read after the name, because the section label is skipped
@@ -34,7 +31,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor, logo, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
@@ -59,7 +56,7 @@ export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor
           </>
         ) : (
         <>
-          <VendorLogo vendor={name} wordmark={wordmark} content="mono" logo={logo} isSelected={isSelected || isPressed || state === 'pressed'} />
+          <VendorLogo vendor={name} wordmark={wordmark} isSelected={isSelected || isPressed || state === 'pressed'} />
           {/* One line with an ellipsis; the full name in the tooltip. */}
           <span className="result-row__name" title={name}>
             <Highlight text={name} query={query} />

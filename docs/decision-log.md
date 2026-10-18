@@ -521,6 +521,12 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Name and ESN on top beside Remove; the brand-color logo below.** The name moved to a new text style, Body/LG Strong (Geist SemiBold 16/24, Body/LG's size, line height and tracking), so the vendor reads first. The logo sits in an invisible frame (no fill, border or padding), at most 128 wide × 28 high, contained and left-aligned with the name. A vendor with no logo keeps the 28px empty so cards stay the same height; no wordmark there, because the name already says it. Card: 110 tall (was 126). *Supersedes this morning's "brand logo on a 128×48 white tile" for the card.* Mono, brand and wordmark rules for the Vendor logo are unchanged; the 128×48 large tile was removed from code (nothing uses it).
 
 **The app runs on the 60 mock vendors**, through one entry point (`src/data/appData.ts`). Realistic data keeps the experience honest; Storybook's comp stories keep the Final Comps vendors. When a vendor API exists, only `appData.ts` changes.
+
+## Oct 18 · Logos only in the cards, not in the rows
+
+**Result rows (and Review rows) show the wordmark tile, no logos.** Will's call after seeing real logos in the results: at 56×36 the mix of vector and raster sources, badges forced into one color and very wide marks looked sloppy, and a list where some logos are crisp and some muddy reads worse than no logos. Scanning the results is about text (bold match + ESN). Logos stay in the Selected item card, where there's room and the brand color confirms the right company; a missing logo there already reads as intentional. Built in code first, Figma to follow (`figma-sync.md`). *Supersedes "Result row: Mono logo" from earlier today.* Rejected: logos everywhere with hard curation (real vendor data would undo it), and no logos at all (loses the confirmation moment).
+
+**Open: tall and square logos in the card.** Under about 1.5:1 (Chiquita, Sun-Maid, Unilever, Nestlé, King Arthur, Utz, Blue Bell, McCormick, both Del Montes, TreeHouse, Conagra) they read as small stamps at 28px tall. Wide logos look right. See the "Test: all 60 vendors, tallest logo first" story.
 ---
 
 ## Build plan

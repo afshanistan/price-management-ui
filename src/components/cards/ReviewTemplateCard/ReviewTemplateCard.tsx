@@ -77,7 +77,7 @@ export function ReviewTemplateCard({ vendors, selectedBrands, presets, today, on
           {/* Focusable so keyboard users can scroll it. */}
           <ul className="review-card__list" tabIndex={0} aria-label={`Vendors, ${vendors.length}`}>
             {vendors.map((vendor) => (
-              <ReviewRow key={vendor.id} type="vendor" name={vendor.name} wordmark={vendor.wordmark} logo={vendor.logo} brandCount={brandCountOf(vendor.id)} esn={vendor.esn} />
+              <ReviewRow key={vendor.id} type="vendor" name={vendor.name} wordmark={vendor.wordmark} brandCount={brandCountOf(vendor.id)} esn={vendor.esn} />
             ))}
           </ul>
         </section>
