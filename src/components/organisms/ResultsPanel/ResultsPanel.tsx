@@ -1,3 +1,4 @@
+import type { CSSProperties } from 'react'
 import { ListBox, type Selection } from 'react-aria-components'
 import type { Vendor } from '../../../data/vendors'
 import { ResultRow } from '../../molecules/ResultRow'
@@ -15,6 +16,8 @@ export interface ResultsPanelProps {
   /** Names the listbox; the field's label. */
   'aria-label': string
   className?: string
+  /** For the parent's measured position only. */
+  style?: CSSProperties
 }
 
 /*
@@ -22,7 +25,7 @@ export interface ResultsPanelProps {
   (same width, over the content below). Inside an Autocomplete, focus stays in the
   search input and rows are reached with aria-activedescendant: arrows move, Enter picks.
 */
-export function ResultsPanel({ items, query, selectedKeys, onSelect, className, ...rest }: ResultsPanelProps) {
+export function ResultsPanel({ items, query, selectedKeys, onSelect, className, style, ...rest }: ResultsPanelProps) {
   // Only additions count: re-picking a selected vendor is a no-op (docs/open-questions.md).
   function handleSelectionChange(keys: Selection) {
     if (keys === 'all') return
@@ -31,7 +34,7 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, className, 
   }
 
   return (
-    <div className={className ? `results-panel ${className}` : 'results-panel'}>
+    <div className={className ? `results-panel ${className}` : 'results-panel'} style={style}>
       <ListBox
         {...rest}
         items={items}

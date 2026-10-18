@@ -1,5 +1,6 @@
 /* Input (design/specs/input.md)
-   States come from the React Aria input inside: [data-hovered], [data-focused], [data-invalid], [data-disabled].
+   States come from the React Aria input inside: [data-hovered], [data-invalid], [data-disabled], and :focus
+   (inside an Autocomplete React Aria doesn't set [data-focused], so focus uses the native pseudo-class).
    "Filled" = the SearchField around it isn't [data-empty].
    [data-state="…"] forces a state for the "All states" story only; never set it in product code. */
 
@@ -63,7 +64,7 @@
 }
 
 /* Clicking in is focus, so the ring shows on any focus, not only keyboard. Figma's ring sits 4px outside. */
-.input:is(:has(.input__control[data-focused]), [data-state='focus']) {
+.input:is(:has(.input__control:focus), [data-state='focus']) {
   --input-fill: var(--fill-input);
   --input-border: var(--border-input-focus);
   outline: var(--focus-width-2) solid var(--focus-ring);

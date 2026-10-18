@@ -76,10 +76,16 @@ Organisms — Results panel `688:249`; Date picker `815:3262`.
 Navigation & wayfinding — Main-Navigation `642:156` (Default / Focus); Wizard navigation `853:184`; Stepper `879:293`; Stepper step `879:185`; Stepper line `879:190`.
 Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand list `744:777`; Selected brands panel `756:1494`; Global presets card `791:2631`; Review template card `830:2654`.
 
+## Status in Storybook (Oct 17, late evening)
+- **Batch 1 built:** Icon, Logo, Button, Icon button, Nav link, Account badge, Main navigation (Default + Focus), Wizard navigation (blocked Next = `aria-disabled`, decided).
+- **Batch 2 built:** Stepper; Pictogram, Vendor logo; Icon tile, Tag, Card header; Input, Text field; Result row (**Single only**), Results panel; Selected item card, Empty selection; **Select vendors card** (step 1, fully interactive). Sample vendors in `src/data/vendors.ts`.
+- Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
+- **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
+
 ## Next
-1. Finish repo setup → `npm run storybook` opens in the browser.
-2. First organism: Icon, Logo → Button, Icon button → Main navigation (Focus) + Wizard navigation, with stories for every state.
-3. Next spec exports from Figma as needed (Stepper, cards), bottom-up, checking `code-backlog.md` per component.
+1. Will: answer the step 1 open questions; apply the Figma queue and re-export `tokens.css` + the three filled icons.
+2. React app: page shell (Focus header → stepper stage → 644 card → wizard footer) with step 1 working end to end.
+3. Batch 3 specs from Figma: step 2 (Checkbox, Group header, Selection summary, Brand chip, Vendor coverage tile, Status mark, Brand list, Selected brands panel, Select brands card), then steps 3–4.
 
 ## Later / open
 - Plugin: add a fourth "Layout" level.
