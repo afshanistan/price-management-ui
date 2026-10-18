@@ -1,0 +1,110 @@
+/* Stepper (design/specs/stepper.md)
+   Sets data-mode="on-brand" itself; every token below resolves to its On brand value.
+   States come from currentStep, as data-state (node, label) and data-line (the line to the step's left). */
+
+.stepper {
+  width: var(--layout-content-width);
+  max-width: 100%;
+}
+
+/* Four equal columns; node centers sit at the column centers. */
+.stepper__list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Node (20) + gap (6) + label (20) = the 46 min height. */
+.stepper__step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+/* ---------- Line: from the previous node center to this one, behind the nodes ---------- */
+
+.stepper__step[data-line]::before {
+  content: '';
+  position: absolute;
+  right: 50%;
+  width: 100%;
+  /* Centered on the node centerline. */
+  top: calc(var(--size-20) / 2);
+  transform: translateY(-50%);
+  /* Square ends. */
+  border-radius: 0;
+}
+
+.stepper__step[data-line='complete']::before {
+  height: var(--space-4);
+  background: var(--fill-status-complete);
+  box-shadow: var(--glow-complete);
+}
+
+.stepper__step[data-line='not-started']::before {
+  height: var(--border-width-2);
+  background: var(--border-stepper-track);
+}
+
+/* ---------- Node (20×20) ---------- */
+
+.stepper__node {
+  position: relative;
+  /* Above the lines. */
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--size-20);
+  height: var(--size-20);
+  border-radius: var(--radius-full);
+}
+
+/* The center dot for In progress and Not started. */
+.stepper__node::after {
+  content: '';
+  width: var(--space-8);
+  height: var(--space-8);
+  border-radius: var(--radius-full);
+}
+
+[data-state='complete'] > .stepper__node {
+  color: var(--icon-on-status-complete);
+  background: var(--fill-status-complete);
+  box-shadow: var(--glow-complete);
+}
+
+[data-state='complete'] > .stepper__node::after {
+  content: none;
+}
+
+/* No glow: keeps "you are here" crisp. */
+[data-state='in-progress'] > .stepper__node {
+  background: var(--surface-brand);
+  border: var(--border-width-2) solid var(--border-status-in-progress);
+}
+
+[data-state='in-progress'] > .stepper__node::after {
+  background: var(--fill-status-in-progress);
+}
+
+[data-state='not-started'] > .stepper__node::after {
+  background: var(--fill-stepper-upcoming);
+}
+
+/* ---------- Label ---------- */
+
+[data-state='complete'] > .stepper__label {
+  color: var(--text-subtle);
+}
+
+[data-state='in-progress'] > .stepper__label {
+  color: var(--text-default);
+}
+
+[data-state='not-started'] > .stepper__label {
+  color: var(--text-stepper-upcoming);
+}

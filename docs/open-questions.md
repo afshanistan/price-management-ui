@@ -19,3 +19,6 @@ Format: **Question** · Where · Options · Sources · Status
 
 ## From building NavLink (Oct 17)
 - **Active nav link on hover and press** · NavLink, `isActive` · (a) stays Active (`--fill-nav-active`, filled icon) with no hover or press change, (b) shows Hover / Pressed fills over Active · The spec's state table has no Active + Hover or Active + Pressed row · **Resolved Oct 17:** (a), for now (decision log, "An active nav link doesn't react to hover or press, for now")
+
+## From building the Stepper (Oct 17)
+- **Current step label weight** · Stepper, in-progress label · (a) Geist **Bold** 700, Figma's `Stepper/Active` text style, (b) **SemiBold** 600, code-backlog "Progress stepper" ("current Neutral/50 semibold") · Spec says build with the Figma style · Open. Built with (a) `.type-stepper-active`; if (b), change the text style in Figma and re-export
