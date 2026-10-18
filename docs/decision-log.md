@@ -465,6 +465,8 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **The Default header's first Settings icon button is Help.** Figma names both icon button layers "Button-Settings", though the first already shows the help icon. Will confirmed: the first one is Help, so the order is Upload CSV · divider · Help · Settings · Account badge. Figma gets the layer rename (`docs/figma-sync.md`).
 
+**A blocked Next is `aria-disabled`, not natively disabled.** Options: (a) native `disabled` (React Aria `isDisabled`): simple, but it leaves the Tab order, so screen reader users may never hear the hint that says why they can't continue; (b) `aria-disabled="true"`: Next stays focusable, the hint is read through `aria-describedby`, and presses are ignored in code. Will compared both in Storybook and chose (b). Both look the same; Button styles `[aria-disabled="true"]` like `[data-disabled]`.
+
 ---
 
 ## Build plan

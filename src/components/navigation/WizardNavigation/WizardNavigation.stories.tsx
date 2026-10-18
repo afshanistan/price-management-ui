@@ -21,10 +21,6 @@ const meta = {
     next: { label: 'Set presets', onPress: fn() },
     canContinue: true,
     hint: 'Add at least one brand for every vendor to continue.',
-    blockedNext: 'aria-disabled',
-  },
-  argTypes: {
-    blockedNext: { control: 'inline-radio', options: ['aria-disabled', 'disabled'] },
   },
   parameters: {
     // Design tab: the main component in Figma (Wizard navigation 853:184).
@@ -39,8 +35,8 @@ const meta = {
           'WizardNavigation — footer outside `<main>`: Back (Secondary XLarge) / Next (Primary XLarge) with a hint beside a blocked Next.\n\n' +
           'The wizard footer, pinned 24px below the card and aligned to its edges. Labels name the destination ("Edit vendors", "Select brands"); the arrows are icons. ' +
           'Back is left out on step 1, but its slot stays, so Next never moves. When the step isn\'t complete (`canContinue` is false), Next is blocked and the hint appears beside it, linked with `aria-describedby`. ' +
-          'It sits on the light page, below the plum stage, so it has no On brand story.\n\n' +
-          '**Open question:** how a blocked Next is disabled. `blockedNext` is temporary; see the "Disabled Next: compare" story.',
+          'A blocked Next is `aria-disabled`, not natively disabled: it stays in the Tab order so screen readers read the hint, and presses do nothing. ' +
+          'It sits on the light page, below the plum stage, so it has no On brand story.',
       },
     },
   },
@@ -106,41 +102,7 @@ export const AllStates: Story = {
     a11y: twoFooters,
     docs: {
       description: {
-        story: 'The two Figma variants. The state isn\'t a prop: it comes from `canContinue`, which the app derives from the step\'s data.',
-      },
-    },
-  },
-}
-
-/* ---------- The open question, side by side ---------- */
-
-export const CompareDisabledNext: Story = {
-  name: 'Disabled Next: compare',
-  render: (args) => (
-    <div className="wizard-navigation-story__stack">
-      <div>
-        <p className="type-label-sm wizard-navigation-story__caption">
-          A · aria-disabled: Tab reaches Next, and a screen reader reads its hint
-        </p>
-        <WizardNavigation {...args} back={undefined} next={{ label: 'Select brands', onPress: fn() }} canContinue={false} hint="Add at least one vendor to continue." blockedNext="aria-disabled" />
-      </div>
-      <div>
-        <p className="type-label-sm wizard-navigation-story__caption">
-          B · native disabled: Tab skips Next, so the hint may never be read
-        </p>
-        <WizardNavigation {...args} back={undefined} next={{ label: 'Select brands', onPress: fn() }} canContinue={false} hint="Add at least one vendor to continue." blockedNext="disabled" />
-      </div>
-    </div>
-  ),
-  parameters: {
-    controls: { disable: true },
-    a11y: twoFooters,
-    docs: {
-      description: {
-        story:
-          'They look identical. The difference is for keyboard and screen reader users: click in the canvas and press Tab. ' +
-          'In A, focus lands on Next and VoiceOver reads "Select brands, dimmed, button, Add at least one vendor to continue." In B, Tab skips it. ' +
-          'Neither one does anything when pressed.',
+        story: 'The two Figma variants. The state isn\'t a prop: it comes from `canContinue`, which the app derives from the step\'s data. Tab to the blocked Next: it takes focus, and a screen reader reads its hint.',
       },
     },
   },

@@ -3,9 +3,6 @@ import type { IconName } from '../../atoms/Icon'
 import { Button } from '../../molecules/Button'
 import './WizardNavigation.css'
 
-/** TEMPORARY until Will picks (docs/open-questions.md, "Disabled Next"). Remove the losing option. */
-export type BlockedNext = 'disabled' | 'aria-disabled'
-
 export interface WizardNavigationProps {
   /** Omit on step 1. The left slot stays, so Next never moves. */
   back?: { label: string; onPress: () => void }
@@ -15,23 +12,12 @@ export interface WizardNavigationProps {
   canContinue: boolean
   /** Shown beside the blocked Next: "Add at least one vendor to continue." */
   hint?: string
-  /**
-   * TEMPORARY. How a blocked Next is disabled:
-   * - 'disabled': native disabled. Simple, but screen readers may skip it and its hint.
-   * - 'aria-disabled': stays focusable so the hint is read; presses are ignored.
-   */
-  blockedNext?: BlockedNext
 }
 
-export function WizardNavigation({ back, next, canContinue, hint, blockedNext = 'aria-disabled' }: WizardNavigationProps) {
+export function WizardNavigation({ back, next, canContinue, hint }: WizardNavigationProps) {
   const hintId = useId()
   const blocked = !canContinue
   const showHint = blocked && Boolean(hint)
-
-  const blockedProps =
-    !blocked ? {}
-    : blockedNext === 'disabled' ? { isDisabled: true }
-    : { 'aria-disabled': true as const }
 
   return (
     // Rendered outside <main>.
@@ -54,10 +40,11 @@ export function WizardNavigation({ back, next, canContinue, hint, blockedNext = 
           size="xlarge"
           hierarchy="primary"
           trailingIcon={next.icon ?? 'arrow-right'}
+          // Blocked = aria-disabled, not native disabled: Next stays focusable, so its hint is read.
+          aria-disabled={blocked || undefined}
           aria-describedby={showHint ? hintId : undefined}
-          // Blocked presses do nothing, whichever way Next is disabled.
+          // A blocked Next ignores presses.
           onPress={blocked ? undefined : next.onPress}
-          {...blockedProps}
         >
           {next.label}
         </Button>
