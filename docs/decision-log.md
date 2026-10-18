@@ -515,6 +515,12 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Vendor logo hover: dropped.** The row hover already covers it. *Closes the Oct 17 proposal (white tile, teal border, teal ink).*
 
 **Follow-ups, not blocking (Will):** cap the logo height (~24px) in the card tile so plain wordmarks like Mars feel less loud; give the Figma Vendor logo a Size (sm/lg) property so the padding travels with it (code already has `size`). Wide logos are listed for editing in `docs/vendor-logo-sources.md`.
+
+## Oct 18 · Selected item card: name first, logo below
+
+**Name and ESN on top beside Remove; the brand-color logo below.** The name moved to a new text style, Body/LG Strong (Geist SemiBold 16/24, Body/LG's size, line height and tracking), so the vendor reads first. The logo sits in an invisible frame (no fill, border or padding), at most 128 wide × 28 high, contained and left-aligned with the name. A vendor with no logo keeps the 28px empty so cards stay the same height; no wordmark there, because the name already says it. Card: 110 tall (was 126). *Supersedes this morning's "brand logo on a 128×48 white tile" for the card.* Mono, brand and wordmark rules for the Vendor logo are unchanged; the 128×48 large tile was removed from code (nothing uses it).
+
+**The app runs on the 60 mock vendors**, through one entry point (`src/data/appData.ts`). Realistic data keeps the experience honest; Storybook's comp stories keep the Final Comps vendors. When a vendor API exists, only `appData.ts` changes.
 ---
 
 ## Build plan

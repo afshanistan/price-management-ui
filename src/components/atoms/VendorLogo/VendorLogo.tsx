@@ -2,8 +2,6 @@ import type { CSSProperties } from 'react'
 import type { VendorLogoFiles } from '../../../data/vendors'
 import './VendorLogo.css'
 
-export type VendorLogoSize = 'sm' | 'lg'
-
 /** Figma's Content property: Wordmark | Mono logo | Brand logo. */
 export type VendorLogoContent = 'wordmark' | 'mono' | 'brand'
 
@@ -20,8 +18,6 @@ export interface VendorLogoProps {
   content?: VendorLogoContent
   /** The vendor's logo files (src/data/mockVendors.ts). */
   logo?: VendorLogoFiles
-  /** sm = 56×36, padding 2/4 (Result row); lg = 128×48, padding 8/16 (Selected item card). */
-  size?: VendorLogoSize
   /** Set by the parent row: teal tile, white ink. Not used with brand. */
   isSelected?: boolean
   /** True when the logo stands alone. Inside a row or card that names the vendor, it's decorative. */
@@ -34,12 +30,11 @@ export function VendorLogo({
   wordmark,
   content = 'wordmark',
   logo,
-  size = 'sm',
   isSelected = false,
   isStandalone = false,
   className,
 }: VendorLogoProps) {
-  const classes = ['vendor-logo', `vendor-logo--${size}`, className].filter(Boolean).join(' ')
+  const classes = ['vendor-logo', className].filter(Boolean).join(' ')
   const src = content === 'mono' ? logo?.mono : content === 'brand' ? logo?.color : undefined
 
   return (

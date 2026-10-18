@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ListBox } from 'react-aria-components'
+import { mockVendors } from '../../../data/mockVendors'
 import { ResultRow } from './ResultRow'
 // Raw import: the Docs page shows the spec and updates whenever it changes.
 import spec from '../../../../design/specs/result-row.md?raw'
@@ -8,7 +9,7 @@ const meta = {
   title: 'Molecules/ResultRow',
   component: ResultRow,
   args: { id: 'cargill', name: 'Cargill', meta: 'DEMO-0022', wordmark: 'CGL', select: 'single' },
-  argTypes: { select: { control: 'inline-radio', options: ['single', 'multi'] } },
+  argTypes: { select: { control: 'inline-radio', options: ['single', 'multi'] }, logo: { control: false } },
   // A row is an option, so it always sits in a listbox.
   render: (args) => (
     <ListBox aria-label="Vendors" selectionMode="multiple" style={{ width: 600 }}>
@@ -25,8 +26,8 @@ const meta = {
         component:
           // Figma component description, verbatim.
           'ResultRow — option in a listbox (vendor search single, brand list multi). Keyboard active = fill + 2px inset focus outline; mouse hover = fill only.\n\n' +
-          'A vendor in the search results: logo, name and ESN. Hover, keyboard highlight and press share one light fill; only the keyboard highlight adds the inset ring. ' +
-          'Pressing turns the logo teal; once added, the row shows "Selected" instead of the ESN. Its accessible name is "Cargill, DEMO-0022". ' +
+          'A vendor in the search results: logo, name and ESN. The logo is the vendor\'s single-color logo in the small tile (wordmark when there\'s no logo file). Hover, keyboard highlight and press share one light fill; only the keyboard highlight adds the inset ring. ' +
+          'Pressing turns the tile teal with a white logo; once added, the row shows "Selected" instead of the ESN. Its accessible name is "Cargill, DEMO-0022". ' +
           '**Multi** (step 2 brand list) swaps the logo for a decorative checkbox and the ESN for the SKU count, read as "Truvia, Cargill, 4 SKUs" (the hidden vendor name, because the section label is skipped when the row is reached from the search).',
       },
     },
@@ -65,6 +66,34 @@ export const AllStates: Story = {
     controls: { disable: true },
     docs: { description: { story: 'The 5 Single variants. Hover, keyboard active and pressed are forced for this story only.' } },
   },
+}
+
+/* ---------- Logos (mock vendors) ---------- */
+
+const logoVendors = ['coca-cola', 'del-monte-foods', 'mars', 'blue-diamond'].map((id) => mockVendors.find((v) => v.id === id)!)
+
+export const WithLogos: Story = {
+  name: 'With logos',
+  render: () => (
+    <ListBox aria-label="Vendors with logos" selectionMode="multiple" style={{ width: 600 }}>
+      {logoVendors.map((v) => (
+        <ResultRow key={v.id} id={v.id} name={v.name} meta={v.esn} wordmark={v.wordmark} logo={v.logo} />
+      ))}
+    </ListBox>
+  ),
+  parameters: { controls: { disable: true }, docs: { description: { story: 'Single-color logos in text-subtle on the light tile: wide, badge, wordmark, and Blue Diamond with no logo (wordmark).' } } },
+}
+
+export const WithLogosSelected: Story = {
+  name: 'With logos, selected',
+  render: () => (
+    <ListBox aria-label="Vendors with logos, selected" selectionMode="multiple" defaultSelectedKeys={logoVendors.map((v) => v.id)} style={{ width: 600 }}>
+      {logoVendors.map((v) => (
+        <ResultRow key={v.id} id={v.id} name={v.name} meta={v.esn} wordmark={v.wordmark} logo={v.logo} />
+      ))}
+    </ListBox>
+  ),
+  parameters: { controls: { disable: true }, docs: { description: { story: 'Already added: white logos on the teal tile, "Selected" in place of the ESN.' } } },
 }
 
 /* ---------- Multi (brand list, step 2) ---------- */

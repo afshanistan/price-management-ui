@@ -1,4 +1,4 @@
-/* Selected item card, Stacked (design/specs/selected-item-card.md). Hugs its content (126 in Figma). */
+/* Selected item card, Stacked (Figma 707:705; design/specs/selected-item-card.md). Hugs its content (110 in Figma). */
 .selected-item-card {
   display: flex;
   align-items: flex-start;
@@ -26,8 +26,6 @@
 }
 
 .selected-item-card__name {
-  font: var(--type-body-md);
-  letter-spacing: var(--type-body-md-tracking);
   color: var(--text-heading);
   white-space: nowrap;
   overflow: hidden;
@@ -36,4 +34,20 @@
 
 .selected-item-card__meta {
   color: var(--text-subtle);
+}
+
+/* The brand-color logo in an invisible frame (no fill, border or padding): at most 128 × 28,
+   scaled to fit and lined up with the name on the left. Brand colors are content, not color roles. */
+.selected-item-card__logo {
+  display: flex;
+  width: var(--size-128);
+  max-width: 100%;
+  height: var(--size-28);
+}
+
+.selected-item-card__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: left center;
 }

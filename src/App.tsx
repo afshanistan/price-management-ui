@@ -4,7 +4,8 @@ import { WizardLayout } from './components/layouts/WizardLayout'
 import { MainNavigation } from './components/navigation/MainNavigation'
 import { Stepper } from './components/navigation/Stepper'
 import { WizardNavigation } from './components/navigation/WizardNavigation'
-import { vendors, type Vendor } from './data/vendors'
+import { appVendors } from './data/appData'
+import type { Vendor } from './data/vendors'
 
 /*
   The Template Builder. For now: the page shell with step 1's card, as is.
@@ -26,7 +27,7 @@ function App() {
         />
       }
     >
-      <SelectVendorsCard vendors={vendors} selected={selectedVendors} onChange={setSelectedVendors} />
+      <SelectVendorsCard vendors={appVendors} selected={selectedVendors} onChange={setSelectedVendors} />
     </WizardLayout>
   )
 }

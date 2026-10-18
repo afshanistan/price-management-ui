@@ -5,24 +5,16 @@
   display: inline-grid;
   place-items: center;
   flex-shrink: 0;
+  /* 56×36, padding 2/4 (Result row, Review row). */
+  width: var(--size-56);
+  height: var(--size-36);
+  padding: var(--space-2) var(--space-4);
   border: var(--border-width-1) solid var(--border-structural);
   border-radius: var(--radius-4);
   background: var(--fill-vendor-logo);
   /* The ink: the wordmark and the mono logo. */
   color: var(--text-subtle);
   transition: var(--transition-interactive);
-}
-
-.vendor-logo--sm {
-  width: var(--size-56);
-  height: var(--size-36);
-  padding: var(--space-2) var(--space-4);
-}
-
-.vendor-logo--lg {
-  width: var(--size-128);
-  height: var(--size-48);
-  padding: var(--space-8) var(--space-16);
 }
 
 /* Brand logo: brand colors only on a white tile. The wordmark fallback keeps the white tile. */

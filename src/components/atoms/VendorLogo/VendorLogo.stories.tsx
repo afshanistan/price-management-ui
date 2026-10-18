@@ -16,13 +16,11 @@ const meta = {
     wordmark: cargill.wordmark,
     logo: cargill.logo,
     content: 'mono',
-    size: 'sm',
     isSelected: false,
     isStandalone: true,
   },
   argTypes: {
     content: { control: 'inline-radio', options: ['wordmark', 'mono', 'brand'] },
-    size: { control: 'inline-radio', options: ['sm', 'lg'] },
     logo: { control: false },
   },
   parameters: {
@@ -37,7 +35,7 @@ const meta = {
           'Vendor identity tile. Content=Mono logo: single-color logo (override the Shape image fill with the vendor’s logo; recolor via the Ink layer — text-subtle by default, text-on-primary on teal). ' +
           'Content=Brand logo: brand-color logo, only on white surface-card tiles (override the Logo image fill). Content=Wordmark: fallback for vendors with no logo. ' +
           'Logos are image fills set to Fit, matching object-fit: contain in code, so the tile can be resized freely.\n\n' +
-          'Result rows use the mono logo in the small tile (56×36), white on teal when selected. Selected item cards use the brand logo in the large white tile (128×48). ' +
+          'The tile is 56×36, padding 2/4. Result rows (and Review rows) use the mono logo, white on teal when selected. Brand logo is for white tiles only; the Selected item card shows its brand logo without a tile. ' +
           'Any content falls back to the wordmark when the vendor has no file for it. Brand colors are content, not UI color roles: a red logo doesn\'t mean error. ' +
           'Decorative inside a row or card that names the vendor; standing alone (`isStandalone`) it takes the vendor name as its accessible name.',
       },
@@ -50,7 +48,7 @@ type Story = StoryObj<typeof meta>
 
 export const MonoLogo: Story = { name: 'Mono logo' }
 export const MonoLogoSelected: Story = { name: 'Mono logo, selected', args: { isSelected: true } }
-export const BrandLogo: Story = { name: 'Brand logo', args: { content: 'brand', size: 'lg' } }
+export const BrandLogo: Story = { name: 'Brand logo', args: { content: 'brand' } }
 export const Wordmark: Story = { args: { content: 'wordmark' } }
 
 export const AllStates: Story = {
@@ -62,12 +60,12 @@ export const AllStates: Story = {
         <div style={row}>
           <VendorLogo vendor={cargill.name} wordmark={cargill.wordmark} logo={cargill.logo} content="mono" isStandalone />
           <VendorLogo vendor={cargill.name} wordmark={cargill.wordmark} logo={cargill.logo} content="mono" isSelected isStandalone />
-          <VendorLogo vendor={cargill.name} wordmark={cargill.wordmark} logo={cargill.logo} content="brand" size="lg" isStandalone />
+          <VendorLogo vendor={cargill.name} wordmark={cargill.wordmark} logo={cargill.logo} content="brand" isStandalone />
         </div>
         <div style={row}>
           <VendorLogo vendor={blueDiamond.name} wordmark={blueDiamond.wordmark} content="mono" isStandalone />
           <VendorLogo vendor={blueDiamond.name} wordmark={blueDiamond.wordmark} content="mono" isSelected isStandalone />
-          <VendorLogo vendor={blueDiamond.name} wordmark={blueDiamond.wordmark} content="brand" size="lg" isStandalone />
+          <VendorLogo vendor={blueDiamond.name} wordmark={blueDiamond.wordmark} content="brand" isStandalone />
         </div>
       </div>
     )
@@ -89,13 +87,13 @@ export const MockLogos: Story = {
       {mockVendors.map((v) => (
         <div key={v.id} style={row}>
           <VendorLogo vendor={v.name} wordmark={v.wordmark} logo={v.logo} content="mono" isStandalone />
-          <VendorLogo vendor={v.name} wordmark={v.wordmark} logo={v.logo} content="brand" size="lg" isStandalone />
+          <VendorLogo vendor={v.name} wordmark={v.wordmark} logo={v.logo} content="brand" isStandalone />
         </div>
       ))}
     </div>
   ),
   parameters: {
     controls: { disable: true },
-    docs: { description: { story: 'The 60 mock vendors: Mono logo (Result row tile) and Brand logo (Selected item card tile). For spotting logos that are too wide for the tiles.' } },
+    docs: { description: { story: 'The 60 mock vendors as Mono logo and Brand logo in the tile. For spotting logos that are too wide for it.' } },
   },
 }

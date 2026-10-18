@@ -11,5 +11,10 @@
 :root {
   --layout-card-height: 644px;  /* figma-sync: "--layout-card-height" (Wizard layout card, Oct 18) */
   --layout-stage-height: 306px; /* figma-sync: "--layout-stage-height" (Wizard layout plum stage, Oct 18) */
-  --size-128: 128px;            /* figma-sync: "--size-128" (Vendor logo lg width, Selected item card, Oct 18) */
+  --size-128: 128px;            /* figma-sync: "--size-128" (Selected item card logo max width, Oct 18) */
+  /* figma-sync: "Body/LG Strong" (Selected item card name, Oct 18). Same as Body/LG, SemiBold. */
+  --type-body-lg-strong: 600 16px/24px var(--font-family-body);
+  --type-body-lg-strong-tracking: 0;
 }
+
+.type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */
