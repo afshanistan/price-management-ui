@@ -33,6 +33,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   const listRef = useRef<HTMLUListElement>(null)
   // After a removal: which card's Remove gets focus next (-1 = the search).
   const focusAfterRemove = useRef<number | null>(null)
+  // After an add: focus goes back to the search.
+  const focusSearchAfterAdd = useRef(false)
   const listLabelId = useId()
 
   const selectedKeys = new Set(selected.map((vendor) => vendor.id))
@@ -55,6 +57,15 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
     if (isOpen && input instanceof HTMLElement) setPanelTop(input.offsetTop + input.offsetHeight)
   }, [isOpen])
 
+  // After an add, the search keeps focus. A mouse pick happens on pointer down, and the browser then
+  // focuses the clicked row, which the closed results just removed: so wait a frame, then focus the search.
+  useEffect(() => {
+    if (!focusSearchAfterAdd.current) return
+    focusSearchAfterAdd.current = false
+    const frame = requestAnimationFrame(() => searchRef.current?.querySelector('input')?.focus())
+    return () => cancelAnimationFrame(frame)
+  }, [selected])
+
   // Move focus after a removal, once the list has re-rendered.
   useEffect(() => {
     const index = focusAfterRemove.current
@@ -66,9 +77,12 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   }, [selected])
 
   function add(vendor: Vendor) {
-    // Focus and the query stay put, so several vendors can be added in a row.
+    // One pick per search (Will, Oct 18): the search clears, which closes the results; focus stays
+    // in the search for the next name. The announcement isn't replaced (an empty query skips it).
     onChange([...selected, vendor])
+    setQuery('')
     setAnnouncement(`${vendor.name} added`)
+    focusSearchAfterAdd.current = true
   }
 
   function remove(vendor: Vendor) {
@@ -90,7 +104,7 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
       <CardHeader title="Add vendors to your template" pictogram="vendor" />
 
       <div ref={searchRef} className="select-vendors-card__search" onFocus={() => setSearchHasFocus(true)} onBlur={handleBlur}>
-        {/* Focus stays in the input; arrows move through results (aria-activedescendant), Enter adds, Esc clears. */}
+        {/* Focus stays in the input; arrows move through results (aria-activedescendant), Enter adds and clears the search, Esc clears. */}
         <Autocomplete inputValue={query} onInputChange={setQuery}>
           <TextField
             label={label}

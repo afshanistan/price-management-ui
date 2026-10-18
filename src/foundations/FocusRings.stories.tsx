@@ -39,7 +39,7 @@ function FocusRingsPage() {
         <OptionTile value="usd" label="USD" description="US dollar" layout="inline" />
       </RadioGroup>
       <ListBox aria-label="Vendors" selectionMode="multiple" style={{ width: 480 }}>
-        <ResultRow id="cargill" name="Cargill" meta="DEMO-0022" wordmark="CGL" />
+        <ResultRow id="cargill" name="Cargill" meta="DEMO-0022" />
       </ListBox>
       <Calendar aria-label="Effective date" defaultFocusedValue={new CalendarDate(2026, 10, 20)} minValue={today.add({ days: 1 })}>
         <CalendarGrid>

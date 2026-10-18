@@ -50,9 +50,11 @@ export function findMatch(text: string, query: string): { rank: MatchRank; start
   return k >= 0 ? { rank: 2, ...at(k) } : null
 }
 
-/** An ESN matches from its first digit: "0563" finds 05631234, "563" doesn't. */
+/** An ESN matches from its first digit: "0563" finds 05631234, "563" doesn't. A leading "ESN" in the
+    query is ignored, so "ESN-0563" and "esn0563" find it too (ESNs read "ESN-05631234"). */
 export function findPrefix(text: string, query: string): { start: number; end: number } | null {
-  const q = folded(query).value
+  let q = folded(query).value
+  if (q.startsWith('esn')) q = q.slice(3)
   return q && folded(text).value.startsWith(q) ? { start: 0, end: q.length } : null
 }
 

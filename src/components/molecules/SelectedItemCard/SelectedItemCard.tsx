@@ -1,12 +1,12 @@
 import { useState } from 'react'
-import type { VendorLogoFiles } from '../../../data/vendors'
+import { formatEsn, type VendorLogoFiles } from '../../../data/vendors'
 import { IconButton } from '../IconButton'
 import './SelectedItemCard.css'
 
 export interface SelectedItemCardProps {
   /** "Cargill". */
   name: string
-  /** ESN, "DEMO-0022". */
+  /** The ESN, the bare number; shown as "ESN-70441642". */
   meta: string
   /** The vendor's logo files. The card shows the brand-color logo; with none (or a tall one), the space stays empty. */
   logo?: VendorLogoFiles
@@ -33,7 +33,7 @@ export function SelectedItemCard({ name, meta, logo, onRemove, className }: Sele
       <div className="selected-item-card__identity">
         <div className="selected-item-card__text">
           <span className="selected-item-card__name type-body-lg-strong" title={name}>{name}</span>
-          <span className="selected-item-card__meta type-data-sm">{meta}</span>
+          <span className="selected-item-card__meta type-data-sm">{formatEsn(meta)}</span>
         </div>
         {/* Decorative: the name is in text. No logo, or a tall one → the 28px stays, empty (no wordmark: the name already says it). */}
         <span className="selected-item-card__logo" aria-hidden="true">

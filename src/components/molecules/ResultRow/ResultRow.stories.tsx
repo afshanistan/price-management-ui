@@ -7,7 +7,7 @@ import spec from '../../../../design/specs/result-row.md?raw'
 const meta = {
   title: 'Molecules/ResultRow',
   component: ResultRow,
-  args: { id: 'cargill', name: 'Cargill', meta: 'DEMO-0022', wordmark: 'CGL', select: 'single' },
+  args: { id: 'cargill', name: 'Cargill', meta: 'DEMO-0022', select: 'single' },
   argTypes: { select: { control: 'inline-radio', options: ['single', 'multi'] } },
   // A row is an option, so it always sits in a listbox.
   render: (args) => (
@@ -25,8 +25,8 @@ const meta = {
         component:
           // Figma component description, verbatim.
           'ResultRow — option in a listbox (vendor search single, brand list multi). Keyboard active = fill + 2px inset focus outline; mouse hover = fill only.\n\n' +
-          'A vendor in the search results: logo, name and ESN. The tile shows the vendor\'s wordmark; rows show no logos (logos live in the Selected item cards). Hover, keyboard highlight and press share one light fill; only the keyboard highlight adds the inset ring. ' +
-          'Pressing turns the tile teal; once added, the row shows "Selected" instead of the ESN. Its accessible name is "Cargill, DEMO-0022". ' +
+          'A vendor in the search results: name and ESN ("ESN-70441642"), no logo tile; logos live in the Selected item cards. Hover, keyboard highlight and press share one light fill; only the keyboard highlight adds the inset ring. ' +
+          'Once added, the row shows "Selected" instead of the ESN. Its accessible name is "Cargill, ESN-DEMO-0022" (comp data; real ESNs are 8 digits). ' +
           '**Multi** (step 2 brand list) swaps the logo for a decorative checkbox and the ESN for the SKU count, read as "Truvia, Cargill, 4 SKUs" (the hidden vendor name, because the section label is skipped when the row is reached from the search).',
       },
     },
@@ -40,13 +40,13 @@ export const Default: Story = {}
 
 export const MatchHighlight: Story = {
   name: 'Match highlight',
-  args: { query: 'car', name: 'Carlsberg Group', id: 'carlsberg', meta: 'DEMO-0010', wordmark: 'CARL' },
+  args: { query: 'car', name: 'Carlsberg Group', id: 'carlsberg', meta: 'DEMO-0010' },
   parameters: { docs: { description: { story: 'The matched part of the name is bold (not drawn in Figma; the spec asks for it).' } } },
 }
 
 export const LongName: Story = {
   name: 'Long name',
-  args: { name: 'McCormick & Company International Flavor Ingredients Division', id: 'long', meta: 'DEMO-0017', wordmark: 'MKC' },
+  args: { name: 'McCormick & Company International Flavor Ingredients Division', id: 'long', meta: 'DEMO-0017' },
   parameters: { docs: { description: { story: 'One line with an ellipsis; the full name shows on hover (title).' } } },
 }
 
@@ -54,11 +54,11 @@ export const AllStates: Story = {
   name: 'All states',
   render: () => (
     <ListBox aria-label="Vendors (all states)" selectionMode="multiple" defaultSelectedKeys={['selected']} style={{ width: 600 }}>
-      <ResultRow id="default" name="Cargill (default)" meta="DEMO-0022" wordmark="CGL" />
-      <ResultRow id="hover" name="Cargill (hover)" meta="DEMO-0022" wordmark="CGL" data-state="hover" />
-      <ResultRow id="keyboard" name="Cargill (keyboard active)" meta="DEMO-0022" wordmark="CGL" data-state="keyboard" />
-      <ResultRow id="pressed" name="Cargill (pressed)" meta="DEMO-0022" wordmark="CGL" data-state="pressed" />
-      <ResultRow id="selected" name="Cargill (selected)" meta="DEMO-0022" wordmark="CGL" />
+      <ResultRow id="default" name="Cargill (default)" meta="DEMO-0022" />
+      <ResultRow id="hover" name="Cargill (hover)" meta="DEMO-0022" data-state="hover" />
+      <ResultRow id="keyboard" name="Cargill (keyboard active)" meta="DEMO-0022" data-state="keyboard" />
+      <ResultRow id="pressed" name="Cargill (pressed)" meta="DEMO-0022" data-state="pressed" />
+      <ResultRow id="selected" name="Cargill (selected)" meta="DEMO-0022" />
     </ListBox>
   ),
   parameters: {
@@ -70,7 +70,7 @@ export const AllStates: Story = {
 /* ---------- Multi (brand list, step 2) ---------- */
 
 export const Multi: Story = {
-  args: { select: 'multi', id: 'truvia', name: 'Truvia', vendor: 'Cargill', skuCount: 4, meta: undefined, wordmark: undefined },
+  args: { select: 'multi', id: 'truvia', name: 'Truvia', vendor: 'Cargill', skuCount: 4, meta: undefined },
   parameters: { docs: { description: { story: 'A brand in the Brand list: decorative checkbox, name, "SKUs: 4". Read as "Truvia, Cargill, 4 SKUs". Click to toggle.' } } },
 }
 

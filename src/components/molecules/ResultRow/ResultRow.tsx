@@ -1,8 +1,8 @@
 import { ListBoxItem, type ListBoxItemProps } from 'react-aria-components'
 import { CheckboxBox } from '../../atoms/Checkbox'
 import { Icon } from '../../atoms/Icon'
-import { VendorLogo } from '../../atoms/VendorLogo'
 import { findMatch, findPrefix } from '../../../data/search'
+import { ESN_PREFIX } from '../../../data/vendors'
 import './ResultRow.css'
 
 export type ResultRowSelect = 'single' | 'multi'
@@ -10,10 +10,8 @@ export type ResultRowSelect = 'single' | 'multi'
 export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'className' | 'style' | 'textValue'> {
   /** Vendor name (single) or brand name (multi). */
   name: string
-  /** Single: ESN, "DEMO-0022". */
+  /** Single: the ESN, the bare number; shown as "ESN-70441642". */
   meta?: string
-  /** Single: the wordmark in the Vendor logo tile. Rows show no logos (decision log, Oct 18: logos live in the cards). */
-  wordmark?: string
   /** Multi: shown as "SKUs: 4", read as "4 SKUs". */
   skuCount?: number
   /** Multi: the brand's vendor. Not shown; read after the name, because the section label is skipped
@@ -21,7 +19,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   vendor?: string
   /** Bolds the matched part of the name. */
   query?: string
-  /** single = vendor search (logo, ESN, "Selected"); multi = brand list (checkbox, SKU count). */
+  /** single = vendor search (name, ESN, "Selected"; no logo tile); multi = brand list (checkbox, SKU count). */
   select?: ResultRowSelect
   /** Forces a state for the "All states" story only. Never set it in product code. */
   'data-state'?: 'hover' | 'keyboard' | 'pressed'
@@ -31,7 +29,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select = 'single', 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
@@ -56,16 +54,16 @@ export function ResultRow({ name, meta = '', wordmark = '', skuCount = 0, vendor
           </>
         ) : (
         <>
-          <VendorLogo vendor={name} wordmark={wordmark} isSelected={isSelected || isPressed || state === 'pressed'} />
-          {/* One line with an ellipsis; the full name in the tooltip. */}
+          {/* No logo tile (decision log, Oct 18): the name and ESN identify the vendor. One line with an ellipsis; the full name in the tooltip. */}
           <span className="result-row__name" title={name}>
             <Highlight text={name} query={query} />
           </span>
-          {/* The accessible name comes from the text: "Cargill, DEMO-0022" (selection is aria-selected). */}
+          {/* The accessible name comes from the text: "Cargill, ESN-70441642" (selection is aria-selected). */}
           <span className="visually-hidden">, </span>
           {/* Once added, "Selected" replaces the ESN on screen; screen readers still get the ESN. */}
           <span className={isSelected ? 'visually-hidden' : 'result-row__meta type-data-sm'}>
-            {/* ESNs match from their first digit, so only a leading match is bold. */}
+            {/* "ESN-" + the number. ESNs match from their first digit, so only a leading match is bold. */}
+            {ESN_PREFIX}
             <Highlight text={meta} query={query} prefixOnly />
           </span>
           {isSelected && (

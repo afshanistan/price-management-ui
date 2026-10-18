@@ -527,6 +527,14 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Result rows (and Review rows) show the wordmark tile, no logos.** Will's call after seeing real logos in the results: at 56×36 the mix of vector and raster sources, badges forced into one color and very wide marks looked sloppy, and a list where some logos are crisp and some muddy reads worse than no logos. Scanning the results is about text (bold match + ESN). Logos stay in the Selected item card, where there's room and the brand color confirms the right company; a missing logo there already reads as intentional. Built in code first, Figma to follow (`figma-sync.md`). *Supersedes "Result row: Mono logo" from earlier today.* Rejected: logos everywhere with hard curation (real vendor data would undo it), and no logos at all (loses the confirmation moment).
 
 **Tall and square logos are left out of the card.** Under 1.5:1 (ink width ÷ height) they read as small stamps at 28px tall, so the card hides them and the space stays empty, like a vendor with no logo: 14 of the 60 (Chiquita, Sun-Maid, Unilever, Nestlé, Utz, King Arthur, Blue Bell, McCormick, both Del Montes, TreeHouse, Conagra, Post, Dole). Wide logos look right and use the 128 width. The ratio is measured per logo and stored with the files; without one (real data later), the card uses the image's own shape. Rejected: letting tall logos grow taller, and hunting for wide lockups first. See the "All 60 vendors, tallest logo first" story.
+
+## Oct 18 · Results: no tile, "ESN-" numbers, one pick per search
+
+**Result rows lose the Vendor logo tile.** With logos gone from the rows, the wordmark tile read as a placeholder. A row is now the vendor name and its ESN; hover, keyboard highlight and the "Selected" check are unchanged. Review rows (step 4) keep their tile for now (not decided).
+
+**ESNs read "ESN-70441642" in the results and the cards.** One identifier, one format; the data keeps the bare number. Search accepts "ESN-0561", "esn0561" or "0561", and bolds the matched digits.
+
+**One pick per search.** Picking a result (click or Enter) adds the vendor, clears the search and closes the results; focus stays in the search for the next name. *Reverses the original step 1 behavior, where focus and the query stayed so several vendors could be added from one search.* Why: the results aren't a multi-select; adding another vendor means typing another name.
 ---
 
 ## Build plan

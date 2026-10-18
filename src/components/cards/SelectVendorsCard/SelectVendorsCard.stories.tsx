@@ -40,7 +40,7 @@ const meta = {
           // Figma component description, verbatim.
           'SelectVendorsCard — step 1: search vendors, selected vendor cards.\n\n' +
           'Step 1 of the wizard. Type a vendor name or ESN; matches appear as you type in a panel under the field. ' +
-          'Pick one (click, or arrows + Enter) to add it at once: focus and the query stay, so you can add several in a row. ' +
+          'Pick one (click, or arrows + Enter) to add it at once: the search clears and the results close, with focus still in the search for the next name. ' +
           'Added vendors show below, three across, each with a Remove button; with none, an empty state shows. ' +
           'Screen readers hear result counts and "Cargill added" / "Cargill removed". The state (default, searching, selected) comes from the data, never a prop.',
       },
@@ -79,18 +79,28 @@ export const FlowAddAndRemove: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const search = canvas.getByRole('searchbox', { name: 'Vendor name or ESN' })
-    // Type, then Enter adds the highlighted match; focus and the query stay.
+    // Type, then Enter adds the highlighted match; the search clears, the results close, focus stays.
     await userEvent.click(search)
     await userEvent.keyboard('Cargill')
     await userEvent.keyboard('{Enter}')
     await expect(await canvas.findByRole('button', { name: 'Remove Cargill' })).toBeInTheDocument()
     await expect(canvas.getByRole('status')).toHaveTextContent('Cargill added')
+    await expect(search).toHaveValue('')
+    await expect(canvas.queryByRole('listbox')).not.toBeInTheDocument()
     await expect(search).toHaveFocus()
+    // A mouse pick does the same: the results close and focus is back in the search.
+    await userEvent.keyboard('General')
+    await userEvent.click(await canvas.findByRole('option', { name: /^General Mills/ }))
+    await expect(await canvas.findByRole('button', { name: 'Remove General Mills' })).toBeInTheDocument()
+    await expect(search).toHaveValue('')
+    await expect(search).toHaveFocus()
+    await userEvent.click(canvas.getByRole('button', { name: 'Remove General Mills' }))
+    await expect(canvas.getByRole('status')).toHaveTextContent('General Mills removed')
     // Remove: the empty state returns and focus goes back to the search.
     await userEvent.click(canvas.getByRole('button', { name: 'Remove Cargill' }))
     await expect(await canvas.findByText('No vendors selected yet')).toBeInTheDocument()
     await expect(canvas.getByRole('status')).toHaveTextContent('Cargill removed')
     await expect(search).toHaveFocus()
   },
-  parameters: { docs: { description: { story: 'Automated: type "Cargill", Enter to add it, then Remove; checks the announcements and where focus goes.' } } },
+  parameters: { docs: { description: { story: 'Automated: type "Cargill", Enter to add it (the search clears and the results close), then Remove; checks the announcements and where focus goes.' } } },
 }

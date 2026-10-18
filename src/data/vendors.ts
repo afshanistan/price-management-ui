@@ -34,6 +34,12 @@ export const vendors: Vendor[] = [
   { id: 'kraft-heinz', name: 'Kraft Heinz', esn: 'DEMO-0005', wordmark: 'KHC' },
 ]
 
+/** How an ESN reads everywhere it's shown: "ESN-70441642" (Will, Oct 18). The data keeps the bare number. */
+export const ESN_PREFIX = 'ESN-'
+export function formatEsn(esn: string) {
+  return `${ESN_PREFIX}${esn}`
+}
+
 /** Live filter by name or ESN, ignoring accents and punctuation (src/data/search.ts). */
 export function matchesVendor(vendor: Vendor, query: string) {
   return searchVendors([vendor], query).length > 0
