@@ -1,0 +1,80 @@
+/* Checkbox (design/specs/checkbox.md). Fixed 18 square.
+   Hover comes from the control ([data-hovered] on .checkbox) or, inside a Result row, from the row
+   (result-row.css). [data-state="hover"] forces it for the "All states" story only. */
+
+.checkbox-box {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--size-18);
+  height: var(--size-18);
+  border-radius: var(--radius-4);
+  border: var(--border-width-1-5) solid var(--checkbox-border);
+  background: var(--checkbox-fill);
+  color: var(--icon-on-primary);
+  transition:
+    background-color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease),
+    transform var(--motion-duration) var(--motion-ease);
+  --checkbox-fill: var(--fill-input);
+  --checkbox-border: var(--border-input);
+}
+
+.checkbox-box:is([data-checked], [data-mixed]) {
+  --checkbox-fill: var(--fill-primary-default);
+  --checkbox-border: var(--fill-primary-default);
+}
+
+/* Hover: the box's own control, a forced state, or a hovered / highlighted Result row. */
+.checkbox-box[data-state='hover'],
+.checkbox[data-hovered] .checkbox-box,
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) .checkbox-box {
+  --checkbox-fill: var(--fill-input-hover);
+  --checkbox-border: var(--border-input-hover);
+}
+
+.checkbox-box:is([data-checked], [data-mixed])[data-state='hover'],
+.checkbox[data-hovered] .checkbox-box:is([data-checked], [data-mixed]),
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) .checkbox-box:is([data-checked], [data-mixed]) {
+  --checkbox-fill: var(--fill-primary-hover);
+  --checkbox-border: var(--fill-primary-hover);
+}
+
+/* The glyph draws in after the box fills. */
+.checkbox-box__glyph path {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--motion-duration) var(--motion-ease) var(--motion-duration);
+}
+
+.checkbox-box:is([data-checked], [data-mixed]) .checkbox-box__glyph path {
+  stroke-dashoffset: 0;
+}
+
+/* ---------- The real checkbox (select all) ---------- */
+
+.checkbox {
+  display: inline-flex;
+  border-radius: var(--radius-4);
+  cursor: pointer;
+}
+
+/* Press: a slight scale-up, the opposite of buttons' 0.97. */
+.checkbox[data-pressed] .checkbox-box {
+  transform: scale(1.08);
+}
+
+.checkbox[data-focus-visible] .checkbox-box {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox[data-pressed] .checkbox-box {
+    transform: none;
+  }
+
+  .checkbox-box__glyph path {
+    transition: none;
+  }
+}

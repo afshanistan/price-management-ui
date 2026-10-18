@@ -1,6 +1,6 @@
 # Component specs (exported from Figma, Oct 17)
 
-Batch 1 (afternoon): header + wizard footer. Batch 2 (evening): Stepper + step 1 (Add vendors).
+Batch 1 (afternoon): header + wizard footer. Batch 2 (evening): Stepper + step 1 (Add vendors). Batches 3 and 4 (night): steps 2, 3 and 4.
 
 One file per component, read straight from the Figma main components (file `Iz1cbfAMKHnHopr6wgXZCa`). Each spec has the same sections:
 
@@ -26,7 +26,24 @@ Batch 2 build order (stepper + step 1):
 9. `selected-item-card.md`, `empty-selection.md`
 10. `select-vendors-card.md` (combines 6–9)
 
-Not exported yet (step 2 onward): Checkbox, Group header, Selection summary, Brand chip, Vendor coverage tile, Status mark, Brand list, Selected brands panel, Select brands card, and steps 3–4.
+Batch 3 build order (step 2, Add brands):
+11. `status-mark.md`, `checkbox.md` (atoms)
+12. `brand-chip.md`, `vendor-coverage-tile.md`, `group-header.md`, `selection-summary.md` (CountBadge + SelectionSummary)
+13. `result-row.md`: the **Multi** section (Single is already built)
+14. `brand-list.md`, `selected-brands-panel.md`
+15. `select-brands-card.md` (combines 11–14; adds `src/data/brands.ts`)
+
+Batch 4 build order (steps 3 and 4):
+16. `radio.md`, `calendar-day.md` (atoms)
+17. `option-tile.md`, `date-picker.md`
+18. `preset-fieldset.md` (Currency + Pricing model), `dates-preset.md`
+19. `global-presets-card.md`
+20. `summary-stat.md`, `review-row.md`, `preset-readout.md`
+21. `review-template-card.md`
+
+That's every component in the 12 Final Comps. Next comes the React app (page shell, routing between steps, the stepper charge-up).
+
+**Flags in batches 3–4 are already logged** in `docs/open-questions.md` under "From the step 2–4 spec export". Where a spec says "log it", update that entry's status instead of adding a new one.
 
 Figma-only machinery you must **not** reproduce in code:
 - The **Semantic/Icon** and **Figma/Icon style** variable modes. In code, icons use `currentColor` and a `filled` prop.

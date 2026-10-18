@@ -1,0 +1,24 @@
+/* Status mark (design/specs/status-mark.md). Fixed 16 circle. The border carries the status in forced colors too. */
+.status-mark {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: var(--size-16);
+  height: var(--size-16);
+  border-radius: var(--radius-full);
+  border: var(--border-width-1-5) solid var(--status-mark-border);
+  background: var(--status-mark-fill);
+}
+
+.status-mark--complete {
+  --status-mark-fill: var(--fill-status-complete);
+  --status-mark-border: var(--border-status-complete);
+  color: var(--icon-on-status-complete);
+}
+
+/* White center, as in Figma (docs/open-questions.md: maybe transparent once real logos exist). */
+.status-mark--todo {
+  --status-mark-fill: var(--surface-card);
+  --status-mark-border: var(--border-status-todo);
+  border-style: dashed;
+}

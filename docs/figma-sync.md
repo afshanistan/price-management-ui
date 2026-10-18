@@ -16,6 +16,9 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 - [ ] **`--size-80`** (Figma `size/80`) · Primitives/Dimension · 80px (no modes) · Vendor logo lg (80×48, Selected item card) · Bind as the width of the lg Vendor logo `677:34` instance in Selected item card `707:717` · Stand-in in `tokens.pending.css` · Vendor logo (Oct 17)
 - [ ] **`--focus-offset-4`** (Figma `focus/offset-4`) · Primitives/Dimension · 4px (no modes) · Input focus ring (sits 4px outside the field) · Bind as the offset of the Input `661:56` Focus ring frame · Stand-in in `tokens.pending.css` · Input (Oct 17)
 - [ ] **`--size-126`** (Figma `size/126`) · Primitives/Dimension · 126px (no modes) · Empty selection, Stacked min height (the same height as a Selected item card, so the section doesn't jump when the last vendor is removed) · Bind as the min height of Empty selection `903:616` Layout=Stacked · Stand-in in `tokens.pending.css` · Empty selection (Oct 17)
+- [ ] **`--space-14`** (Figma `space/14`) · Primitives/Dimension · 14px (no modes) · Brand chip, Type=All brands (left padding) · Bind as the left padding of Brand chip `891:629` All brands variants · Stand-in in `tokens.pending.css` · Brand chip (Oct 17)
+- [ ] **`--size-18`** (Figma `size/18`) · Primitives/Dimension · 18px (no modes) · Checkbox (18×18) · Bind as the width and height of Checkbox `728:38` · Stand-in in `tokens.pending.css` · Checkbox (Oct 17)
+- [ ] **`--layout-panel-width`** (Figma `layout/panel-width`) · Primitives/Dimension · 360px (no modes) · Selected brands panel (fixed width beside the Brand list) · Bind as the width of Selected brands panel `756:1494` · Stand-in in `tokens.pending.css` · Selected brands panel (Oct 17)
 
 ## Components
 
