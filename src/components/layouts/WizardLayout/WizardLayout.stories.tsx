@@ -77,7 +77,14 @@ export const Step1Selected: Story = {
   name: 'Step 1 (all vendors)',
   args: placeholderArgs,
   render: () => <Step1 initial={vendors} />,
+  // Only the selected vendors grid scrolls; the card, its title and search stay put.
+  play: async ({ canvasElement }) => {
+    const card = canvasElement.querySelector<HTMLElement>('.wizard-layout__card > *')!
+    const grid = within(canvasElement).getByRole('list', { name: /Selected vendors/ })
+    await expect(card.scrollHeight).toBe(card.clientHeight)
+    await expect(grid.scrollHeight).toBeGreaterThan(grid.clientHeight)
+  },
   parameters: {
-    docs: { description: { story: 'All 7 sample vendors: the card stays 644 and its content scrolls inside; the footer doesn\'t move.' } },
+    docs: { description: { story: 'All 7 sample vendors: the card stays 644; only the selected vendors grid scrolls, under its label. The footer doesn\'t move.' } },
   },
 }

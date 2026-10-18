@@ -467,6 +467,14 @@ Figma can't position an overlay under an element via its API, so the Effective d
 
 **A blocked Next is `aria-disabled`, not natively disabled.** Options: (a) native `disabled` (React Aria `isDisabled`): simple, but it leaves the Tab order, so screen reader users may never hear the hint that says why they can't continue; (b) `aria-disabled="true"`: Next stays focusable, the hint is read through `aria-describedby`, and presses are ignored in code. Will compared both in Storybook and chose (b). Both look the same; Button styles `[aria-disabled="true"]` like `[data-disabled]`.
 
+
+## Oct 18 · React app: page shell
+
+**WizardLayout's Design tab links to Final Comps 01a.** The Layouts page in Figma is empty, so there's no page-shell component to link. Will kept the screen (`879:4657`) rather than building a Layouts component just for the link.
+
+**Step 1: the empty box fills the card, as in Figma.** In the fixed 644 card, the Selected vendors section takes the rest of the height and the Empty selection stretches to fill it (Figma: the section and the empty box are both fill). Rejected: keeping it at its 126 minimum, which left blank card below it.
+
+**Step 1: only the selected vendors grid scrolls.** The card title, the search and the "Selected vendors (N)" label stay put; the grid of vendor cards scrolls under the label once it outgrows the card. Rejected: scrolling the whole card (the title and search scroll away) and scrolling the section with its label (the count leaves view). The shell's own scroll on the card stays only as a fallback, e.g. at 200% text.
 ---
 
 ## Build plan

@@ -1,5 +1,5 @@
 /* Select vendors card, step 1 (design/specs/select-vendors-card.md).
-   It hugs its content; the page shell fixes the card at 644 and scrolls its body. */
+   It hugs its content; the page shell fixes the card at 644, and only the selected vendors grid scrolls. */
 .select-vendors-card {
   display: flex;
   flex-direction: column;
@@ -34,18 +34,30 @@
   background: var(--border-structural);
 }
 
+/* In the page shell's fixed card, this section takes the rest of the height (decision log,
+   "Step 1: only the selected vendors scroll"). The label stays; the grid scrolls under it. */
 .select-vendors-card__selected {
+  flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-12);
+}
+
+/* Nothing selected: the empty box fills the section, as in Figma. */
+.select-vendors-card__selected > .empty-selection {
+  flex: 1;
 }
 
 .select-vendors-card__label {
   color: var(--text-heading);
 }
 
-/* Three across, wrapping. */
+/* Three across, wrapping. Scrolls inside the section once the rows outgrow it. */
 .select-vendors-card__list {
+  min-height: 0;
+  overflow-y: auto;
+  align-content: start;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-16);
