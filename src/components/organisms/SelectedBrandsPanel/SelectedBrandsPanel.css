@@ -1,0 +1,107 @@
+/* Selected brands panel (design/specs/selected-brands-panel.md). Fixed width, fills the card body height.
+   Summary and coverage strip stay pinned; the chips scroll. */
+.selected-brands-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  flex-shrink: 0;
+  width: var(--layout-panel-width);
+  min-height: 0;
+  padding: var(--space-16);
+  border: var(--border-width-1) solid var(--border-structural);
+  /* The plum top edge. */
+  border-top: var(--border-width-3) solid var(--border-brand-strong);
+  border-radius: var(--radius-8);
+  overflow: hidden;
+}
+
+.selected-brands-panel__coverage {
+  display: flex;
+  gap: var(--space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.selected-brands-panel__coverage > li {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.selected-brands-panel__divider {
+  flex-shrink: 0;
+  width: 100%;
+  height: var(--border-width-1);
+  margin: 0;
+  border: none;
+  background: var(--border-structural);
+}
+
+.selected-brands-panel__chips {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+/* Empty: the stacked placeholder fills the chip area. */
+.selected-brands-panel__empty {
+  flex: 1;
+}
+
+.selected-brands-panel__vendor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
+
+.selected-brands-panel__vendor-label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+}
+
+.selected-brands-panel__vendor-name,
+.selected-brands-panel__vendor-count {
+  margin: 0;
+  font: var(--type-body-xs);
+  letter-spacing: var(--type-body-xs-tracking);
+}
+
+.selected-brands-panel__vendor-name {
+  color: var(--text-brand);
+}
+
+/* Programmatic focus only (after its last chip is removed). */
+.selected-brands-panel__vendor-name:focus {
+  outline: none;
+}
+
+.selected-brands-panel__vendor-name:focus-visible {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
+.selected-brands-panel__vendor-count {
+  color: var(--text-subtle);
+}
+
+.selected-brands-panel__chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.selected-brands-panel__chip-list > li {
+  max-width: 100%;
+}
+
+.selected-brands-panel__chip-all {
+  flex: 1;
+}

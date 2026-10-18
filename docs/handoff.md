@@ -78,14 +78,16 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 
 ## Status in Storybook (Oct 17, late evening)
 - **Batch 1 built:** Icon, Logo, Button, Icon button, Nav link, Account badge, Main navigation (Default + Focus), Wizard navigation (blocked Next = `aria-disabled`, decided).
-- **Batch 2 built:** Stepper; Pictogram, Vendor logo; Icon tile, Tag, Card header; Input, Text field; Result row (**Single only**), Results panel; Selected item card, Empty selection; **Select vendors card** (step 1, fully interactive). Sample vendors in `src/data/vendors.ts`.
+- **Batch 2 built:** Stepper; Pictogram, Vendor logo; Icon tile, Tag, Card header; Input, Text field; Result row (Single), Results panel; Selected item card, Empty selection; **Select vendors card** (step 1, fully interactive). Sample vendors in `src/data/vendors.ts`.
+- **Batch 3 built:** Status mark, Checkbox; Brand chip, Vendor coverage tile, Group header, CountBadge + Selection summary; Result row **Multi**; Brand list, Selected brands panel; **Select brands card** (step 2, fully interactive). Sample brands in `src/data/brands.ts` (with `isBrandStepComplete`, shared with the wizard) and story selections in `src/data/brandSamples.ts`.
+- **Batch 4 specs are exported** (steps 3–4) but not built yet.
 - Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
 - **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
 
 ## Next
-1. Will: answer the step 1 open questions; apply the Figma queue and re-export `tokens.css` + the three filled icons.
-2. React app: page shell (Focus header → stepper stage → 644 card → wizard footer) with step 1 working end to end.
-3. Batch 3 specs from Figma: step 2 (Checkbox, Group header, Selection summary, Brand chip, Vendor coverage tile, Status mark, Brand list, Selected brands panel, Select brands card), then steps 3–4.
+1. Will: answer the open questions (steps 1–2); apply the Figma queue and re-export `tokens.css` + the three filled icons.
+2. Build batch 4 in the README's order (steps 3–4: Radio, Calendar day, Option tile, Date picker, Preset fieldset, Dates preset, Global presets card, Summary stat, Review row, Preset readout, Review template card).
+3. React app: page shell (Focus header → stepper stage → 644 card → wizard footer), routing between steps, the stepper charge-up.
 
 ## Later / open
 - Plugin: add a fourth "Layout" level.

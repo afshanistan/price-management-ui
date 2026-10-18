@@ -1,4 +1,4 @@
-import { Checkbox, type CheckboxChecked } from '../../atoms/Checkbox'
+import { Checkbox, CheckboxBox, type CheckboxChecked } from '../../atoms/Checkbox'
 import './GroupHeader.css'
 
 export interface GroupHeaderProps {
@@ -9,7 +9,18 @@ export interface GroupHeaderProps {
   /** "4 of 5". Omit to hide. */
   count?: string
   /** Tri-state select all. Omit to hide the checkbox. */
-  selectAll?: { checked: CheckboxChecked; onChange: () => void; label: string }
+  selectAll?: {
+    checked: CheckboxChecked
+    onChange: () => void
+    label: string
+    /**
+     * Inside a listbox a real checkbox isn't allowed, so the list renders the real control
+     * outside it and the header shows the box only (clickable, hidden from screen readers).
+     */
+    visualOnly?: boolean
+    /** visualOnly: the real control has keyboard focus, so the box shows the focus ring. */
+    isFocusVisible?: boolean
+  }
   className?: string
 }
 
@@ -17,7 +28,12 @@ export interface GroupHeaderProps {
 export function GroupHeader({ vendor, vendorId, count, selectAll, className }: GroupHeaderProps) {
   return (
     <div className={className ? `group-header ${className}` : 'group-header'}>
-      {selectAll && (
+      {selectAll?.visualOnly && (
+        <span className="group-header__select-all group-header__box" data-focus-visible={selectAll.isFocusVisible || undefined} onClick={selectAll.onChange}>
+          <CheckboxBox checked={selectAll.checked} />
+        </span>
+      )}
+      {selectAll && !selectAll.visualOnly && (
         <Checkbox
           aria-label={selectAll.label}
           isSelected={selectAll.checked === true}

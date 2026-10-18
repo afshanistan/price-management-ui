@@ -28,3 +28,15 @@
   flex-shrink: 0;
   color: var(--text-subtle);
 }
+
+/* Visual-only box (the Brand list's real select all sits outside the listbox). */
+.group-header__box {
+  display: inline-flex;
+  border-radius: var(--radius-4);
+  cursor: pointer;
+}
+
+.group-header__box[data-focus-visible] .checkbox-box {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}

@@ -1,0 +1,32 @@
+/* Select brands card, step 2 (design/specs/select-brands-card.md).
+   The page shell fixes the card at 644; the Brand list and the panel's chips scroll inside themselves. */
+.select-brands-card {
+  display: flex;
+  gap: var(--space-24);
+  width: var(--layout-content-width);
+  max-width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: var(--space-24);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-16);
+  background: var(--surface-card);
+}
+
+.select-brands-card__main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-24);
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Search, then the list filling the rest. */
+.select-brands-card__directory {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-12);
+  flex: 1;
+  min-height: 0;
+}
