@@ -20,6 +20,8 @@ export interface VendorLogoFiles {
   color: string
   /** Single color, drawn in currentColor. Missing when the artwork has no one-color reading. */
   mono?: string
+  /** The logo's shape: ink width ÷ height. The Selected item card hides logos under 1.5 (tall or square). */
+  ratio?: number
 }
 
 export const vendors: Vendor[] = [

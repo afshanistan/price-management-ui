@@ -28,7 +28,7 @@ const meta = {
           // Figma component description, verbatim.
           'SelectedItemCard — a chosen vendor (logo, name, ESN) with a destructive remove button.\n\n' +
           'One added vendor in step 1\'s grid: name (Body/LG Strong) and ESN on top, the trash button top-right ("Remove Coca-Cola"), and the brand-color logo below, ' +
-          'at most 128 × 28, scaled to fit and lined up with the name. A vendor with no logo keeps the space empty, so cards stay the same height; no wordmark, the name already says it. ' +
+          'at most 128 × 28, scaled to fit and lined up with the name. Logos under 1.5 : 1 (tall or square) are left out. A vendor with no logo keeps the space empty, so cards stay the same height; no wordmark, the name already says it. ' +
           'Brand colors are content, not UI color roles. The parent lists the cards and, after a removal, moves focus to the next card\'s Remove (or the search) and announces it.',
       },
     },
@@ -43,10 +43,10 @@ export const WideLogo: Story = {
   parameters: { docs: { description: { story: 'A wide logo fills the 128 width and stays short.' } } },
 }
 
-export const BadgeLogo: Story = {
-  name: 'Logo: badge (Del Monte Foods)',
+export const TallLogoHidden: Story = {
+  name: 'Tall logo, hidden (Del Monte Foods)',
   args: vendor('del-monte-foods'),
-  parameters: { docs: { description: { story: 'A badge fills the 28 height and sits left.' } } },
+  parameters: { docs: { description: { story: 'Del Monte\'s badge is 1.34 : 1. Under 1.5 the card leaves it out and the space stays empty.' } } },
 }
 
 export const WordmarkLogo: Story = {
@@ -72,90 +72,27 @@ export const AllLogos: Story = {
   decorators: [(Story) => <div style={{ width: 'auto' }}><Story /></div>],
   render: () => (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 293px)', gap: 'var(--space-16)' }}>
-      {['coca-cola', 'del-monte-foods', 'mars', 'blue-diamond'].map((id) => (
+      {['coca-cola', 'mars', 'del-monte-foods', 'blue-diamond'].map((id) => (
         <SelectedItemCard key={id} {...vendor(id)} onRemove={() => {}} />
       ))}
     </div>
   ),
-  parameters: { controls: { disable: true }, docs: { description: { story: 'As in Figma\'s reference frame (990:11496): wide, badge, wordmark, no logo. All four cards are the same height.' } } },
+  parameters: { controls: { disable: true }, docs: { description: { story: 'Wide, wordmark, a tall logo (hidden) and no logo. All four cards are the same height.' } } },
 }
 
 /* ---------- Test: every mock vendor, tallest logo first ---------- */
 
-/** Width ÷ height of each logo's ink (blank margins excluded), measured Oct 18 (docs/vendor-logo-sources.md). */
-const logoRatio: Record<string, number> = {
-  'chiquita': 0.8,
-  'sun-maid': 0.8,
-  'unilever': 0.9,
-  'king-arthur': 1.0,
-  'nestle-usa': 1.0,
-  'utz': 1,
-  'blue-bell': 1.1,
-  'mccormick': 1.2,
-  'del-monte-foods': 1.3,
-  'fresh-del-monte': 1.3,
-  'treehouse': 1.3,
-  'conagra': 1.4,
-  'dole': 1.5,
-  'perdue': 1.5,
-  'post-holdings': 1.5,
-  'bg-foods': 1.6,
-  'general-mills': 1.7,
-  'hain-celestial': 1.7,
-  'pilgrims': 1.7,
-  'ocean-spray': 1.8,
-  'smucker': 2.0,
-  'bimbo-usa': 2.1,
-  'tyson': 2.1,
-  'bobs-red-mill': 2.2,
-  'cargill': 2.2,
-  'welchs': 2.3,
-  'barilla': 2.5,
-  'anheuser-busch': 2.6,
-  'tillamook': 2.6,
-  'coca-cola-consolidated': 2.7,
-  'dfa': 2.7,
-  'goya': 2.7,
-  'hershey': 2.8,
-  'celsius': 2.9,
-  'hormel': 2.9,
-  'monster': 3.2,
-  'sargento': 3.2,
-  'danone-na': 3.3,
-  'keurig-dr-pepper': 3.3,
-  'pepsico': 3.3,
-  'mars': 3.5,
-  'campbells': 3.7,
-  'lindt': 3.7,
-  'flowers-foods': 3.9,
-  'kellanova': 3.9,
-  'kikkoman': 4.0,
-  'mondelez': 4.2,
-  'red-bull': 4.2,
-  'heineken-usa': 4.3,
-  'molson-coors': 4.3,
-  'wk-kellogg': 4.6,
-  'chobani': 4.8,
-  'smithfield': 4.8,
-  'lamb-weston': 5.0,
-  'kraft-heinz': 5.9,
-  'coca-cola': 6.2,
-  'constellation': 7.2,
-  'ferrero': 8.0,
-  'land-o-lakes': 9.2,
-}
-
 export const AllVendorsByShape: Story = {
-  name: 'Test: all 60 vendors, tallest logo first',
+  name: 'All 60 vendors, tallest logo first',
   decorators: [(Story) => <div style={{ width: 'auto' }}><Story /></div>],
   render: () => {
-    const sorted = [...mockVendors].sort((a, b) => (logoRatio[a.id] ?? 99) - (logoRatio[b.id] ?? 99))
+    const sorted = [...mockVendors].sort((a, b) => (a.logo?.ratio ?? 99) - (b.logo?.ratio ?? 99))
     return (
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 293px)', gap: 'var(--space-16)' }}>
         {sorted.map((v) => (
           <div key={v.id}>
             <div className="type-label-sm" style={{ color: 'var(--text-subtle)', marginBottom: 'var(--space-4)' }}>
-              {v.logo ? `${logoRatio[v.id]} : 1` : 'no logo'}
+              {v.logo?.ratio ? `${v.logo.ratio.toFixed(2)} : 1${v.logo.ratio < 1.5 ? ' · hidden (under 1.5)' : ''}` : 'no logo'}
             </div>
             <SelectedItemCard name={v.name} meta={v.esn} logo={v.logo} onRemove={() => {}} />
           </div>
@@ -165,6 +102,6 @@ export const AllVendorsByShape: Story = {
   },
   parameters: {
     controls: { disable: true },
-    docs: { description: { story: 'For choosing a rule: the label is each logo\'s width ÷ height. Tall and square logos (under ~1.5 : 1) come first; wide ones last.' } },
+    docs: { description: { story: 'The label is each logo\'s width ÷ height. Logos under 1.5 : 1 (tall or square) are hidden and the space stays empty, like a vendor with no logo (14 of 60).' } },
   },
 }
