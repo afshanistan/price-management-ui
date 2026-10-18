@@ -1,0 +1,32 @@
+/* Preset fieldset (design/specs/preset-fieldset.md). Fills its grid column. */
+.preset-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  min-width: 0;
+  /* The plum top edge (Figma's "Accent edge" rectangle + the 16 gap). */
+  border-top: var(--border-width-3) solid var(--border-brand-strong);
+  padding-top: var(--space-16);
+}
+
+.preset-fieldset__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.preset-fieldset__title {
+  font: var(--type-heading-sm);
+  letter-spacing: var(--type-heading-sm-tracking);
+  color: var(--text-heading);
+}
+
+.preset-fieldset__helper {
+  color: var(--text-subtle);
+}
+
+.preset-fieldset__options {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+}
