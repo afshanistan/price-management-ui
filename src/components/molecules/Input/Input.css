@@ -16,10 +16,9 @@
   background: var(--input-fill);
   color: var(--icon-default);
   cursor: text;
-  /* The focus ring is always there but transparent, so it eases in (outline-color is in
-     --transition-interactive: fast, ease-out) and reverses on blur. */
-  outline: var(--focus-width-2) solid transparent;
-  outline-offset: var(--focus-offset-4);
+  /* Focus thickens the border to 2px with an inner pixel (below); at rest that pixel is 0 wide, so
+     border-color and box-shadow ease together (--transition-interactive: fast, ease-out). */
+  box-shadow: inset 0 0 0 0 var(--input-border);
   transition: var(--transition-interactive);
   --input-fill: var(--fill-input);
   --input-border: var(--border-input);
@@ -65,18 +64,20 @@
   --input-border: var(--border-input-hover);
 }
 
-/* Clicking in is focus, so the ring shows on any focus, not only keyboard. Figma's ring sits 4px outside.
-   It eases in (fast) and out; no halo (dropped Oct 18: too heavy, and no other focus ring has one). */
+/* Focus (any focus: clicking in is focus) = the border itself goes 2px teal, no ring around it
+   (Will, Oct 18). The extra pixel is drawn inside, so the field doesn't change size or shift.
+   With an error, the same thickening happens in the error color. */
 .input:is(:has(.input__control:focus), [data-state='focus']) {
   --input-fill: var(--fill-input);
   --input-border: var(--border-input-focus);
-  outline-color: var(--focus-ring);
+  box-shadow: inset 0 0 0 calc(var(--border-width-2) - var(--border-width-1)) var(--input-border);
 }
 
-/* Forced colors draw even a transparent outline: no ring at rest there. */
+/* Forced colors drop box-shadow: show focus with a system-colored outline instead. */
 @media (forced-colors: active) {
-  .input:not(:has(.input__control:focus), [data-state='focus']) {
-    outline-style: none;
+  .input:is(:has(.input__control:focus), [data-state='focus']) {
+    outline: var(--border-width-2) solid Highlight;
+    outline-offset: calc(var(--border-width-1) * -1);
   }
 }
 

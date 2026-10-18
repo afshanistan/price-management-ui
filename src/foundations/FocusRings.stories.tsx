@@ -63,7 +63,7 @@ const meta = {
       description: {
         component:
           'Rule ID 8: every interactive element shows a focus ring when reached by keyboard. ' +
-          'The play step presses Tab through one of each component and checks the ring (2px `--focus-ring` outline; round on the chip ×, calendar day and input clear; inset on result rows; on the tile for option tiles). ' +
+          'The play step presses Tab through one of each component and checks the ring (2px `--focus-ring` outline; round on the chip ×, calendar day and input clear; inset on result rows; on the tile for option tiles). Text fields are the exception: their own border goes 2px teal, with no ring around it. ' +
           'It runs with `npm run test-storybook`. A global `:focus-visible` baseline in `global.css` covers anything a component misses.',
       },
     },
@@ -86,6 +86,13 @@ export const TabThroughEverything: Story = {
       const style = getComputedStyle(host)
       const name = el.getAttribute('aria-label') || el.textContent?.trim() || el.tagName
       seen.push(name)
+      if (host.classList.contains('input')) {
+        // Text fields show focus as their own 2px border (an inner pixel added to the 1px border), not a ring.
+        // It eases in (fast), so read it once the transition is done.
+        await new Promise((resolve) => setTimeout(resolve, 250))
+        await expect(getComputedStyle(host).boxShadow, `focus border on "${name}"`).toMatch(/inset.*[1-9]px|[1-9]px.*inset/)
+        continue
+      }
       await expect(style.outlineStyle, `focus ring on "${name}"`).not.toBe('none')
       await expect(parseFloat(style.outlineWidth), `focus ring width on "${name}"`).toBeGreaterThan(0)
     }
