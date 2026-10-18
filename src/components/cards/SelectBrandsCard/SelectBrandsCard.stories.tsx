@@ -106,8 +106,25 @@ export const FlowBrands: Story = {
     await expect(status()).toHaveTextContent('All Cargill brands removed')
     // Nothing is selected at all now, so the panel shows its stacked empty state.
     await expect(await canvas.findByText('No brands selected yet')).toBeInTheDocument()
+    // Each brand names its vendor: the section label is skipped with aria-activedescendant.
+    await expect(canvas.getByRole('option', { name: /^Diamond Crystal\s*,\s*Cargill/ })).toBeInTheDocument()
+    // Arrowing down then back up, the active row never hides under its sticky group header (WCAG 2.4.11).
+    // React Aria scrolls the active row on the next animation frame, so each check waits for it.
+    await userEvent.click(search)
+    const nextFrames = () => new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)))
+    const activeRowClearsHeader = () => {
+      const row = canvasElement.ownerDocument.getElementById(search.getAttribute('aria-activedescendant') ?? '')!
+      const header = row.parentElement!.querySelector('.brand-list__header')!
+      return row.getBoundingClientRect().top >= header.getBoundingClientRect().bottom - 0.5
+    }
+    for (let i = 0; i < 14; i++) await userEvent.keyboard('{ArrowDown}')
+    for (let i = 0; i < 12; i++) {
+      await userEvent.keyboard('{ArrowUp}')
+      await nextFrames()
+      await expect(activeRowClearsHeader()).toBe(true)
+    }
   },
   parameters: {
-    docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, then remove the "All 5 brands" chip.' } },
+    docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, then remove the "All 5 brands" chip. Then checks that brands name their vendor, and that arrowing up never hides the active row under its sticky group header.' } },
   },
 }
