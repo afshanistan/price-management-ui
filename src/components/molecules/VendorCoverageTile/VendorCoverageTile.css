@@ -13,6 +13,13 @@
   color: var(--text-on-coverage-tile);
 }
 
+/* The single-color logo in the tile's ink, scaled to fit. Height 24 is a placeholder
+   (docs/open-questions.md, "Coverage tile logo"). */
+.vendor-coverage-tile__logo {
+  width: 100%;
+  height: var(--size-24);
+}
+
 /* Top-right corner, 6px in. */
 .vendor-coverage-tile__mark {
   position: absolute;

@@ -11,4 +11,5 @@
 :root {
   --layout-card-height: 644px;  /* figma-sync: "--layout-card-height" (Wizard layout card, Oct 18) */
   --layout-stage-height: 306px; /* figma-sync: "--layout-stage-height" (Wizard layout plum stage, Oct 18) */
+  --size-128: 128px;            /* figma-sync: "--size-128" (Vendor logo lg width, Selected item card, Oct 18) */
 }

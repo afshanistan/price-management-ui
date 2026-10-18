@@ -1,14 +1,14 @@
-/* Vendor logo (design/specs/vendor-logo.md)
-   A fixed tile (icon-like: fixed size, not min-height). [data-selected] is set by the parent row or card. */
+/* Vendor logo (design/specs/vendor-logo.md; Figma Vendor logo 989:98, Content = Wordmark | Mono logo | Brand logo)
+   A fixed tile (icon-like: fixed size, not min-height). [data-selected] is set by the parent row. */
 
 .vendor-logo {
   display: inline-grid;
   place-items: center;
   flex-shrink: 0;
-  padding: var(--space-2) var(--space-4);
   border: var(--border-width-1) solid var(--border-structural);
   border-radius: var(--radius-4);
   background: var(--fill-vendor-logo);
+  /* The ink: the wordmark and the mono logo. */
   color: var(--text-subtle);
   transition: var(--transition-interactive);
 }
@@ -16,15 +16,21 @@
 .vendor-logo--sm {
   width: var(--size-56);
   height: var(--size-36);
+  padding: var(--space-2) var(--space-4);
 }
 
 .vendor-logo--lg {
-  width: var(--size-80);
+  width: var(--size-128);
   height: var(--size-48);
+  padding: var(--space-8) var(--space-16);
 }
 
-/* Teal tile when the parent is pressed or selected.
-   The wordmark color isn't bound in Figma: --text-on-primary for now (docs/open-questions.md). */
+/* Brand logo: brand colors only on a white tile. The wordmark fallback keeps the white tile. */
+.vendor-logo[data-content='brand'] {
+  background: var(--surface-card);
+}
+
+/* Teal tile when the parent is pressed or selected: white ink. */
 .vendor-logo[data-selected] {
   background: var(--fill-row-indicator);
   border-color: var(--fill-row-indicator);
@@ -33,4 +39,31 @@
 
 .vendor-logo__wordmark {
   white-space: nowrap;
+}
+
+/* Logos fill the padded area, scaled to fit (object-fit: contain), never stretched. */
+.vendor-logo__art {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.vendor-logo__brand {
+  object-fit: contain;
+}
+
+.mono-logo {
+  display: block;
+  background: currentColor;
+  -webkit-mask: var(--vendor-logo-src) center / contain no-repeat;
+  mask: var(--vendor-logo-src) center / contain no-repeat;
+}
+
+/* Forced colors drop backgrounds, which would hide a masked logo: draw it in the text color. */
+@media (forced-colors: active) {
+  .mono-logo {
+    forced-color-adjust: none;
+    background: CanvasText;
+  }
 }

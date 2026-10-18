@@ -503,6 +503,18 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **The Results panel's scroll check is accepted, as for the Brand list.** Keyboard users reach every row with arrows from the search (`aria-activedescendant`). Rejected: an extra Tab stop.
 
 **Logos: single color in the results, brand color in the selected cards.** Will's own option, chosen over single color everywhere and brand color on white in the results. In the results the logo is single color (ink on white; white on teal for a vendor already added). In the Selected item card the logo is in its brand colors, so the tile becomes white with a thin border instead of teal: inside "Selected vendors" the teal tile wasn't signaling anything the list doesn't, and the brand colors confirm the right company. Brand color stays contained to one place. Vendors with no logo, or no single-color version (Sun-Maid, Blue Bell), show the wordmark there. Figma first. *Changes the Oct 17 Vendor logo Selected state for the Selected item card.*
+
+## Oct 18 · Vendor logo: Content = Wordmark | Mono logo | Brand logo
+
+**Built to Figma's Vendor logo set (`989:98`).** Mono logo: the vendor's single-color logo in the tile's ink (text-subtle on fill-vendor-logo; text-on-primary on teal when selected or pressed). Brand logo: the brand-color logo, only on a white surface-card tile with a 1px border-structural. Wordmark: the fallback when a vendor has no file for the content asked for. Logos scale to fit inside the tile padding (object-fit: contain), never stretched.
+
+**Result row: Mono logo, 56×36, padding 2/4. Selected item card: Brand logo, 128×48, padding 8/16, white tile.** The card's teal tile is gone (it existed for continuity with the selected result row); its wordmark fallback is text-subtle on white.
+
+**Brand-color logos are content, not UI color roles.** A red logo doesn't mean error; a green one doesn't mean complete.
+
+**Vendor logo hover: dropped.** The row hover already covers it. *Closes the Oct 17 proposal (white tile, teal border, teal ink).*
+
+**Follow-ups, not blocking (Will):** cap the logo height (~24px) in the card tile so plain wordmarks like Mars feel less loud; give the Figma Vendor logo a Size (sm/lg) property so the padding travels with it (code already has `size`). Wide logos are listed for editing in `docs/vendor-logo-sources.md`.
 ---
 
 ## Build plan

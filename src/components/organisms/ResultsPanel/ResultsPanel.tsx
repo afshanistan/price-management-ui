@@ -49,7 +49,7 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, className, 
           <p className="results-panel__empty">No vendors match “{query.trim()}”.</p>
         )}
       >
-        {(vendor) => <ResultRow id={vendor.id} name={vendor.name} meta={vendor.esn} wordmark={vendor.wordmark} query={query} />}
+        {(vendor) => <ResultRow id={vendor.id} name={vendor.name} meta={vendor.esn} wordmark={vendor.wordmark} logo={vendor.logo} query={query} />}
       </ListBox>
     </div>
   )

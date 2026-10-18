@@ -85,3 +85,27 @@ To re-run: `scripts/vendor-logos/` (lookup → download → convert → contact 
 | 58 | Celsius Holdings | PNG | 14 KB | [Celsius Energy Drink logo.png](https://upload.wikimedia.org/wikipedia/commons/3/3c/Celsius_Energy_Drink_logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original) | Wikipedia infobox |
 | 59 | Utz Brands | SVG | 13 KB | [Utz-Logo.svg](https://upload.wikimedia.org/wikipedia/commons/3/36/Utz-Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original) | Commons search |
 | 60 | TreeHouse Foods | PNG | 31 KB | [TreeHouse Foods Logo.png](https://upload.wikimedia.org/wikipedia/en/f/f3/TreeHouse_Foods_Logo.png?utm_source=en.wikipedia.org&utm_campaign=imageinfo&utm_content=original) | Wikipedia infobox |
+
+## Too wide for the tiles (Oct 18)
+
+Measured in code: each logo's ink (blank margins excluded), scaled to fit the tile's content box: Result row 46×30 (56×36, padding 2/4), Selected item card 94×30 (128×48, padding 8/16). Will to edit or find new versions.
+
+**Too wide for the Result row** (ink under ~10px tall):
+
+| Vendor | Ink ratio | Row | Card | Likely fix |
+|---|---|---|---|---|
+| Land O'Lakes | 9.2:1 | 4.9px | 10.1px | Use the mark alone, or a stacked lockup |
+| Ferrero | 8.0:1 | 5.8px | 11.8px | A stacked or shorter version |
+| Constellation Brands | 7.2:1 | 6.0px | 12.2px | Crop the 39% blank margin first; then the star mark alone |
+| The Coca-Cola Company | 6.2:1 | 7.4px | 15.2px | The script "Coca-Cola" without "THE … COMPANY" |
+| The Kraft Heinz Company | 5.9:1 | 7.8px | 15.9px | The stacked Kraft Heinz lockup |
+| Lamb Weston | 5.0:1 | 9.1px | 18.7px | Drop the tagline ("Seeing possibilities in potatoes") |
+| Chobani | 4.8:1 | 9.5px | 19.4px | OK in the card; fine as is or a stacked version |
+| Smithfield | 4.8:1 | 9.5px | 19.5px | OK in the card |
+| WK Kellogg Co | 4.6:1 | 9.9px | 20.3px | OK in the card; the file is also 0.8 MB |
+
+**Borderline in the Result row** (10–12px): Molson Coors, Heineken, Monster, Red Bull, Mondelēz, Flowers Foods, Kikkoman, Kellanova. All fine in the card.
+
+**Files with big blank margins** (the logo renders smaller than it needs to; cropping is lossless): Blue Bell 58%, Coca-Cola Consolidated 44% (also only 16.7px in the card), Constellation 39%, Monster 32%, Flowers Foods 25%, Welch's 15%, Land O'Lakes 14%. Cropping SVGs to their ink can be scripted; PNGs need an editor.
+
+Everything else reads at 12px or more in the row and 25px or more in the card.

@@ -12,7 +12,14 @@ export interface Vendor {
   /** Placeholder wordmark for the Vendor logo until real logos exist. */
   wordmark: string
   /** Logo file URLs (mock vendors only): brand colors, and single color when the artwork allows it. */
-  logo?: { color: string; mono?: string }
+  logo?: VendorLogoFiles
+}
+
+export interface VendorLogoFiles {
+  /** Brand colors, as published. */
+  color: string
+  /** Single color, drawn in currentColor. Missing when the artwork has no one-color reading. */
+  mono?: string
 }
 
 export const vendors: Vendor[] = [

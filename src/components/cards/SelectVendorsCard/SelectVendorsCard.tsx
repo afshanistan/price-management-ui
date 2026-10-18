@@ -129,7 +129,7 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
           <ul ref={listRef} className="select-vendors-card__list" aria-labelledby={listLabelId}>
             {selected.map((vendor) => (
               <li key={vendor.id}>
-                <SelectedItemCard name={vendor.name} meta={vendor.esn} wordmark={vendor.wordmark} onRemove={() => remove(vendor)} />
+                <SelectedItemCard name={vendor.name} meta={vendor.esn} wordmark={vendor.wordmark} logo={vendor.logo} onRemove={() => remove(vendor)} />
               </li>
             ))}
           </ul>

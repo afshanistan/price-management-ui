@@ -61,7 +61,7 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
       <ul className="selected-brands-panel__coverage" aria-label="Brand coverage">
         {perVendor.map(({ vendor, all, selected }) => (
           <li key={vendor.id}>
-            <VendorCoverageTile vendorName={vendor.name} wordmark={vendor.wordmark} selectedCount={selected.length} totalCount={all.length} />
+            <VendorCoverageTile vendorName={vendor.name} wordmark={vendor.wordmark} logo={vendor.logo} selectedCount={selected.length} totalCount={all.length} />
           </li>
         ))}
       </ul>
