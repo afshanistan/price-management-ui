@@ -1,4 +1,4 @@
-# Handoff — Price Management 2.0 (as of Sat Oct 17, ~6pm)
+# Handoff — Price Management 2.0 (as of Sun Oct 18, morning)
 
 Read this first in a new chat. Decisions and the why behind them live in `claude/decision-log.md`. Everything decided in Figma that has to be built in code lives in **`claude/code-backlog.md`** — check it when building each component in Storybook and each screen in React. The Foundations page in Figma summarizes the rules that came out of the log.
 
@@ -82,6 +82,10 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 - **Batch 3 built:** Status mark, Checkbox; Brand chip, Vendor coverage tile, Group header, CountBadge + Selection summary; Result row **Multi**; Brand list, Selected brands panel; **Select brands card** (step 2, fully interactive). Sample brands in `src/data/brands.ts` (with `isBrandStepComplete`, shared with the wizard) and story selections in `src/data/brandSamples.ts`.
 - **Batch 4 built:** Radio, Calendar day; Option tile, Date picker; Preset fieldset, Dates preset; **Global presets card** (step 3); Summary stat, Review row, Preset readout; **Review template card** (step 4). Presets data and date helpers in `src/data/presets.ts` (`presetsSetCount`, `effectiveDateOf`). Stories freeze today at Oct 17, 2026.
 - **Every component in the 12 Final Comps is now in Storybook.**
+- **Overnight polish (Oct 18):**
+  - **Motion:** shared rules in `src/styles/motion.css`, plus a Storybook toolbar switch for reduced motion.
+  - **Tests:** `npm run test-storybook` runs every story with axe set to fail, plus Foundations/Focus rings and three "Flow" play tests. 145 of 145 pass; 7 are known exceptions tied to open questions.
+  - **Report:** `docs/overnight-report.md`. Components are still pre-review, waiting on Will's visual pass.
 - Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
 - **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
 
