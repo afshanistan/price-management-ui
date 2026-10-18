@@ -1,6 +1,6 @@
 /* ==========================================================================
    tokens.css — Price Management 2.0
-   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-17 (v2: on-brand state fix + border/1-5).
+   Generated from Figma file Iz1cbfAMKHnHopr6wgXZCa on 2026-10-17 (v3: + layout/content-width).
    DO NOT EDIT BY HAND. Change the variable in Figma, then re-export.
 
    Layers:
@@ -202,6 +202,7 @@
   --focus-offset-2: 2px;
   --layout-max-width: 1440px;
   --layout-min-width: 1024px;
+  --layout-content-width: 960px; /* Figma layout/content-width (Oct 17): card, stepper, wizard navigation */
   --layout-gutter: var(--space-24);
 
   /* ---------- 1c. Typography primitives ---------- */
