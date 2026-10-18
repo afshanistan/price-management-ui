@@ -1,0 +1,40 @@
+/* Empty selection (design/specs/empty-selection.md). CSS dashes are shorter than Figma's (see spec flag). */
+.empty-selection {
+  display: flex;
+  border: var(--border-width-1) dashed var(--border-placeholder);
+  border-radius: var(--radius-8);
+  color: var(--icon-subtle);
+}
+
+.empty-selection--stacked {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  /* The same height as a Selected item card, so nothing jumps when the last one is removed. */
+  min-height: var(--size-126);
+  padding: 0 var(--space-16);
+  text-align: center;
+}
+
+.empty-selection--inline {
+  align-items: center;
+  gap: var(--space-8);
+  padding: var(--space-10) var(--space-12);
+}
+
+.empty-selection__message,
+.empty-selection__helper {
+  margin: 0;
+  color: var(--text-subtle);
+}
+
+.empty-selection__message {
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+}
+
+.empty-selection__helper {
+  font: var(--type-body-sm);
+  letter-spacing: var(--type-body-sm-tracking);
+}

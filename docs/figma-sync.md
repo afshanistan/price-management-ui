@@ -15,6 +15,7 @@ Format: **Token name** · Collection · Light value · On brand value · Used by
 - [ ] **`--space-10`** (Figma `space/10`) · Primitives/Dimension · 10px (no modes) · Empty selection, Inline layout (padding 10 / 12) · Bind as the vertical padding of Empty selection `903:616` Layout=Inline · Stand-in in `tokens.pending.css` · Empty selection (Oct 17)
 - [ ] **`--size-80`** (Figma `size/80`) · Primitives/Dimension · 80px (no modes) · Vendor logo lg (80×48, Selected item card) · Bind as the width of the lg Vendor logo `677:34` instance in Selected item card `707:717` · Stand-in in `tokens.pending.css` · Vendor logo (Oct 17)
 - [ ] **`--focus-offset-4`** (Figma `focus/offset-4`) · Primitives/Dimension · 4px (no modes) · Input focus ring (sits 4px outside the field) · Bind as the offset of the Input `661:56` Focus ring frame · Stand-in in `tokens.pending.css` · Input (Oct 17)
+- [ ] **`--size-126`** (Figma `size/126`) · Primitives/Dimension · 126px (no modes) · Empty selection, Stacked min height (the same height as a Selected item card, so the section doesn't jump when the last vendor is removed) · Bind as the min height of Empty selection `903:616` Layout=Stacked · Stand-in in `tokens.pending.css` · Empty selection (Oct 17)
 
 ## Components
 

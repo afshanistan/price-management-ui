@@ -11,5 +11,6 @@
 :root {
   --space-10: 10px;        /* figma-sync: "--space-10" (Empty selection inline padding, Oct 17) */
   --size-80: 80px;         /* figma-sync: "--size-80" (Vendor logo lg width, Oct 17) */
+  --size-126: 126px;       /* figma-sync: "--size-126" (Empty selection min height, Oct 17) */
   --focus-offset-4: 4px;   /* figma-sync: "--focus-offset-4" (Input focus ring offset, Oct 17) */
 }
