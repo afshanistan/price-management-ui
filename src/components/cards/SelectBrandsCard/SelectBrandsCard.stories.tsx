@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { userEvent, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 import { incompleteSample, selectedSample, step2Vendors } from '../../../data/brandSamples'
 import { brands } from '../../../data/brands'
 import { SelectBrandsCard } from './SelectBrandsCard'
@@ -81,4 +81,37 @@ export const NoResults: Story = {
     await userEvent.type(input, 'xyz')
   },
   parameters: { docs: { description: { story: 'Figma State=No results (02c): "xyz" typed.' } } },
+}
+
+/* ---------- Interaction test (runs with npm run test-storybook) ---------- */
+
+export const FlowBrands: Story = {
+  name: 'Flow: check, select all, remove',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const search = canvas.getByRole('searchbox', { name: 'Search by brand' })
+    const status = () => canvas.getByRole('status')
+    // Check a brand from the search: Enter toggles the highlighted row; a chip appears.
+    await userEvent.click(search)
+    await userEvent.keyboard('Truvia')
+    await userEvent.keyboard('{Enter}')
+    await expect(await canvas.findByRole('button', { name: 'Remove Truvia' })).toBeInTheDocument()
+    await expect(status()).toHaveTextContent('Truvia added')
+    // Esc clears the search; Tab reaches the first select all; Space selects the whole vendor.
+    await userEvent.keyboard('{Escape}')
+    await userEvent.tab()
+    await expect(canvas.getByRole('checkbox', { name: 'Select all Cargill brands' })).toHaveFocus()
+    await userEvent.keyboard(' ')
+    await expect(status()).toHaveTextContent('All Cargill brands selected')
+    // The vendor collapses to "All 5 brands"; its × clears the vendor.
+    await userEvent.click(await canvas.findByRole('button', { name: 'Remove all Cargill brands' }))
+    await expect(status()).toHaveTextContent('All Cargill brands removed')
+    // Nothing is selected at all now, so the panel shows its stacked empty state.
+    await expect(await canvas.findByText('No brands selected yet')).toBeInTheDocument()
+  },
+  parameters: {
+    // Known exception: Brand list scroll region isn't a Tab stop (docs/open-questions.md). Reported, not failed.
+    a11y: { test: 'todo' },
+    docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, then remove the "All 5 brands" chip.' } },
+  },
 }

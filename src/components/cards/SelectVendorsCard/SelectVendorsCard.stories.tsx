@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { userEvent, within } from 'storybook/test'
+import { expect, userEvent, within } from 'storybook/test'
 import { vendors, type Vendor } from '../../../data/vendors'
 import { SelectVendorsCard } from './SelectVendorsCard'
 // Raw import: the Docs page shows the spec and updates whenever it changes.
@@ -66,4 +66,27 @@ export const Searching: Story = {
 export const Selected: Story = {
   args: { selected: byId('cargill', 'general-mills', 'kraft-heinz') },
   parameters: { docs: { description: { story: 'Figma State=Selected (screen 01c). Remove a vendor: focus moves to the next Remove, or back to the search when none are left.' } } },
+}
+
+/* ---------- Interaction test (runs with npm run test-storybook) ---------- */
+
+export const FlowAddAndRemove: Story = {
+  name: 'Flow: add and remove a vendor',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const search = canvas.getByRole('searchbox', { name: 'Vendor name or ESN' })
+    // Type, then Enter adds the highlighted match; focus and the query stay.
+    await userEvent.click(search)
+    await userEvent.keyboard('Cargill')
+    await userEvent.keyboard('{Enter}')
+    await expect(await canvas.findByRole('button', { name: 'Remove Cargill' })).toBeInTheDocument()
+    await expect(canvas.getByRole('status')).toHaveTextContent('Cargill added')
+    await expect(search).toHaveFocus()
+    // Remove: the empty state returns and focus goes back to the search.
+    await userEvent.click(canvas.getByRole('button', { name: 'Remove Cargill' }))
+    await expect(await canvas.findByText('No vendors selected yet')).toBeInTheDocument()
+    await expect(canvas.getByRole('status')).toHaveTextContent('Cargill removed')
+    await expect(search).toHaveFocus()
+  },
+  parameters: { docs: { description: { story: 'Automated: type "Cargill", Enter to add it, then Remove; checks the announcements and where focus goes.' } } },
 }

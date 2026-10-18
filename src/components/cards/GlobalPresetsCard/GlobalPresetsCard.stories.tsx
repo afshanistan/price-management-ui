@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { CalendarDate } from '@internationalized/date'
-import { userEvent, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { initialPresets, presetsSetCount, type GlobalPresetsValue } from '../../../data/presets'
 import { GlobalPresetsCard } from './GlobalPresetsCard'
 // Raw import: the Docs page shows the spec and updates whenever it changes.
@@ -65,4 +65,34 @@ export const CustomDateSet: Story = {
   name: 'Custom date set',
   args: { value: { ...initialPresets, effectiveDate: { source: 'custom', date: new CalendarDate(2026, 10, 28) } } },
   parameters: { docs: { description: { story: 'Figma 03c: Oct 28, 2026 confirmed.' } } },
+}
+
+/* ---------- Interaction test (runs with npm run test-storybook) ---------- */
+
+export const FlowPresets: Story = {
+  name: 'Flow: pick, cancel, confirm',
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    // The picker renders in a portal, outside the canvas.
+    const page = within(canvasElement.ownerDocument.body)
+    // Pick a currency.
+    await userEvent.click(canvas.getByText('USD'))
+    await expect(canvas.getByRole('radio', { name: 'USD' })).toBeChecked()
+    // Custom date opens the picker; Esc cancels and goes back to No default.
+    await userEvent.click(canvas.getByText('Custom date'))
+    await expect(await page.findByRole('dialog', { name: 'Choose custom date' })).toBeInTheDocument()
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(page.queryByRole('dialog')).not.toBeInTheDocument())
+    await expect(canvas.getAllByRole('radio', { name: 'No default' })[0]).toBeChecked()
+    // Again, then Enter on the first available day (Oct 18; today is the 17th) and OK.
+    await userEvent.click(canvas.getByText('Custom date'))
+    await page.findByRole('dialog', { name: 'Choose custom date' })
+    await userEvent.keyboard('{Enter}')
+    await userEvent.click(page.getByRole('button', { name: 'OK' }))
+    await waitFor(() => expect(page.queryByRole('dialog')).not.toBeInTheDocument())
+    await expect(canvas.getByRole('radio', { name: 'Custom date' })).toBeChecked()
+    await expect(canvas.getByText('Oct 18, 2026')).toBeInTheDocument()
+    await expect(canvas.getByRole('status')).toHaveTextContent('Effective date set to October 18, 2026')
+  },
+  parameters: { docs: { description: { story: 'Automated: pick USD, open and cancel the date picker, then confirm Oct 18, 2026 with Enter and OK.' } } },
 }
