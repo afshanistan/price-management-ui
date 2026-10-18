@@ -68,6 +68,7 @@ For every component (autodocs is on globally in `.storybook/preview.tsx`, so eac
 - One story per meaningful variant (each size × hierarchy, each tone), plus an **"All states"** story that shows the states side by side. Force a state with a static wrapper or a `data-*` attribute only in that story; real hover and press must still work in the others.
 - A story **on brand**: wrap it in `<div data-mode="on-brand" style="background: var(--surface-brand)">`, or use the toolbar's Mode switch.
 - The a11y panel must show **no violations**. If one can't be fixed without a design change, log it in `docs/open-questions.md`.
+- **Design tab** (`@storybook/addon-designs`): the meta's `parameters.design` links to the component's main component in Figma: `{ type: 'figma', url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=580-26' }` (node ID from `docs/handoff.md` → Components, with `:` written as `-`). Set it once in the meta so every story inherits it. If the component has no node ID there, ask Will.
 - `parameters.docs.description.component` starts with the Figma component description from the spec (the `>` line under **Figma:**), verbatim, then a short summary from the spec (what it is, when to use it).
 
 ## Workflow per component

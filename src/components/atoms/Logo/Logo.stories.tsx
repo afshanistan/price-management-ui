@@ -9,6 +9,11 @@ const meta = {
     title: 'Price Management',
   },
   parameters: {
+    // Design tab: the main component in Figma (Logo 637:25).
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=637-25',
+    },
     docs: {
       description: {
         component:

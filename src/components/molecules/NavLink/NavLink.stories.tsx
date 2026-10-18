@@ -26,6 +26,11 @@ const meta = {
     ),
   ],
   parameters: {
+    // Design tab: the main component in Figma (Nav link 624:108).
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=624-108',
+    },
     docs: {
       description: {
         component:

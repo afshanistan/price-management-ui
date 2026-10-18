@@ -13,6 +13,11 @@ const meta = {
     name: 'Will Norris',
   },
   parameters: {
+    // Design tab: the main component in Figma (Account-Badge 617:107).
+    design: {
+      type: 'figma',
+      url: 'https://www.figma.com/design/Iz1cbfAMKHnHopr6wgXZCa/Screens---Price-Managment?node-id=617-107',
+    },
     docs: {
       description: {
         component:
