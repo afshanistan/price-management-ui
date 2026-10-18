@@ -8,7 +8,7 @@
 
 .text-field__label {
   color: var(--text-heading);
-  transition: color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 .text-field:is(:focus-within, :has([data-state='focus'])) .text-field__label {

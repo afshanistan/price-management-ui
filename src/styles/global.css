@@ -2,6 +2,7 @@
 @import './tokens.css';
 @import './tokens.pending.css';
 @import './fonts.css';
+@import './motion.css';
 
 *,
 *::before,

@@ -47,7 +47,7 @@
   background: transparent;
   color: inherit;
   cursor: pointer;
-  transition: background-color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 .brand-chip__remove:is([data-hovered], [data-pressed], [data-state='hover']) {

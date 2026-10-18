@@ -28,9 +28,3 @@
     transform: scale(1.1);
   }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .count-badge[data-pop] {
-    animation: none;
-  }
-}

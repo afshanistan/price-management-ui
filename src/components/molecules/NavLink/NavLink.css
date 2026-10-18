@@ -18,9 +18,7 @@
   background-color: var(--nav-link-fill);
   --nav-link-fill: transparent;
   --nav-link-ink: var(--text-subtle);
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 .nav-link:focus {
@@ -72,11 +70,4 @@
 
 .nav-link:is([data-pressed], [data-state='pressed'], [aria-current='page']) .nav-link__filled {
   opacity: 1;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-link,
-  .nav-link__icons > .icon {
-    transition: none;
-  }
 }

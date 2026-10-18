@@ -25,8 +25,21 @@ const preview: Preview = {
     }
   },
 
-  // Toolbar switch: where the story is placed. "On brand" is the plum header / stage.
+  // Toolbar switches. Mode: where the story is placed ("On brand" is the plum header / stage).
+  // Motion: "Reduced" applies the same rules as the system's reduced-motion setting (src/styles/motion.css).
   globalTypes: {
+    motion: {
+      description: 'Motion',
+      toolbar: {
+        title: 'Motion',
+        icon: 'lightning',
+        items: [
+          { value: 'full', title: 'Full motion' },
+          { value: 'reduced', title: 'Reduced motion' },
+        ],
+        dynamicTitle: true,
+      },
+    },
     mode: {
       description: 'Mode',
       toolbar: {
@@ -42,9 +55,15 @@ const preview: Preview = {
   },
   initialGlobals: {
     mode: 'light',
+    motion: 'full',
   },
 
   decorators: [
+    // Motion toolbar: mark <html> so motion.css can apply the reduced-motion rules.
+    (Story, context) => {
+      document.documentElement.dataset.motion = context.globals.motion ?? 'full'
+      return <Story />
+    },
     (Story, context) =>
       context.globals.mode === 'on-brand' ? (
         <div

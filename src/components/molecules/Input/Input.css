@@ -16,9 +16,7 @@
   background: var(--input-fill);
   color: var(--icon-default);
   cursor: text;
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    border-color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
   --input-fill: var(--fill-input);
   --input-border: var(--border-input);
 }
@@ -108,7 +106,7 @@
   background: transparent;
   color: var(--icon-subtle);
   cursor: pointer;
-  transition: background-color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 /* Not drawn in Figma: a light neutral circle (docs/open-questions.md). */

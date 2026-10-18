@@ -1,0 +1,23 @@
+/* Layout for the Motion page only. */
+.motion-story {
+  display: grid;
+  gap: var(--space-32);
+  max-width: 640px;
+}
+
+.motion-story h2 {
+  margin: 0 0 var(--space-12);
+  color: var(--text-heading);
+}
+
+.motion-story__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+}
+
+.motion-story__tiles {
+  display: grid;
+  gap: var(--space-8);
+  width: 282px;
+}

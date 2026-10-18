@@ -13,10 +13,7 @@
   /* The icon follows with currentColor. */
   color: var(--icon-button-ink);
   background-color: var(--icon-button-fill);
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    color var(--motion-duration) var(--motion-ease),
-    transform var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive), var(--transition-press);
 }
 
 /* Icon-only squares stay a fixed size (not min-height). */
@@ -103,10 +100,4 @@
 .icon-button--destructive[data-disabled] {
   --icon-button-fill: transparent;
   --icon-button-ink: var(--icon-disabled);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .icon-button:is([data-pressed], [data-state='pressed']) {
-    transform: none;
-  }
 }

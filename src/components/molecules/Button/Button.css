@@ -16,11 +16,7 @@
   color: var(--button-ink);
   background-color: var(--button-fill);
   border-color: var(--button-border);
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    border-color var(--motion-duration) var(--motion-ease),
-    color var(--motion-duration) var(--motion-ease),
-    transform var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive), var(--transition-press);
 }
 
 .button__label {
@@ -46,11 +42,6 @@
   transform: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .button:is([data-pressed], [data-state='pressed']) {
-    transform: none;
-  }
-}
 
 /* ---------- Sizes: min-height, never height ---------- */
 

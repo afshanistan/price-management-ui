@@ -13,7 +13,7 @@
   background: var(--fill-tertiary-default);
   cursor: pointer;
   outline: none;
-  transition: background-color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 /* Hover, keyboard active and pressed share one fill. Selected keeps the default fill. */

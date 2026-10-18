@@ -1,0 +1,49 @@
+/* ==========================================================================
+   motion.css: the one place interactive motion is defined (code-backlog "Global").
+   Built only from the Figma motion tokens (--motion-duration 150ms, --motion-ease ease-out),
+   so it holds no design values of its own. tokens.css sets --motion-duration to 0ms under
+   prefers-reduced-motion, which turns every transition and pop off at once.
+   ========================================================================== */
+
+:root {
+  /* Every color change on an interactive component. No springs on color. */
+  --transition-interactive:
+    background-color var(--motion-duration) var(--motion-ease),
+    border-color var(--motion-duration) var(--motion-ease),
+    color var(--motion-duration) var(--motion-ease),
+    box-shadow var(--motion-duration) var(--motion-ease),
+    outline-color var(--motion-duration) var(--motion-ease);
+
+  /* Press feedback: Button / Icon button scale to 0.97, Checkbox to 1.08. */
+  --transition-press: transform var(--motion-duration) var(--motion-ease);
+}
+
+/* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).
+   The same rules twice, because a media query and an attribute can't share one block. */
+@media (prefers-reduced-motion: reduce) {
+  /* Scales, draws and pops off; colors change instantly (--motion-duration is 0). */
+  .button:is([data-pressed], [data-state='pressed']),
+  .icon-button:is([data-pressed], [data-state='pressed']),
+  .checkbox[data-pressed] .checkbox-box {
+    transform: none;
+  }
+
+  .count-badge[data-pop] {
+    animation: none;
+  }
+}
+
+:root[data-motion='reduced'] {
+  --motion-duration: 0ms;
+
+  /* Scales, draws and pops off; colors change instantly (--motion-duration is 0). */
+  & .button:is([data-pressed], [data-state='pressed']),
+  & .icon-button:is([data-pressed], [data-state='pressed']),
+  & .checkbox[data-pressed] .checkbox-box {
+    transform: none;
+  }
+
+  & .count-badge[data-pop] {
+    animation: none;
+  }
+}

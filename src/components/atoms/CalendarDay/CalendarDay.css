@@ -11,9 +11,7 @@
   color: var(--text-default);
   cursor: pointer;
   outline: none;
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    color var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive);
 }
 
 .calendar-day:is([data-hovered], [data-state='hover']) {

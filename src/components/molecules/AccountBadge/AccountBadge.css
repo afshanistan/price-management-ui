@@ -35,9 +35,7 @@
   border-radius: inherit;
   border: var(--account-badge-rim-width) solid var(--account-badge-rim-color);
   pointer-events: none;
-  transition:
-    border-color var(--motion-duration) var(--motion-ease),
-    border-width var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive), border-width var(--motion-duration) var(--motion-ease);
 }
 
 .account-badge:is([data-hovered], [data-state='hover']) {

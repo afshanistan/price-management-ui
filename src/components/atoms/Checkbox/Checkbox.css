@@ -12,10 +12,7 @@
   border: var(--border-width-1-5) solid var(--checkbox-border);
   background: var(--checkbox-fill);
   color: var(--icon-on-primary);
-  transition:
-    background-color var(--motion-duration) var(--motion-ease),
-    border-color var(--motion-duration) var(--motion-ease),
-    transform var(--motion-duration) var(--motion-ease);
+  transition: var(--transition-interactive), var(--transition-press);
   --checkbox-fill: var(--fill-input);
   --checkbox-border: var(--border-input);
 }
@@ -65,14 +62,4 @@
 .checkbox[data-focus-visible] .checkbox-box {
   outline: var(--focus-width-2) solid var(--focus-ring);
   outline-offset: var(--focus-offset-2);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .checkbox[data-pressed] .checkbox-box {
-    transform: none;
-  }
-
-  .checkbox-box__glyph path {
-    transition: none;
-  }
 }
