@@ -9,7 +9,10 @@ import { Controls, Description, Heading, Markdown, Primary, Stories, Subtitle, T
 */
 export function DocsPage() {
   const { preparedMeta } = useOf('meta', ['meta'])
-  const spec = preparedMeta.parameters.spec as string | undefined
+  const raw = preparedMeta.parameters.spec as string | undefined
+  // The page already has a title and the "Spec" heading, so drop the spec's own "# …" title line.
+  // Only the page changes; the spec file stays as exported.
+  const spec = raw?.replace(/^#\s.*\n+/, '')
 
   return (
     <>
