@@ -1,0 +1,21 @@
+/* Icon tile (design/specs/icon-tile.md). Fixed square; the pictogram fills it inside the padding. */
+.icon-tile {
+  display: inline-grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: var(--space-4);
+  border-radius: var(--radius-4);
+  background: var(--fill-icon-tile);
+  /* Figma Icon mode Brand. */
+  color: var(--icon-brand);
+}
+
+.icon-tile--32 {
+  width: var(--size-32);
+  height: var(--size-32);
+}
+
+.icon-tile--48 {
+  width: var(--size-48);
+  height: var(--size-48);
+}

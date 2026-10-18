@@ -1,0 +1,33 @@
+/* Card header (design/specs/card-header.md). 48 tall with no description, 58 with one: min-height. */
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  min-height: var(--size-48);
+}
+
+.card-header__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.card-header__title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-8);
+  margin: 0;
+  font: var(--type-heading-lg);
+  letter-spacing: var(--type-heading-lg-tracking);
+  color: var(--text-heading);
+}
+
+.card-header__description {
+  margin: 0;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
+  color: var(--text-subtle);
+}

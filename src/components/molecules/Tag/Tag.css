@@ -1,0 +1,11 @@
+/* Tag (design/specs/tag.md). Inline pill; text-bearing, so min-height. */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--size-20);
+  padding: var(--space-2) var(--space-8);
+  border-radius: var(--radius-full);
+  background: var(--fill-tag);
+  color: var(--text-on-tag);
+  white-space: nowrap;
+}
