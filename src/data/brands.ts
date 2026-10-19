@@ -2,6 +2,7 @@
   Sample brands, shared by the stories and the app.
   From Figma's step 2 Brand list (illustrative only). Numbers are SKU counts.
 */
+import { findMatch } from './search'
 import type { Vendor } from './vendors'
 
 export interface Brand {
@@ -34,8 +35,9 @@ export function isBrandStepComplete(vendors: Vendor[], brandList: Brand[], selec
   return vendors.every((vendor) => brandList.some((brand) => brand.vendorId === vendor.id && selectedIds.has(brand.id)))
 }
 
-/** Live filter: the brand name matches, or the vendor name matches (then all its brands show). */
+/** Live filter: the brand name matches, or the vendor name matches (then all its brands show).
+    Ignores accents and punctuation, like the vendor search (src/data/search.ts). */
 export function matchesBrand(brand: Brand, vendor: Vendor, query: string) {
-  const q = query.trim().toLowerCase()
-  return q === '' || brand.name.toLowerCase().includes(q) || vendor.name.toLowerCase().includes(q)
+  if (query.trim() === '') return true
+  return Boolean(findMatch(brand.name, query) || findMatch(vendor.name, query))
 }

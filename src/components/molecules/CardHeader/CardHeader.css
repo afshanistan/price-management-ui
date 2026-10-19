@@ -31,3 +31,8 @@
   letter-spacing: var(--type-body-md-tracking);
   color: var(--text-subtle);
 }
+
+/* Focus lands on the title only by script (a step change); no ring, it isn't a control. */
+.card-header__title:focus {
+  outline: none;
+}

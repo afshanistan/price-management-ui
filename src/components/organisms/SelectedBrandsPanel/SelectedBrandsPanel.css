@@ -47,9 +47,22 @@
   overflow-y: auto;
 }
 
-/* Empty: the stacked placeholder fills the chip area. */
+/* Empty: the stacked placeholder fills the chip area (its fade wrapper passes the height through). */
+.selected-brands-panel__empty-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .selected-brands-panel__empty {
   flex: 1;
+}
+
+/* The groups, one under another (in a fade wrapper, so the gap lives here). */
+.selected-brands-panel__groups {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
 }
 
 .selected-brands-panel__vendor {
@@ -90,6 +103,8 @@
 }
 
 .selected-brands-panel__chip-list {
+  /* Relative: a removed chip is lifted out of the row (Motion popLayout) while it fades. */
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-6);

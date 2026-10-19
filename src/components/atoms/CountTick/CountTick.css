@@ -1,0 +1,11 @@
+/* A clipped slot the number ticks through (motion: CountTick.tsx). */
+.count-tick {
+  position: relative;
+  display: inline-flex;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+
+.count-tick__value {
+  display: inline-block;
+}

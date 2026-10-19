@@ -83,3 +83,7 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 - [ ] **Toast exit timing** · Toast · The prompt says "fade, ~250ms"; there's no 250 token, so it uses `layout` (225ms) with ease-in. Add a token if 250 matters · Open
 - [ ] **Select vendors card spec is out of date** · `design/specs/select-vendors-card.md` · Still says the panel stays open after a pick and vendors are listed oldest first, and shows the helper text. Re-export after Figma reflects one pick per search, newest first, the Undo toast, no row logos and no helper text · Open
 
+## From building step 2 in the app (Oct 18)
+- [ ] **No "Clear all" in the Selected brands panel** · Selection summary · The Oct 16 decision log mentions "Clear all gets an undo toast", but the current Selection summary (count + title) has no Clear all. Built without it; Undo exists only for the "All N brands" × · (a) add Clear all to the summary in Figma, (b) leave it out · Open
+- [ ] **Undo toast placement on step 2** · Select brands card · Bottom center of the card, over the brand list and panel (placeholder, like step 1's). Part of "Toast needs Figma design" · Open
+

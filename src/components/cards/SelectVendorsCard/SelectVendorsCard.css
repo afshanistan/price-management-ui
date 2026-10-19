@@ -152,18 +152,6 @@
   animation-name: motion-fade-in;
 }
 
-/* The count in "Selected vendors (3)": a clipped slot the number ticks through. */
-.count-tick {
-  position: relative;
-  display: inline-flex;
-  overflow: hidden;
-  vertical-align: bottom;
-}
-
-.count-tick__value {
-  display: inline-block;
-}
-
 /* The name flying from its results row to its new card (a copy, outside the card's scroll area). */
 .select-vendors-card__flight {
   position: fixed;

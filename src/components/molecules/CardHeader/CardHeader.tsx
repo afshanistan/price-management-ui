@@ -20,7 +20,8 @@ export function CardHeader({ title, pictogram, description, tag, className }: Ca
     <div className={className ? `card-header ${className}` : 'card-header'}>
       <IconTile pictogram={pictogram} size={48} />
       <div className="card-header__text">
-        <h1 className="card-header__title">
+        {/* Focusable by script only: the wizard moves focus here on a step change, so it's announced. */}
+        <h1 tabIndex={-1} className="card-header__title">
           {title}
           {/* The hidden comma makes it read "Add pricing defaults, optional". */}
           {tag && (

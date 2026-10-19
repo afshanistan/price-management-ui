@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'motion/react'
+import { duration, ease } from '../../../styles/motion'
 import { StatusMark } from '../../atoms/StatusMark'
 import { MonoLogo } from '../../atoms/VendorLogo'
 import type { VendorLogoFiles } from '../../../data/vendors'
@@ -29,7 +31,18 @@ export function VendorCoverageTile({ vendorName, wordmark, logo, selectedCount, 
           {wordmark}
         </span>
       )}
-      <StatusMark status={status} className="vendor-coverage-tile__mark" />
+      {/* To do ↔ complete: a quick fade in place (fast), no draw-in or glow. */}
+      <AnimatePresence initial={false}>
+        <motion.span
+          key={status}
+          className="vendor-coverage-tile__mark"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: duration.fast, ease: ease.out } }}
+          exit={{ opacity: 0, transition: { duration: duration.fast, ease: ease.in } }}
+        >
+          <StatusMark status={status} />
+        </motion.span>
+      </AnimatePresence>
       <span className="visually-hidden">
         {`${vendorName}, ${selectedCount} of ${totalCount} ${totalCount === 1 ? 'brand' : 'brands'} selected, ${status === 'complete' ? 'complete' : 'to do'}`}
       </span>

@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { duration, ease } from '../../../styles/motion'
+import './CountTick.css'
 
 /*
   A number that ticks when it changes: the new value slides in (up when it grows, down when it

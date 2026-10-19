@@ -11,7 +11,7 @@ import { SelectedItemCard } from '../../molecules/SelectedItemCard'
 import { TextField } from '../../molecules/TextField'
 import { ToastRegion, type ToastMessage } from '../../molecules/Toast'
 import { ResultsPanel } from '../../organisms/ResultsPanel'
-import { CountTick } from './CountTick'
+import { CountTick } from '../../atoms/CountTick'
 import './SelectVendorsCard.css'
 
 export interface SelectVendorsCardProps {

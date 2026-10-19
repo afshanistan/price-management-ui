@@ -571,6 +571,16 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Removing the last vendor is a fade-through, not a cross-fade.** The cross-fade overlapped a mostly solid card with a mostly solid dashed box for about 150ms (opposite curves made it worse). Now the last card leaves exactly like any other removal, then the empty state fades in: about 420ms in all, never both on screen.
 
 **The text field label no longer turns teal on focus.** The field's 2px teal border already shows focus; a teal label added color without information. *Changes Figma's Text field Focus state (label `text-label-focus`).*
+
+## Oct 18 · Step 2 in the app, and how step 1's motion carries over
+
+**Step 2 shows only the brands of the vendors picked on step 1, and vendors are edited only on step 1.** Going back, removing a vendor and returning drops that vendor's brand picks. Picks are kept across Next and Back.
+
+**Step 2 lists vendors A–Z**, in the brand list and the Selected brands panel (Will's hybrid: step 1 stays newest first, where order means "what I just did"; step 2 is a reference list, where A–Z is easier to scan). A leading "The" is ignored, so The Coca-Cola Company files under C.
+
+**Brand data: real brands for all 60 mock vendors** (551), with invented SKU counts. Some brands appear under two vendors on purpose (Coca-Cola and its bottler), as real data does.
+
+**Step 1's rules, adapted for a multi-select:** chips enter, glide and leave like vendor cards, but in A–Z order, faster (smaller items), and without the highlight tint (several picks in a row would tint everything), the flight (tiring by the tenth brand) or the re-pick pointer (a checked brand just unchecks). Undo only for big removals (the "All N brands" ×); a single chip's checkbox is right beside it. Swaps are fade-throughs, like step 1's empty state. The summary's CountBadge keeps its Oct 17 pop rather than also ticking. The step-to-step transition is still deferred.
 ---
 
 ## Build plan

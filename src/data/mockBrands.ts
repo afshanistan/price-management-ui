@@ -1,0 +1,75 @@
+/*
+  Mock brands for the 60 mock vendors (src/data/mockVendors.ts): real brand names, grouped by the
+  company that sells them to a US grocer. Lists are A–Z; SKU counts are invented. Illustrative only.
+  Some brands appear under two vendors on purpose (a brand and its bottler), as real data does.
+*/
+import type { Brand } from './brands'
+
+const lists: Record<string, [name: string, skuCount: number][]> = {
+  'nestle-usa': [["Buitoni", 24], ["Carnation", 34], ["Coffee-mate", 7], ["DiGiorno", 23], ["Gerber", 39], ["Haagen-Dazs", 22], ["Hot Pockets", 19], ["Lean Cuisine", 50], ["Nescafé", 32], ["Nesquik", 37], ["Nestlé Toll House", 12], ["Purina ONE", 29], ["Stouffer's", 16], ["Sweet Earth", 6], ["Tombstone", 33]],
+  'pepsico': [["Bubly", 11], ["Cap'n Crunch", 81], ["Cheetos", 20], ["Diet Pepsi", 32], ["Doritos", 15], ["Fritos", 25], ["Gatorade", 6], ["Lay's", 9], ["Lifewtr", 12], ["Mountain Dew", 25], ["Pearl Milling Company", 12], ["Pepsi", 39], ["Quaker", 6], ["Rice-A-Roni", 84], ["Rold Gold", 7], ["Ruffles", 89], ["Sabra", 55], ["Smartfood", 6], ["Starry", 10], ["SunChips", 13], ["Tostitos", 37], ["Tropicana", 22]],
+  'coca-cola': [["BodyArmor", 27], ["Coca-Cola", 11], ["Coca-Cola Zero Sugar", 16], ["Costa Coffee", 40], ["Dasani", 28], ["Diet Coke", 24], ["Fairlife", 27], ["Fanta", 21], ["Fresca", 21], ["Gold Peak", 30], ["Honest Tea", 9], ["Minute Maid", 27], ["Peace Tea", 8], ["Powerade", 62], ["Seagram's Ginger Ale", 13], ["Simply", 80], ["smartwater", 23], ["Sprite", 23], ["Topo Chico", 6], ["vitaminwater", 31]],
+  'coca-cola-consolidated': [["Coca-Cola", 15], ["Coca-Cola Zero Sugar", 6], ["Dasani", 4], ["Diet Coke", 19], ["Dr Pepper", 20], ["Fanta", 43], ["Monster Energy", 9], ["Powerade", 7], ["Sprite", 38], ["Sundrop", 83]],
+  'general-mills': [["Annie's", 25], ["Betty Crocker", 34], ["Bisquick", 25], ["Blue Buffalo", 24], ["Cheerios", 28], ["Chex", 61], ["Cinnamon Toast Crunch", 19], ["Epic Provisions", 19], ["Fiber One", 18], ["Gold Medal", 40], ["Lucky Charms", 40], ["Lärabar", 35], ["Nature Valley", 20], ["Old El Paso", 81], ["Pillsbury", 10], ["Progresso", 17], ["Totino's", 4], ["Wheaties", 4], ["Yoplait", 18]],
+  'kraft-heinz': [["Capri Sun", 13], ["Classico", 40], ["Claussen", 34], ["Crystal Light", 30], ["Grey Poupon", 14], ["Heinz", 33], ["Jell-O", 36], ["Jet-Puffed", 45], ["Kool-Aid", 24], ["Kraft", 18], ["Kraft Mac & Cheese", 34], ["Lea & Perrins", 17], ["Lunchables", 40], ["Maxwell House", 40], ["Ore-Ida", 12], ["Oscar Mayer", 32], ["Philadelphia", 4], ["Smart Ones", 8], ["Velveeta", 23]],
+  'mondelez': [["belVita", 10], ["Cadbury", 7], ["Chips Ahoy!", 28], ["Clif Bar", 13], ["Good Thins", 11], ["Halls", 19], ["Honey Maid", 19], ["Milka", 25], ["Nutter Butter", 63], ["Oreo", 18], ["Ritz", 40], ["Sour Patch Kids", 25], ["Swedish Fish", 16], ["Tate's Bake Shop", 7], ["Toblerone", 4], ["Trident", 8], ["Triscuit", 26], ["Wheat Thins", 17]],
+  'kellanova': [["Austin", 26], ["Cheez-It", 14], ["Eggo", 40], ["Gardenburger", 15], ["Keebler Town House", 35], ["MorningStar Farms", 55], ["Nutri-Grain", 90], ["Pop-Tarts", 21], ["Pringles", 36], ["Rice Krispies Treats", 85], ["RXBAR", 19]],
+  'wk-kellogg': [["Apple Jacks", 29], ["Bear Naked", 49], ["Corn Flakes", 7], ["Corn Pops", 21], ["Crispix", 30], ["Froot Loops", 18], ["Frosted Flakes", 19], ["Kashi", 5], ["Mini-Wheats", 9], ["Raisin Bran", 68], ["Rice Krispies", 39], ["Special K", 8]],
+  'conagra': [["Act II", 11], ["Banquet", 8], ["Bertolli Frozen", 28], ["Birds Eye", 37], ["Chef Boyardee", 28], ["Duncan Hines", 20], ["Gardein", 20], ["Healthy Choice", 29], ["Hebrew National", 31], ["Hunt's", 22], ["Marie Callender's", 27], ["Orville Redenbacher's", 30], ["P.F. Chang's Home Menu", 5], ["PAM", 8], ["Reddi-wip", 35], ["Rotel", 12], ["Slim Jim", 18], ["Snack Pack", 63], ["Vlasic", 35], ["Wish-Bone", 34]],
+  'campbells': [["Campbell's", 30], ["Cape Cod", 23], ["Goldfish", 16], ["Kettle Brand", 82], ["Lance", 8], ["Late July", 13], ["Michael Angelo's", 14], ["Milano", 10], ["Pace", 33], ["Pepperidge Farm", 22], ["Pop Secret", 14], ["Prego", 78], ["Rao's", 8], ["Snyder's of Hanover", 6], ["Swanson", 25], ["V8", 52]],
+  'smucker': [["Café Bustelo", 12], ["Ding Dongs", 34], ["Dunkin' (at home)", 42], ["Folgers", 10], ["Hostess", 6], ["Jif", 30], ["Meow Mix", 39], ["Milk-Bone", 30], ["Milo's Kitchen", 12], ["Smucker's", 37], ["Twinkies", 7], ["Uncrustables", 20], ["Voortman", 35]],
+  'hormel': [["Applegate", 38], ["Columbus", 14], ["Dinty Moore", 13], ["Herdez", 19], ["Hormel", 20], ["Hormel Black Label", 15], ["Hormel Natural Choice", 32], ["Jennie-O", 34], ["Justin's", 25], ["La Victoria", 68], ["Planters", 26], ["Skippy", 49], ["SPAM", 23], ["Wholly Guacamole", 40]],
+  'tyson': [["Aidells", 27], ["Ball Park", 76], ["Bosco Sticks", 63], ["Hillshire Farm", 36], ["Jimmy Dean", 37], ["Raised & Rooted", 10], ["Sara Lee (deli)", 43], ["State Fair", 16], ["Tyson", 11], ["Wright Brand", 24]],
+  'smithfield': [["Armour", 32], ["Carando", 21], ["Eckrich", 6], ["Farmland", 33], ["Gwaltney", 32], ["Healthy Ones", 35], ["John Morrell", 35], ["Kretschmar", 36], ["Margherita", 24], ["Nathan's Famous", 63], ["Smithfield", 52]],
+  'cargill': [["Clear Valley", 15], ["Diamond Crystal", 32], ["Excel Fresh Meats", 6], ["Honeysuckle White", 7], ["Rumba Meats", 6], ["Shady Brook Farms", 10], ["Sterling Silver", 5], ["Truvia", 7]],
+  'mars': [["3 Musketeers", 21], ["Ben's Original", 20], ["Dove", 14], ["Extra", 27], ["Kevin's Natural Foods", 7], ["Kind", 14], ["M&M's", 13], ["Milky Way", 39], ["Orbit", 14], ["Pedigree", 33], ["Skittles", 12], ["Snickers", 16], ["Starburst", 8], ["Twix", 24], ["Whiskas", 22]],
+  'hershey': [["Almond Joy", 40], ["Dot's Pretzels", 34], ["Heath", 50], ["Hershey's", 9], ["Ice Breakers", 36], ["Jolly Rancher", 32], ["Kisses", 17], ["Kit Kat", 30], ["Lily's", 90], ["Pirate's Booty", 16], ["Reese's", 23], ["SkinnyPop", 11], ["Twizzlers", 13], ["York", 26]],
+  'unilever': [["Axe", 16], ["Ben & Jerry's", 5], ["Breyers", 60], ["Degree", 11], ["Dove", 37], ["Hellmann's", 31], ["Klondike", 4], ["Knorr", 30], ["Liquid I.V.", 19], ["Magnum", 33], ["Suave", 36], ["Talenti", 9], ["Vaseline", 31]],
+  'danone-na': [["Activia", 25], ["Dannon", 33], ["Evian", 30], ["Horizon Organic", 22], ["International Delight", 20], ["Light + Fit", 28], ["Oikos", 34], ["Silk", 27], ["So Delicious", 26], ["Stok", 20], ["Two Good", 38]],
+  'keurig-dr-pepper': [["7UP", 5], ["A&W", 15], ["Bai", 27], ["Canada Dry", 28], ["Clamato", 34], ["Core Hydration", 6], ["Dr Pepper", 39], ["Green Mountain Coffee", 36], ["Hawaiian Punch", 74], ["Mott's", 39], ["Schweppes", 7], ["Snapple", 14], ["Squirt", 16], ["Sunkist", 12], ["The Original Donut Shop", 4]],
+  'molson-coors': [["Blue Moon", 40], ["Coors Banquet", 25], ["Coors Light", 29], ["Keystone Light", 17], ["Leinenkugel's", 52], ["Miller High Life", 52], ["Miller Lite", 9], ["Topo Chico Hard Seltzer", 62], ["Vizzy", 81], ["ZOA Energy", 52]],
+  'anheuser-busch': [["Bud Light", 35], ["Budweiser", 6], ["Busch Light", 35], ["Cutwater", 20], ["Goose Island", 19], ["Kona Brewing", 47], ["Michelob Ultra", 24], ["Natural Light", 29], ["Stella Artois", 21]],
+  'constellation': [["Corona Extra", 11], ["High West", 6], ["Kim Crawford", 73], ["Meiomi", 34], ["Modelo Especial", 29], ["Pacifico", 18], ["Robert Mondavi", 11], ["The Prisoner", 24], ["Victoria", 68]],
+  'heineken-usa': [["Amstel Light", 20], ["Dos Equis", 26], ["Heineken", 11], ["Heineken 0.0", 9], ["Lagunitas", 14], ["Sol", 36], ["Strongbow", 13], ["Tecate", 38]],
+  'post-holdings': [["Bob Evans", 66], ["Crystal Farms", 4], ["Fruity Pebbles", 31], ["Grape-Nuts", 18], ["Great Grains", 49], ["Honey Bunches of Oats", 8], ["Malt-O-Meal", 11], ["Nutro", 11], ["Peter Pan", 14], ["Weetabix", 24]],
+  'mccormick': [["Cholula", 50], ["Frank's RedHot", 31], ["French's", 40], ["Lawry's", 8], ["McCormick", 16], ["Old Bay", 20], ["Simply Asia", 84], ["Stubb's", 78], ["Thai Kitchen", 15], ["Zatarain's", 39]],
+  'lamb-weston': [["Alexia", 34], ["Grown in Idaho", 32], ["Lamb Weston", 59], ["Lamb's Supreme", 4], ["Stealth Fries", 16]],
+  'bg-foods': [["B&G", 36], ["Clabber Girl", 17], ["Cream of Wheat", 30], ["Crisco", 12], ["Green Giant (frozen)", 35], ["Las Palmas", 18], ["Maple Grove Farms", 10], ["Mrs. Dash", 16], ["Ortega", 29], ["Polaner", 36], ["Underwood", 16], ["Victoria", 39]],
+  'flowers-foods': [["Canyon Bakehouse", 15], ["Dave's Killer Bread", 30], ["Mrs. Freshley's", 8], ["Nature's Own", 29], ["Simple Mills", 65], ["Tastykake", 38], ["Wonder", 25]],
+  'bimbo-usa': [["Arnold", 5], ["Ball Park Buns", 22], ["Bimbo", 9], ["Brownberry", 22], ["Entenmann's", 18], ["Little Bites", 48], ["Marinela", 10], ["Oroweat", 32], ["Sara Lee", 10], ["Thomas'", 15]],
+  'pilgrims': [["Gold'n Plump", 32], ["Just Bare", 22], ["Pierce Chicken", 40], ["Pilgrim's", 24], ["Savory Kitchen", 20]],
+  'perdue': [["Coleman Natural", 80], ["Niman Ranch", 32], ["Panorama Organic", 26], ["Perdue", 22], ["Simply Smart Organics", 46]],
+  'dole': [["Dole Bananas", 21], ["Dole Berries", 37], ["Dole Pineapples", 6], ["Dole Salads", 10]],
+  'del-monte-foods': [["College Inn", 22], ["Contadina", 35], ["Del Monte", 29], ["Joyba", 18], ["Kitchen Basics", 15], ["S&W", 18]],
+  'fresh-del-monte': [["Del Monte Avocados", 9], ["Del Monte Bananas", 86], ["Del Monte Fresh-Cut", 32], ["Del Monte Pineapples", 66], ["Mann Packing", 26]],
+  'chiquita': [["Chiquita Avocados", 22], ["Chiquita Bananas", 38], ["Chiquita Bites", 24]],
+  'ocean-spray': [["Craisins", 59], ["Ocean Spray", 72], ["Ocean Spray Cran-Grape", 74], ["Ocean Spray Wave", 11]],
+  'land-o-lakes': [["Alpine Lace", 36], ["Kozy Shack", 12], ["Land O Lakes Butter", 6], ["Land O Lakes Cheese", 24], ["Land O Lakes Half & Half", 34]],
+  'dfa': [["Alta Dena", 14], ["Borden", 36], ["Cache Valley", 57], ["Dean's", 8], ["Kemps", 10], ["Lehigh Valley Dairy Farms", 19], ["Oak Farms", 40], ["Plugrá", 14], ["TruMoo", 51]],
+  'chobani': [["Chobani", 6], ["Chobani Coffee Creamer", 5], ["Chobani Flip", 28], ["Chobani Oat", 48], ["La Colombe", 39]],
+  'sargento': [["Sargento", 16], ["Sargento Balanced Breaks", 4], ["Sargento Shredded", 30], ["Sargento Snacks", 27]],
+  'tillamook': [["Tillamook Butter", 39], ["Tillamook Cheese", 39], ["Tillamook Ice Cream", 34], ["Tillamook Sour Cream", 75], ["Tillamook Yogurt", 33]],
+  'barilla': [["Barilla", 24], ["Barilla Pronto", 37], ["Barilla Protein+", 32], ["Mulino Bianco", 13], ["Wasa", 30]],
+  'ferrero': [["Baby Ruth", 88], ["Blue Bunny", 28], ["Butterfinger", 33], ["Crunch", 36], ["Famous Amos", 32], ["Ferrero Rocher", 8], ["Keebler", 12], ["Kinder", 6], ["Mother's", 19], ["Nutella", 17], ["Tic Tac", 28]],
+  'lindt': [["Ghirardelli", 88], ["Lindt Excellence", 81], ["Lindt Lindor", 11], ["Russell Stover", 34], ["Whitman's", 26]],
+  'blue-diamond': [["Almond Breeze", 33], ["Blue Diamond Almonds", 39], ["Nut-Thins", 23]],
+  'sun-maid': [["Champion Raisins", 17], ["Mariani", 12], ["Sun-Maid", 14], ["Sun-Maid Raisins", 12]],
+  'welchs': [["Welch's Fruit Snacks", 37], ["Welch's Grape Juice", 31], ["Welch's Jelly", 37], ["Welch's Sparkling", 20]],
+  'hain-celestial': [["Celestial Seasonings", 38], ["Earth's Best", 22], ["Ella's Kitchen", 13], ["Garden Veggie", 86], ["Greek Gods", 37], ["Imagine", 47], ["Joya", 21], ["Sensible Portions", 17], ["Spectrum", 78], ["Terra", 10]],
+  'bobs-red-mill': [["Bob's Red Mill", 19], ["Bob's Red Mill Flours", 38], ["Bob's Red Mill Gluten Free", 62], ["Bob's Red Mill Oats", 14]],
+  'king-arthur': [["King Arthur Flour", 11], ["King Arthur Gluten Free", 12], ["King Arthur Mixes", 14]],
+  'kikkoman': [["Kikkoman Panko", 73], ["Kikkoman Ponzu", 17], ["Kikkoman Soy Sauce", 5], ["Kikkoman Teriyaki", 15], ["Pearl Organic Soymilk", 27]],
+  'goya': [["Goya", 40], ["Goya Adobo", 27], ["Goya Beans", 5], ["Goya Coconut Water", 31], ["Goya Frozen", 32], ["Goya Sazón", 9]],
+  'blue-bell': [["Blue Bell Bars", 31], ["Blue Bell Half Gallons", 30], ["Blue Bell Ice Cream", 31]],
+  'red-bull': [["Organics by Red Bull", 33], ["Red Bull", 22], ["Red Bull Editions", 18], ["Red Bull Sugarfree", 53], ["Red Bull Zero", 36]],
+  'monster': [["Bang Energy", 19], ["Burn", 29], ["Full Throttle", 32], ["Java Monster", 24], ["Juice Monster", 10], ["Monster Energy", 22], ["Monster Ultra", 77], ["NOS", 39], ["Rehab Monster", 9], ["Reign", 43]],
+  'celsius': [["Alani Nu", 65], ["Celsius", 23], ["Celsius Essentials", 31], ["Celsius On-the-Go", 5]],
+  'utz': [["Bachman", 70], ["Boulder Canyon", 17], ["Golden Flake", 31], ["Good Health", 5], ["Hawaiian", 27], ["On the Border", 22], ["TGI Fridays (snacks)", 10], ["Utz", 21], ["Zapp's", 5]],
+  'treehouse': [["TreeHouse Private Label Broth", 10], ["TreeHouse Private Label Coffee", 34], ["TreeHouse Private Label Pasta", 84], ["TreeHouse Private Label Snacks", 77]],
+}
+
+const slug = (text: string) => text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
+export const mockBrands: Brand[] = Object.entries(lists).flatMap(([vendorId, list]) =>
+  list.map(([name, skuCount]) => ({ id: `${vendorId}--${slug(name)}`, name, vendorId, skuCount })),
+)

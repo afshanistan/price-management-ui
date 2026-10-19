@@ -40,6 +40,12 @@ export function formatEsn(esn: string) {
   return `${ESN_PREFIX}${esn}`
 }
 
+/** Vendors A–Z by name, ignoring a leading "The" (The Coca-Cola Company files under C), as step 2 lists them. */
+export function byVendorName(a: Vendor, b: Vendor) {
+  const key = (v: Vendor) => v.name.replace(/^the\s+/i, '')
+  return key(a).localeCompare(key(b), undefined, { sensitivity: 'base' })
+}
+
 /** Live filter by name or ESN, ignoring accents and punctuation (src/data/search.ts). */
 export function matchesVendor(vendor: Vendor, query: string) {
   return searchVendors([vendor], query).length > 0
