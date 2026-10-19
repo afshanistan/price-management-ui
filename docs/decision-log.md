@@ -679,7 +679,7 @@ From the step 4 design review (`docs/reviews/step-4-design-review.md`, R1–R16)
 
 **Brands can be removed on Review; vendors can't.** Each brand row has step 1's trash ("Remove Cheerios"), always visible, quiet gray at rest and red on hover (it repeats on every row, so teal at rest would be loud). Undo toast, as on step 1. A vendor's last brand can't go (every vendor needs a brand): its trash looks disabled but stays focusable, with a tooltip "Each vendor needs a brand", the blocked-Next pattern. Will: removing vendors from Review "is where we get into trouble". Rejected: hiding the last trash, letting it remove the vendor too, no undo, hover-only trash.
 
-**Both lists get the plum top edge and scroll shadows.** Plum, because the lists are "what you've got", like the Selected brands panel; teal would read as a list to pick from. A soft shade on whichever edge has more to scroll (macOS hides scrollbars, so the lists didn't look scrollable). Rejected: a fade-out (covers text, looks like a glitch), a cut-off row (unreliable with group labels), always-on scrollbars. Review only for now; steps 1 and 2 could follow.
+**Both lists get the plum top edge and scroll shadows.** Plum, because the lists are "what you've got", like the Selected brands panel; teal would read as a list to pick from. A soft shade on whichever edge has more to scroll (macOS hides scrollbars, so the lists didn't look scrollable). Rejected: a fade-out (covers text, looks like a glitch), a cut-off row (unreliable with group labels), always-on scrollbars. Then on every scrolling panel (R19, Will): the step 1 Results panel and Selected vendors grid, the step 2 Brand list and Selected brands chips, one shared piece.
 
 **Summary strip: Vendors · Brands · Presets.** Labels follow the count ("1 Vendor"); "Presets set" became "Presets"; in "2 of 3" the "of 3" steps down so the number leads and the optional stat stops outweighing the other two. Rejected: "Defaults set", counting "Decide later" as decided. The strip's thirds don't line up with the lists' halves below; Will: fine.
 
@@ -687,9 +687,23 @@ From the step 4 design review (`docs/reviews/step-4-design-review.md`, R1–R16)
 
 **Vendor rows match step 1:** no wordmark tile, "ESN-70441642". *Supersedes "Review rows show the wordmark tile" (Oct 18).* Lists stay A–Z.
 
-**Presets read like step 3, with a clearer hierarchy.** "Decide later · Fill in per row" on one line, like the step 3 tile (not "No default"), "Canadian dollar (CAD)", the date without "Next month". Labels stay quiet; set values go Body/LG Strong; "Decide later" stays regular and subtle. **Still fits the 644 card:** the hint on two lines plus the taller values made Review 666 (it would have scrolled), so the hint joined "Decide later" on one line and the readouts' padding went 12 → 10 (exactly 644). Rejected: shrinking both lists to 208. That fit to the pixel, and rounding on Will's screen still made the card scroll, so the gaps on either side of the lists (summary → lists, lists → presets) went 24 → 16 and match (16px of room), and in the app the Review card can't scroll as a whole, only its lists (Will: a scrolling card "is just weird"). Rejected: every gap 20, lists 222; lists that fill the leftover height (held). Rejected: labels in the mono Data font (mono marks data: IDs, ESNs, SKUs) and values in mono (words read as code).
+**The lists are a fixed 230 tall** (R22), not hugging a short list, and every vendor row has a line under it, the last one too (R20), so a short list shows where it ends. *Replaces the spec's "few items → lists shrink".*
+
+**Presets read like step 3, with a clearer hierarchy.** "Decide later · Fill in per row" on one line, like the step 3 tile (not "No default"), "Canadian dollar (CAD)", the date without "Next month". Labels stay quiet; set values go Body/LG Strong. *"Decide later" first stayed regular and subtle (set vs unset at a glance); Will then made it bold like the others (R21): it's a choice, not a gap.* **Still fits the 644 card:** the hint on two lines plus the taller values made Review 666 (it would have scrolled), so the hint joined "Decide later" on one line and the readouts' padding went 12 → 10 (exactly 644). Rejected: shrinking both lists to 208. That fit to the pixel, and rounding on Will's screen still made the card scroll, so the gaps on either side of the lists (summary → lists, lists → presets) went 24 → 16 and match (16px of room), and in the app the Review card can't scroll as a whole, only its lists (Will: a scrolling card "is just weird"). Rejected: every gap 20, lists 222; lists that fill the leftover height (held). Rejected: labels in the mono Data font (mono marks data: IDs, ESNs, SKUs) and values in mono (words read as code).
 
 **Edit icon and Review pictogram** drawn by Will and exported from Figma; the placeholders are gone from Review.
+
+
+## Oct 19 · Review motion pass
+
+From the step 4 review (M1–M8). Same vocabulary as steps 1–3: fades, small scales, ticks, a highlight; nothing over 300ms except the 1s highlight fade; reduced motion = opacity only or instant.
+
+- **Page load staggers** like steps 1–3: header, summary strip, then lists and presets together.
+- **The citron checks pop in** once the strip lands, Vendors then Brands: the one celebration on Review, with step 2's pop.
+- **Removing a brand is two beats:** the row fades, then the list closes up, like a vendor card leaving on step 1. Each count it touched ticks (group label, vendor's "N brands", Brands total).
+- **Undo brings the row back** where it was, then it glows once in the highlight fill, like a re-added vendor card.
+
+Rejected: summary numbers counting up (about 400ms, reads like a dashboard; the check pop is enough). Nothing extra on Edit buttons, sticky labels or the blocked trash. The Download finale waits for the stepper review.
 
 ---
 

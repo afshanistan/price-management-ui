@@ -6,7 +6,7 @@ import spec from '../../../../design/specs/summary-stat.md?raw'
 const meta = {
   title: 'Molecules/SummaryStat',
   component: SummaryStat,
-  args: { value: '3', label: 'Vendors', status: 'complete', srLabel: '3 vendors, complete' },
+  args: { value: 3, label: 'Vendors', status: 'complete', srLabel: '3 vendors, complete' },
   argTypes: { status: { control: 'inline-radio', options: ['complete', 'optional'] } },
   decorators: [(Story) => <div style={{ width: 304 }}><Story /></div>],
   parameters: {
@@ -30,5 +30,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Complete: Story = {}
-export const Optional: Story = { args: { value: '2', total: 3, label: 'Presets', status: 'optional', srLabel: '2 of 3 presets set, optional' } }
-export const One: Story = { name: 'One (singular label)', args: { value: '1', label: 'Vendor', srLabel: '1 vendor, complete' } }
+export const Optional: Story = { args: { value: 2, total: 3, label: 'Presets', status: 'optional', srLabel: '2 of 3 presets set, optional' } }
+export const One: Story = { name: 'One (singular label)', args: { value: 1, label: 'Vendor', srLabel: '1 vendor, complete' } }

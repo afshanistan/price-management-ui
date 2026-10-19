@@ -9,6 +9,7 @@ import { StatusMark } from '../../atoms/StatusMark'
 import { BrandChip } from '../../molecules/BrandChip'
 import { EmptySelection } from '../../molecules/EmptySelection'
 import { SelectionSummary } from '../../molecules/SelectionSummary'
+import { ScrollShadows } from '../../../foundations/ScrollShadows'
 import './SelectedBrandsPanel.css'
 
 export interface SelectedBrandsPanelProps {
@@ -91,6 +92,8 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
 
       <hr className="selected-brands-panel__divider" />
 
+      {/* The chips scroll inside this frame; shades on the edges with more (R19). */}
+      <div className="selected-brands-panel__chips-frame">
       <motion.div ref={chipsRef} layoutScroll className="selected-brands-panel__chips">
         {/* Fade-through: the empty state and the groups never share the screen. */}
         <AnimatePresence initial={false} mode="wait">
@@ -197,6 +200,8 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
           )}
         </AnimatePresence>
       </motion.div>
+      <ScrollShadows scroller=".selected-brands-panel__chips" />
+      </div>
     </aside>
   )
 }

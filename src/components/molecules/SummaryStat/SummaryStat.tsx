@@ -1,3 +1,4 @@
+import { CountTick } from '../../atoms/CountTick'
 import { StatusMark } from '../../atoms/StatusMark'
 import { Tag } from '../Tag'
 import './SummaryStat.css'
@@ -5,8 +6,8 @@ import './SummaryStat.css'
 export type SummaryStatStatus = 'complete' | 'optional'
 
 export interface SummaryStatProps {
-  /** "5", "20", "2". */
-  value: string
+  /** 5, 20, 2. A number ticks when it changes (a brand removed on Review, M5). */
+  value: number | string
   /** Presets: "of 3" after the value, smaller and subtle, so the number leads (step 4 review R5). */
   total?: number
   /** "Vendor" / "Vendors", "Brands", "Presets": the card matches it to the count (R3, R4). */
@@ -24,7 +25,7 @@ export function SummaryStat({ value, total, label, status, srLabel, className }:
     <div className={className ? `summary-stat ${className}` : 'summary-stat'}>
       <span className="visually-hidden">{srLabel}</span>
       <span className="summary-stat__value" aria-hidden="true">
-        {value}
+        {typeof value === 'number' ? <CountTick value={value} /> : value}
         {total !== undefined && <span className="summary-stat__total"> of {total}</span>}
       </span>
       <span className="summary-stat__meta" aria-hidden="true">

@@ -7,6 +7,16 @@
   overflow: hidden;
 }
 
+/* The scroll shadows' frame. :where keeps it from overriding the parent's own positioning
+   (step 1 floats the panel with position: absolute, which works as a frame too). */
+:where(.results-panel) {
+  position: relative;
+}
+
+.results-panel {
+  isolation: isolate;
+}
+
 .results-panel__list {
   display: flex;
   flex-direction: column;

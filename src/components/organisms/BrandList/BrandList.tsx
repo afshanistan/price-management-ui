@@ -7,6 +7,7 @@ import { duration } from '../../../styles/motion'
 import { Checkbox, type CheckboxChecked } from '../../atoms/Checkbox'
 import { GroupHeader } from '../../molecules/GroupHeader'
 import { ResultRow } from '../../molecules/ResultRow'
+import { ScrollShadows } from '../../../foundations/ScrollShadows'
 import './BrandList.css'
 
 export interface BrandListGroup {
@@ -248,6 +249,8 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
         )
       })}
     </ListBox>
+    {/* Shades on the list's edges while there's more to scroll (R19). */}
+    <ScrollShadows scroller=".brand-list__list" />
     </div>
     </div>
   )

@@ -78,14 +78,15 @@
 }
 
 /* The list's frame: border, the plum accent edge (R11: "what you've got", like the Selected brands
-   panel; teal would read as a list to act on), and the scroll shadows (R12). Scrolls past 230. */
+   panel; teal would read as a list to act on); the scroll shadows sit in it (R12). Fixed 230; scrolls inside. */
 .review-card__box {
   position: relative;
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  flex: 1;
-  min-height: 0;
-  max-height: var(--size-230);
+  /* Always 230 tall, even with one row (R22): the two lists keep their shape and the card its
+     layout, whatever was picked. Empty space under a short list stays plain. */
+  height: var(--size-230);
   border: var(--border-width-1) solid var(--border-structural);
   border-top: var(--border-width-3) solid var(--border-brand-strong);
   border-radius: var(--radius-12);
@@ -110,43 +111,15 @@
   outline: none;
 }
 
-.review-card__list > li + li {
-  border-top: var(--border-width-1) solid var(--border-structural);
+/* Vendor rows: a line under every row, the last one too, so a short list shows where it ends
+   (step 4 review R20). */
+.review-card__list > .review-row--vendor {
+  border-bottom: var(--border-width-1) solid var(--border-structural);
 }
 
-/* Scroll shadows: a soft shade on an edge with more to scroll to; it fades when you reach that end. */
-.review-card__box::before,
-.review-card__box::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  height: var(--space-12);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity var(--motion-duration) var(--motion-ease);
-}
-
-.review-card__box::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--scroll-shadow), transparent);
-}
-
-.review-card__box::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--scroll-shadow), transparent);
-}
-
-.review-card__box[data-more-above]::before,
-.review-card__box[data-more-below]::after {
-  opacity: 1;
-}
+/* Scroll shadows: the shared ScrollShadows inside the frame (R12). */
 
 /* Brands grouped by vendor (R9). Groups butt together; the label carries the rules. */
-.review-card__list > .review-card__group + .review-card__group {
-  border-top: 0;
-}
 
 /* A quiet, read-only label (neutral, not the step 2 teal bar: it does nothing). Sticks while its
    group scrolls by. Stand-in look until Figma has it (docs/figma-sync.md, "Review group label"). */
@@ -191,6 +164,29 @@
 /* Each brand row is its own animated item; it clips while it collapses. */
 .review-card__item {
   overflow: hidden;
+}
+
+/* Restored by Undo (M6): once the gap has opened and the row faded in, it glows in the highlight
+   fill and fades out, like a vendor card re-added on step 1. Reduced motion: no wait. */
+@keyframes review-card-restored {
+  from {
+    background-color: var(--fill-row-highlight);
+  }
+}
+
+.review-card__item.is-restored > .review-row {
+  animation: review-card-restored var(--motion-duration-highlight) var(--motion-ease-out) backwards;
+  animation-delay: calc(var(--motion-duration-layout) + var(--motion-duration-base));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-card__item.is-restored > .review-row {
+    animation-delay: 0ms;
+  }
+}
+
+:root[data-motion='reduced'] .review-card__item.is-restored > .review-row {
+  animation-delay: 0ms;
 }
 
 .review-card__item + .review-card__item {

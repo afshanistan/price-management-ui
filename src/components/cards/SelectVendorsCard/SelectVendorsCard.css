@@ -50,6 +50,9 @@
 
 /* The empty state and the grid share one cell, so they cross-fade in place. */
 .select-vendors-card__stage {
+  /* Frames the grid's scroll shadows (R19). */
+  position: relative;
+  isolation: isolate;
   flex: 1;
   min-height: 0;
   display: grid;

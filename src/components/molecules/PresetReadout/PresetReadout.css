@@ -20,16 +20,14 @@
   color: var(--text-heading);
 }
 
-/* "Decide later" stays regular and subtle, so set and unset read apart at a glance. "Fill in per row"
-   sits beside it on one line, like step 3's inline tile (R17). */
+/* "Decide later" is a choice too: the same bold value as a set preset (step 4 review R21; was regular
+   and subtle in R16). "Fill in per row" sits beside it on one line, small and subtle, like step 3's
+   inline tile (R17). */
 .preset-readout__value[data-empty] {
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
   column-gap: var(--space-8);
-  font: var(--type-body-lg);
-  letter-spacing: var(--type-body-lg-tracking);
-  color: var(--text-subtle);
 }
 
 .preset-readout__hint {

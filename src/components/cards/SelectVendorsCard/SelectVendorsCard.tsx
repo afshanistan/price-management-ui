@@ -12,6 +12,7 @@ import { TextField } from '../../molecules/TextField'
 import { ToastRegion, type ToastMessage } from '../../molecules/Toast'
 import { ResultsPanel } from '../../organisms/ResultsPanel'
 import { CountTick } from '../../atoms/CountTick'
+import { ScrollShadows } from '../../../foundations/ScrollShadows'
 import './SelectVendorsCard.css'
 
 export interface SelectVendorsCardProps {
@@ -335,6 +336,8 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
               </motion.ul>
             )}
           </AnimatePresence>
+          {/* Once the cards outgrow the section, shades on the edges with more (R19). */}
+          <ScrollShadows scroller=".select-vendors-card__list" />
         </div>
         {/* Undo for the latest removal. Its region is polite: "Cargill removed" is announced there, once. */}
         <ToastRegion toast={toast} onDismiss={() => setToast(null)} className="select-vendors-card__toast" />

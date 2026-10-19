@@ -91,6 +91,42 @@
   animation-delay: calc(var(--motion-stagger) * 2);
 }
 
+/* Step 4 (Review motion pass, Oct 19): header, the summary strip, then the lists and presets
+   together (at most three groups after the card). */
+.wizard-layout__card .review-card > :is(.card-header, .review-card__strip, .review-card__scope, .review-card__section) {
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+}
+
+.wizard-layout__card .review-card > .card-header {
+  animation-delay: var(--motion-stagger);
+}
+
+.wizard-layout__card .review-card > .review-card__strip {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+
+.wizard-layout__card .review-card > :is(.review-card__scope, .review-card__section) {
+  animation-delay: calc(var(--motion-stagger) * 3);
+}
+
+/* The two citron checks pop in once the strip has landed, one stagger apart: step 2's check pop
+   (0.6 → 1 + fade, fast, ease-out). The one celebratory moment on Review. */
+@keyframes motion-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+.wizard-layout__card .review-card > .review-card__strip .summary-stat__check {
+  animation: motion-pop var(--motion-duration-fast) var(--motion-ease-out) backwards;
+  animation-delay: calc(var(--motion-stagger) * 2 + var(--motion-duration-base));
+}
+
+.wizard-layout__card .review-card > .review-card__strip > :nth-child(2) .summary-stat__check {
+  animation-delay: calc(var(--motion-stagger) * 3 + var(--motion-duration-base));
+}
+
 /* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).
    The same rules twice, because a media query and an attribute can't share one block. */
 @media (prefers-reduced-motion: reduce) {
@@ -112,7 +148,9 @@
   .wizard-layout__card .select-brands-card__directory,
   .wizard-layout__card .select-brands-card > .selected-brands-panel,
   .wizard-layout__card .global-presets-card > .card-header,
-  .wizard-layout__card .global-presets-card__grid {
+  .wizard-layout__card .global-presets-card__grid,
+  .wizard-layout__card .review-card > :is(.card-header, .review-card__strip, .review-card__scope, .review-card__section),
+  .wizard-layout__card .review-card > .review-card__strip .summary-stat__check {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }
@@ -139,7 +177,9 @@
   & .wizard-layout__card .select-brands-card__directory,
   & .wizard-layout__card .select-brands-card > .selected-brands-panel,
   & .wizard-layout__card .global-presets-card > .card-header,
-  & .wizard-layout__card .global-presets-card__grid {
+  & .wizard-layout__card .global-presets-card__grid,
+  & .wizard-layout__card .review-card > :is(.card-header, .review-card__strip, .review-card__scope, .review-card__section),
+  & .wizard-layout__card .review-card > .review-card__strip .summary-stat__check {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }

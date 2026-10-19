@@ -2,6 +2,7 @@ import { useId, type CSSProperties } from 'react'
 import { ListBox, type Selection } from 'react-aria-components'
 import type { Vendor } from '../../../data/vendors'
 import { ResultRow } from '../../molecules/ResultRow'
+import { ScrollShadows } from '../../../foundations/ScrollShadows'
 import './ResultsPanel.css'
 
 export interface ResultsPanelProps {
@@ -60,6 +61,8 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, onReselect,
       >
         {(vendor) => <ResultRow id={vendor.id} name={vendor.name} meta={vendor.esn} query={query} highlightId={highlightId} />}
       </ListBox>
+      {/* Past six rows the list scrolls: shades on the edges with more (R19). */}
+      <ScrollShadows scroller=".results-panel__list" />
     </div>
   )
 }

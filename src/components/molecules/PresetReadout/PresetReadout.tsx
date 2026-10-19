@@ -3,7 +3,7 @@ import './PresetReadout.css'
 export interface PresetReadoutProps {
   /** "Effective date". */
   label: string
-  /** null shows "Decide later · Fill in per row" on one line, in subtle text, as on step 3 (step 4 review R13, R15, R17). */
+  /** null shows "Decide later" (bold, like a set value) with "Fill in per row" beside it, as on step 3 (step 4 review R13, R15, R17, R21). */
   value: string | null
   className?: string
 }

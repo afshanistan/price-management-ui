@@ -1,5 +1,6 @@
 import { OverlayArrow, Tooltip, TooltipTrigger } from 'react-aria-components'
 import { formatEsn } from '../../../data/vendors'
+import { CountTick } from '../../atoms/CountTick'
 import { IconButton } from '../IconButton'
 import './ReviewRow.css'
 
@@ -50,7 +51,8 @@ export function ReviewRow({ type, name, brandCount = 0, esn, onRemove, removeBlo
         <span className="review-row__name" title={name}>{name}</span>
         {type === 'vendor' && (
           <span className="review-row__count type-body-sm">
-            {brandCount} {brandCount === 1 ? 'brand' : 'brands'}
+            {/* Ticks when a brand is removed on Review (M5). */}
+            <CountTick value={brandCount} /> {brandCount === 1 ? 'brand' : 'brands'}
           </span>
         )}
       </span>

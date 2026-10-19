@@ -19,7 +19,7 @@ const meta = {
         component:
           // Figma component description, verbatim.
           'PresetReadout — label over value; "No default" in text-subtle.\n\n' +
-          'One preset in Review\'s Global presets strip: a quiet label over its value in Body/LG Strong, or "Decide later · Fill in per row" in subtle text, as on step 3 (step 4 review, Oct 19). Not interactive.',
+          'One preset in Review\'s Global presets strip: a quiet label over its value in Body/LG Strong; "Decide later" is a value too, with "Fill in per row" beside it in small subtle text, as on step 3 (step 4 review, Oct 19). Not interactive.',
       },
     },
   },

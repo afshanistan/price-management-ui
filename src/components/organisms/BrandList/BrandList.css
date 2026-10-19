@@ -8,8 +8,15 @@
   max-height: 100%;
 }
 
-/* Wraps the listbox only so it can be hidden from screen readers when every group is closed. */
+/* Wraps the listbox so it can be hidden from screen readers when every group is closed, and frames
+   the scroll shadows: inside the list's border and teal top edge, following its corners (R19). */
 .brand-list__frame {
+  position: relative;
+  isolation: isolate;
+  --scroll-shadows-inset-top: var(--border-width-3);
+  --scroll-shadows-inset-bottom: var(--border-width-1);
+  --scroll-shadows-inset-x: var(--border-width-1);
+  --scroll-shadows-radius: calc(var(--radius-8) - var(--border-width-1));
   display: flex;
   flex-direction: column;
   width: 100%;

@@ -27,7 +27,27 @@ Same routine as steps 2 and 3: Will clicks through top to bottom, notes are logg
 | R16 | Preset readout hierarchy: label stays quiet (Body/SM, subtle); a set value goes **Body/LG Strong** (Geist SemiBold 16, `text-heading`); "Decide later" stays regular, subtle. Labels in mono rejected (mono is for data: IDs, ESNs, SKUs); values in mono rejected (words read as code) | **Built** (Figma queue) |
 | R17 | Fit the 644 card: "Decide later · Fill in per row" on one line, like step 3's inline tile (replaces "under it" in R15); readout padding 12 → 10 top and bottom | **Built** (Figma queue) |
 | R18 | Summary → lists and lists → Global presets both 16 (were 24; the gap under the header stays 24). The card fit 644 to the pixel, so rounding on Will's screen made it scroll; now 16px of room. Plus a lock: in the app the Review card never scrolls as a whole (`overflow: hidden`), only its lists. Rejected: every gap 20, lists 222; flexible lists (held) | **Built** (Figma queue) |
+| R19 | Scroll shadows on **every** scrolling panel, not just Review: step 1 Results panel and Selected vendors grid, step 2 Brand list and Selected brands chips, Review's two lists. One shared piece (`src/foundations/ScrollShadows`) | **Built** |
+| R20 | Review's Vendors list: a line under every row, the last one too, so a short list shows where it ends | **Built** |
+| R21 | "Decide later" gets the same treatment as a set value: Body/LG Strong, `text-heading` ("Fill in per row" stays Body/SM, subtle, beside it). Reverses R16's "Decide later stays regular, subtle": it's a choice, not a gap | **Built** |
+| R22 | Review's Vendors and Brands lists are a fixed 230 tall (were hug, up to 230): one row or many, the lists keep their shape; empty space under a short list stays plain | **Built** |
 
 Visual review done (Will, Oct 19). Batch built Oct 19, not committed: Will looks first. 176 of 176 tests pass.
 
 **Fit (R17), Oct 19:** with R15 and R16 the card was 666 at its fullest, 22 over the fixed 644, so it would have scrolled in the app. Will picked (a). Rejected: shrinking both lists to 208. Now 644 exactly (Long lists and Heavy). Motion pass next.
+
+## Motion pass (Oct 19)
+
+| # | Item | Status |
+|---|---|---|
+| M1 | Page load: after the card, header → summary strip → lists and presets together, one stagger (35ms) apart; opacity only under reduced motion | **Built** |
+| M2 | The two citron checks pop in once the strip lands (step 2's pop: 0.6 → 1 + fade, fast), Vendors then Brands one stagger apart | **Built** |
+| M3 | Summary numbers count up | **Rejected** (over 300ms, a dashboard trick; M2 is the celebration) |
+| M4 | Removing a brand: the row fades (fast, ease-in), then the gap closes (layout, ease-in-out) and the rows below glide up; reduced motion: fade only | **Built** |
+| M5 | Counts tick when a brand goes or comes back: group label, the vendor's "N brands", the Brands total (CountTick, like step 2) | **Built** |
+| M6 | Undo: the gap opens, the row fades in, then glows in the highlight fill and fades (1s), like a re-added vendor card on step 1 | **Built** |
+| M7 | Edit buttons, sticky labels, blocked trash: nothing extra | **Kept** |
+| M8 | Download finale (the stepper line charges once) | **Later**, stepper review |
+
+**Carried to the stepper review (Will, Oct 19):** page transitions feel too fast. Today a step change swaps the card instantly and replays the page-load entrance (200ms, 8px rise, 35ms stagger), with no exit. Retime it as one moment with the step transition: the old content exits, the stepper charges up, the new content enters from the direction of travel (code-backlog "Charge-up on Next"). Not tuned here, so it isn't timed twice.
+

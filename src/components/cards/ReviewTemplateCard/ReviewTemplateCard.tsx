@@ -5,8 +5,9 @@ import type { Brand } from '../../../data/brands'
 import { currencyOptions, effectiveDateOf, formatShort, NO_DEFAULT, presetsSetCount, pricingModelOptions, type GlobalPresetsValue } from '../../../data/presets'
 import type { Vendor } from '../../../data/vendors'
 import { useReducedMotionSetting } from '../../../foundations/useReducedMotionSetting'
-import { useScrollEdges } from '../../../foundations/useScrollEdges'
+import { ScrollShadows } from '../../../foundations/ScrollShadows'
 import { duration, ease } from '../../../styles/motion'
+import { CountTick } from '../../atoms/CountTick'
 import { Pictogram, type PictogramType } from '../../atoms/Pictogram'
 import { Button } from '../../molecules/Button'
 import { CardHeader } from '../../molecules/CardHeader'
@@ -66,30 +67,46 @@ function SectionHeader({ title, pictogram, editLabel, onEdit }: { title: string;
   that have more to scroll to (R12). The border, accent and shadows sit on the frame; the list scrolls.
 */
 function ScrollBox({ label, focusable, children }: { label: string; focusable?: boolean; children: ReactNode }) {
-  const listRef = useRef<HTMLUListElement>(null)
-  const edges = useScrollEdges(listRef)
   return (
-    <div className="review-card__box" data-more-above={edges.top || undefined} data-more-below={edges.bottom || undefined}>
+    <div className="review-card__box">
       {/* Focusable only when nothing inside is, so keyboard users can still scroll it. */}
-      <ul ref={listRef} className="review-card__list" tabIndex={focusable ? 0 : undefined} aria-label={label}>
+      <ul className="review-card__list" tabIndex={focusable ? 0 : undefined} aria-label={label}>
         {children}
       </ul>
+      <ScrollShadows scroller=".review-card__list" />
     </div>
   )
 }
 
-/* One brand row; fades and collapses when removed, the rows below slide up (R10d, refined in the motion pass). */
-function BrandItem({ brandId, reduced, children }: { brandId: string; reduced: boolean; children: ReactNode }) {
+/*
+  One brand row (Review motion pass, Oct 19).
+  Removed (M4): it fades first (fast, ease-in), then the gap closes (layout, ease-in-out) and the rows
+  below glide up, like a vendor card leaving on step 1. Restored by Undo (M6): the gap opens (layout),
+  the row fades in, then glows in the highlight fill and fades (highlight, CSS). Reduced motion: fades only.
+*/
+function BrandItem({ brandId, restored, reduced, children }: { brandId: string; restored: boolean; reduced: boolean; children: ReactNode }) {
   const isPresent = useIsPresent()
   return (
     <motion.li
-      className="review-card__item"
+      className={restored ? 'review-card__item is-restored' : 'review-card__item'}
       data-brand-id={brandId}
       data-exiting={isPresent ? undefined : ''}
       inert={!isPresent}
       initial={{ opacity: 0, height: 0 }}
-      animate={{ opacity: 1, height: 'auto', transition: { duration: reduced ? 0 : duration.base, ease: ease.out } }}
-      exit={{ opacity: 0, height: 0, transition: reduced ? { duration: duration.fast } : { duration: duration.base, ease: ease.in } }}
+      animate={{
+        opacity: 1,
+        height: 'auto',
+        transition: reduced
+          ? { opacity: { duration: duration.fast }, height: { duration: 0 } }
+          : { height: { duration: duration.layout, ease: ease.inOut }, opacity: { duration: duration.base, ease: ease.out, delay: duration.layout } },
+      }}
+      exit={{
+        opacity: 0,
+        height: 0,
+        transition: reduced
+          ? { opacity: { duration: duration.fast }, height: { duration: 0, delay: duration.fast } }
+          : { opacity: { duration: duration.fast, ease: ease.in }, height: { duration: duration.layout, ease: ease.inOut, delay: duration.fast } },
+      }}
     >
       {children}
     </motion.li>
@@ -110,6 +127,8 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
   const toastCount = useRef(0)
   const lastRemoved = useRef<Brand | null>(null)
   const focusAfterChange = useRef<string | null>(null)
+  // The brand Undo just put back: it glows once when it returns (M6).
+  const [restoredId, setRestoredId] = useState<string | null>(null)
   const brandsRef = useRef<HTMLElement>(null)
   // Undo runs from the toast, after other changes may have happened: always start from the latest list.
   const latest = useRef(selectedBrands)
@@ -149,6 +168,7 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
     if (!removed || !onSelectedBrandsChange) return
     if (latest.current.some((b) => b.id === removed.id)) return
     onSelectedBrandsChange([...latest.current, removed])
+    setRestoredId(removed.id)
     focusAfterChange.current = removed.id
   }
 
@@ -162,9 +182,9 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
 
       {/* Labels follow the count: "1 Vendor" (R3). Presets: "2 of 3", "of 3" smaller (R4, R5). */}
       <div className="review-card__strip">
-        <SummaryStat value={String(vendors.length)} label={vendors.length === 1 ? 'Vendor' : 'Vendors'} status="complete" srLabel={`${plural(vendors.length, 'vendor', 'vendors')}, complete`} />
-        <SummaryStat value={String(brandTotal)} label={brandTotal === 1 ? 'Brand' : 'Brands'} status="complete" srLabel={`${plural(brandTotal, 'brand', 'brands')}, complete`} />
-        <SummaryStat value={String(setCount)} total={3} label="Presets" status="optional" srLabel={`${setCount} of 3 presets set, optional`} />
+        <SummaryStat value={vendors.length} label={vendors.length === 1 ? 'Vendor' : 'Vendors'} status="complete" srLabel={`${plural(vendors.length, 'vendor', 'vendors')}, complete`} />
+        <SummaryStat value={brandTotal} label={brandTotal === 1 ? 'Brand' : 'Brands'} status="complete" srLabel={`${plural(brandTotal, 'brand', 'brands')}, complete`} />
+        <SummaryStat value={setCount} total={3} label="Presets" status="optional" srLabel={`${setCount} of 3 presets set, optional`} />
       </div>
 
       <div className="review-card__scope">
@@ -186,12 +206,15 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
                 <li key={vendor.id} className="review-card__group">
                   <div className="review-card__group-label" id={labelId}>
                     <span className="review-card__group-vendor" title={vendor.name}>{vendor.name}</span>
-                    <span className="review-card__group-count type-body-sm">{plural(brands.length, 'brand', 'brands')}</span>
+                    {/* The count ticks when a brand goes or comes back (M5). */}
+                    <span className="review-card__group-count type-body-sm">
+                      <CountTick value={brands.length} /> {brands.length === 1 ? 'brand' : 'brands'}
+                    </span>
                   </div>
                   <ul className="review-card__group-rows" aria-labelledby={labelId}>
                     <AnimatePresence initial={false}>
                       {brands.map((brand) => (
-                        <BrandItem key={brand.id} brandId={brand.id} reduced={reduced}>
+                        <BrandItem key={brand.id} brandId={brand.id} restored={brand.id === restoredId} reduced={reduced}>
                           <ReviewRow
                             as="div"
                             type="brand"

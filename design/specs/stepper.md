@@ -84,9 +84,18 @@ Stories need the plum stage behind them (`--surface-brand` background, `data-mod
 
 ## Motion
 - Resting glow on complete nodes and lines only, never on the in-progress ring.
-- **Charge-up on Next** (code-backlog "Progress stepper"): ring → check draw-in (~150ms); a citron pulse travels to the next node while the line thickens 2→4px and turns citron (0–250ms); next node grows dot → ring with a brief glow, label brightens (~250ms). Total < 500ms, never blocks input. Only first-time completions charge up; going Back just moves the ring.
-- **For Storybook:** build the resting states first. The charge-up can wait for the React app, where it runs with the card transition. If you do it here, a story with a "Next" button that bumps `currentStep` is enough.
-- Reduced motion: instant swap, static glow.
+- **Charge-up on Next: the "fuse"** (revised Oct 19, replaces the < 500ms version). One citron stroke leaves the step just finished, runs down the line, and wraps around the next node.
+  1. **Close the old step** (0–250ms): its in-progress ring resolves to the complete node; the check draws on (`pathLength` 0→1).
+  2. **Line** (≈250–1400ms): a citron stroke draws from the finished node's edge toward the next node, over the 2px track. A short bright tip (Citron/100, the "neon core") leads it.
+  3. **Wrap** (≈1400–1800ms): the same stroke continues around the next node, clockwise from 9 o'clock (the side the line arrives on), closing the ring.
+  4. **Settle** (≈1800–2000ms): the tip fades; the glow blooms once and eases back to the resting glow; the label goes upcoming → active (bold, `--text-default`). Hand off to the resting state.
+  - **One continuous path, one easing curve** for line + wrap, so the stroke keeps its momentum and only settles as it closes the ring (no stall at the node). Default easing: an ease-out such as `[0.22, 1, 0.36, 1]`.
+  - **Weight:** the fuse is drawn at 2px end to end; the 4px complete line + its glow fade in underneath behind the fuse's leading edge (or as the fuse finishes). Alternative to compare: two segments (4px line, then 2px ring) with hand-matched easings.
+  - **Duration is a tuning variable,** default 2000ms, tested against ~1200ms in Storybook. Not locked yet.
+  - **Never blocks input.** Plays alongside the card transition. If `currentStep` changes mid-animation, jump to the end state immediately.
+  - **Only first-time completions** play the fuse (track the furthest step reached). Going Back, or Next into a step already reached, just moves the ring.
+- **Build:** resting states stay plain CSS. The fuse is a separate decorative SVG layer (`aria-hidden`) over the stepper, absolutely positioned and sized to the 960 × node-row box, that plays and then unmounts. Path computed from node centers (x = 120, 360, 600, 840; y = 10; ring radius 9 for a 2px stroke inside the 20px node). Motion (`motion/react`, already installed) for the sequence. Glow animates the opacity of a blurred copy, not a `filter` value.
+- **Reduced motion** (`useReducedMotion`): no fuse layer; instant swap to the resting state, static glow.
 
 ## Code backlog
 - Progress stepper (Oct 16, evening): placement, node states, line states, resting glow, charge-up, in-progress token pair.

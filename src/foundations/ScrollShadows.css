@@ -1,0 +1,29 @@
+/* Scroll shadows (ScrollShadows.tsx). The frame they sit in must be positioned. */
+.scroll-shadows__edge {
+  position: absolute;
+  left: var(--scroll-shadows-inset-x, 0);
+  right: var(--scroll-shadows-inset-x, 0);
+  /* Above sticky group headers and labels. */
+  z-index: 3;
+  height: var(--space-12);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-duration) var(--motion-ease);
+}
+
+.scroll-shadows__edge--top {
+  top: var(--scroll-shadows-inset-top, 0);
+  /* Follows the frame's corners where it doesn't clip them itself. */
+  border-radius: var(--scroll-shadows-radius, 0) var(--scroll-shadows-radius, 0) 0 0;
+  background: linear-gradient(to bottom, var(--scroll-shadow), transparent);
+}
+
+.scroll-shadows__edge--bottom {
+  bottom: var(--scroll-shadows-inset-bottom, 0);
+  border-radius: 0 0 var(--scroll-shadows-radius, 0) var(--scroll-shadows-radius, 0);
+  background: linear-gradient(to top, var(--scroll-shadow), transparent);
+}
+
+.scroll-shadows__edge[data-visible] {
+  opacity: 1;
+}
