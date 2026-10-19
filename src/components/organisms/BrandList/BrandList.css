@@ -27,9 +27,9 @@
   border-radius: var(--radius-8);
   background: var(--surface-card);
   overflow-y: auto;
-  /* Rows scrolled into view stop below the sticky Group header (min-height 40 + its 1px rule,
-     which the 16/24 name fills), so arrowing up never hides the active row under it (WCAG 2.4.11). */
-  scroll-padding-top: calc(var(--size-40) + var(--border-width-1));
+  /* Rows scrolled into view stop below the sticky Group header (its min-height, --size-40),
+     so arrowing up never hides the active row under it (WCAG 2.4.11). */
+  scroll-padding-top: var(--size-40);
   outline: none;
 }
 
