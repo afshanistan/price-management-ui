@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { formatEsn, type VendorLogoFiles } from '../../../data/vendors'
+import { formatEsn, MIN_LOGO_RATIO, type VendorLogoFiles } from '../../../data/vendors'
 import { IconButton } from '../IconButton'
 import './SelectedItemCard.css'
 
@@ -13,9 +13,6 @@ export interface SelectedItemCardProps {
   onRemove: () => void
   className?: string
 }
-
-/** Tall and square logos read as small stamps at 28px tall; the card leaves them out (decision log, Oct 18). */
-const MIN_LOGO_RATIO = 1.5
 
 /*
   A chosen vendor (Figma Selected item card 707:705): name and ESN on top beside Remove, the

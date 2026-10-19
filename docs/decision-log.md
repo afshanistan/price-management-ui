@@ -609,6 +609,18 @@ From the step 2 design review (items 8–11 in `docs/reviews/step-2-design-revie
 
 **Groups ease open and closed.** Open: rows grow to 40px and fade in, layout duration (225ms), ease-out. Close: they shrink away, fast (150ms), ease-in, then leave. Will asked for ease-out; closing uses the system's exit curve so it feels snappier. Search opens groups instantly (it changes on every keystroke); reduced motion is instant. The caret turns at once.
 
+## Oct 19 · Selected brands panel: no coverage strip; the vendor line carries the status
+
+From the step 2 design review.
+
+**The coverage strip is gone.** Will: the logos were meant as a moment of visual distinction, and they weren't delivering it. Tried first: full-color logos in an invisible 64×24 frame (the step 1 Selected item card's approach), four to a row, wrapping, with the vendor name for tall or missing logos. In a 75px cell very wide logos came out tiny (Coca-Cola ~10px tall), names truncated, and the status marks floated at the cell's corner, away from narrow logos. Will: "not worth it anymore." Also settles pressure-test #1: realistic templates have 1–2 vendors, 4–6 for a broker, rarely 8. The Vendor coverage tile is retired.
+
+**Each vendor's line says its own status.** The name is one tick bigger and bolder than the chips under it: Label/LG (14 medium), plum (it's a label), was Body/XS 12 (smaller than the 13px chips). The count stays beside it, and a citron complete mark appears right after the count once the vendor has a brand ("Cargill 2 of 8 ✓"); nothing before. First built at the far right of the line; Will moved it next to the count. Citron stays a check beside a number, never color alone. Motion for the mark: later.
+
+**One empty line for every vendor: "Select a brand to continue."** Replaces "No {vendor} brands yet" (which read "No Conagra Brands brands yet"). Singular because one brand per vendor unlocks Next; "Select" matches "Select all" and "Selected brands". Rejected: "No brands selected" (a fact, not what to do), "Select/Choose brands to continue" (suggests several). The panel's empty helper now says "Select brands on the left. Each vendor needs at least one." *Answers the open question "Incomplete vendor: note or empty state": the inline empty state, no note.*
+
+**Kept:** the divider under "Selected brands" (now between the summary and the vendor list).
+
 ---
 
 ## Build plan

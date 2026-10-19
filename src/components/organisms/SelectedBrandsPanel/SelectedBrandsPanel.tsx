@@ -5,10 +5,10 @@ import type { Vendor } from '../../../data/vendors'
 import { useReducedMotionSetting } from '../../../foundations/useReducedMotionSetting'
 import { duration, ease } from '../../../styles/motion'
 import { CountTick } from '../../atoms/CountTick'
+import { StatusMark } from '../../atoms/StatusMark'
 import { BrandChip } from '../../molecules/BrandChip'
 import { EmptySelection } from '../../molecules/EmptySelection'
 import { SelectionSummary } from '../../molecules/SelectionSummary'
-import { VendorCoverageTile } from '../../molecules/VendorCoverageTile'
 import './SelectedBrandsPanel.css'
 
 export interface SelectedBrandsPanelProps {
@@ -25,7 +25,9 @@ export interface SelectedBrandsPanelProps {
 }
 
 /*
-  The basket: summary, coverage strip, chips by vendor. State is derived:
+  The basket: summary, then chips by vendor. Each vendor's line carries its own status: a citron
+  complete mark right after its count once it has a brand (step 2 design review, Oct 19: the coverage strip
+  is gone). State is derived:
   nothing selected = Empty; some vendor has none = Incomplete; else With selections.
 
   Motion (decision log, "Step 2 motion"): chips fade and scale in (fast) and the others glide; a removed
@@ -84,13 +86,6 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
     <aside aria-labelledby={titleId} className={className ? `selected-brands-panel ${className}` : 'selected-brands-panel'}>
       <SelectionSummary title="Selected brands" titleId={titleId} count={total} status={isComplete ? 'complete' : 'todo'} />
 
-      <ul className="selected-brands-panel__coverage" aria-label="Brand coverage">
-        {perVendor.map(({ vendor, all, selected }) => (
-          <li key={vendor.id}>
-            <VendorCoverageTile vendorName={vendor.name} wordmark={vendor.wordmark} logo={vendor.logo} selectedCount={selected.length} totalCount={all.length} />
-          </li>
-        ))}
-      </ul>
 
       <hr className="selected-brands-panel__divider" />
 
@@ -102,7 +97,7 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
               <EmptySelection
                 pictogram="brand"
                 message="No brands selected yet"
-                helper="Check brands on the left. Each vendor needs at least one."
+                helper="Select brands on the left. Each vendor needs at least one."
                 className="selected-brands-panel__empty"
               />
             </Fade>
@@ -124,17 +119,22 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
                       {/* An H3, styled small; focus lands here when its last chip goes. */}
                       <h3 tabIndex={-1} className="selected-brands-panel__vendor-name">{vendor.name}</h3>
                       <span className="selected-brands-panel__vendor-count">
-                        <span className="visually-hidden">{selected.length} of {all.length}</span>
+                        <span className="visually-hidden">
+                          {selected.length} of {all.length}
+                          {selected.length > 0 ? ', complete' : ''}
+                        </span>
                         <span aria-hidden="true">
                           <CountTick value={selected.length} /> of {all.length}
                         </span>
                       </span>
+                      {/* Complete once the vendor has a brand; nothing before (the empty line says it). Motion later. */}
+                      {selected.length > 0 && <StatusMark status="complete" className="selected-brands-panel__vendor-status" />}
                     </div>
                     {/* Fade-through inside the group: inline empty ↔ chips ↔ "All N brands". */}
                     <AnimatePresence initial={false} mode="wait">
                       {content === 'empty' ? (
                         <Fade key="empty">
-                          <EmptySelection layout="inline" pictogram="brand" message={`No ${vendor.name} brands yet`} />
+                          <EmptySelection layout="inline" pictogram="brand" message="Select a brand to continue" />
                         </Fade>
                       ) : content === 'all' ? (
                         <Fade key="all" leave="shrink">

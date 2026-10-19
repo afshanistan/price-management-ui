@@ -25,6 +25,11 @@ The heaviest realistic template: 12 vendors including the giants (PepsiCo 22 bra
 | 5 | 4 | **Review's vendor rows still show the wordmark tile** ("CGL", "KO"), the look the step 1 results dropped as placeholder-like; and their **ESNs are bare numbers**, not "ESN-70441642" like the results and cards. | `s4-review-big` | (a) match step 1: no tile, "ESN-" format, (b) keep the tile on Review only |
 | 6 | 4 | **Long vendor names cut off in Review's Brands list.** The vendor column is mono and narrow: "Tillamook County Creamery Association" truncates. | `s4-review-big` (scroll to Tillamook) | (a) ellipsis + full name on hover (as now), (b) drop the vendor column when brands are grouped (see 4a) |
 
+## Decided
+
+- **#1 (Oct 19, Will): drop the strip** (option d). Each vendor line in the panel shows a citron complete mark after its count instead.
+- **#2 (Oct 19, Will):** every empty vendor reads "Select a brand to continue".
+
 ## Noted, not now
 
 - Review's header pictogram and the Edit buttons still use the placeholder triangle (existing open questions).

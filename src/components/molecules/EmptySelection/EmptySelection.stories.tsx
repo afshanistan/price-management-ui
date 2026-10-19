@@ -42,5 +42,5 @@ export const Stacked: Story = { name: 'Stacked (step 1)' }
 
 export const Inline: Story = {
   name: 'Inline (step 2)',
-  args: { layout: 'inline', pictogram: 'brand', message: 'No Kraft Heinz brands yet', helper: undefined },
+  args: { layout: 'inline', pictogram: 'brand', message: 'Select a brand to continue', helper: undefined },
 }

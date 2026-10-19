@@ -34,8 +34,9 @@ const meta = {
         component:
           // Figma component description, verbatim.
           'SelectedBrandsPanel — the basket: summary, coverage strip, chips by vendor; 3px plum top edge.\n\n' +
-          'The right side of step 2: "Selected brands" with its count badge, one coverage tile per vendor, then the selected brands as chips grouped by vendor (an H3 each). ' +
-          'A vendor with every brand selected collapses to "All N brands"; a vendor with none shows an inline empty state. ' +
+          'The right side of step 2: "Selected brands" with its count badge, then the selected brands as chips grouped by vendor (an H3 each, Label/LG, with "N of M" and a citron complete mark right after it once the vendor has a brand). ' +
+          'A vendor with every brand selected collapses to "All N brands"; a vendor with none shows "Select a brand to continue". ' +
+          '**Oct 19 (step 2 design review):** the coverage strip is gone; the spec below is the older export. ' +
           'Removing a chip moves focus to the next chip\'s ×, else the previous one, else the vendor\'s heading.',
       },
     },

@@ -15,6 +15,9 @@ export interface Vendor {
   logo?: VendorLogoFiles
 }
 
+/** Tall and square logos read as small stamps; the Selected item card and the coverage tile leave them out (decision log, Oct 18). */
+export const MIN_LOGO_RATIO = 1.5
+
 export interface VendorLogoFiles {
   /** Brand colors, as published. */
   color: string

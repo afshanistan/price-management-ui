@@ -1,5 +1,5 @@
 /* Selected brands panel (design/specs/selected-brands-panel.md). Fixed width, fills the card body height.
-   Summary and coverage strip stay pinned; the chips scroll. */
+   The summary stays pinned; the chips scroll. */
 .selected-brands-panel {
   display: flex;
   flex-direction: column;
@@ -13,20 +13,6 @@
   border-top: var(--border-width-3) solid var(--border-brand-strong);
   border-radius: var(--radius-8);
   overflow: hidden;
-}
-
-.selected-brands-panel__coverage {
-  display: flex;
-  gap: var(--space-8);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.selected-brands-panel__coverage > li {
-  display: flex;
-  flex: 1 1 0;
-  min-width: 0;
 }
 
 .selected-brands-panel__divider {
@@ -84,8 +70,16 @@
   letter-spacing: var(--type-body-xs-tracking);
 }
 
+/* One tick bigger and bolder than the chips (Body/SM 13 regular): Label/LG 14 medium (Oct 19). */
 .selected-brands-panel__vendor-name {
+  font: var(--type-label-lg);
+  letter-spacing: var(--type-label-lg-tracking);
   color: var(--text-brand);
+}
+
+/* Right after the count ("Cargill  2 of 8 ✓"), level with the text (Will, Oct 19). */
+.selected-brands-panel__vendor-status {
+  align-self: center;
 }
 
 /* Programmatic focus only (after its last chip is removed). */

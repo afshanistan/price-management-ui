@@ -15,7 +15,11 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 | 9 | Rows blend together: every other row Neutral/100 | **Built Oct 19 as hairline dividers** (stripes rejected: hover vanished on Neutral/100) |
 | 10 | Open/close is instant: ease it | **Built Oct 19**: open 225ms ease-out, close 150ms ease-in; search and reduced motion instant |
 | 11 | Teal accent edge on the Brand list, like the panel's plum edge | **Built Oct 19**: 3px `--border-action-strong` (Teal/700) |
+| 12 | Coverage tiles: full-color logos in an invisible frame | **Tried, then dropped** (logos too small or replaced by names in a 75px cell) |
+| 13 | Coverage strip as a 4-column wrapping grid | **Dropped with 12**: the strip is gone (answers pressure-test #1) |
+| 14 | Selected brands: vendor name one tick bigger and bolder than the chips, complete mark after the count | **Built Oct 19**: Label/LG plum; citron check after "N of M" once the vendor has a brand. Mark motion: later |
+| 15 | One empty line for every vendor | **Built Oct 19**: "Select a brand to continue" (answers pressure-test #2); panel helper "Select brands on the left…" |
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
 
-Still to review on step 2: the pressure-test findings in `docs/pressure-tests/steps-2-4.md` (#1 coverage strip, #2 "No Conagra Brands brands yet", #3 Sprite under two vendors), then step 2 motion.
+Still to review on step 2: pressure-test #3 (Sprite under two vendors), the rest of the Selected brands panel, then step 2 motion (including the complete mark's motion).

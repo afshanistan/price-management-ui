@@ -18,8 +18,9 @@ const meta = {
         component:
           // Figma component description, verbatim.
           'StatusMark — complete (citron + check) or to-do (dashed ring). Never interactive, never color alone.\n\n' +
-          'A 16px status dot for the Vendor coverage tile: a citron circle with a check when a vendor has brands, a dashed ring when it still needs one. ' +
-          'Always decorative: the tile\'s hidden text says the status ("…, complete" / "…, to do").',
+          'A 16px status dot: a citron circle with a check when a vendor has brands, a dashed ring when it still needs one. ' +
+          'In the Selected brands panel, the complete mark sits right after each vendor\'s count once it has a brand (the to-do ring isn\'t used there; Oct 19). ' +
+          'Always decorative: nearby hidden text says the status ("…, complete").',
       },
     },
   },
@@ -34,10 +35,10 @@ export const ToDo: Story = { name: 'To do', args: { status: 'todo' } }
 export const BothStatuses: Story = {
   name: 'Both statuses',
   render: () => (
-    <div style={{ display: 'flex', gap: 'var(--space-16)', padding: 'var(--space-12)', background: 'var(--fill-coverage-tile)' }}>
+    <div style={{ display: 'flex', gap: 'var(--space-16)', padding: 'var(--space-12)', background: 'var(--surface-card)' }}>
       <StatusMark status="complete" />
       <StatusMark status="todo" />
     </div>
   ),
-  parameters: { controls: { disable: true }, docs: { description: { story: 'On the coverage tile fill, where they sit.' } } },
+  parameters: { controls: { disable: true }, docs: { description: { story: 'On the panel surface, where the complete mark sits.' } } },
 }
