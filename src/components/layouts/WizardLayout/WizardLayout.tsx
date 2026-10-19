@@ -10,6 +10,8 @@ export interface WizardLayoutProps {
   children: ReactNode
   /** The wizard footer: <WizardNavigation />. It renders its own <footer>, outside <main>. */
   footer: ReactNode
+  /** Optional page-level toast (<ToastRegion />), placed over the bottom of the card. */
+  toast?: ReactNode
 }
 
 /*
@@ -17,7 +19,7 @@ export interface WizardLayoutProps {
   Focus header 56 → plum stage with the stepper band 80 → <main> with the fixed 644 card
   in the 960 column → 24 → wizard footer. The layout only places things; the slots own their landmarks.
 */
-export function WizardLayout({ header, stepper, children, footer }: WizardLayoutProps) {
+export function WizardLayout({ header, stepper, children, footer, toast }: WizardLayoutProps) {
   return (
     <div className="wizard-layout">
       {header}
@@ -26,7 +28,10 @@ export function WizardLayout({ header, stepper, children, footer }: WizardLayout
         {stepper}
       </div>
       <main className="wizard-layout__main">
-        <div className="wizard-layout__card">{children}</div>
+        <div className="wizard-layout__card">
+          {children}
+          {toast && <div className="wizard-layout__toast">{toast}</div>}
+        </div>
       </main>
       <div className="wizard-layout__footer">{footer}</div>
     </div>

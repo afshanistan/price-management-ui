@@ -46,6 +46,7 @@
 /* Every step's card is the same fixed height, so the footer never moves (Rule ID 6: the card
    stays fixed; its content scrolls). The cards hug their content; here they fill the frame. */
 .wizard-layout__card {
+  position: relative;
   width: var(--layout-content-width);
   max-width: 100%;
   height: var(--layout-card-height);
@@ -53,7 +54,7 @@
   flex-direction: column;
 }
 
-.wizard-layout__card > * {
+.wizard-layout__card > :not(.wizard-layout__toast) {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
@@ -68,4 +69,13 @@
   justify-content: center;
   margin-top: var(--space-24);
   padding-inline: var(--space-32);
+}
+
+/* A page-level toast sits over the bottom of the card (placement to come from Figma). */
+.wizard-layout__toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-16);
+  z-index: 1;
 }
