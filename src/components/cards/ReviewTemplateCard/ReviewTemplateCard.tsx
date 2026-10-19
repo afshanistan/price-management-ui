@@ -122,6 +122,21 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
   const reduced = useReducedMotionSetting()
   const labelIdBase = useId()
 
+  // Locked in the app's 644 frame (R18), but never at the cost of content: when enlarged text or text
+  // spacing makes it really taller than the frame (more than rounding), it scrolls (WCAG 1.4.4, 1.4.12).
+  const rootRef = useRef<HTMLDivElement>(null)
+  const [overflows, setOverflows] = useState(false)
+  useLayoutEffect(() => {
+    const root = rootRef.current
+    if (!root) return
+    const check = () => setOverflows(root.scrollHeight - root.clientHeight > 4)
+    check()
+    const observer = new ResizeObserver(check)
+    observer.observe(root)
+    for (const child of root.children) observer.observe(child)
+    return () => observer.disconnect()
+  }, [])
+
   // Removal and Undo, as on step 1: one toast at a time, for the latest removal.
   const [toast, setToast] = useState<ToastMessage | null>(null)
   const toastCount = useRef(0)
@@ -173,7 +188,7 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
   }
 
   return (
-    <div className={className ? `review-card ${className}` : 'review-card'}>
+    <div ref={rootRef} className={className ? `review-card ${className}` : 'review-card'} data-overflows={overflows || undefined}>
       <CardHeader
         title="Congrats! Your template is ready for download"
         pictogram="review"
@@ -219,6 +234,7 @@ export function ReviewTemplateCard({ vendors, selectedBrands, onSelectedBrandsCh
                             as="div"
                             type="brand"
                             name={brand.name}
+                            vendorName={vendor.name}
                             onRemove={onSelectedBrandsChange ? () => remove(brand) : undefined}
                             removeBlockedReason={brands.length === 1 ? 'Each vendor needs a brand' : undefined}
                           />

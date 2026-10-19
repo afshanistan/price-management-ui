@@ -74,11 +74,16 @@ export function SelectVendorsCard({ vendors, selected, onChange, className }: Se
   const results = searchVendors(vendors, query)
   const isOpen = searchHasFocus && query.trim() !== ''
 
-  // Polite announcements while typing: "7 vendors found" / "No vendors match “xyz”".
+  // Polite announcements while typing: "7 vendors found" / "No vendors match “xyz”". Once typing
+  // pauses (500ms), not on every keystroke (a11y checklist rule 15, Oct 19).
   useEffect(() => {
     if (query.trim() === '') return
     const n = results.length
-    setAnnouncement(n === 0 ? `No vendors match “${query.trim()}”` : `${n} ${n === 1 ? 'vendor' : 'vendors'} found`)
+    const timer = window.setTimeout(
+      () => setAnnouncement(n === 0 ? `No vendors match “${query.trim()}”` : `${n} ${n === 1 ? 'vendor' : 'vendors'} found`),
+      500,
+    )
+    return () => window.clearTimeout(timer)
     // Only the query should trigger this, not every render.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])

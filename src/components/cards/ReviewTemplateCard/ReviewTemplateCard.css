@@ -42,9 +42,15 @@
 }
 
 /* In the app's fixed 644 frame, Review never scrolls as a whole: only its lists do (Will, R18).
-   With 16px of room nothing is cut; this guards against a browser rounding a pixel taller. */
+   With 16px of room nothing is cut; this guards against a browser rounding a pixel taller.
+   Enlarged text or text spacing can make it really taller: then it scrolls rather than cut the
+   presets off (data-overflows, set by the card; WCAG 1.4.4, 1.4.12). */
 .wizard-layout__content > .review-card {
   overflow: hidden;
+}
+
+.wizard-layout__content > .review-card[data-overflows] {
+  overflow-y: auto;
 }
 
 .review-card__section {
@@ -105,6 +111,10 @@
   padding: 0;
   list-style: none;
   overflow-y: auto;
+  /* A focused trash scrolled into view stops below the sticky vendor label (its height: padding 6 + 6,
+     Label/MD 18, two 1px rules = 32), so focus is never hidden under it (WCAG 2.4.11), as in the
+     step 2 Brand list. */
+  scroll-padding-top: var(--size-32);
 }
 
 .review-card__list:focus {

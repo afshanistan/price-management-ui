@@ -53,11 +53,16 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
     // Groups with no matches drop out entirely.
     .filter((group) => group.brands.length > 0)
 
-  // Polite count while typing: "12 brands match" / "No brands match “xyz”".
+  // Polite count while typing: "12 brands match" / "No brands match “xyz”". Once typing pauses
+  // (500ms), not on every keystroke (a11y checklist rule 15, Oct 19).
   const matchCount = groups.reduce((sum, group) => sum + group.brands.length, 0)
   useEffect(() => {
     if (query.trim() === '') return
-    setAnnouncement(matchCount === 0 ? `No brands match “${query.trim()}”` : `${plural(matchCount, 'brand', 'brands')} match`)
+    const timer = window.setTimeout(
+      () => setAnnouncement(matchCount === 0 ? `No brands match “${query.trim()}”` : `${plural(matchCount, 'brand', 'brands')} match`),
+      500,
+    )
+    return () => window.clearTimeout(timer)
     // Only the query should trigger this.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query])

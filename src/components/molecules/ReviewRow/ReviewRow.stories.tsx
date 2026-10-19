@@ -33,10 +33,10 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Vendor: Story = {}
-export const Brand: Story = { args: { type: 'brand', name: 'Truvia', onRemove: fn() } }
+export const Brand: Story = { args: { type: 'brand', name: 'Truvia', vendorName: 'Cargill', onRemove: fn() } }
 export const BrandLast: Story = {
   name: 'Brand, last of its vendor',
-  args: { type: 'brand', name: 'Truvia', onRemove: fn(), removeBlockedReason: 'Each vendor needs a brand' },
+  args: { type: 'brand', name: 'Truvia', vendorName: 'Cargill', onRemove: fn(), removeBlockedReason: 'Each vendor needs a brand' },
   parameters: { docs: { description: { story: 'The trash looks disabled but stays focusable: hover it or Tab to it for the tooltip.' } } },
 }
 export const OneBrand: Story = { name: 'One brand', args: { name: 'The Kraft Heinz Company', brandCount: 1, esn: '24870547' } }

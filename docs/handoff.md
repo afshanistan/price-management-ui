@@ -109,6 +109,8 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 
 **Last (Oct 19):** the toast is styled: the header's plum, white text, a teal countdown (citron rejected: it only means "complete").
 
+**Accessibility test (Oct 19):** Will's checklist (Google Sheet, column K) run on the app: 12 Pass, 5 Fixed (Review text growth, focus under sticky labels, trash names with vendor, search counts announced once, blocked trash explains itself), 1 Accepted (reflow), 3 Fix later (count badge color only, forced colors, 1280×800 fold). Details: `docs/accessibility-test.md`.
+
 **Next:** open items below (open questions, the long Figma queue), the Download finale (held until Download is real), or a "remember my step on reload" convenience for testing (offered, not built).
 
 *Step 4 — open items to bring up (lay out the data first):*
