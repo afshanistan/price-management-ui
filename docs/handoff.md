@@ -89,6 +89,12 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 - Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
 - **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
 
+## Status (Oct 18, evening)
+- **The app runs all four steps** (`npm run dev`) on 60 real mock vendors and 551 brands: vendors → brands → presets → review, with picks kept, Edit from Review, page titles and heading focus. Download is a placeholder toast. Step-to-step motion is deferred (`TODO(step-transition)`).
+- **Motion built for steps 1–2** (decision log "Step 1 motion", "Step 2 motion"); options for steps 3–4 in `docs/motion-options-steps-3-4.md`.
+- **Pressure tests:** step 1 (`docs/pressure-tests/step-1.md`, decided) and steps 2–4 (`docs/pressure-tests/steps-2-4.md`, waiting for Will).
+- **Figma reconcile queue** is long: `docs/figma-sync.md`.
+
 ## Next
 1. Will: answer the open questions (steps 1–4); apply the Figma queue (now 8 dimension tokens + the filled-icon re-export) and re-export `tokens.css` and the three icons.
 2. React app: page shell (Focus header → stepper stage → 644 card → wizard footer), routing between the four steps with state kept across Back / Edit, page titles, the stepper charge-up.

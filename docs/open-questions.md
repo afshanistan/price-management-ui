@@ -87,3 +87,12 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 - [ ] **No "Clear all" in the Selected brands panel** · Selection summary · The Oct 16 decision log mentions "Clear all gets an undo toast", but the current Selection summary (count + title) has no Clear all. Built without it; Undo exists only for the "All N brands" × · (a) add Clear all to the summary in Figma, (b) leave it out · Open
 - [ ] **Undo toast placement on step 2** · Select brands card · Bottom center of the card, over the brand list and panel (placeholder, like step 1's). Part of "Toast needs Figma design" · Open
 
+## From wiring steps 3–4 and the steps 2–4 pressure test (Oct 18)
+*Built with the default in each Status (Will: use spec defaults while away). Findings: `docs/pressure-tests/steps-2-4.md`.*
+- [ ] **Review order** · Review template card, Vendors and Brands lists · The spec says "step 1 order"; step 1 is now newest first and step 2 A–Z · (a) A–Z like step 2, (b) step 1 order · Open. Built as (a)
+- [ ] **Coverage strip with many vendors** · Selected brands panel · 12 vendors = 24px tiles, logos gone · (a) wrap, (b) scroll, (c) one summary line past ~4, (d) drop it · Open. Built as is
+- [ ] **"No Conagra Brands brands yet"** · Selected brands panel, inline empty · Doubles "Brands" for some vendor names · (a) "No brands from {vendor} yet", (b) "Nothing selected yet", (c) keep · Open. Built as (c)
+- [ ] **Review's Brands list at scale** · Review template card · 122 brands in a 5-row window · (a) group by vendor, collapsed, (b) vendor counts only, (c) taller list, (d) keep · Open. Built as (d)
+- [ ] **Review vendor rows: tile and ESN format** · Review row · Still the wordmark tile and a bare ESN, unlike step 1 · (a) match step 1, (b) keep · Open. Built as (b)
+- [ ] **Download template** · Wizard footer, step 4 · A placeholder toast "Download isn't built yet" (Will, Oct 18) until there's a real export · Open. Built as a toast
+
