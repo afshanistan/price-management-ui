@@ -48,6 +48,9 @@ export function ResultsPanel({ items, query, selectedKeys, onSelect, onReselect,
         // a row kept the bold from the first letter typed ("C" of Coca-Cola for "coca cola").
         dependencies={[query]}
         selectionMode="multiple"
+        // Escape belongs to the search (it clears the query); React Aria's default would also clear
+        // the selection, which here reads as "re-picked" vendors (found in the Oct 18 pressure test).
+        escapeKeyBehavior="none"
         selectedKeys={selectedKeys}
         onSelectionChange={handleSelectionChange}
         className="results-panel__list"

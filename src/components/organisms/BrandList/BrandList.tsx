@@ -90,6 +90,9 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
       ref={listRef}
       aria-label="Brands"
       selectionMode="multiple"
+      // Escape belongs to the search (it clears the query). React Aria's default would also clear
+      // every selected brand, with no undo (found in the Oct 18 pressure test).
+      escapeKeyBehavior="none"
       selectedKeys={selectedIds}
       onSelectionChange={handleSelectionChange}
       className="brand-list__list"

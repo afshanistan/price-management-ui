@@ -97,8 +97,12 @@ export const FlowBrands: Story = {
     await userEvent.keyboard('{Enter}')
     await expect(await canvas.findByRole('button', { name: 'Remove Truvia' })).toBeInTheDocument()
     await expect(status()).toHaveTextContent('Truvia added')
-    // Esc clears the search; Tab reaches the first select all; Space selects the whole vendor.
+    // Esc clears the search, and only the search: a second Esc on the empty field keeps the picks
+    // (React Aria's default would clear every selected brand; Oct 18 pressure test).
     await userEvent.keyboard('{Escape}')
+    await userEvent.keyboard('{Escape}')
+    await expect(canvas.getByRole('button', { name: 'Remove Truvia' })).toBeInTheDocument()
+    // Tab reaches the first select all; Space selects the whole vendor.
     await userEvent.tab()
     await expect(canvas.getByRole('checkbox', { name: 'Select all Cargill brands' })).toHaveFocus()
     await userEvent.keyboard(' ')
