@@ -34,6 +34,32 @@
   }
 }
 
+/* The groups inside a card enter one stagger apart. On the first page load they rise in (base, 35ms
+   apart); on a step change (WizardLayout sets data-arrival="step") they fade in over the page duration,
+   60ms apart, while the content slides in from the travel side (stepper review B). */
+:root {
+  --enter-duration: var(--motion-duration-base);
+  --enter-stagger: var(--motion-stagger);
+}
+
+.wizard-layout__card[data-arrival='step'] {
+  --enter-duration: var(--motion-duration-page);
+  --enter-stagger: var(--motion-stagger-page);
+}
+
+.wizard-layout__card[data-arrival='step']
+  :is(
+    .select-vendors-card > *,
+    .select-brands-card__main > .card-header,
+    .select-brands-card__directory,
+    .select-brands-card > .selected-brands-panel,
+    .global-presets-card > .card-header,
+    .global-presets-card__grid,
+    .review-card > :is(.card-header, .review-card__strip, .review-card__scope, .review-card__section)
+  ) {
+  animation-name: motion-fade-in;
+}
+
 /* backwards, not both: each holds its start state through its delay, then lets go when it ends.
    Holding the end state would keep every group on its own layer, and the later selected area
    would paint over the search's Results panel (docs/bugs.md). */
@@ -42,19 +68,19 @@
 }
 
 .wizard-layout__card .select-vendors-card > :is(.card-header, .select-vendors-card__search, .select-vendors-card__divider, .select-vendors-card__selected) {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+  animation: motion-enter var(--enter-duration) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .select-vendors-card > .card-header {
-  animation-delay: var(--motion-stagger);
+  animation-delay: var(--enter-stagger);
 }
 
 .wizard-layout__card .select-vendors-card > .select-vendors-card__search {
-  animation-delay: calc(var(--motion-stagger) * 2);
+  animation-delay: calc(var(--enter-stagger) * 2);
 }
 
 .wizard-layout__card .select-vendors-card > :is(.select-vendors-card__divider, .select-vendors-card__selected) {
-  animation-delay: calc(var(--motion-stagger) * 3);
+  animation-delay: calc(var(--enter-stagger) * 3);
 }
 
 /* Step 2 (step 2 design review, Oct 19): the same three groups, one stagger apart: header,
@@ -62,51 +88,51 @@
 .wizard-layout__card .select-brands-card__main > .card-header,
 .wizard-layout__card .select-brands-card__directory,
 .wizard-layout__card .select-brands-card > .selected-brands-panel {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+  animation: motion-enter var(--enter-duration) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .select-brands-card__main > .card-header {
-  animation-delay: var(--motion-stagger);
+  animation-delay: var(--enter-stagger);
 }
 
 .wizard-layout__card .select-brands-card__directory {
-  animation-delay: calc(var(--motion-stagger) * 2);
+  animation-delay: calc(var(--enter-stagger) * 2);
 }
 
 .wizard-layout__card .select-brands-card > .selected-brands-panel {
-  animation-delay: calc(var(--motion-stagger) * 3);
+  animation-delay: calc(var(--enter-stagger) * 3);
 }
 
 /* Step 3 (Oct 19): header, then the three preset columns together (at most three groups after the card). */
 .wizard-layout__card .global-presets-card > .card-header,
 .wizard-layout__card .global-presets-card__grid {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+  animation: motion-enter var(--enter-duration) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .global-presets-card > .card-header {
-  animation-delay: var(--motion-stagger);
+  animation-delay: var(--enter-stagger);
 }
 
 .wizard-layout__card .global-presets-card__grid {
-  animation-delay: calc(var(--motion-stagger) * 2);
+  animation-delay: calc(var(--enter-stagger) * 2);
 }
 
 /* Step 4 (Review motion pass, Oct 19): header, the summary strip, then the lists and presets
    together (at most three groups after the card). */
 .wizard-layout__card .review-card > :is(.card-header, .review-card__strip, .review-card__scope, .review-card__section) {
-  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+  animation: motion-enter var(--enter-duration) var(--motion-ease-out) backwards;
 }
 
 .wizard-layout__card .review-card > .card-header {
-  animation-delay: var(--motion-stagger);
+  animation-delay: var(--enter-stagger);
 }
 
 .wizard-layout__card .review-card > .review-card__strip {
-  animation-delay: calc(var(--motion-stagger) * 2);
+  animation-delay: calc(var(--enter-stagger) * 2);
 }
 
 .wizard-layout__card .review-card > :is(.review-card__scope, .review-card__section) {
-  animation-delay: calc(var(--motion-stagger) * 3);
+  animation-delay: calc(var(--enter-stagger) * 3);
 }
 
 /* The two citron checks pop in once the strip has landed, one stagger apart: step 2's check pop
@@ -120,11 +146,11 @@
 
 .wizard-layout__card .review-card > .review-card__strip .summary-stat__check {
   animation: motion-pop var(--motion-duration-fast) var(--motion-ease-out) backwards;
-  animation-delay: calc(var(--motion-stagger) * 2 + var(--motion-duration-base));
+  animation-delay: calc(var(--enter-stagger) * 2 + var(--enter-duration));
 }
 
 .wizard-layout__card .review-card > .review-card__strip > :nth-child(2) .summary-stat__check {
-  animation-delay: calc(var(--motion-stagger) * 3 + var(--motion-duration-base));
+  animation-delay: calc(var(--enter-stagger) * 3 + var(--enter-duration));
 }
 
 /* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).

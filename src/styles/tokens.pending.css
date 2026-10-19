@@ -26,6 +26,9 @@
   --motion-duration-layout: 225ms;
   --motion-duration-highlight: 1000ms;
   --motion-stagger: 35ms;
+  /* figma-sync: "Motion tokens: page" (stepper review B, Oct 19). A step's content entering. */
+  --motion-duration-page: 300ms;
+  --motion-stagger-page: 60ms;
   --motion-ease-out: cubic-bezier(0.2, 0, 0, 1);
   --motion-ease-in: cubic-bezier(0.4, 0, 1, 1);
   --motion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
@@ -52,6 +55,9 @@
 }
 
 [data-mode="on-brand"] {
+  /* figma-sync: "--stroke-fuse-tip" (stepper review, Oct 19). The fuse's bright leading tip, the
+     spec's "neon core": Citron/100. The stepper only lives on brand. */
+  --stroke-fuse-tip: var(--color-citron-100);
   --scroll-shadow: color-mix(in srgb, var(--color-base-black) 30%, transparent);
 }
 

@@ -54,16 +54,42 @@
   flex-direction: column;
 }
 
-.wizard-layout__card > :not(.wizard-layout__toast) {
+/* The card's surface, drawn once by the layout so it stays put while the content moves between
+   steps (stepper review). Its height follows the card: the whole frame, or step 3's hugging content
+   (WizardLayout.tsx eases it). The same look every card has on its own. */
+.wizard-layout__surface {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 100%;
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-16);
+  background: var(--surface-card);
+  box-shadow: var(--elevation-stage-card);
+}
+
+/* One step's content, over the surface. It moves on a step change; the surface doesn't. */
+.wizard-layout__content {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The card fills the frame and its content scrolls inside. Its own border and fill are see-through
+   here (the surface draws them), so nothing is drawn twice while it moves. */
+.wizard-layout__content > * {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
-  box-shadow: var(--elevation-stage-card);
+  border-color: transparent;
+  background: transparent;
 }
 
 /* Hug (step 3): the card takes its content's height at the top of the frame; the rest of the 644 is
    page surface, so the footer stays where it is on every step. */
-.wizard-layout__card[data-fit='hug'] > :not(.wizard-layout__toast) {
+.wizard-layout__card[data-fit='hug'] > .wizard-layout__content,
+.wizard-layout__card[data-fit='hug'] > .wizard-layout__content > * {
   flex: none;
 }
 

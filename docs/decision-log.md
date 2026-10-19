@@ -705,6 +705,18 @@ From the step 4 review (M1–M8). Same vocabulary as steps 1–3: fades, small s
 
 Rejected: summary numbers counting up (about 400ms, reads like a dashboard; the check pop is enough). Nothing extra on Edit buttons, sticky labels or the blocked trash. The Download finale waits for the stepper review.
 
+
+## Oct 19 · Stepper and step transition
+
+From the stepper review (`docs/reviews/stepper-review.md`, A–F). Will: today's transitions felt too fast (200ms, 35ms stagger, no exit).
+
+- **The fuse, as the spec draws it** (revised Oct 19): on a first-time Next the old ring resolves and its check draws on, one 2px citron stroke runs down the line and wraps the next node clockwise from 9 o'clock, then the glow blooms once and the label goes bold. A complete line is **2px** citron with its glow, the same as the stroke that draws it (Will: the 2 → 4 thickening flickered at the handoff and added little; color and glow already say done). **1200ms by default**, with 2000 to compare in Storybook (2s on every Next gets long). Back, or Next into a step already reached, just moves the ring.
+- **Later steps stay complete when you go back** (Figma 02e): the app remembers the furthest step reached.
+- **The card stays; its content moves.** The layout draws the card's surface once; the old content fades and slides 24px toward where you came from (~200ms), then the new one comes in from the travel side (300ms) with its groups fading in 60ms apart. About half a second, while the fuse keeps running in the stepper: you never wait on it. Step 3's shorter card: the surface eases its height; the footer never moves.
+- **Bold current label**, as Figma (closes the Bold vs SemiBold question).
+
+Held: the Download finale (the fuse running the whole line), while Download is a placeholder. Rejected: tuning the old entrance on its own (it would have been retimed again with the exit).
+
 ---
 
 ## Build plan

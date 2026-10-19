@@ -43,7 +43,7 @@
 
 /* In the app's fixed 644 frame, Review never scrolls as a whole: only its lists do (Will, R18).
    With 16px of room nothing is cut; this guards against a browser rounding a pixel taller. */
-.wizard-layout__card > .review-card:not(.wizard-layout__toast) {
+.wizard-layout__content > .review-card {
   overflow: hidden;
 }
 

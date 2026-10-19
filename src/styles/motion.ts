@@ -8,10 +8,13 @@ export const duration = {
   fast: 0.15,
   base: 0.2,
   layout: 0.225,
+  /** A step's content entering (stepper review B). */
+  page: 0.3,
   highlight: 1,
 } as const
 
 export const stagger = 0.035
+export const staggerPage = 0.06
 
 export const ease = {
   /** Entrances and state changes: the system standard. */

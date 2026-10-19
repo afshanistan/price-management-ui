@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { GlobalPresetsCard } from './components/cards/GlobalPresetsCard'
 import { ReviewTemplateCard, type ReviewEditStep } from './components/cards/ReviewTemplateCard'
 import { SelectBrandsCard } from './components/cards/SelectBrandsCard'
@@ -30,16 +30,23 @@ const editTarget: Record<ReviewEditStep, Step> = { vendors: 1, brands: 2, preset
   Picks are kept when moving between steps. Vendors are only edited on step 1: going back, removing
   a vendor and returning drops that vendor's brand picks (Will, Oct 18). Review's Edit jumps to that
   step and the normal wizard carries on from there (no special return to Review).
-  TODO(step-transition): Next / Back swap the card instantly; the stepper charge-up and card
-  transition come later (Stepper.tsx).
+  Step transition (stepper review, Oct 19): the stepper remembers the furthest step reached (Edit keeps
+  later steps complete) and plays its charge-up on a first-time Next; the layout moves the card content
+  in the direction of travel and focuses the new heading.
 */
 function App() {
-  const [step, setStep] = useState<Step>(1)
+  const [step, setStepState] = useState<Step>(1)
+  const [reached, setReached] = useState<Step>(1)
+  const [direction, setDirection] = useState<1 | -1>(1)
+  function setStep(next: Step) {
+    setDirection(next > step ? 1 : -1)
+    setReached((r) => (next > r ? next : r))
+    setStepState(next)
+  }
   const [selectedVendors, setSelectedVendors] = useState<Vendor[]>([])
   const [selectedBrandIds, setSelectedBrandIds] = useState<Set<string>>(() => new Set())
   const [presets, setPresets] = useState<GlobalPresetsValue>(initialPresets)
   const [toast, setToast] = useState<ToastMessage | null>(null)
-  const isFirstRender = useRef(true)
   const today = useMemo(() => currentDay(), [])
 
   // Step 2 only offers the brands of the vendors picked on step 1.
@@ -54,12 +61,7 @@ function App() {
   useEffect(() => {
     document.title = titles[step]
     setToast(null)
-    // On a step change (not the first load), focus the new card's heading so it's announced.
-    if (isFirstRender.current) {
-      isFirstRender.current = false
-      return
-    }
-    document.querySelector<HTMLElement>('main h1')?.focus()
+    // The layout focuses the new card's heading once the old card has left (WizardLayout).
   }, [step])
 
   function goToBrands() {
@@ -109,11 +111,13 @@ function App() {
   return (
     <WizardLayout
       header={<MainNavigation variant="focus" onExit={() => {}} />}
-      stepper={<Stepper currentStep={step} />}
+      stepper={<Stepper currentStep={step} reachedStep={reached} />}
       footer={footer}
       toast={<ToastRegion toast={toast} onDismiss={() => setToast(null)} />}
       // Step 3 is a short form: its card hugs. The list steps keep the fixed frame (Oct 19).
       cardFit={step === 3 ? 'hug' : 'fixed'}
+      stepKey={step}
+      direction={direction}
     >
       {step === 1 && <SelectVendorsCard vendors={appVendors} selected={selectedVendors} onChange={setSelectedVendors} />}
       {step === 2 && (

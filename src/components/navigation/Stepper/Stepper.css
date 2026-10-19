@@ -3,6 +3,8 @@
    States come from currentStep, as data-state (node, label) and data-line (the line to the step's left). */
 
 .stepper {
+  /* The fuse layer sits over the node row. */
+  position: relative;
   width: var(--layout-content-width);
   max-width: 100%;
 }
@@ -29,6 +31,9 @@
 
 .stepper__step[data-line]::before {
   content: '';
+  /* Only the glow eases in. The color switches at once: as the fuse finishes, the citron line under it
+     is identical to the stroke on top, so nothing visibly swaps (an eased plum → citron flickered). */
+  transition: box-shadow var(--motion-duration-base) var(--motion-ease-out);
   position: absolute;
   right: 50%;
   width: 100%;
@@ -39,8 +44,10 @@
   border-radius: 0;
 }
 
+/* 2px, like the track and the fuse that draws it: color and glow say "done" (stepper review, Will:
+   the 2 → 4 thickening flickered and added little). Figma's Stepper line Complete is 4px: queued. */
 .stepper__step[data-line='complete']::before {
-  height: var(--space-4);
+  height: var(--border-width-2);
   background: var(--fill-status-complete);
   box-shadow: var(--glow-complete);
 }
@@ -61,11 +68,17 @@
   width: var(--size-20);
   height: var(--size-20);
   border-radius: var(--radius-full);
+  /* The ring resolving to the complete node, and the ring moving on Back. */
+  transition:
+    background-color var(--motion-duration-base) var(--motion-ease-out),
+    border-color var(--motion-duration-base) var(--motion-ease-out),
+    box-shadow var(--motion-duration-base) var(--motion-ease-out);
 }
 
-/* The center dot for In progress and Not started. */
+/* The center dot for In progress and Not started. Its color eases as the fuse arrives. */
 .stepper__node::after {
   content: '';
+  transition: background-color var(--motion-duration-base) var(--motion-ease-out);
   width: var(--space-8);
   height: var(--space-8);
   border-radius: var(--radius-full);
@@ -108,3 +121,51 @@
 [data-state='not-started'] > .stepper__label {
   color: var(--text-stepper-upcoming);
 }
+
+[data-state] > .stepper__label {
+  transition: color var(--motion-duration-base) var(--motion-ease-out);
+}
+
+/* ---------- The fuse (charge-up on a first-time Next; Stepper.tsx) ---------- */
+
+/* The finished step's check draws on over the first 12.5% of the fuse. */
+.stepper__step[data-check-draw] .stepper__check path {
+  stroke-dasharray: 1;
+  animation: stepper-check-draw calc(var(--fuse-duration) * 0.125) var(--motion-ease-out) backwards;
+}
+
+@keyframes stepper-check-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+
+.stepper__fuse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Over the nodes and lines; decorative and never in the way. */
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.stepper__fuse path {
+  fill: none;
+  stroke-width: var(--border-width-2);
+}
+
+.stepper__fuse-stroke {
+  stroke: var(--fill-status-complete);
+}
+
+.stepper__fuse-tip {
+  stroke: var(--stroke-fuse-tip);
+  stroke-linecap: round;
+}
+
+.stepper__fuse-bloom {
+  stroke: var(--fill-status-complete);
+  stroke-width: var(--space-6);
+}
+
