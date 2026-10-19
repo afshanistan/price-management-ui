@@ -89,6 +89,35 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 - Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
 - **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
 
+## Start here (next session, after Oct 18)
+
+**Where things stand.** The app runs all four steps (`npm run dev` → http://localhost:5173) on 60 real mock vendors and 551 real brands. Storybook: `npm run storybook` (6006). Tests: `npm run test-storybook` (167 passing; commit only when all pass). Everything is committed on `main`; nothing pushed. Will's working style: say what you'll do before doing it; after each build comes a design review (data → mock data → pressure test → commit).
+
+**1. Decide the steps 2–4 pressure-test findings** (`docs/pressure-tests/steps-2-4.md`, screenshots in `step-2-4/`; also in `open-questions.md`). Each is built with a default for now:
+1. Coverage strip doesn't scale: 12 vendors = 24px tiles (wrap / scroll / one summary line / drop it). The big one.
+2. "No Conagra Brands brands yet": inline empty copy doubles "Brands".
+3. Same brand under two vendors (Sprite under both Coca-Colas).
+4. Review's Brands list: 122 brands in a ~5-row window (group by vendor / counts only / taller / keep).
+5. Review vendor rows: still the wordmark tile and a bare ESN (match step 1?).
+6. Long vendor names cut off in Review's Brands list.
+Plus: Review order (built A–Z; spec said step 1 order) and Download (placeholder toast).
+
+**2. Motion for steps 3–4:** pick from `docs/motion-options-steps-3-4.md` (nothing built). The step-to-step transition (stepper charge-up, card slide) is still deferred: `TODO(step-transition)`.
+
+**3. Small open items** (all in `open-questions.md` unless noted):
+- Native name tooltip on result rows and cards (browser `title`): recommended removing it from the result rows (talked through, not decided or logged yet).
+- Coverage tile logo: ink color, height, overlap with the status mark.
+- ESN match bold is hard to see (monospace 500 → 600).
+- Toast: visual design and placement (steps 1, 2 and 4).
+- No "Clear all" in the Selected brands panel (Oct 16 note vs current design).
+- Logo shape cutoff: logos under 1.5:1 hidden in cards; 1.5–2.2:1 ones look small (raise to 2:1?).
+- Too-wide / padded logo files to edit or replace: `docs/vendor-logo-sources.md` → "Too wide for the tiles".
+- Waiting on Figma first: result count in the Results panel; long names wrap to two lines in the Selected item card.
+
+**4. Figma reconcile pass** (`docs/figma-sync.md`, open items): re-export `tokens.css` (motion tokens, Body/LG Strong, size/128, layout card and stage heights); Result row without a Vendor logo; ESN format "ESN-########"; no helper text on the vendor search; Input focus = 2px border, no ring; Text field label stays text-heading on focus; tall-logo rule in the Selected item card; stale descriptions (Content=Brand logo, the logo reference frame name). Then re-export the specs that are out of date (Select vendors card, Vendor logo, Selected item card, Vendor coverage tile, Results panel).
+
+**Known, not urgent:** `npm run lint` has pre-existing errors in three story files (GroupHeader, SelectionSummary, ResultsPanel: `useState` inside an anonymous `render`).
+
 ## Status (Oct 18, evening)
 - **The app runs all four steps** (`npm run dev`) on 60 real mock vendors and 551 brands: vendors → brands → presets → review, with picks kept, Edit from Review, page titles and heading focus. Download is a placeholder toast. Step-to-step motion is deferred (`TODO(step-transition)`).
 - **Motion built for steps 1–2** (decision log "Step 1 motion", "Step 2 motion"); options for steps 3–4 in `docs/motion-options-steps-3-4.md`.
