@@ -24,6 +24,8 @@
   min-height: 0;
   max-height: 100%;
   border: var(--border-width-1) solid var(--border-structural);
+  /* A 3px teal top edge: the Selected brands panel's plum edge, in the action color (Oct 19). */
+  border-top: var(--border-width-3) solid var(--border-action-strong);
   border-radius: var(--radius-8);
   background: var(--surface-card);
   overflow-y: auto;
@@ -31,6 +33,53 @@
      so arrowing up never hides the active row under it (WCAG 2.4.11). */
   scroll-padding-top: var(--size-40);
   outline: none;
+}
+
+/* Hairline between brand rows (not under the header, which has its own rule), Oct 19.
+   Chosen over zebra stripes: stripes reshuffle as search filters rows, and Neutral/100 matched
+   the Teal/100 hover's lightness (1.01:1), so hover would vanish on every other row. */
+.brand-list__group .result-row + .result-row {
+  border-top: var(--border-width-1) solid var(--border-structural);
+}
+
+/* Opening and closing a group (Oct 19): each row grows from 0 to its 40px and fades in (layout
+   duration, ease-out), or shrinks away (fast, ease-in) before it's removed. */
+.brand-list__group--opening .result-row {
+  overflow: hidden;
+  animation: brand-list-row-open var(--motion-duration-layout) var(--motion-ease-out);
+}
+
+.brand-list__group--closing .result-row {
+  overflow: hidden;
+  pointer-events: none;
+  animation: brand-list-row-close var(--motion-duration-fast) var(--motion-ease-in) forwards;
+}
+
+@keyframes brand-list-row-open {
+  from {
+    min-height: 0;
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    min-height: var(--size-40);
+    height: var(--size-40);
+    opacity: 1;
+  }
+}
+
+@keyframes brand-list-row-close {
+  from {
+    min-height: var(--size-40);
+    height: var(--size-40);
+    opacity: 1;
+  }
+  to {
+    min-height: 0;
+    height: 0;
+    opacity: 0;
+    border-top-width: 0;
+  }
 }
 
 /* Sticky while its brands scroll under it. */

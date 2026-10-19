@@ -597,6 +597,18 @@ From the step 2 design review. Will: the header blends into the list, and the se
 
 **Not changed:** the Selected brands panel's vendor labels (plain text, not controls), so the two columns no longer share one header style, on purpose.
 
+## Oct 19 · Brand list: denser rows, dividers, a teal edge, eased open and close
+
+From the step 2 design review (items 8–11 in `docs/reviews/step-2-design-review.md`).
+
+**Brand rows are 40px, not 48.** Will: "a scooch too much." 40 is about 17% shorter (no 38 token) and matches the group header. Passes WCAG 2.5.8 (24px minimum); under the 44px AAA / platform touch guidance, accepted for a laptop tool. About two more brands fit in view. Step 1's vendor rows (Result row, Single) stay 48.
+
+**Hairline dividers between rows, not zebra stripes.** Will wanted the rows to read as a series. Rejected: Neutral/100 stripes (the same lightness as the Teal/100 hover, 1.01:1, so hover would vanish on every other row; stripes also reshuffle as search filters rows and add a third resting fill to an all-teal pane), Neutral/50 stripes (works, but still reshuffles). 1px `border-structural` between rows, none under the header.
+
+**A 3px teal top edge on the Brand list**, the Selected brands panel's plum edge in the action color: `--border-action-strong` (Teal/700; Teal/300 on brand), the teal partner of `--border-brand-strong`. Watch: with the first group header right under it, the top of the list is edge + teal bar + rule.
+
+**Groups ease open and closed.** Open: rows grow to 40px and fade in, layout duration (225ms), ease-out. Close: they shrink away, fast (150ms), ease-in, then leave. Will asked for ease-out; closing uses the system's exit curve so it feels snappier. Search opens groups instantly (it changes on every keystroke); reduced motion is instant. The caret turns at once.
+
 ---
 
 ## Build plan

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { expect, userEvent, within } from 'storybook/test'
+import { expect, userEvent, waitFor, within } from 'storybook/test'
 import { Autocomplete } from 'react-aria-components'
 import { TextField } from '../../molecules/TextField'
 import { brandsByVendor, selectedSample, step2Vendors } from '../../../data/brandSamples'
@@ -120,7 +120,8 @@ export const AllClosed: Story = {
     await expect(toggle).toHaveAttribute('aria-expanded', 'true')
     await userEvent.click(toggle)
     await expect(toggle).toHaveAttribute('aria-expanded', 'false')
-    await expect(canvas.queryAllByRole('option')).toHaveLength(0)
+    // The rows shrink away (150ms) before they leave.
+    await waitFor(() => expect(canvas.queryAllByRole('option')).toHaveLength(0))
     await expect(canvas.queryByText(/No brands match/)).not.toBeInTheDocument()
   },
   parameters: { docs: { description: { story: 'Automated: closes the open group. Closed headers read as a summary: each vendor and its count.' } } },

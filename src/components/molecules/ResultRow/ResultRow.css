@@ -66,6 +66,9 @@
 /* ---------- Multi (brand list): checkbox box, square corners (docs/open-questions.md) ---------- */
 
 .result-row--multi {
+  /* 40, not 48 (step 2 design review, Oct 19): denser list, more brands in view. Passes WCAG 2.5.8
+     (24px); under the 44px touch guidance, fine for a laptop tool. Step 1's single rows stay 48. */
+  min-height: var(--size-40);
   border-radius: 0;
 }
 

@@ -11,6 +11,10 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 | 5 | Group header: the bar blends into the list | **Built Oct 19**: Teal/100 + dark teal rule (in item 7) |
 | 6 | Group header: name size and color | **Built Oct 19**: Label/XL (15/22 medium; 16 semibold was "a tick too big", 16 medium looked the same), `text-heading` (in item 7) |
 | 7 | Group header layout: name + count left; ☐ Select all + caret right | **Built and committed Oct 19** at Will's request. Decision log "Group header: a teal bar that opens and closes"; Figma queue in `docs/figma-sync.md` |
+| 8 | Brand rows a scooch too tall (−20%) | **Built Oct 19**: 40px (Brand list only; step 1 stays 48) |
+| 9 | Rows blend together: every other row Neutral/100 | **Built Oct 19 as hairline dividers** (stripes rejected: hover vanished on Neutral/100) |
+| 10 | Open/close is instant: ease it | **Built Oct 19**: open 225ms ease-out, close 150ms ease-in; search and reduced motion instant |
+| 11 | Teal accent edge on the Brand list, like the panel's plum edge | **Built Oct 19**: 3px `--border-action-strong` (Teal/700) |
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
 

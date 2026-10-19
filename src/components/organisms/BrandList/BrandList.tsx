@@ -1,7 +1,9 @@
-import { useRef, useState, type SyntheticEvent } from 'react'
+import { useEffect, useRef, useState, type SyntheticEvent } from 'react'
 import { Button, Header, ListBox, ListBoxSection, type Selection } from 'react-aria-components'
 import type { Brand } from '../../../data/brands'
 import type { Vendor } from '../../../data/vendors'
+import { useReducedMotionSetting } from '../../../foundations/useReducedMotionSetting'
+import { duration } from '../../../styles/motion'
 import { Checkbox, type CheckboxChecked } from '../../atoms/Checkbox'
 import { GroupHeader } from '../../molecules/GroupHeader'
 import { ResultRow } from '../../molecules/ResultRow'
@@ -56,18 +58,60 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
     const first = groups.find((group) => group.selectedCount === 0) ?? groups[0]
     return new Set(first ? [first.vendor.id] : [])
   })
+  // Opening and closing ease (Oct 19): open = layout duration, ease-out; close = fast, ease-in, and the
+  // rows stay mounted until they've shrunk away. Search opens groups instantly (it changes on every
+  // keystroke), and reduced motion skips it. The caret and aria-expanded flip at once.
+  const reduced = useReducedMotionSetting()
+  const [moving, setMoving] = useState<Record<string, 'opening' | 'closing'>>({})
+  const timers = useRef(new Map<string, number>())
+  useEffect(() => {
+    const pending = timers.current
+    return () => pending.forEach((timer) => window.clearTimeout(timer))
+  }, [])
   const isOpen = (vendorId: string) => isSearching || open.has(vendorId)
+  const isExpanded = (vendorId: string) => isSearching || (open.has(vendorId) && moving[vendorId] !== 'closing')
   // Every group closed (and no search): the list holds no options, only closed headers. Screen readers
   // get those from the real toggles above (name, count, collapsed), so the empty listbox is hidden from
   // them: a listbox with no options fails axe aria-required-children.
   const allClosed = !isSearching && groups.every((group) => !open.has(group.vendor.id))
-  const toggle = (vendorId: string) =>
-    setOpen((prev) => {
-      const next = new Set(prev)
-      if (next.has(vendorId)) next.delete(vendorId)
-      else next.add(vendorId)
-      return next
-    })
+  function settle(vendorId: string, after: number, then?: () => void) {
+    window.clearTimeout(timers.current.get(vendorId))
+    timers.current.set(
+      vendorId,
+      window.setTimeout(() => {
+        timers.current.delete(vendorId)
+        then?.()
+        setMoving((prev) => {
+          const next = { ...prev }
+          delete next[vendorId]
+          return next
+        })
+      }, after),
+    )
+  }
+
+  function toggle(vendorId: string) {
+    const closing = isExpanded(vendorId)
+    const close = () =>
+      setOpen((prev) => {
+        const next = new Set(prev)
+        next.delete(vendorId)
+        return next
+      })
+    if (reduced) {
+      if (closing) close()
+      else setOpen((prev) => new Set(prev).add(vendorId))
+      return
+    }
+    if (closing) {
+      setMoving((prev) => ({ ...prev, [vendorId]: 'closing' }))
+      settle(vendorId, duration.fast * 1000, close)
+    } else {
+      setOpen((prev) => new Set(prev).add(vendorId))
+      setMoving((prev) => ({ ...prev, [vendorId]: 'opening' }))
+      settle(vendorId, duration.layout * 1000)
+    }
+  }
 
   const selectAllOf = (group: BrandListGroup) => {
     const visibleSelected = group.brands.filter((brand) => selectedIds.has(brand.id)).length
@@ -98,7 +142,7 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
             <div key={vendor.id}>
               {/* Disabled while searching: every group with matches is open then. */}
               <Button
-                aria-expanded={isOpen(vendor.id)}
+                aria-expanded={isExpanded(vendor.id)}
                 isDisabled={isSearching}
                 onPress={() => toggle(vendor.id)}
                 onFocusChange={(isFocused) => (isFocused ? showGroup(vendor.id, 'toggle') : setFocused(null))}
@@ -133,7 +177,10 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
       {groups.map((group) => {
         const { vendor, brands, selectedCount, totalCount } = group
         const { checked, label, text } = selectAllOf(group)
-        const expanded = isOpen(vendor.id)
+        const expanded = isExpanded(vendor.id)
+        // Rows render while open or still closing; the class drives the ease.
+        const showRows = isOpen(vendor.id)
+        const motionState = isSearching ? undefined : moving[vendor.id]
         const isFocused = (control: 'toggle' | 'selectAll') => focused?.vendorId === vendor.id && focused.control === control
 
         return (
@@ -142,7 +189,7 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
             id={vendor.id}
             // "Cargill, 4 of 5 brands selected".
             aria-label={`${vendor.name}, ${selectedCount} of ${totalCount} brands selected`}
-            className="brand-list__group"
+            className={motionState ? `brand-list__group brand-list__group--${motionState}` : 'brand-list__group'}
           >
             <Header className="brand-list__header">
               <div
@@ -173,7 +220,7 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
               />
               </div>
             </Header>
-            {expanded && brands.map((brand) => (
+            {showRows && brands.map((brand) => (
               <ResultRow key={brand.id} id={brand.id} select="multi" name={brand.name} vendor={vendor.name} skuCount={brand.skuCount} query={query} />
             ))}
           </ListBoxSection>

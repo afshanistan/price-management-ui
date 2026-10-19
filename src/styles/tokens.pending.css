@@ -40,12 +40,15 @@
   --fill-group-header: var(--color-teal-100);
   --fill-group-header-hover: var(--color-teal-200);
   --border-group-header: var(--color-teal-700);
+  /* figma-sync: "--border-action-strong" (Brand list top edge, Oct 19): teal partner of --border-brand-strong. */
+  --border-action-strong: var(--color-teal-700);
 }
 
 [data-mode="on-brand"] {
   --fill-group-header: var(--color-teal-900);
   --fill-group-header-hover: var(--color-teal-800);
   --border-group-header: var(--color-teal-300);
+  --border-action-strong: var(--color-teal-300);
 }
 
 .type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */
