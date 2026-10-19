@@ -24,8 +24,7 @@ export function GlobalPresetsCard({ value, onChange, today, className }: GlobalP
 
   return (
     <div className={className ? `global-presets-card ${className}` : 'global-presets-card'}>
-      {/* Reads "Add pricing defaults, optional". */}
-      <CardHeader title="Add pricing defaults" pictogram="presets" tag="Optional" />
+      <CardHeader title="Add pricing defaults" pictogram="presets" suffix="(optional)" />
       {/* Tab order: Effective date → calendar button → Currency → Pricing model. */}
       <div className="global-presets-card__grid">
         <DatesPreset

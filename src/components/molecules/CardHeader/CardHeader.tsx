@@ -1,6 +1,5 @@
 import type { PictogramType } from '../../atoms/Pictogram'
 import { IconTile } from '../IconTile'
-import { Tag } from '../Tag'
 import './CardHeader.css'
 
 export interface CardHeaderProps {
@@ -10,12 +9,15 @@ export interface CardHeaderProps {
   pictogram: PictogramType
   /** Omit to hide (Figma "Show description"). */
   description?: string
-  /** e.g. "Optional" on step 3 (Figma "Show tag"). Reads as part of the H1. */
-  tag?: string
+  /**
+   * e.g. "(optional)" on step 3: part of the title line, in the title's size but regular weight and
+   * subtle text, so it can't get lost (Oct 19; replaced the Optional tag, Figma "Show tag").
+   */
+  suffix?: string
   className?: string
 }
 
-export function CardHeader({ title, pictogram, description, tag, className }: CardHeaderProps) {
+export function CardHeader({ title, pictogram, description, suffix, className }: CardHeaderProps) {
   return (
     <div className={className ? `card-header ${className}` : 'card-header'}>
       <IconTile pictogram={pictogram} size={48} />
@@ -23,13 +25,8 @@ export function CardHeader({ title, pictogram, description, tag, className }: Ca
         {/* Focusable by script only: the wizard moves focus here on a step change, so it's announced. */}
         <h1 tabIndex={-1} className="card-header__title">
           {title}
-          {/* The hidden comma makes it read "Add pricing defaults, optional". */}
-          {tag && (
-            <>
-              <span className="visually-hidden">, </span>
-              <Tag>{tag}</Tag>
-            </>
-          )}
+          {/* Reads "Add pricing defaults (optional)". */}
+          {suffix && <span className="card-header__suffix">{suffix}</span>}
         </h1>
         {description && <p className="card-header__description">{description}</p>}
       </div>

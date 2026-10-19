@@ -45,11 +45,11 @@ export const WithDescription: Story = {
   },
 }
 
-export const WithTag: Story = {
-  name: 'With tag',
+export const WithSuffix: Story = {
+  name: 'With "(optional)"',
   args: {
     title: 'Add pricing defaults',
     pictogram: 'presets',
-    tag: 'Optional',
+    suffix: '(optional)',
   },
 }

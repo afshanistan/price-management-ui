@@ -20,12 +20,19 @@
   --radio-border: var(--fill-primary-default);
 }
 
-.radio-circle[data-checked]::after {
+.radio-circle::after {
   content: '';
   width: var(--space-8);
   height: var(--space-8);
   border-radius: var(--radius-full);
   background: var(--icon-on-primary);
+  /* The dot grows in when picked (fast, ease-out; off under reduced motion, where the duration is 0). Oct 19. */
+  transform: scale(0);
+  transition: transform var(--motion-duration) var(--motion-ease);
+}
+
+.radio-circle[data-checked]::after {
+  transform: scale(1);
 }
 
 .radio-circle[data-state='hover'] {

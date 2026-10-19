@@ -1,4 +1,4 @@
-import { useId, type ReactNode, type Ref } from 'react'
+import { useEffect, useId, useRef, useState, type ReactNode, type Ref } from 'react'
 import { Radio } from 'react-aria-components'
 import { RadioCircle } from '../../atoms/Radio'
 import './OptionTile.css'
@@ -16,6 +16,8 @@ export interface OptionTileProps {
   layout?: OptionTileLayout
   /** Trailing control (Custom date's calendar button). A sibling of the radio, never inside it. */
   action?: ReactNode
+  /** The label is a placeholder ("Select a date"): shown in subtle text until a real value replaces it. */
+  isPlaceholder?: boolean
   /** The tile box, e.g. to anchor the Date picker. */
   tileRef?: Ref<HTMLDivElement>
   /** Forces a state for the "All states" story only. Never set it in product code. */
@@ -28,10 +30,18 @@ export interface OptionTileProps {
   native radio + the circle + the text, all one label) and, if any, the action button beside it.
   States come from the Radio: [data-hovered], [data-pressed], [data-selected], [data-focus-visible].
 */
-export function OptionTile({ value, label, description, layout = 'stacked', action, tileRef, 'data-state': state, className }: OptionTileProps) {
+export function OptionTile({ value, label, description, layout = 'stacked', action, tileRef, isPlaceholder, 'data-state': state, className }: OptionTileProps) {
   const labelId = useId()
   const descriptionId = useId()
   const classes = ['option-tile', `option-tile--${layout}`, className].filter(Boolean).join(' ')
+  // When the label changes ("Select a date" → "Oct 22, 2026"), the text fades in (not on first render).
+  const [swap, setSwap] = useState(0)
+  const shownLabel = useRef(label)
+  useEffect(() => {
+    if (shownLabel.current === label) return
+    shownLabel.current = label
+    setSwap((n) => n + 1)
+  }, [label])
 
   return (
     <div ref={tileRef} className={classes} data-state={state}>
@@ -46,8 +56,8 @@ export function OptionTile({ value, label, description, layout = 'stacked', acti
             <span className="option-tile__slot">
               <RadioCircle checked={isSelected || isPressed || state === 'pressed'} />
             </span>
-            <span className="option-tile__text">
-              <span id={labelId} className="option-tile__label type-label-lg">
+            <span key={swap} className="option-tile__text" data-swap={swap > 0 || undefined}>
+              <span id={labelId} className="option-tile__label type-label-lg" data-placeholder={isPlaceholder || undefined}>
                 {label}
               </span>
               {description && (

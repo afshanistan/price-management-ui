@@ -10,6 +10,11 @@ export interface DatesValue {
   source: DateSource
   /** The confirmed custom date, remembered while another option is selected. */
   date: CalendarDate | null
+  /**
+   * Next month / Next quarter: the date fixed when it was picked (Will, Oct 19: relative while you
+   * build, fixed once chosen). A saved template keeps it even if opened months later.
+   */
+  fixed?: CalendarDate | null
 }
 
 export interface GlobalPresetsValue {
@@ -33,15 +38,22 @@ export interface PresetOption {
   layout?: 'stacked' | 'inline'
 }
 
+/*
+  "Decide later" replaces "No default" (step 3 design review, Oct 19): it says what skipping means,
+  the column is left to fill in per row of the downloaded file. Same tile in all three presets.
+*/
+export const decideLaterOption: PresetOption = { value: NO_DEFAULT, label: 'Decide later', description: 'Fill in per row', layout: 'inline' }
+
+/* The name leads, the code follows (Oct 19). Review still shows the code until its own review. */
 export const currencyOptions: PresetOption[] = [
-  { value: NO_DEFAULT, label: 'No default' },
-  { value: 'USD', label: 'USD', description: 'US dollar', layout: 'inline' },
-  { value: 'CAD', label: 'CAD', description: 'Canadian dollar', layout: 'inline' },
-  { value: 'MXN', label: 'MXN', description: 'Mexican peso', layout: 'inline' },
+  decideLaterOption,
+  { value: 'USD', label: 'US dollar', description: '(USD)', layout: 'inline' },
+  { value: 'CAD', label: 'Canadian dollar', description: '(CAD)', layout: 'inline' },
+  { value: 'MXN', label: 'Mexican peso', description: '(MXN)', layout: 'inline' },
 ]
 
 export const pricingModelOptions: PresetOption[] = [
-  { value: NO_DEFAULT, label: 'No default' },
+  decideLaterOption,
   { value: 'fixed-price', label: 'Fixed price' },
   { value: 'cost-plus', label: 'Cost plus' },
   { value: 'target-margin', label: 'Target margin' },
@@ -69,13 +81,15 @@ export const formatLong = (date: CalendarDate) => long.format(date.toDate(getLoc
 
 /** The effective date a value resolves to, or null for No default (and an unconfirmed custom date). */
 export function effectiveDateOf(value: DatesValue, today: CalendarDate) {
-  if (value.source === 'next-month') return nextMonth(today)
-  if (value.source === 'next-quarter') return nextQuarter(today)
+  if (value.source === 'next-month') return value.fixed ?? nextMonth(today)
+  if (value.source === 'next-quarter') return value.fixed ?? nextQuarter(today)
   if (value.source === 'custom') return value.date
   return null
 }
 
-/** How many of the three presets aren't "No default" (Review: "1 of 3"). */
+/** How many of the three presets aren't "Decide later" (Review: "1 of 3"). Custom date counts once it has a date. */
 export function presetsSetCount(value: GlobalPresetsValue) {
-  return [value.effectiveDate.source !== 'none', value.currency !== NO_DEFAULT, value.pricingModel !== NO_DEFAULT].filter(Boolean).length
+  const dates = value.effectiveDate
+  const datesSet = dates.source !== 'none' && !(dates.source === 'custom' && !dates.date)
+  return [datesSet, value.currency !== NO_DEFAULT, value.pricingModel !== NO_DEFAULT].filter(Boolean).length
 }

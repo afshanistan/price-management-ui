@@ -112,6 +112,8 @@ function App() {
       stepper={<Stepper currentStep={step} />}
       footer={footer}
       toast={<ToastRegion toast={toast} onDismiss={() => setToast(null)} />}
+      // Step 3 is a short form: its card hugs. The list steps keep the fixed frame (Oct 19).
+      cardFit={step === 3 ? 'hug' : 'fixed'}
     >
       {step === 1 && <SelectVendorsCard vendors={appVendors} selected={selectedVendors} onChange={setSelectedVendors} />}
       {step === 2 && (

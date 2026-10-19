@@ -75,24 +75,42 @@ export const FlowPresets: Story = {
     const canvas = within(canvasElement)
     // The picker renders in a portal, outside the canvas.
     const page = within(canvasElement.ownerDocument.body)
-    // Pick a currency.
-    await userEvent.click(canvas.getByText('USD'))
-    await expect(canvas.getByRole('radio', { name: 'USD' })).toBeChecked()
-    // Custom date opens the picker; Esc cancels and goes back to No default.
-    await userEvent.click(canvas.getByText('Custom date'))
+    const dialog = () => page.queryByRole('dialog', { name: 'Choose custom date' })
+    // Pick a currency: the name leads, the code follows.
+    await userEvent.click(canvas.getByText('US dollar'))
+    await expect(canvas.getByRole('radio', { name: 'US dollar' })).toBeChecked()
+    // Clicking Custom date opens the picker; Esc cancels: back to Decide later, and focus goes with it.
+    await userEvent.click(canvas.getByText('Select a date'))
     await expect(await page.findByRole('dialog', { name: 'Choose custom date' })).toBeInTheDocument()
     await userEvent.keyboard('{Escape}')
-    await waitFor(() => expect(page.queryByRole('dialog')).not.toBeInTheDocument())
-    await expect(canvas.getAllByRole('radio', { name: 'No default' })[0]).toBeChecked()
+    await waitFor(() => expect(dialog()).not.toBeInTheDocument())
+    const decideLater = canvas.getAllByRole('radio', { name: 'Decide later' })[0]
+    await expect(decideLater).toBeChecked()
+    await waitFor(() => expect(decideLater).toHaveFocus())
     // Again, then Enter on the first available day (Oct 18; today is the 17th) and OK.
-    await userEvent.click(canvas.getByText('Custom date'))
+    await userEvent.click(canvas.getByText('Select a date'))
     await page.findByRole('dialog', { name: 'Choose custom date' })
     await userEvent.keyboard('{Enter}')
     await userEvent.click(page.getByRole('button', { name: 'OK' }))
-    await waitFor(() => expect(page.queryByRole('dialog')).not.toBeInTheDocument())
-    await expect(canvas.getByRole('radio', { name: 'Custom date' })).toBeChecked()
-    await expect(canvas.getByText('Oct 18, 2026')).toBeInTheDocument()
+    await waitFor(() => expect(dialog()).not.toBeInTheDocument())
+    await expect(canvas.getByRole('radio', { name: 'Oct 18, 2026' })).toBeChecked()
     await expect(canvas.getByRole('status')).toHaveTextContent('Effective date set to October 18, 2026')
+    // Arrowing onto Custom date only selects it (no surprise popup); Enter opens the picker.
+    await userEvent.click(canvas.getByText('Nov 1, 2026'))
+    await expect(canvas.getByRole('radio', { name: 'Nov 1, 2026' })).toBeChecked()
+    await userEvent.keyboard('{ArrowDown}{ArrowDown}')
+    await expect(canvas.getByRole('radio', { name: 'Oct 18, 2026' })).toBeChecked()
+    await expect(dialog()).not.toBeInTheDocument()
+    await userEvent.keyboard('{Enter}')
+    await expect(await page.findByRole('dialog', { name: 'Choose custom date' })).toBeInTheDocument()
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(dialog()).not.toBeInTheDocument())
+    // Clicking a remembered custom date reopens the picker too.
+    await userEvent.click(canvas.getByText('Nov 1, 2026'))
+    await userEvent.click(canvas.getByText('Oct 18, 2026'))
+    await expect(await page.findByRole('dialog', { name: 'Choose custom date' })).toBeInTheDocument()
+    await userEvent.keyboard('{Escape}')
+    await waitFor(() => expect(dialog()).not.toBeInTheDocument())
   },
-  parameters: { docs: { description: { story: 'Automated: pick USD, open and cancel the date picker, then confirm Oct 18, 2026 with Enter and OK.' } } },
+  parameters: { docs: { description: { story: 'Automated: pick US dollar; open and cancel the date picker (back to Decide later, with focus); confirm Oct 18, 2026 with Enter and OK; arrow onto Custom date without opening, then Enter opens it; clicking a remembered date reopens it.' } } },
 }

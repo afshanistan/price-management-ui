@@ -6,9 +6,11 @@
   width: var(--size-36);
   height: var(--size-36);
   border-radius: var(--radius-full);
-  font: var(--type-body-md);
-  letter-spacing: var(--type-body-md-tracking);
-  color: var(--text-default);
+  /* Pickable days: Label/LG (14 medium) in near-black, so they stand apart from the disabled ones
+     (Body/MD regular, text-disabled). Step 3 design review, Oct 19. */
+  font: var(--type-label-lg);
+  letter-spacing: var(--type-label-lg-tracking);
+  color: var(--text-heading);
   cursor: pointer;
   outline: none;
   transition: var(--transition-interactive);
@@ -26,6 +28,8 @@
 /* Past days (and today; docs/open-questions.md). */
 .calendar-day[data-disabled] {
   background: none;
+  font: var(--type-body-md);
+  letter-spacing: var(--type-body-md-tracking);
   color: var(--text-disabled);
   cursor: default;
 }

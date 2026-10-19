@@ -1,6 +1,6 @@
 import type { CalendarDate } from '@internationalized/date'
 import type { Brand } from '../../../data/brands'
-import { currencyOptions, effectiveDateOf, formatShort, NO_DEFAULT, presetsSetCount, pricingModelOptions, type GlobalPresetsValue } from '../../../data/presets'
+import { effectiveDateOf, formatShort, NO_DEFAULT, presetsSetCount, pricingModelOptions, type GlobalPresetsValue } from '../../../data/presets'
 import type { Vendor } from '../../../data/vendors'
 import { Pictogram, type PictogramType } from '../../atoms/Pictogram'
 import { Button } from '../../molecules/Button'
@@ -95,7 +95,8 @@ export function ReviewTemplateCard({ vendors, selectedBrands, presets, today, on
         <SectionHeader title="Global presets" pictogram="presets" editLabel="Edit presets" optional onEdit={() => onEdit('presets')} />
         <dl className="review-card__strip review-card__presets">
           <PresetReadout label="Effective date" value={effectiveDate ? formatShort(effectiveDate) : null} />
-          <PresetReadout label="Currency" value={labelOf(currencyOptions, presets.currency)} />
+          {/* The code ("CAD"), as before: whether Review follows step 3's "Canadian dollar (CAD)" is for the Review page review. */}
+          <PresetReadout label="Currency" value={presets.currency === NO_DEFAULT ? null : presets.currency} />
           <PresetReadout label="Pricing model" value={labelOf(pricingModelOptions, presets.pricingModel)} />
         </dl>
       </section>

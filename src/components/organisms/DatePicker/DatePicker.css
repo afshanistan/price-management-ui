@@ -7,6 +7,48 @@
   box-shadow: var(--elevation-2);
 }
 
+/* Opens with a fade and a 4px move away from its tile (base, ease-out), like step 1's results panel;
+   closes with a fade (fast, ease-in). React Aria keeps it mounted until the exit animation ends. */
+.date-picker[data-entering] {
+  animation: date-picker-in var(--motion-duration-base) var(--motion-ease-out);
+}
+
+.date-picker[data-exiting] {
+  animation: date-picker-out var(--motion-duration-fast) var(--motion-ease-in) forwards;
+}
+
+.date-picker[data-placement='top'] {
+  --date-picker-from: var(--space-4);
+}
+
+.date-picker[data-placement='bottom'] {
+  --date-picker-from: calc(var(--space-4) * -1);
+}
+
+@keyframes date-picker-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--date-picker-from, 0));
+  }
+}
+
+@keyframes date-picker-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: a fade only. */
+@media (prefers-reduced-motion: reduce) {
+  .date-picker[data-placement] {
+    --date-picker-from: 0;
+  }
+}
+
+:root[data-motion='reduced'] .date-picker[data-placement] {
+  --date-picker-from: 0;
+}
+
 .date-picker__dialog {
   display: flex;
   flex-direction: column;

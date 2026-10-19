@@ -648,6 +648,28 @@ Rejected: auto-collapsing a vendor once complete (things moving on their own whi
 
 **Clearing "All N brands" no longer offers Undo.** The chip only exists when every brand of the vendor is picked, so getting it back is one click on that vendor's Select all, right beside it on the left. The toast added noise for almost no saving. The removal is still announced to screen readers ("All General Mills brands removed"). *Reverses Oct 17 "Its × clears the whole vendor with an undo toast."* Step 1 keeps its Undo toast (removing a vendor costs a search to undo); step 4's Download toast is a placeholder until Download exists. The toast's look and placement are still open (step 1).
 
+## Oct 19 · Step 3: the date leads, "Decide later", a calendar that stays in the card
+
+From the step 3 design review (`docs/reviews/step-3-design-review.md`, P1–P15). Will: a prototype, keep it tight.
+
+**Effective date: the date is the value.** Tiles read "Nov 1, 2026 · Next month", "Jan 1, 2027 · Next quarter", "Select a date · Custom date" (the date in Label/LG, the relative name as the grey description), the opposite of Currency, where the name leads. Will: next month / next quarter are relative while you build the template and fixed once picked; the value now saves that date. Open for when saved templates exist: a reopened template whose date has drifted should show it as a Custom date (Claude's pick), not "Next month · Nov 1" in November.
+
+**Custom date flow.** Clicking the tile always opens the calendar, even when it already has a remembered date (it opens highlighted, so OK is one click). Arrowing onto the tile only selects it; Enter, Space or the calendar button open it (no popup just from moving through a radio group, WCAG 3.2.2). No Clear button: Cancel next to Clear invites mistakes, and "Decide later" already removes the date. Cancel with no custom date ever confirmed sends both the selection and focus back to the previous tile, so the Custom tile doesn't look chosen (Will spotted the teal focus ring reading as selected).
+
+**The calendar opens upward, above the Custom date tile**, inside the card. The hugging card leaves no room below, and below would cover the footer's Edit brands button. It covers the card header; Will: better than covering the footer. Rejected: pinned to the card's bottom-left (covers the tile that opened it). Opens with a fade and a 4px move (base, ease-out), closes with a fade (fast, ease-in), like step 1's results panel. *Changes Figma 03b (4px under the tile).*
+
+**"Decide later · Fill in per row" replaces "No default"** in all three presets. "No default" said what the system does, not what it means for you. Assumed meaning: the column is left to fill in per row of the downloaded file (Will's description); to confirm with product. Rejected: "I'll decide later" (the only first-person text in the app), "Set it per row in the file" (216 of ~224px: too tight).
+
+**Currency: the name leads**, "US dollar (USD)". Review keeps showing the code until its own review.
+
+**"(optional)" joins the title** in its size, regular weight, subtle text; the small Optional tag was easy to miss. Rejected: the parenthetical in the full bold title style (as loud as the title), a subtitle line.
+
+**Step 3's card hugs its content; the footer stays put.** The fixed 644 kept Next in one place on every step; now the frame keeps its 644 (so the footer still never moves) and step 3's card sits at the top at its natural height. List steps (1, 2, 4) keep the fixed card.
+
+**Calendar days: pickable ones in 14 medium near-black**, disabled ones unchanged (Body/MD, `text-disabled`). The difference was color only (7.5:1 vs 3.6:1). Lighter disabled days (Neutral/400, a new calendar token; allowed, since disabled controls are exempt from contrast) are held until we see whether the weight change is enough.
+
+**Motion:** page load staggers (card, header, the three columns); the radio dot grows in; the Custom tile's text fades when its date changes.
+
 ---
 
 ## Build plan

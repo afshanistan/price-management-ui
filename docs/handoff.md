@@ -91,7 +91,7 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 
 ## Start here (next session, after Oct 18)
 
-**Oct 19 update: design review in progress** (`docs/reviews/step-2-design-review.md`). Order: brands → presets → review → stepper, each design then motion. **Step 2 is done** (Brand list, Selected brands panel, motion pass), except pressure-test #3 (Sprite under two vendors). Next: step 3 (presets). Explorations in Storybook `Scratch/Group header explorations`. Tests: 173 passing.
+**Oct 19 update: design review in progress** (`docs/reviews/step-2-design-review.md`). Order: brands → presets → review → stepper, each design then motion. **Steps 2 and 3 are done** (`step-2-design-review.md`, `step-3-design-review.md`). Next: step 4 (Review), then the stepper. Explorations in Storybook `Scratch/Group header explorations`. Tests: 173 passing.
 
 **Where things stand.** The app runs all four steps (`npm run dev` → http://localhost:5173) on 60 real mock vendors and 551 real brands. Storybook: `npm run storybook` (6006). Tests: `npm run test-storybook` (167 passing; commit only when all pass). Everything is committed on `main`; nothing pushed. Will's working style: say what you'll do before doing it; after each build comes a design review (data → mock data → pressure test → commit).
 

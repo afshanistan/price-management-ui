@@ -61,6 +61,12 @@
   box-shadow: var(--elevation-stage-card);
 }
 
+/* Hug (step 3): the card takes its content's height at the top of the frame; the rest of the 644 is
+   page surface, so the footer stays where it is on every step. */
+.wizard-layout__card[data-fit='hug'] > :not(.wizard-layout__toast) {
+  flex: none;
+}
+
 /* ---------- Footer: 24 below the card, aligned to its edges ---------- */
 
 .wizard-layout__footer {

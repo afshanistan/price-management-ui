@@ -43,8 +43,9 @@ export function DatePicker({ isOpen, triggerRef, value, onConfirm, onCancel, tod
       isOpen={isOpen}
       onOpenChange={(open) => !open && onCancel()}
       triggerRef={triggerRef}
-      placement="bottom start"
-      // 4px under the tile, as in Figma (03b).
+      // Above the Custom date tile, inside the card, with the tile still showing underneath (Will, Oct 19;
+      // Figma 03b had it 4px under the tile). Flips below only when there's no room above.
+      placement="top start"
       offset={4}
       shouldFlip
       className="date-picker"

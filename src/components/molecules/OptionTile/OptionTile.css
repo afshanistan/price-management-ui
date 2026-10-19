@@ -63,6 +63,22 @@
   flex-shrink: 0;
 }
 
+/* A placeholder label ("Select a date") reads like an empty field until a date replaces it. */
+.option-tile__label[data-placeholder] {
+  color: var(--text-subtle);
+}
+
+/* The label just changed: the new text fades in (base, ease-out). Opacity only, so it stays under reduced motion. */
+.option-tile__text[data-swap] {
+  animation: option-tile-swap var(--motion-duration-base) var(--motion-ease-out);
+}
+
+@keyframes option-tile-swap {
+  from {
+    opacity: 0;
+  }
+}
+
 .option-tile__description {
   min-width: 0;
   color: var(--text-subtle);

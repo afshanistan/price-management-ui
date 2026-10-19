@@ -25,6 +25,11 @@
   color: var(--text-heading);
 }
 
+.card-header__suffix {
+  font-weight: 400;
+  color: var(--text-subtle);
+}
+
 .card-header__description {
   margin: 0;
   font: var(--type-body-md);

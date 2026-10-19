@@ -77,6 +77,20 @@
   animation-delay: calc(var(--motion-stagger) * 3);
 }
 
+/* Step 3 (Oct 19): header, then the three preset columns together (at most three groups after the card). */
+.wizard-layout__card .global-presets-card > .card-header,
+.wizard-layout__card .global-presets-card__grid {
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+}
+
+.wizard-layout__card .global-presets-card > .card-header {
+  animation-delay: var(--motion-stagger);
+}
+
+.wizard-layout__card .global-presets-card__grid {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+
 /* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).
    The same rules twice, because a media query and an attribute can't share one block. */
 @media (prefers-reduced-motion: reduce) {
@@ -96,7 +110,9 @@
   .wizard-layout__card .select-vendors-card > *,
   .wizard-layout__card .select-brands-card__main > .card-header,
   .wizard-layout__card .select-brands-card__directory,
-  .wizard-layout__card .select-brands-card > .selected-brands-panel {
+  .wizard-layout__card .select-brands-card > .selected-brands-panel,
+  .wizard-layout__card .global-presets-card > .card-header,
+  .wizard-layout__card .global-presets-card__grid {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }
@@ -121,7 +137,9 @@
   & .wizard-layout__card .select-vendors-card > *,
   & .wizard-layout__card .select-brands-card__main > .card-header,
   & .wizard-layout__card .select-brands-card__directory,
-  & .wizard-layout__card .select-brands-card > .selected-brands-panel {
+  & .wizard-layout__card .select-brands-card > .selected-brands-panel,
+  & .wizard-layout__card .global-presets-card > .card-header,
+  & .wizard-layout__card .global-presets-card__grid {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }
