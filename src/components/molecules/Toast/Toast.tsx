@@ -25,7 +25,7 @@ export interface ToastRegionProps {
 }
 
 /*
-  A simple toast (visual design to come from Figma: docs/open-questions.md, "Toast needs Figma design").
+  A simple toast: the header's plum, white text, a teal countdown (Will, Oct 19; Figma queued).
   The region is always mounted and polite (role="status"), so each new message is announced once;
   the toast itself enters by sliding up 8px and fading (base, ease-out) and exits by fading.
   No close button: it dismisses after the timeout, which pauses on hover and focus.
@@ -68,6 +68,9 @@ function Toast({ toast, onDismiss, timeout }: { toast: ToastMessage; onDismiss: 
 
   return (
     <motion.div
+      // Always plum, like the header, so it sets On brand mode itself (as the stepper does), and every
+      // token inside re-resolves: white text, the Undo button's on-brand colors (Will, Oct 19).
+      data-mode="on-brand"
       className="toast"
       inert={!isPresent}
       aria-hidden={!isPresent || undefined}

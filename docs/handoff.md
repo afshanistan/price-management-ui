@@ -107,6 +107,8 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 
 **Evening (Oct 19): stepper review done and built** (`docs/reviews/stepper-review.md`, A–F; decision log "Stepper and step transition"). On a first-time Next the stepper plays "the fuse" (1200ms; story has 2000 and 6000 slow motion): check draws, one 2px citron stroke runs the line and wraps the next node, the bloom settles onto the resting glow, label already bold. Complete lines are 2px now (Figma queued). Back/Edit un-complete the later steps with the reverse fuse (800ms, one pull back; Will, replaces Figma 02e, queued). The card surface stays and its content moves: exit ~200ms toward the past, enter 300ms from the travel side, groups fade in 60ms apart; step 3's card eases its height; focus goes to the new heading. 178 tests pass.
 
+**Last (Oct 19):** the toast is styled: the header's plum, white text, a teal countdown (citron rejected: it only means "complete").
+
 **Next:** open items below (open questions, the long Figma queue), the Download finale (held until Download is real), or a "remember my step on reload" convenience for testing (offered, not built).
 
 *Step 4 — open items to bring up (lay out the data first):*

@@ -717,6 +717,11 @@ From the stepper review (`docs/reviews/stepper-review.md`, A–F). Will: today's
 
 Held: the Download finale (the fuse running the whole line), while Download is a placeholder. Rejected: tuning the old entrance on its own (it would have been retimed again with the exit).
 
+
+## Oct 19 · The toast goes plum
+
+**The toast takes the header's plum,** with white text: it sets On brand mode itself (always plum, like the stepper), so the Undo button picks up the on-brand colors already tuned for contrast. **The countdown line is teal,** the Undo button's own on-brand ink: it shows how long that action is still there. Rejected: citron (Will's first thought; it only ever means "complete", never decoration or time), a subtle neutral (nearly invisible on plum). Replaces the placeholder (white card, gray line).
+
 ---
 
 ## Build plan

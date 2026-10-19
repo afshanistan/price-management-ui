@@ -18,8 +18,8 @@ const meta = {
     docs: {
       description: {
         component:
-          'Toast — a short message with an optional action, e.g. "Cargill removed · Undo". No Figma design yet: a placeholder look from existing tokens ' +
-          '(docs/open-questions.md, "Toast needs Figma design").\n\n' +
+          'Toast — a short message with an optional action, e.g. "Cargill removed · Undo". The header\'s plum surface (it sets On brand mode itself), white text, ' +
+          'and a teal countdown line: the Undo button\'s own color, since it shows how long Undo is still there (Will, Oct 19; Figma queued).\n\n' +
           'One at a time: a new toast replaces the current one. It enters by sliding up 8px and fading (base, ease-out) and exits by fading. ' +
           'It dismisses itself after 5 seconds; the timer pauses while it is hovered or has focus. No close button. ' +
           'The region is always mounted and polite (`role="status"`), so each message is announced once.',
