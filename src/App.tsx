@@ -30,17 +30,15 @@ const editTarget: Record<ReviewEditStep, Step> = { vendors: 1, brands: 2, preset
   Picks are kept when moving between steps. Vendors are only edited on step 1: going back, removing
   a vendor and returning drops that vendor's brand picks (Will, Oct 18). Review's Edit jumps to that
   step and the normal wizard carries on from there (no special return to Review).
-  Step transition (stepper review, Oct 19): the stepper remembers the furthest step reached (Edit keeps
-  later steps complete) and plays its charge-up on a first-time Next; the layout moves the card content
-  in the direction of travel and focuses the new heading.
+  Step transition (stepper review, Oct 19): the stepper plays its charge-up on Next and the reverse on
+  Back or Edit (going back un-completes the later steps: you redo from there); the layout moves the card
+  content in the direction of travel and focuses the new heading. Picks are kept either way.
 */
 function App() {
   const [step, setStepState] = useState<Step>(1)
-  const [reached, setReached] = useState<Step>(1)
   const [direction, setDirection] = useState<1 | -1>(1)
   function setStep(next: Step) {
     setDirection(next > step ? 1 : -1)
-    setReached((r) => (next > r ? next : r))
     setStepState(next)
   }
   const [selectedVendors, setSelectedVendors] = useState<Vendor[]>([])
@@ -111,7 +109,7 @@ function App() {
   return (
     <WizardLayout
       header={<MainNavigation variant="focus" onExit={() => {}} />}
-      stepper={<Stepper currentStep={step} reachedStep={reached} />}
+      stepper={<Stepper currentStep={step} />}
       footer={footer}
       toast={<ToastRegion toast={toast} onDismiss={() => setToast(null)} />}
       // Step 3 is a short form: its card hugs. The list steps keep the fixed frame (Oct 19).

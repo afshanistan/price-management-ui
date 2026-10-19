@@ -75,6 +75,13 @@
     box-shadow var(--motion-duration-base) var(--motion-ease-out);
 }
 
+/* The check and the dot share the node's one cell, both centered. While a check undraws (the reverse)
+   the dot is already there: without this, the grid stacked them and the dot sat low, then jumped. */
+.stepper__node > *,
+.stepper__node::after {
+  grid-area: 1 / 1;
+}
+
 /* The center dot for In progress and Not started. Its color eases as the fuse arrives. */
 .stepper__node::after {
   content: '';
@@ -167,5 +174,29 @@
 .stepper__fuse-bloom {
   stroke: var(--fill-status-complete);
   stroke-width: var(--space-6);
+}
+
+/* The reverse: a check that undraws (a step the retracting stroke passed, or the landing step). It
+   keeps the complete check's ink while the node's fill fades away under it. */
+.stepper__check--undraw {
+  color: var(--icon-on-status-complete);
+}
+
+.stepper__check--undraw path {
+  stroke-dasharray: 1;
+  animation: stepper-check-undraw var(--motion-duration-fast) var(--motion-ease-in) forwards;
+}
+
+@keyframes stepper-check-undraw {
+  to {
+    stroke-dashoffset: 1;
+  }
+}
+
+/* The reverse's glow: the resting glow's strength, retracting with the stroke. */
+.stepper__fuse-glow {
+  stroke: var(--fill-status-complete);
+  stroke-width: var(--space-6);
+  opacity: 0.5;
 }
 

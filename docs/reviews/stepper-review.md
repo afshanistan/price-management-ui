@@ -21,3 +21,16 @@ What was built before: resting states only (nodes, lines, glow), no motion; stat
 - **Arrive (90%):** the node's own ring, fill and dot fade in under the fuse's ring; the label's color eases to active. The fuse goes once the bloom ends.
 - **Slow motion:** the Charge-up story's fuseDuration has 6000 to see each phase.
 
+## Going back un-completes (Will, Oct 19)
+
+Going back (Back, Edit) takes you to an earlier step of a linear process, so you redo from there: the later steps go back to not started, and walking forward replays the fuse on each Next. **Replaces Figma 02e "Back from review"** (later steps stayed complete) and the code-backlog rule "Stepper keeps later steps complete". Picks are still kept; only the stepper resets.
+
+| # | Item | Status |
+|---|---|---|
+| G | The reverse runs **800ms**, quicker than the fuse: undoing isn't a moment | **Built**, not committed |
+| H | Jumping back several steps (Edit vendors from Review): **one continuous pull back** in the same 800ms | **Built**, not committed |
+| I | The footer's Back (one step) uses the same reverse | **Built**, not committed |
+
+The reverse, the fuse played backwards without a bloom: the completed path (from the landing step to the old ring) is drawn over the plain track with its resting glow, then retracts: it unwinds the old ring counter-clockwise, then pulls back down the line; each step it passes un-checks; when it's gone, the landing step's check undraws and its ring fades in. The old step is a dot from the start, its label easing to gray and dropping its weight last. Charge-up story: Back, "Back to Vendors", unfuseDuration 800 / 1200 / 4000 (slow motion). Test: "Flow: forward and back".
+
+**Fix (Will):** going back, the landing node's dot sat low for a split second, then jumped to center. The undrawing check and the dot were stacked in the node's grid (two rows); now they share one centered cell.
