@@ -29,6 +29,7 @@ The heaviest realistic template: 12 vendors including the giants (PepsiCo 22 bra
 
 - **#1 (Oct 19, Will): drop the strip** (option d). Each vendor line in the panel shows a citron complete mark after its count instead.
 - **#2 (Oct 19, Will):** every empty vendor reads "Select a brand to continue".
+- **#3 (Oct 19, Will): (a) keep as is, and (c) a data question for real vendor data.** A real edge case; the stronger teal group headers, vendor-grouped chips and chip-hover-lights-its-row now carry it. If real users pick the wrong one, (b) vendor beside the brand while searching is a small change.
 
 ## Noted, not now
 

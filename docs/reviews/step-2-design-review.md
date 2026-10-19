@@ -25,7 +25,7 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 
 | 19 | Motion pass: page-load stagger, slot fills into the chip, check pops in, "step done" as one moment, chip hover lights its row, opened group scrolls into view | **Built Oct 19** (decision log "Step 2 motion pass"). Dropped: vendor name as a link |
 
-Step 2 review done except pressure-test #3 (Sprite under two vendors). The step-to-step transition waits for the stepper review.
+Pressure-test #3 (Sprite under two vendors): **kept as is** (Will, Oct 19); logged as a data question for real vendor data. Step 2 review done. The step-to-step transition waits for the stepper review.
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
 

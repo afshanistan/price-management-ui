@@ -95,4 +95,4 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 - [ ] **Review's Brands list at scale** · Review template card · 122 brands in a 5-row window · (a) group by vendor, collapsed, (b) vendor counts only, (c) taller list, (d) keep · Open. Built as (d)
 - [ ] **Review vendor rows: tile and ESN format** · Review row · Still the wordmark tile and a bare ESN, unlike step 1 · (a) match step 1, (b) keep · Open. Built as (b)
 - [ ] **Download template** · Wizard footer, step 4 · A placeholder toast "Download isn't built yet" (Will, Oct 18) until there's a real export · Open. Built as a toast
-
+- [ ] **Same brand under two vendors (real data)** · Brand list / Selected brands · Mock data puts e.g. Sprite under The Coca-Cola Company and Coca-Cola Consolidated (brand owner and bottler). Design keeps it as is (Will, Oct 19; pressure-test #3). For the product/data team: do real catalogues duplicate brands across suppliers like this, and do users think of them as separate? If people pick the wrong one in testing, show the vendor beside the brand while searching · Open (data)
