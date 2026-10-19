@@ -1,4 +1,4 @@
-# Handoff — Price Management 2.0 (as of Sun Oct 18, morning)
+# Handoff — Price Management 2.0 (as of Mon Oct 19, lunch)
 
 Read this first in a new chat. Decisions and the why behind them live in `claude/decision-log.md`. Everything decided in Figma that has to be built in code lives in **`claude/code-backlog.md`** — check it when building each component in Storybook and each screen in React. The Foundations page in Figma summarizes the rules that came out of the log.
 
@@ -89,36 +89,36 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 - Every story links its Figma component (Design tab) and shows its spec at the bottom of its Docs page. Storybook's Project section shows `docs/open-questions.md` and `docs/figma-sync.md` live.
 - **Waiting on Will:** open questions in `docs/open-questions.md`; Figma queue in `docs/figma-sync.md` (four dimension tokens, filled-icon re-export).
 
-## Start here (next session, after Oct 18)
+## Start here (next session, after Oct 19)
 
-**Oct 19 update: design review in progress** (`docs/reviews/step-2-design-review.md`). Order: brands → presets → review → stepper, each design then motion. **Steps 2 and 3 are done** (`step-2-design-review.md`, `step-3-design-review.md`). Next: step 4 (Review), then the stepper. Explorations in Storybook `Scratch/Group header explorations`. Tests: 173 passing.
+**Where things stand.** The app runs all four steps (`npm run dev` → http://localhost:5173) on 60 mock vendors and 551 real brands. Storybook: `npm run storybook` (6006). Tests: `npm run test-storybook` (**173 passing**; commit only when all pass). Everything is committed on `main` (last: `5723473`); nothing pushed. Both servers are usually already running on Will's machine.
 
-**Where things stand.** The app runs all four steps (`npm run dev` → http://localhost:5173) on 60 real mock vendors and 551 real brands. Storybook: `npm run storybook` (6006). Tests: `npm run test-storybook` (167 passing; commit only when all pass). Everything is committed on `main`; nothing pushed. Will's working style: say what you'll do before doing it; after each build comes a design review (data → mock data → pressure test → commit).
+**How Will works (Oct 19).** Say what you'll do before doing it. Design review per page: lay out the data first, Will gives notes, Claude logs them with a number (step 3 used P1, P2…), asks lettered questions (A, B…) with a pick, and **builds the whole batch only when Will says so**, then shows it before committing ("build, I'll look, then commit or change"). Offer Storybook links he can open in his own browser (he dislikes the in-app pane). Give your own recommendation when asked; never invent design. It's a prototype: keep it tight.
 
-**1. Decide the steps 2–4 pressure-test findings** (`docs/pressure-tests/steps-2-4.md`, screenshots in `step-2-4/`; also in `open-questions.md`). Each is built with a default for now:
-1. Coverage strip doesn't scale: 12 vendors = 24px tiles (wrap / scroll / one summary line / drop it). The big one.
-2. "No Conagra Brands brands yet": inline empty copy doubles "Brands".
-3. Same brand under two vendors (Sprite under both Coca-Colas).
-4. Review's Brands list: 122 brands in a ~5-row window (group by vendor / counts only / taller / keep).
-5. Review vendor rows: still the wordmark tile and a bare ESN (match step 1?).
-6. Long vendor names cut off in Review's Brands list.
-Plus: Review order (built A–Z; spec said step 1 order) and Download (placeholder toast).
+**Today (Oct 19): steps 2 and 3 reviewed and done.**
+- Step 2 (`docs/reviews/step-2-design-review.md`): teal collapsible group headers (name 15 medium + count left, ☐ Select all + caret right), 40px rows with dividers, teal top edge on the Brand list; the coverage strip is gone (each vendor line in the panel shows a citron check after its count); chip-shaped "Select a brand to continue" slots; no toast on step 2; motion pass (page-load stagger, slot fills into the chip, check pops in, "step done" moment, chip hover lights its row, opened group scrolls into view).
+- Step 3 (`docs/reviews/step-3-design-review.md`, P1–P15): dates lead ("Nov 1, 2026 · Next month", fixed once picked), "Decide later · Fill in per row" replaces "No default", "US dollar (USD)", "(optional)" in the title, the calendar opens above the Custom date tile, step 3's card hugs inside the fixed 644 frame (footer never moves), keyboard/focus fixes, motion.
+- Explorations kept in Storybook: `Scratch/Group header explorations`.
+- All decisions with reasons and rejected options: `docs/decision-log.md` (Oct 19 sections at the end).
 
-**2. Motion for steps 3–4:** pick from `docs/motion-options-steps-3-4.md` (nothing built). The step-to-step transition (stepper charge-up, card slide) is still deferred: `TODO(step-transition)`.
+**Next (after lunch): 1. the Review page (step 4), design then motion. 2. The stepper / step-to-step transition.**
 
-**3. Small open items** (all in `open-questions.md` unless noted):
-- Native name tooltip on result rows and cards (browser `title`): recommended removing it from the result rows (talked through, not decided or logged yet).
-- Coverage tile logo: ink color, height, overlap with the status mark.
-- ESN match bold is hard to see (monospace 500 → 600).
-- Toast: visual design and placement (steps 1, 2 and 4).
-- No "Clear all" in the Selected brands panel (Oct 16 note vs current design).
-- Logo shape cutoff: logos under 1.5:1 hidden in cards; 1.5–2.2:1 ones look small (raise to 2:1?).
-- Too-wide / padded logo files to edit or replace: `docs/vendor-logo-sources.md` → "Too wide for the tiles".
-- Waiting on Figma first: result count in the Results panel; long names wrap to two lines in the Selected item card.
+*Step 4 — open items to bring up (lay out the data first):*
+- Pressure-test findings (`docs/pressure-tests/steps-2-4.md`): **#4** the Brands list is a long scroll (122 brands in a ~5-row window: group by vendor, counts only, taller, keep); **#5** vendor rows still show the wordmark tile and a bare ESN (match step 1: no tile, "ESN-"); **#6** long vendor names cut off in the Brands list.
+- Review order: built A–Z (the spec said step 1 order).
+- Download is a placeholder toast ("Download isn't built yet").
+- Presets wording now differs from step 3: Review says "No default" and "CAD"; step 3 says "Decide later" and "Canadian dollar (CAD)" (open question "Review's preset wording").
+- Review's header pictogram and the Edit buttons use the placeholder triangle.
+- Motion options already written: `docs/motion-options-steps-3-4.md` (summary numbers count up once, sections stagger in, Download finale with the stepper).
+- Review's "1 of 3" spec sample doesn't add up (open question).
 
-**4. Figma reconcile pass** (`docs/figma-sync.md`, open items): re-export `tokens.css` (motion tokens, Body/LG Strong, size/128, layout card and stage heights); Result row without a Vendor logo; ESN format "ESN-########"; no helper text on the vendor search; Input focus = 2px border, no ring; Text field label stays text-heading on focus; tall-logo rule in the Selected item card; stale descriptions (Content=Brand logo, the logo reference frame name). Then re-export the specs that are out of date (Select vendors card, Vendor logo, Selected item card, Vendor coverage tile, Results panel).
+*Stepper:* the step-to-step transition (stepper charge-up, card slide) is deferred everywhere (`TODO(step-transition)`). Note step 3's card is now shorter than the others (hug), so the transition must handle a height change. The stepper uses the same "complete" signal as step 2's citron badge.
 
-**Known, not urgent:** `npm run lint` has pre-existing errors in three story files (GroupHeader, SelectionSummary, ResultsPanel: `useState` inside an anonymous `render`).
+**Open, not urgent** (`docs/open-questions.md`): what "Decide later" really means downstream (product); a reopened saved template whose relative date drifted; same brand under two vendors (data); is today selectable; Undo toast look and placement (step 1 only now); lighter disabled calendar days (held); native `title` tooltips on result rows; ESN match bold; logo shape cutoff.
+
+**Figma reconcile pass** (`docs/figma-sync.md`): a long queue for Will, including today's: group header redesign + tokens (`fill-group-header`, `border-group-header`, `border-action-strong`), Label/XL text style, Brand list rows 40 + dividers, Selected brands panel (strip out, status on the vendor line, Label/LG `text-heading`), Empty selection inline chip-shaped, retire Vendor coverage tile, step 3 copy and order, card header "(optional)", date picker above the tile, calendar day weights, step 3 card hugs. Stand-ins live in `src/styles/tokens.pending.css`.
+
+**Known, not urgent:** `npm run lint` still has the pre-existing error in `ResultsPanel.stories.tsx` (`useState` in an anonymous render) and a warning in `App.tsx`.
 
 ## Status (Oct 18, evening)
 - **The app runs all four steps** (`npm run dev`) on 60 real mock vendors and 551 brands: vendors → brands → presets → review, with picks kept, Edit from Review, page titles and heading focus. Download is a placeholder toast. Step-to-step motion is deferred (`TODO(step-transition)`).
