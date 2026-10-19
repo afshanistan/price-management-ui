@@ -7,6 +7,10 @@
   border-radius: var(--radius-full);
   background: var(--count-badge-fill);
   color: var(--count-badge-ink);
+  /* To do → complete eases with the footer's hint and Next (base, ease-out): one "step done" moment. */
+  transition:
+    background-color var(--motion-duration-base) var(--motion-ease-out),
+    color var(--motion-duration-base) var(--motion-ease-out);
 }
 
 .count-badge--todo {

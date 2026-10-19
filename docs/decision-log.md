@@ -631,6 +631,19 @@ From the step 2 design review.
 
 **Not doing: the vendor name in the panel as a link to its group on the left.** Any honest affordance either makes the labels teal links or adds an icon to every line; with ≤8 vendors and collapsed headers on the left, finding a vendor is already one glance.
 
+## Oct 19 · Step 2 motion pass: small moments of progress
+
+From the step 2 design review. Calm, in the existing vocabulary (fades, small scales, ticks; nothing over 300ms; reduced motion = opacity only or instant). The step-to-step transition stays deferred to the stepper review.
+
+- **Page load staggers like step 1:** the card rises in, then header, search + Brand list, and the Selected brands panel follow one stagger (35ms) apart.
+- **The empty slot fills.** When a vendor's first brand lands, the chip-shaped slot fades out while the chip fades in on the same spot. Emptying stays a fade-through (the slot waits for the chips to leave); chips ↔ "All N brands" stay fade-throughs. *A deliberate exception to "fade-throughs, never cross-fades": same shape, same place, so the overlap reads as filling, not muddle.*
+- **The complete check pops in** after the vendor's count (scale 0.6 → 1 + fade, fast, ease-out) and fades out (fast, ease-in) — the count badge's pop, smaller.
+- **"Step done" is one moment:** the count badge's color now eases (base, ease-out) with the footer hint fading out and Set presets enabling, which already eased.
+- **Hovering a chip lights up its brand's row** on the left (the row hover fill, no ring), if its group is open. No scrolling to it.
+- **Opening a group low in the list scrolls up just enough** to show its rows (or as many as fit), never past its own header; smooth, instant under reduced motion. Search-opened groups don't scroll.
+
+Rejected: auto-collapsing a vendor once complete (things moving on their own while you work), more motion on the counts, and the vendor name in the panel as a link (no honest affordance).
+
 ---
 
 ## Build plan

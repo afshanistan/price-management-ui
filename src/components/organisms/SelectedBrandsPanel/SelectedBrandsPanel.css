@@ -80,6 +80,7 @@
 
 /* Right after the count ("Cargill  2 of 8 ✓"), level with the text (Will, Oct 19). */
 .selected-brands-panel__vendor-status {
+  display: inline-flex;
   align-self: center;
 }
 
@@ -99,7 +100,14 @@
 
 /* At least one chip's height (the "All N brands" chip and the empty slot are both 34). */
 .selected-brands-panel__vendor-content {
+  position: relative;
   min-height: calc(var(--size-24) + var(--space-4) * 2 + var(--border-width-1) * 2);
+}
+
+/* The empty slot sits on the chips' spot (the wrapper's min-height holds the space). */
+.selected-brands-panel__slot {
+  position: absolute;
+  inset: 0 0 auto;
 }
 
 .selected-brands-panel__chip-list {

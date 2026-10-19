@@ -27,6 +27,8 @@ export interface BrandListProps {
   onSelectionChange: (ids: Set<string>) => void
   /** The group header's select all: acts on the visible matches. */
   onSelectAll: (vendorId: string) => void
+  /** A brand whose chip is hovered in the Selected brands panel: its row shows the hover fill. */
+  linkedBrandId?: string | null
   className?: string
 }
 
@@ -49,7 +51,7 @@ export interface BrandListProps {
 */
 const isolate = (event: SyntheticEvent) => event.stopPropagation()
 
-export function BrandList({ groups, query, selectedIds, onSelectionChange, onSelectAll, className }: BrandListProps) {
+export function BrandList({ groups, query, selectedIds, onSelectionChange, onSelectAll, linkedBrandId, className }: BrandListProps) {
   const isSearching = query.trim() !== ''
   const [focused, setFocused] = useState<{ vendorId: string; control: 'toggle' | 'selectAll' } | null>(null)
   const listRef = useRef<HTMLDivElement>(null)
@@ -111,6 +113,25 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
       setMoving((prev) => ({ ...prev, [vendorId]: 'opening' }))
       settle(vendorId, duration.layout * 1000)
     }
+    if (!closing) requestAnimationFrame(() => revealGroup(vendorId))
+  }
+
+  // A group opened low in the list scrolls up just enough to show its rows (or as many as fit), never
+  // past its own header. Smooth, or instant under reduced motion (Oct 19).
+  function revealGroup(vendorId: string) {
+    const list = listRef.current
+    const header = list?.querySelector(`[data-vendor-header="${vendorId}"]`)
+    const group = groups.find((g) => g.vendor.id === vendorId)
+    if (!list || !header || !group) return
+    const listBox = list.getBoundingClientRect()
+    const headerBox = header.getBoundingClientRect()
+    // Brand rows and group headers are both 40px (--size-40), so the header's height measures a row.
+    const rowsHeight = group.brands.length * headerBox.height
+    const needed = Math.min(rowsHeight, list.clientHeight - headerBox.height)
+    const available = listBox.bottom - headerBox.bottom
+    if (available >= needed) return
+    const toHeaderTop = headerBox.top - listBox.top - list.clientTop
+    list.scrollBy({ top: Math.min(needed - available, toHeaderTop), behavior: reduced ? 'auto' : 'smooth' })
   }
 
   const selectAllOf = (group: BrandListGroup) => {
@@ -221,7 +242,7 @@ export function BrandList({ groups, query, selectedIds, onSelectionChange, onSel
               </div>
             </Header>
             {showRows && brands.map((brand) => (
-              <ResultRow key={brand.id} id={brand.id} select="multi" name={brand.name} vendor={vendor.name} skuCount={brand.skuCount} query={query} />
+              <ResultRow key={brand.id} id={brand.id} select="multi" name={brand.name} vendor={vendor.name} skuCount={brand.skuCount} query={query} isLinkedHover={brand.id === linkedBrandId} />
             ))}
           </ListBoxSection>
         )

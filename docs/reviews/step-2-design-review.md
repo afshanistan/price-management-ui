@@ -23,8 +23,10 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 | 17 | Count badge citron once every vendor has a brand | **Already built** (Oct 17) |
 | 18 | Vendor names in the panel: not plum | **Built Oct 19**: `text-heading`, like the Brand list |
 
-**Delight ideas, for the motion pass** (not built): 1. the empty slot fills into the chip in place; 2. the complete check pops in (0.6 → 1, fast); 3. the "step done" moment (badge citron + footer hint fades + Set presets unlocks) reads as one; 4. hovering a chip highlights its row on the left. Dropped: 5. vendor name in the panel as a link (no honest affordance).
+| 19 | Motion pass: page-load stagger, slot fills into the chip, check pops in, "step done" as one moment, chip hover lights its row, opened group scrolls into view | **Built Oct 19** (decision log "Step 2 motion pass"). Dropped: vendor name as a link |
+
+Step 2 review done except pressure-test #3 (Sprite under two vendors). The step-to-step transition waits for the stepper review.
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
 
-Still to review on step 2: pressure-test #3 (Sprite under two vendors), the rest of the Selected brands panel, then step 2 motion (including the complete mark's motion).
+Next: pressure-test #3, then the presets page (step 3).

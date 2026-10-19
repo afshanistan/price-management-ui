@@ -57,6 +57,26 @@
   animation-delay: calc(var(--motion-stagger) * 3);
 }
 
+/* Step 2 (step 2 design review, Oct 19): the same three groups, one stagger apart: header,
+   the search and Brand list, the Selected brands panel. */
+.wizard-layout__card .select-brands-card__main > .card-header,
+.wizard-layout__card .select-brands-card__directory,
+.wizard-layout__card .select-brands-card > .selected-brands-panel {
+  animation: motion-enter var(--motion-duration-base) var(--motion-ease-out) backwards;
+}
+
+.wizard-layout__card .select-brands-card__main > .card-header {
+  animation-delay: var(--motion-stagger);
+}
+
+.wizard-layout__card .select-brands-card__directory {
+  animation-delay: calc(var(--motion-stagger) * 2);
+}
+
+.wizard-layout__card .select-brands-card > .selected-brands-panel {
+  animation-delay: calc(var(--motion-stagger) * 3);
+}
+
 /* Reduced motion: the OS setting, or Storybook's Motion toolbar (data-motion="reduced" on <html>).
    The same rules twice, because a media query and an attribute can't share one block. */
 @media (prefers-reduced-motion: reduce) {
@@ -73,7 +93,10 @@
 
   /* Page load: opacity only, at fast. */
   .wizard-layout__card,
-  .wizard-layout__card .select-vendors-card > * {
+  .wizard-layout__card .select-vendors-card > *,
+  .wizard-layout__card .select-brands-card__main > .card-header,
+  .wizard-layout__card .select-brands-card__directory,
+  .wizard-layout__card .select-brands-card > .selected-brands-panel {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }
@@ -95,7 +118,10 @@
 
   /* Page load: opacity only, at fast. */
   & .wizard-layout__card,
-  & .wizard-layout__card .select-vendors-card > * {
+  & .wizard-layout__card .select-vendors-card > *,
+  & .wizard-layout__card .select-brands-card__main > .card-header,
+  & .wizard-layout__card .select-brands-card__directory,
+  & .wizard-layout__card .select-brands-card > .selected-brands-panel {
     animation-name: motion-fade-in;
     animation-duration: var(--motion-duration-fast);
   }

@@ -25,6 +25,8 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   select?: ResultRowSelect
   /** Single: a shared id for the keyboard highlight, so it slides from row to row (one per panel and query). */
   highlightId?: string
+  /** Multi: its chip in the Selected brands panel is hovered, so the row shows the hover fill (Oct 19). */
+  isLinkedHover?: boolean
   /** Forces a state for the "All states" story only. Never set it in product code. */
   'data-state'?: 'hover' | 'keyboard' | 'pressed'
 }
@@ -33,7 +35,7 @@ export interface ResultRowProps extends Omit<ListBoxItemProps, 'children' | 'cla
   An option in the Results panel's listbox. Selection, hover, press and keyboard
   highlight come from React Aria: [data-selected], [data-hovered], [data-pressed], [data-focus-visible].
 */
-export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select = 'single', highlightId, 'data-state': state, ...rest }: ResultRowProps) {
+export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select = 'single', highlightId, isLinkedHover, 'data-state': state, ...rest }: ResultRowProps) {
   return (
     <ListBoxItem
       {...rest}
@@ -41,6 +43,7 @@ export function ResultRow({ name, meta = '', skuCount = 0, vendor, query, select
       className={`result-row result-row--${select}`}
       data-state={state}
       data-slide={(select === 'single' && highlightId) || undefined}
+      data-linked-hover={isLinkedHover || undefined}
     >
       {({ isSelected, isPressed, isFocusVisible }) =>
         select === 'multi' ? (

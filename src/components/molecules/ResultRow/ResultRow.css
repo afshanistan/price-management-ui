@@ -17,8 +17,9 @@
   transition: var(--transition-interactive);
 }
 
-/* Hover, keyboard active and pressed share one fill. Selected keeps the default fill. */
-.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) {
+/* Hover, keyboard active and pressed share one fill. Selected keeps the default fill.
+   [data-linked-hover]: its chip in the Selected brands panel is hovered (the same fill, no ring). */
+.result-row:is([data-hovered], [data-focus-visible], [data-pressed], [data-linked-hover], [data-state='hover'], [data-state='keyboard'], [data-state='pressed']) {
   background: var(--fill-row-highlight);
 }
 

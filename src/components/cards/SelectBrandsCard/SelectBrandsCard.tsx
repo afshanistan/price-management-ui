@@ -33,6 +33,8 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
   const [query, setQuery] = useState('')
   const [announcement, setAnnouncement] = useState('')
   const [toast, setToast] = useState<ToastMessage | null>(null)
+  // A chip hovered in the panel lights up its row on the left (if its group is open).
+  const [hoveredBrand, setHoveredBrand] = useState<string | null>(null)
   const toastCount = useRef(0)
   // Undo starts from the latest selection, whatever happened since the removal.
   const latestIds = useRef(selectedIds)
@@ -129,6 +131,8 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
               selectedIds={selectedIds}
               onSelectionChange={handleListChange}
               onSelectAll={handleSelectAll}
+              // A removed chip never reports the pointer leaving, so only a still-selected brand lights up.
+              linkedBrandId={hoveredBrand && selectedIds.has(hoveredBrand) ? hoveredBrand : null}
             />
           </Autocomplete>
         </div>
@@ -139,6 +143,7 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
         selectedIds={selectedIds}
         onRemove={removeBrand}
         onRemoveVendor={removeVendor}
+        onHoverBrand={setHoveredBrand}
       />
       {/* Undo for removing a whole vendor's brands; its region announces the removal. */}
       <ToastRegion toast={toast} onDismiss={() => setToast(null)} className="select-brands-card__toast" />

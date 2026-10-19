@@ -21,6 +21,8 @@ export interface SelectedBrandsPanelProps {
   onRemove: (brandId: string) => void
   /** The "All N brands" chip's ×. */
   onRemoveVendor: (vendorId: string) => void
+  /** Pointer over a brand chip (its id) or off it (null): the card highlights the brand's row on the left. */
+  onHoverBrand?: (brandId: string | null) => void
   className?: string
 }
 
@@ -34,7 +36,7 @@ export interface SelectedBrandsPanelProps {
   chip fades and shrinks while the rest close the gap. Swaps are fade-throughs, never cross-fades:
   the panel's empty state ↔ the groups, and inside a group: its inline empty ↔ chips ↔ "All N brands".
 */
-export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRemove, onRemoveVendor, className }: SelectedBrandsPanelProps) {
+export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRemove, onRemoveVendor, onHoverBrand, className }: SelectedBrandsPanelProps) {
   const titleId = useId()
   const chipsRef = useRef<HTMLDivElement>(null)
   const reduced = useReducedMotionSetting()
@@ -127,18 +129,36 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
                           <CountTick value={selected.length} /> of {all.length}
                         </span>
                       </span>
-                      {/* Complete once the vendor has a brand; nothing before (the empty line says it). Motion later. */}
-                      {selected.length > 0 && <StatusMark status="complete" className="selected-brands-panel__vendor-status" />}
+                      {/* Complete once the vendor has a brand; nothing before (the empty line says it).
+                          It pops in (0.6 → 1, fast, ease-out) and fades out (fast, ease-in); opacity only under reduced motion. */}
+                      <AnimatePresence initial={false}>
+                        {selected.length > 0 && (
+                          <motion.span
+                            key="complete"
+                            className="selected-brands-panel__vendor-status"
+                            initial={{ opacity: 0, scale: 0.6 }}
+                            animate={{ opacity: 1, scale: 1, transition: { duration: duration.fast, ease: ease.out } }}
+                            exit={{ opacity: 0, transition: { duration: duration.fast, ease: ease.in } }}
+                          >
+                            <StatusMark status="complete" />
+                          </motion.span>
+                        )}
+                      </AnimatePresence>
                     </div>
-                    {/* Fade-through inside the group: inline empty ↔ chips ↔ "All N brands". The wrapper holds
-                        at least one chip's height, so nothing below jumps (not even mid-fade). */}
+                    {/* The wrapper holds at least one chip's height, so nothing below jumps (not even mid-fade).
+                        The empty slot is its own layer: when the first brand lands it fades out while the chip
+                        fades in on the same spot, so the slot fills (Oct 19). Emptying stays a fade-through: the
+                        slot waits for the chips to leave. Chips ↔ "All N brands" stay fade-throughs too. */}
                     <div className="selected-brands-panel__vendor-content">
-                    <AnimatePresence initial={false} mode="wait">
-                      {content === 'empty' ? (
-                        <Fade key="empty">
+                    <AnimatePresence initial={false}>
+                      {content === 'empty' && (
+                        <Slot key="slot">
                           <EmptySelection layout="inline" pictogram="brand" message="Select a brand to continue" />
-                        </Fade>
-                      ) : content === 'all' ? (
+                        </Slot>
+                      )}
+                    </AnimatePresence>
+                    <AnimatePresence initial={false} mode="wait">
+                      {content === 'empty' ? null : content === 'all' ? (
                         <Fade key="all" leave="shrink">
                           <ul className="selected-brands-panel__chip-list">
                             <li className="selected-brands-panel__chip-all">
@@ -156,7 +176,7 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
                           <ul className="selected-brands-panel__chip-list">
                             <AnimatePresence initial={false} mode="popLayout">
                               {selected.map((brand, index) => (
-                                <Chip key={brand.id}>
+                                <Chip key={brand.id} onHover={(isHovered) => onHoverBrand?.(isHovered ? brand.id : null)}>
                                   <BrandChip
                                     label={brand.name}
                                     removeLabel={`Remove ${brand.name}`}
@@ -201,10 +221,29 @@ function Fade({ className, leave, children }: { className?: string; leave?: 'shr
 
 /* One brand chip: fades and scales in (fast), glides when others come and go, fades and shrinks out.
    Inert while it leaves, so its × can't be pressed twice and focus skips it. */
-function Chip({ children }: { children: ReactNode }) {
+/* The empty slot's layer: on top of the chips' spot, so the two cross on the same place. */
+function Slot({ children }: { children: ReactNode }) {
+  const isPresent = useIsPresent()
+  return (
+    <motion.div
+      className="selected-brands-panel__slot"
+      inert={!isPresent}
+      initial={{ opacity: 0 }}
+      // Comes back only after the chips have gone (a fade-through), so it waits one fast beat.
+      animate={{ opacity: 1, transition: { duration: duration.base, ease: ease.out, delay: duration.fast } }}
+      exit={{ opacity: 0, transition: { duration: duration.fast, ease: ease.in } }}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+function Chip({ children, onHover }: { children: ReactNode; onHover?: (isHovered: boolean) => void }) {
   const isPresent = useIsPresent()
   return (
     <motion.li
+      onPointerEnter={() => onHover?.(true)}
+      onPointerLeave={() => onHover?.(false)}
       data-exiting={isPresent ? undefined : ''}
       inert={!isPresent}
       layout
