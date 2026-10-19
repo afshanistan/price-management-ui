@@ -20,7 +20,10 @@
 .empty-selection--inline {
   align-items: center;
   gap: var(--space-8);
-  padding: var(--space-10) var(--space-12);
+  /* Chip-shaped (step 2 design review, Oct 19): the slot a chip will land in. 4 + 24 + 4 + borders
+     = 34, the "All N brands" chip's height, with the chip's pill corners. */
+  padding: var(--space-4) var(--space-12);
+  border-radius: var(--radius-full);
 }
 
 .empty-selection__message,

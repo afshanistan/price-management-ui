@@ -70,11 +70,12 @@
   letter-spacing: var(--type-body-xs-tracking);
 }
 
-/* One tick bigger and bolder than the chips (Body/SM 13 regular): Label/LG 14 medium (Oct 19). */
+/* One tick bigger and bolder than the chips (Body/SM 13 regular): Label/LG 14 medium, in the same
+   near-black as the Brand list's vendor names (Oct 19; was plum). */
 .selected-brands-panel__vendor-name {
   font: var(--type-label-lg);
   letter-spacing: var(--type-label-lg-tracking);
-  color: var(--text-brand);
+  color: var(--text-heading);
 }
 
 /* Right after the count ("Cargill  2 of 8 ✓"), level with the text (Will, Oct 19). */
@@ -94,6 +95,11 @@
 
 .selected-brands-panel__vendor-count {
   color: var(--text-subtle);
+}
+
+/* At least one chip's height (the "All N brands" chip and the empty slot are both 34). */
+.selected-brands-panel__vendor-content {
+  min-height: calc(var(--size-24) + var(--space-4) * 2 + var(--border-width-1) * 2);
 }
 
 .selected-brands-panel__chip-list {

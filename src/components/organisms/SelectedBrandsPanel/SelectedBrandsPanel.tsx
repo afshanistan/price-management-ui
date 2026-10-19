@@ -130,7 +130,9 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
                       {/* Complete once the vendor has a brand; nothing before (the empty line says it). Motion later. */}
                       {selected.length > 0 && <StatusMark status="complete" className="selected-brands-panel__vendor-status" />}
                     </div>
-                    {/* Fade-through inside the group: inline empty ↔ chips ↔ "All N brands". */}
+                    {/* Fade-through inside the group: inline empty ↔ chips ↔ "All N brands". The wrapper holds
+                        at least one chip's height, so nothing below jumps (not even mid-fade). */}
+                    <div className="selected-brands-panel__vendor-content">
                     <AnimatePresence initial={false} mode="wait">
                       {content === 'empty' ? (
                         <Fade key="empty">
@@ -167,6 +169,7 @@ export function SelectedBrandsPanel({ vendors, brandsByVendor, selectedIds, onRe
                         </Fade>
                       )}
                     </AnimatePresence>
+                    </div>
                   </motion.section>
                 )
               })}

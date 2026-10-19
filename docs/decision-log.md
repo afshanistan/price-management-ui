@@ -621,6 +621,16 @@ From the step 2 design review.
 
 **Kept:** the divider under "Selected brands" (now between the summary and the vendor list).
 
+## Oct 19 · Empty vendor = a chip-shaped slot; vendor names lose the plum
+
+**The empty line is a slot where a chip will land.** Clearing "All 8 brands" swapped a 34px chip for the 46px placeholder, so every vendor below jumped 12px. Will's first idea: give each vendor at least the placeholder's 46px (no jump, but 12–16px of dead space under every one-row vendor, the common case). Chosen instead: shrink the inline placeholder to chip height (34: padding 4 around the 24px icon) and round it like a chip (pill), so it reads as an empty slot; each vendor's area holds at least 34px, even mid-fade. Chips wrapping to a second row still push the list down (content growing, expected).
+
+**Vendor names in the panel are near-black (`text-heading`), not plum**, the same as the Brand list's vendor names. Will: the plum didn't make sense there. Plum stays on step 2 as structure only (the panel's top edge, the page header).
+
+**Count badge turns citron when every vendor has a brand**: Will asked for it; it was already built (Oct 17, "Count badge = whole step").
+
+**Not doing: the vendor name in the panel as a link to its group on the left.** Any honest affordance either makes the labels teal links or adds an icon to every line; with ≤8 vendors and collapsed headers on the left, finding a vendor is already one glance.
+
 ---
 
 ## Build plan

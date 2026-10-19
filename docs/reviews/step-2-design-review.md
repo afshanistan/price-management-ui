@@ -19,6 +19,11 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 | 13 | Coverage strip as a 4-column wrapping grid | **Dropped with 12**: the strip is gone (answers pressure-test #1) |
 | 14 | Selected brands: vendor name one tick bigger and bolder than the chips, complete mark after the count | **Built Oct 19**: Label/LG plum; citron check after "N of M" once the vendor has a brand. Mark motion: later |
 | 15 | One empty line for every vendor | **Built Oct 19**: "Select a brand to continue" (answers pressure-test #2); panel helper "Select brands on the left…" |
+| 16 | Vendors below jump when a vendor empties | **Built Oct 19**: the placeholder is a 34px chip-shaped slot (pill); each vendor holds ≥34px |
+| 17 | Count badge citron once every vendor has a brand | **Already built** (Oct 17) |
+| 18 | Vendor names in the panel: not plum | **Built Oct 19**: `text-heading`, like the Brand list |
+
+**Delight ideas, for the motion pass** (not built): 1. the empty slot fills into the chip in place; 2. the complete check pops in (0.6 → 1, fast); 3. the "step done" moment (badge citron + footer hint fades + Set presets unlocks) reads as one; 4. hovering a chip highlights its row on the left. Dropped: 5. vendor name in the panel as a link (no honest affordance).
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
 
