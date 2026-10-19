@@ -26,6 +26,7 @@ Same routine as steps 2 and 3: Will clicks through top to bottom, notes are logg
 | R15 | "Decide later" carries "Fill in per row" under it, as on step 3 (T (b)); depends on the open product question on what it means downstream | **Built** |
 | R16 | Preset readout hierarchy: label stays quiet (Body/SM, subtle); a set value goes **Body/LG Strong** (Geist SemiBold 16, `text-heading`); "Decide later" stays regular, subtle. Labels in mono rejected (mono is for data: IDs, ESNs, SKUs); values in mono rejected (words read as code) | **Built** (Figma queue) |
 | R17 | Fit the 644 card: "Decide later · Fill in per row" on one line, like step 3's inline tile (replaces "under it" in R15); readout padding 12 → 10 top and bottom | **Built** (Figma queue) |
+| R18 | Summary → lists and lists → Global presets both 16 (were 24; the gap under the header stays 24). The card fit 644 to the pixel, so rounding on Will's screen made it scroll; now 16px of room. Plus a lock: in the app the Review card never scrolls as a whole (`overflow: hidden`), only its lists. Rejected: every gap 20, lists 222; flexible lists (held) | **Built** (Figma queue) |
 
 Visual review done (Will, Oct 19). Batch built Oct 19, not committed: Will looks first. 176 of 176 tests pass.
 

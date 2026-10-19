@@ -34,6 +34,19 @@
   align-items: stretch;
 }
 
+/* Summary → lists and lists → Global presets: both 16 (the gap under the header stays 24).
+   Leaves the fixed 644 card 16px of room (step 4 review R18). */
+.review-card__scope,
+.review-card__scope + .review-card__section {
+  margin-top: calc(var(--space-16) - var(--space-24));
+}
+
+/* In the app's fixed 644 frame, Review never scrolls as a whole: only its lists do (Will, R18).
+   With 16px of room nothing is cut; this guards against a browser rounding a pixel taller. */
+.wizard-layout__card > .review-card:not(.wizard-layout__toast) {
+  overflow: hidden;
+}
+
 .review-card__section {
   display: flex;
   flex-direction: column;
