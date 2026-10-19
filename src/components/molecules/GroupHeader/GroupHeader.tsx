@@ -66,7 +66,7 @@ export function GroupHeader({ vendor, vendorId, count, selectAll, expand, classN
   const toggleable = expand && !expand.isDisabled
   const title = (
     <>
-      <span id={vendorId} className="group-header__vendor type-body-lg-strong">
+      <span id={vendorId} className="group-header__vendor type-body-lg-medium">
         {vendor}
       </span>
       {count && <Count value={count} />}

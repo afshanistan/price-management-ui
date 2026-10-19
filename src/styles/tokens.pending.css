@@ -15,6 +15,9 @@
   /* figma-sync: "Body/LG Strong" (Selected item card name, Oct 18). Same as Body/LG, SemiBold. */
   --type-body-lg-strong: 600 16px/24px var(--font-family-body);
   --type-body-lg-strong-tracking: 0;
+  /* figma-sync: "Body/LG Medium" (Group header vendor name, Oct 19). Same as Body/LG, Medium. */
+  --type-body-lg-medium: 500 16px/24px var(--font-family-body);
+  --type-body-lg-medium-tracking: 0;
 
   /* figma-sync: "Motion tokens" (Step 1 motion pass, Oct 18). Same values as src/styles/motion.ts.
      --motion-ease redefines the generated ease-out keyword as the system standard curve. */
@@ -46,3 +49,4 @@
 }
 
 .type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */
+.type-body-lg-medium { font: var(--type-body-lg-medium); letter-spacing: var(--type-body-lg-medium-tracking); }  /* Body/LG Medium: Geist Medium 16/24 */

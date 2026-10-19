@@ -9,7 +9,7 @@ Running list from Will's review. Ideas are collected first and built in a batch 
 | 3 | Group header: select all needs a label, and where it goes | **Built Oct 19** (in item 7) |
 | 4 | Group header: stronger hierarchy for the vendor name | **Built Oct 19** (in item 7) |
 | 5 | Group header: the bar blends into the list | **Built Oct 19**: Teal/100 + dark teal rule (in item 7) |
-| 6 | Group header: name size and color | **Built Oct 19**: Body/LG Strong, `text-heading` (in item 7) |
+| 6 | Group header: name size and color | **Built Oct 19**: Body/LG Medium (16/500, was Body/LG Strong: "a tick too big"), `text-heading` (in item 7) |
 | 7 | Group header layout: name + count left; ☐ Select all + caret right | **Built and committed Oct 19** at Will's request. Decision log "Group header: a teal bar that opens and closes"; Figma queue in `docs/figma-sync.md` |
 
 Explorations kept for reference: Storybook → `Scratch/Group header explorations` (`src/scratch/`).
