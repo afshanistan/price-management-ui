@@ -40,7 +40,7 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 **Step 2 (Select brands)**
 - [ ] **Brand list shadow** · Brand list `744:777` · Figma has `Elevation/2 – floating` on a list that sits inline in the card · Probably left from when it was a dropdown · Open. Built without the shadow (Oct 17)
 - [x] **Incomplete vendor: note or empty state** · Selected brands panel, Incomplete · code-backlog: a "Sysco needs at least one brand." note; Figma: inline Empty selection "No Kraft Heinz brands yet", no note · Open. Built Figma's: the inline empty state, no note (Oct 17) **Answered Oct 19 (Will):** the inline empty state, reworded "Select a brand to continue", no note; the vendor line gets a citron complete mark once it has a brand.
-- [ ] **Undo toast for "All N brands" ×** · Select brands card · code-backlog asks for an undo toast; there's no Toast component in Figma · Open. Built the clear + "All General Mills brands removed" in the live region, no toast; re-checking on the left is the undo (Oct 17)
+- [x] **Undo toast for "All N brands" ×** · Select brands card · code-backlog asks for an undo toast; there's no Toast component in Figma · Open. Built the clear + "All General Mills brands removed" in the live region, no toast; re-checking on the left is the undo (Oct 17) **Moot Oct 19 (Will): step 2 has no toast.** The "All N brands" chip only exists when every brand is picked, so Select all brings it back in one click.
 - [ ] **Focus after removing a chip** · Selected brands panel · Not in Figma or the annotations (same question as step 1's vendor remove) · Open. Built: next chip's ×, else previous, else the vendor's H3 (focusable with tabindex -1) (Oct 17)
 - [ ] **General Mills wordmark** · Vendor logo / coverage tile · `vendors.ts` (step 1) "GIS"; Figma step 2 coverage tile "GMI" · Open. Kept `vendors.ts` ("GIS") as the one source; the step 2 stories show GIS (Oct 17)
 - [ ] **Status mark To do center** · Status mark · Figma fills it white (`--surface-card`); code-backlog suggests transparent once real logos exist · Open. Built Figma's white center (Oct 17)
@@ -85,7 +85,7 @@ Format: `[ ]` open / `[x]` answered · **Question** · Where · Options · Sourc
 
 ## From building step 2 in the app (Oct 18)
 - [ ] **No "Clear all" in the Selected brands panel** · Selection summary · The Oct 16 decision log mentions "Clear all gets an undo toast", but the current Selection summary (count + title) has no Clear all. Built without it; Undo exists only for the "All N brands" × · (a) add Clear all to the summary in Figma, (b) leave it out · Open
-- [ ] **Undo toast placement on step 2** · Select brands card · Bottom center of the card, over the brand list and panel (placeholder, like step 1's). Part of "Toast needs Figma design" · Open
+- [x] **Undo toast placement on step 2** · Select brands card · Bottom center of the card, over the brand list and panel (placeholder, like step 1's). Part of "Toast needs Figma design" · Open **Moot Oct 19 (Will): step 2 has no toast.** The "All N brands" chip only exists when every brand is picked, so Select all brings it back in one click.
 
 ## From wiring steps 3–4 and the steps 2–4 pressure test (Oct 18)
 *Built with the default in each Status (Will: use spec defaults while away). Findings: `docs/pressure-tests/steps-2-4.md`.*

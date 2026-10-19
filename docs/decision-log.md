@@ -644,6 +644,10 @@ From the step 2 design review. Calm, in the existing vocabulary (fades, small sc
 
 Rejected: auto-collapsing a vendor once complete (things moving on their own while you work), more motion on the counts, and the vendor name in the panel as a link (no honest affordance).
 
+## Oct 19 · No toast on step 2
+
+**Clearing "All N brands" no longer offers Undo.** The chip only exists when every brand of the vendor is picked, so getting it back is one click on that vendor's Select all, right beside it on the left. The toast added noise for almost no saving. The removal is still announced to screen readers ("All General Mills brands removed"). *Reverses Oct 17 "Its × clears the whole vendor with an undo toast."* Step 1 keeps its Undo toast (removing a vendor costs a search to undo); step 4's Download toast is a placeholder until Download exists. The toast's look and placement are still open (step 1).
+
 ---
 
 ## Build plan

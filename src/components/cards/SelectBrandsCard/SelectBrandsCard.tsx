@@ -1,10 +1,9 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Autocomplete } from 'react-aria-components'
 import { matchesBrand, type Brand } from '../../../data/brands'
 import { byVendorName, type Vendor } from '../../../data/vendors'
 import { CardHeader } from '../../molecules/CardHeader'
 import { TextField } from '../../molecules/TextField'
-import { ToastRegion, type ToastMessage } from '../../molecules/Toast'
 import { BrandList, type BrandListGroup } from '../../organisms/BrandList'
 import { SelectedBrandsPanel } from '../../organisms/SelectedBrandsPanel'
 import './SelectBrandsCard.css'
@@ -32,13 +31,8 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
   const vendors = useMemo(() => [...picked].sort(byVendorName), [picked])
   const [query, setQuery] = useState('')
   const [announcement, setAnnouncement] = useState('')
-  const [toast, setToast] = useState<ToastMessage | null>(null)
   // A chip hovered in the panel lights up its row on the left (if its group is open).
   const [hoveredBrand, setHoveredBrand] = useState<string | null>(null)
-  const toastCount = useRef(0)
-  // Undo starts from the latest selection, whatever happened since the removal.
-  const latestIds = useRef(selectedIds)
-  latestIds.current = selectedIds
 
   const brandsByVendor = useMemo(
     () => Object.fromEntries(vendors.map((vendor) => [vendor.id, brands.filter((brand) => brand.vendorId === vendor.id)])),
@@ -98,23 +92,13 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
     onChange(next)
   }
 
-  // "All N brands" ×: clears the vendor, and offers Undo in a toast (a big removal; a single chip's ×
-  // doesn't need one, its checkbox is right beside it). The toast announces it, so the card stays quiet.
+  // "All N brands" ×: clears the vendor. No Undo toast (Will, Oct 19): the chip only exists when every
+  // brand is picked, so getting it back is one click on the vendor's Select all, right there on the left.
   function removeVendor(vendorId: string) {
     const vendor = vendors.find((v) => v.id === vendorId)
-    const removed = brandsByVendor[vendorId].map((brand) => brand.id).filter((id) => selectedIds.has(id))
+    const removed = brandsByVendor[vendorId].map((brand) => brand.id)
     onChange(new Set([...selectedIds].filter((id) => !removed.includes(id))))
-    toastCount.current += 1
-    setToast({
-      id: toastCount.current,
-      message: `All ${vendor?.name} brands removed`,
-      actionLabel: 'Undo',
-      onAction: () => {
-        setToast(null)
-        onChange(new Set([...latestIds.current, ...removed]))
-        setAnnouncement(`All ${vendor?.name} brands restored`)
-      },
-    })
+    setAnnouncement(`All ${vendor?.name} brands removed`)
   }
 
   return (
@@ -145,8 +129,6 @@ export function SelectBrandsCard({ vendors: picked, brands, selectedIds, onChang
         onRemoveVendor={removeVendor}
         onHoverBrand={setHoveredBrand}
       />
-      {/* Undo for removing a whole vendor's brands; its region announces the removal. */}
-      <ToastRegion toast={toast} onDismiss={() => setToast(null)} className="select-brands-card__toast" />
       {/* Polite live region, owned by the card. */}
       <div role="status" className="visually-hidden">
         {announcement}

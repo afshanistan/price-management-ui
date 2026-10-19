@@ -88,9 +88,8 @@ export const FlowBrands: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement)
     const search = canvas.getByRole('searchbox', { name: 'Search by brand' })
-    // Two polite regions: the card's (added, selected, restored) and the toast's (big removals).
+    // The card's polite region announces adds, selects and removals.
     const status = () => canvasElement.querySelector('.select-brands-card > .visually-hidden[role="status"]')!
-    const toastStatus = () => canvasElement.querySelector('.toast-region')!
     // Check a brand from the search: Enter toggles the highlighted row; a chip appears.
     await userEvent.click(search)
     await userEvent.keyboard('Truvia')
@@ -111,15 +110,14 @@ export const FlowBrands: Story = {
     await expect(canvas.getByRole('checkbox', { name: 'Select all Cargill brands' })).toHaveFocus()
     await userEvent.keyboard(' ')
     await expect(status()).toHaveTextContent('All Cargill brands selected')
-    // The vendor collapses to "All 5 brands"; its × clears the vendor, and a toast offers Undo.
+    // The vendor collapses to "All 5 brands"; its × clears the vendor (no Undo toast: Select all brings it back).
     await userEvent.click(await canvas.findByRole('button', { name: 'Remove all Cargill brands' }))
-    await expect(toastStatus()).toHaveTextContent('All Cargill brands removed')
+    await expect(status()).toHaveTextContent('All Cargill brands removed')
     // Nothing is selected at all now, so the panel shows its stacked empty state (after a fade-through).
     await expect(await canvas.findByText('No brands selected yet')).toBeInTheDocument()
-    // Undo brings all five back as the "All 5 brands" chip.
-    await userEvent.click(canvas.getByRole('button', { name: 'Undo' }))
+    // One click on Select all brings the vendor back as the "All 5 brands" chip.
+    await userEvent.click(canvas.getByRole('checkbox', { name: 'Select all Cargill brands' }))
     await expect(await canvas.findByRole('button', { name: 'Remove all Cargill brands' })).toBeInTheDocument()
-    await expect(status()).toHaveTextContent('All Cargill brands restored')
     // Let the fades finish before the a11y check: half-faded text would fail contrast.
     await new Promise((resolve) => setTimeout(resolve, 600))
     // Each brand names its vendor: the section label is skipped with aria-activedescendant.
@@ -141,6 +139,6 @@ export const FlowBrands: Story = {
     }
   },
   parameters: {
-    docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, remove the "All 5 brands" chip, then Undo. Then checks that brands name their vendor, and that arrowing up never hides the active row under its sticky group header.' } },
+    docs: { description: { story: 'Automated: check Truvia from the search, select all Cargill with Space, remove the "All 5 brands" chip, then bring it back with Select all. Then checks that brands name their vendor, and that arrowing up never hides the active row under its sticky group header.' } },
   },
 }
