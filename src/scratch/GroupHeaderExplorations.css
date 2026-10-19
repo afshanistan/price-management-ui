@@ -1,0 +1,280 @@
+/* SCRATCH — throwaway styles for GroupHeaderExplorations.stories.tsx. Delete with the folder.
+   Fills borrow tokens that already resolve to the right teal:
+   Teal/50 = --fill-row-selected · Teal/100 = --fill-row-highlight · Teal/200 = --fill-secondary-hover
+   Dark teal rule = --border-selected (Teal/700) · caret = --icon-on-tertiary (Teal/700). */
+
+.scratch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-24);
+}
+
+.scratch-variant {
+  margin: 0;
+}
+
+.scratch-variant__label {
+  margin-bottom: var(--space-8);
+  font: var(--type-label-md);
+  letter-spacing: var(--type-label-md-tracking);
+  color: var(--text-subtle);
+}
+
+/* Same box as the Brand list: bordered, scrolls inside. */
+.scratch-list {
+  height: 400px;
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-8);
+  background: var(--surface-card);
+  overflow-y: auto;
+}
+
+/* ---------- Header ---------- */
+
+.scratch-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  min-height: var(--size-40);
+  padding: var(--space-8) var(--space-12);
+  background: var(--scratch-fill);
+  border-bottom: var(--border-width-1) solid var(--scratch-rule, transparent);
+  cursor: pointer;
+  transition: var(--transition-interactive);
+}
+
+.scratch-header:hover {
+  background: var(--scratch-fill-hover);
+}
+
+/* The whole bar toggles: the button's hit area stretches over it; the checkbox sits above. */
+.scratch-header__toggle {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.scratch-header__toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.scratch-header:has(.scratch-header__toggle:focus-visible) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: calc(var(--focus-width-2) * -1);
+}
+
+.scratch-header__check {
+  position: relative;
+  z-index: 1;
+}
+
+/* Name lines up with the row names: checkbox 18 + 12 (as now). */
+.scratch-header > .scratch-header__check:first-child {
+  margin-right: calc(var(--space-12) - var(--space-6));
+}
+
+.scratch-header__name {
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--scratch-name);
+}
+
+.scratch-header__count {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}
+
+.scratch-header__caret {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-left: var(--space-6);
+  color: var(--icon-on-tertiary);
+  transition: transform var(--motion-duration-base) var(--motion-ease);
+}
+
+.scratch-header[data-open] .scratch-header__caret {
+  transform: rotate(90deg);
+}
+
+/* ---------- Fill ---------- */
+
+.scratch-list[data-fill='current'] {
+  --scratch-fill: var(--surface-card);
+  --scratch-fill-hover: var(--fill-row-selected);
+  --scratch-rule: var(--border-brand);
+}
+
+.scratch-list[data-fill='teal-100'] {
+  --scratch-fill: var(--fill-row-highlight);
+  --scratch-fill-hover: var(--fill-secondary-hover);
+}
+
+.scratch-list[data-fill='teal-100-rule'] {
+  --scratch-fill: var(--fill-row-highlight);
+  --scratch-fill-hover: var(--fill-secondary-hover);
+  --scratch-rule: var(--border-selected);
+}
+
+.scratch-list[data-fill='teal-50'] {
+  --scratch-fill: var(--fill-row-selected);
+  --scratch-fill-hover: var(--fill-row-highlight);
+}
+
+/* ---------- Name: size / weight ---------- */
+
+.scratch-list[data-type='current'] .scratch-header__name {
+  font: var(--type-label-md);
+  letter-spacing: var(--type-label-md-tracking);
+}
+
+.scratch-list[data-type='T1'] .scratch-header__name {
+  font: var(--type-label-lg);
+  letter-spacing: var(--type-label-lg-tracking);
+}
+
+.scratch-list[data-type='T2'] .scratch-header__name {
+  font: var(--type-body-lg-strong);
+  letter-spacing: var(--type-body-lg-strong-tracking, normal);
+}
+
+/* ---------- Name: color ---------- */
+
+.scratch-list[data-color='plum'] { --scratch-name: var(--text-brand); }
+.scratch-list[data-color='C1'] { --scratch-name: var(--text-heading); }
+.scratch-list[data-color='C2'] { --scratch-name: var(--text-on-tertiary); }
+
+/* ---------- Select all with a visible label (P2, P4) ---------- */
+
+.scratch-labelled-check {
+  align-items: center;
+  gap: var(--space-6);
+  flex-shrink: 0;
+  color: var(--text-default);
+}
+
+/* ---------- P3: select all as the first row in the open group ---------- */
+
+.scratch-selectall-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  min-height: var(--size-40);
+  padding: 0 var(--space-12);
+  border-bottom: var(--border-width-1) solid var(--border-structural);
+  color: var(--text-heading);
+  transition: var(--transition-interactive);
+}
+
+.scratch-selectall-row[data-hovered] {
+  background: var(--fill-row-highlight);
+}
+
+.scratch-selectall-row[data-focus-visible] {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: calc(var(--focus-width-2) * -1);
+}
+
+.scratch-selectall-row[data-focus-visible] .checkbox-box {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scratch-header__caret {
+    transition: none;
+  }
+}
+
+/* ---------- Proposed layout (round 2) ---------- */
+
+.proposed-stage {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-16);
+  max-width: 1400px;
+}
+
+.proposed-grid {
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+}
+
+.proposed-list {
+  height: 460px;
+}
+
+.proposed-header {
+  gap: var(--space-12);
+}
+
+/* Hover the bar only when the pointer isn't on the no-collapse cluster. */
+.proposed-header:hover:has(.proposed-cluster:hover) {
+  background: var(--scratch-fill);
+}
+
+.proposed-header .scratch-header__toggle:disabled {
+  cursor: default;
+}
+
+.proposed-name {
+  font: var(--type-body-lg-strong);
+  color: var(--text-heading);
+}
+
+.proposed-cluster {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-8);
+  /* A little padding so a near-miss on the checkbox lands here, not on the collapse target. */
+  padding: var(--space-4) var(--space-6);
+  margin: calc(var(--space-4) * -1) 0;
+  cursor: default;
+}
+
+/* Will's order: a touch more space before the count, so "Select all 3 of 19" doesn't read as one phrase. */
+.proposed-cluster[data-order='will'] .proposed-count {
+  margin-left: var(--space-4);
+}
+
+.proposed-check {
+  align-items: center;
+  gap: var(--space-6);
+  color: var(--text-default);
+}
+
+.proposed-count {
+  display: inline-block;
+  color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
+}
+
+.proposed-count[data-tick] {
+  animation: proposed-count-tick var(--motion-duration) var(--motion-ease);
+}
+
+.proposed-caret {
+  margin-left: 0;
+}
+
+@keyframes proposed-count-tick {
+  50% {
+    transform: scale(1.15);
+  }
+}

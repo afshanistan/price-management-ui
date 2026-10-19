@@ -581,6 +581,22 @@ From the 60-vendor test (`docs/pressure-tests/step-1.md`). Will chose the recomm
 **Brand data: real brands for all 60 mock vendors** (551), with invented SKU counts. Some brands appear under two vendors on purpose (Coca-Cola and its bottler), as real data does.
 
 **Step 1's rules, adapted for a multi-select:** chips enter, glide and leave like vendor cards, but in A–Z order, faster (smaller items), and without the highlight tint (several picks in a row would tint everything), the flight (tiring by the tenth brand) or the re-pick pointer (a checked brand just unchecks). Undo only for big removals (the "All N brands" ×); a single chip's checkbox is right beside it. Swaps are fade-throughs, like step 1's empty state. The summary's CountBadge keeps its Oct 17 pop rather than also ticking. The step-to-step transition is still deferred.
+## Oct 19 · Group header: a teal bar that opens and closes
+
+From the step 2 design review. Will: the header blends into the list, and the select all reads as "a big check mark next to General Mills." Explored in Storybook (`Scratch/Group header explorations`: four fills, two name sizes × two colors, four select-all placements, then three orders).
+
+**Keep the one search at the top.** Will floated a search in each vendor's header instead. Kept the top search: people often know the brand, not who owns it (Sprite, Häagen-Dazs), the top search already matches vendor names ("coca" → both Coca-Colas), and twelve header searches would mean twelve more tab stops and a jumpy sticky header. The real problem was getting to a vendor in a long list, so: collapsible groups.
+
+**The bar is teal now, with a dark teal rule.** It opens and closes, so it's a control: teal, not plum (rule 3). Fill Teal/100 (`--fill-group-header`), hover Teal/200, 1px Teal/700 rule (`--border-group-header`). Rejected: Teal/100 alone (a hovered row looks exactly like a header; the rule is the one thing a row never has), Teal/50 (too faint to fix "blending in"), the white bar with the plum rule (the one being replaced). *Teal/100 is also the row hover; the rule is what tells them apart.*
+
+**The name is bigger than the rows it labels.** Body/LG Strong (16 semibold), `text-heading`. It was Label/MD 13, smaller than the 14px rows. Rejected: Label/LG 14 (same size as the rows), dark teal (reads as a link on a teal bar), plum (a second color back in the pane), Bricolage (reserved for headings; these aren't).
+
+**Layout: name + count on the left; ☐ Select all, then the caret, on the right.** Will's order, so the checkbox and the caret are never side by side. "Select all" is visible now (Label/MD, `text-default`; "Select 2 matches" while searching). Rejected: the checkbox on the left with no label (the old layout), select all as the first row inside the open group (can't select a closed vendor), "Select all ☐ count" and "count ☐ Select all" by the caret. *Supersedes Oct 17 "Select all per vendor … in the group header directly above the row checkboxes."* The count ticks when it changes, the confirmation that the click landed.
+
+**Behavior, built as previewed** (Claude's proposal in the review; Will chose the layout and asked to commit it): the whole bar opens and closes the group, except the select-all cluster, so a near-miss on the box never closes it. The first vendor with nothing selected starts open, the rest closed. While searching, every group with matches opens (and can't close); clearing the search returns to how you left them. *Answers the parked code-backlog item "Collapsible vendor groups": real vendors carry 15–22 brands.*
+
+**Not changed:** the Selected brands panel's vendor labels (plain text, not controls), so the two columns no longer share one header style, on purpose.
+
 ---
 
 ## Build plan

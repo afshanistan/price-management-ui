@@ -29,4 +29,20 @@
   --motion-ease: var(--motion-ease-out);
 }
 
+/* figma-sync: "Group header fill and rule" (step 2 design review, Oct 19). The Brand list's vendor
+   header: a teal bar (it opens and closes, so it's a control: teal, not plum) with a dark teal rule,
+   the one thing a hovered row never has. */
+:root,
+[data-mode="light"] {
+  --fill-group-header: var(--color-teal-100);
+  --fill-group-header-hover: var(--color-teal-200);
+  --border-group-header: var(--color-teal-700);
+}
+
+[data-mode="on-brand"] {
+  --fill-group-header: var(--color-teal-900);
+  --fill-group-header-hover: var(--color-teal-800);
+  --border-group-header: var(--color-teal-300);
+}
+
 .type-body-lg-strong { font: var(--type-body-lg-strong); letter-spacing: var(--type-body-lg-strong-tracking); }  /* Body/LG Strong: Geist SemiBold 16/24 */

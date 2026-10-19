@@ -91,6 +91,8 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 
 ## Start here (next session, after Oct 18)
 
+**Oct 19 update: design review in progress** (`docs/reviews/step-2-design-review.md`). Order: brands → presets → review → stepper, each design then motion; ideas are batched unless Will says build now. Done so far: the Group header redesign (teal bar, collapsible, name + count left, ☐ Select all + caret right), committed; explorations in Storybook `Scratch/Group header explorations`. Next on step 2: pressure-test findings #1–3 below, then step 2 motion. Tests: 176 passing. The lint note under "Known, not urgent" no longer applies to GroupHeader.
+
 **Where things stand.** The app runs all four steps (`npm run dev` → http://localhost:5173) on 60 real mock vendors and 551 real brands. Storybook: `npm run storybook` (6006). Tests: `npm run test-storybook` (167 passing; commit only when all pass). Everything is committed on `main`; nothing pushed. Will's working style: say what you'll do before doing it; after each build comes a design review (data → mock data → pressure test → commit).
 
 **1. Decide the steps 2–4 pressure-test findings** (`docs/pressure-tests/steps-2-4.md`, screenshots in `step-2-4/`; also in `open-questions.md`). Each is built with a default for now:

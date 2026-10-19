@@ -1,24 +1,68 @@
-/* Group header, Subtle (design/specs/group-header.md). The Brand list version:
-   13 top (12 + the list's 1px border), 12 sides, 8 bottom. */
+/* Group header (step 2 design review, Oct 19; decision log "Group header: a teal bar that opens and
+   closes"). Replaces Tone=Subtle; Figma redesign queued in docs/figma-sync.md "Group header redesign".
+   Left: name + count. Right: select all, then the caret. */
 .group-header {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--space-6);
+  gap: var(--space-12);
   min-height: var(--size-40);
-  padding: calc(var(--space-12) + var(--border-width-1)) var(--space-12) var(--space-8);
-  border-bottom: var(--border-width-1) solid var(--border-brand);
-  /* Sticky in the list, so rows mustn't show through. */
-  background: var(--surface-card);
+  padding: var(--space-8) var(--space-12);
+  border-bottom: var(--border-width-1) solid var(--border-group-header);
+  /* Opaque: the list makes it sticky, so rows mustn't show through. */
+  background: var(--fill-group-header);
+  transition: var(--transition-interactive);
 }
 
-/* The name lines up with the row names: checkbox 18 + 12. */
-.group-header__select-all {
-  margin-right: calc(var(--space-12) - var(--space-6));
+/* The whole bar opens and closes the group (the select-all cluster excepted). */
+.group-header[data-toggleable] {
+  cursor: pointer;
+}
+
+.group-header[data-toggleable]:hover:not(:has(.group-header__select-all:hover)) {
+  background: var(--fill-group-header-hover);
+}
+
+/* Keyboard focus on the real toggle (in the list it lives outside the listbox): an inset ring. */
+.group-header[data-focus-visible],
+.group-header:has(.group-header__toggle[data-focus-visible]) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: calc(var(--focus-width-2) * -1);
+}
+
+.group-header__title {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  flex: 1;
+  min-width: 0;
+}
+
+/* Standalone (outside the list): the title is the real toggle; its hit area stretches over the bar. */
+.group-header__toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  cursor: pointer;
+  outline: none;
+}
+
+.group-header__toggle::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.group-header__toggle[data-disabled] {
+  cursor: default;
 }
 
 .group-header__vendor {
   min-width: 0;
-  color: var(--text-brand);
+  color: var(--text-heading);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -27,16 +71,54 @@
 .group-header__count {
   flex-shrink: 0;
   color: var(--text-subtle);
+  font-variant-numeric: tabular-nums;
 }
 
-/* Visual-only box (the Brand list's real select all sits outside the listbox). */
-.group-header__box {
+/* A small tick when the count changes: the confirmation that select all (or a row) landed. */
+.group-header__count[data-tick] {
+  display: inline-block;
+  animation: group-header-count-tick var(--motion-duration) var(--motion-ease);
+}
+
+@keyframes group-header-count-tick {
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Checkbox + "Select all". Above the stretched toggle, with a little padding so a near-miss lands here. */
+.group-header__select-all {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: var(--space-6);
+  padding: var(--space-4) var(--space-6);
+  margin: calc(var(--space-4) * -1) calc(var(--space-6) * -1);
   border-radius: var(--radius-4);
   cursor: pointer;
 }
 
+.group-header__select-text {
+  color: var(--text-default);
+  white-space: nowrap;
+}
+
+/* Visual-only box (the Brand list's real select all sits outside the listbox). */
 .group-header__box[data-focus-visible] .checkbox-box {
   outline: var(--focus-width-2) solid var(--focus-ring);
   outline-offset: var(--focus-offset-2);
+}
+
+/* Right when closed, down when open. */
+.group-header__caret {
+  display: inline-flex;
+  flex-shrink: 0;
+  color: var(--icon-on-tertiary);
+  transition: var(--transition-press);
+}
+
+.group-header[data-expanded] .group-header__caret {
+  transform: rotate(90deg);
 }

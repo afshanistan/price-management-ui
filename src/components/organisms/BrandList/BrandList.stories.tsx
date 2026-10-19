@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import { expect, userEvent, within } from 'storybook/test'
 import { Autocomplete } from 'react-aria-components'
 import { TextField } from '../../molecules/TextField'
 import { brandsByVendor, selectedSample, step2Vendors } from '../../../data/brandSamples'
@@ -84,7 +85,7 @@ export const Default: Story = {
   args: placeholderArgs,
   render: () => <Interactive query="" initial={new Set()} />,
   parameters: {
-    docs: { description: { story: 'Nothing checked. Scroll: the group headers stick.' } },
+    docs: { description: { story: 'Nothing checked: the first vendor starts open (where the work is), the rest closed. Click a header to open or close it; scroll an open group and its header sticks.' } },
   },
 }
 
@@ -92,18 +93,35 @@ export const Selected: Story = {
   args: placeholderArgs,
   render: () => <Interactive query="" initial={selectedSample} />,
   parameters: {
-    docs: { description: { story: 'Cargill 4 of 5 (Mixed), General Mills 9 of 9, Kraft Heinz 3 of 8.' } },
+    docs: { description: { story: 'Cargill 4 of 5 (Mixed), General Mills 9 of 9, Kraft Heinz 3 of 8. Every vendor has a brand, so the first one starts open.' } },
   },
 }
 
 export const Searching: Story = {
   args: placeholderArgs,
   render: () => <Interactive query="cr" initial={selectedSample} />,
-  parameters: { docs: { description: { story: '"cr": matches are bold; select all acts on the visible matches ("Select 2 matches").' } } },
+  parameters: { docs: { description: { story: '"cr": every group with matches opens; matches are bold; select all acts on the visible matches ("Select 2 matches").' } } },
 }
 
 export const NoResults: Story = {
   name: 'No results',
   args: placeholderArgs,
   render: () => <Interactive query="xyz" initial={selectedSample} />,
+}
+
+export const AllClosed: Story = {
+  name: 'All closed',
+  args: placeholderArgs,
+  render: () => <Interactive query="" initial={selectedSample} />,
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    // Close the one open group with its (visually hidden) toggle: only headers remain, no empty message.
+    const toggle = canvas.getByRole('button', { name: /^Cargill, 4 of 5 brands selected/ })
+    await expect(toggle).toHaveAttribute('aria-expanded', 'true')
+    await userEvent.click(toggle)
+    await expect(toggle).toHaveAttribute('aria-expanded', 'false')
+    await expect(canvas.queryAllByRole('option')).toHaveLength(0)
+    await expect(canvas.queryByText(/No brands match/)).not.toBeInTheDocument()
+  },
+  parameters: { docs: { description: { story: 'Automated: closes the open group. Closed headers read as a summary: each vendor and its count.' } } },
 }

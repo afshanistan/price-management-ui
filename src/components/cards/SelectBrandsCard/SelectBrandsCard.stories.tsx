@@ -102,7 +102,11 @@ export const FlowBrands: Story = {
     await userEvent.keyboard('{Escape}')
     await userEvent.keyboard('{Escape}')
     await expect(canvas.getByRole('button', { name: 'Remove Truvia' })).toBeInTheDocument()
-    // Tab reaches the first select all; Space selects the whole vendor.
+    // Tab reaches the first vendor's open/close toggle (Cargill starts open: nothing selected yet),
+    // then its select all; Space selects the whole vendor.
+    await userEvent.tab()
+    await expect(canvas.getByRole('button', { name: /^Cargill, \d+ of 5 brands selected/ })).toHaveAttribute('aria-expanded', 'true')
+    await expect(canvas.getByRole('button', { name: /^Cargill, \d+ of 5 brands selected/ })).toHaveFocus()
     await userEvent.tab()
     await expect(canvas.getByRole('checkbox', { name: 'Select all Cargill brands' })).toHaveFocus()
     await userEvent.keyboard(' ')
