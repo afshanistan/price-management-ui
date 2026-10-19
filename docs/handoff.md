@@ -101,7 +101,9 @@ Cards — Select vendors card `689:358`; Select brands card `772:2750`; Brand li
 - Explorations kept in Storybook: `Scratch/Group header explorations`.
 - All decisions with reasons and rejected options: `docs/decision-log.md` (Oct 19 sections at the end).
 
-**Next (after lunch): 1. the Review page (step 4), design then motion. 2. The stepper / step-to-step transition.**
+**Afternoon (Oct 19): step 4 visual review done and built** (`docs/reviews/step-4-design-review.md`, R1–R17; decision log "Review page (step 4) design review"): Will's `edit` icon and `review` pictogram; summary strip "1 Vendor" / Brands / Presets with a smaller "of 3"; one Optional tag; vendor rows without tile, "ESN-…"; brands grouped by vendor under quiet sticky labels; a trash on each brand row (Undo toast; a vendor's last brand is blocked with a tooltip); plum top edge and scroll shadows on both lists; presets match step 3 ("Decide later · Fill in per row", "Canadian dollar (CAD)") with bold values; the card fits 644 exactly. 176 tests pass.
+
+**Next: 1. Review motion pass** (row removal is a first cut; options in `docs/motion-options-steps-3-4.md`). **2. The stepper / step-to-step transition and the progress bar "glow up".**
 
 *Step 4 — open items to bring up (lay out the data first):*
 - Pressure-test findings (`docs/pressure-tests/steps-2-4.md`): **#4** the Brands list is a long scroll (122 brands in a ~5-row window: group by vendor, counts only, taller, keep); **#5** vendor rows still show the wordmark tile and a bare ESN (match step 1: no tile, "ESN-"); **#6** long vendor names cut off in the Brands list.

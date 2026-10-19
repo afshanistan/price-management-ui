@@ -124,6 +124,8 @@ function App() {
         <ReviewTemplateCard
           vendors={vendorsAZ}
           selectedBrands={selectedBrands}
+          // Brands can be removed on Review (step 4 review R10); the card keeps each vendor's last one.
+          onSelectedBrandsChange={(brands) => setSelectedBrandIds(new Set(brands.map((brand) => brand.id)))}
           presets={presets}
           today={today}
           onEdit={(target) => setStep(editTarget[target])}

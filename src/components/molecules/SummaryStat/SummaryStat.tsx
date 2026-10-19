@@ -5,24 +5,27 @@ import './SummaryStat.css'
 export type SummaryStatStatus = 'complete' | 'optional'
 
 export interface SummaryStatProps {
-  /** "5", "20", "1 of 3". */
+  /** "5", "20", "2". */
   value: string
-  /** "Vendors", "Brands", "Presets set". */
+  /** Presets: "of 3" after the value, smaller and subtle, so the number leads (step 4 review R5). */
+  total?: number
+  /** "Vendor" / "Vendors", "Brands", "Presets": the card matches it to the count (R3, R4). */
   label: string
   /** complete = citron check; optional = the Optional tag (presets always, whatever the count). */
   status: SummaryStatStatus
-  /** What screen readers hear instead: "5 vendors, complete" / "1 of 3 presets set, optional". */
+  /** What screen readers hear instead: "5 vendors, complete" / "2 of 3 presets set, optional". */
   srLabel: string
   className?: string
 }
 
 /** A big number for Review's summary strip. Not interactive. */
-export function SummaryStat({ value, label, status, srLabel, className }: SummaryStatProps) {
+export function SummaryStat({ value, total, label, status, srLabel, className }: SummaryStatProps) {
   return (
     <div className={className ? `summary-stat ${className}` : 'summary-stat'}>
       <span className="visually-hidden">{srLabel}</span>
       <span className="summary-stat__value" aria-hidden="true">
         {value}
+        {total !== undefined && <span className="summary-stat__total"> of {total}</span>}
       </span>
       <span className="summary-stat__meta" aria-hidden="true">
         <span className="summary-stat__label type-body-sm">{label}</span>

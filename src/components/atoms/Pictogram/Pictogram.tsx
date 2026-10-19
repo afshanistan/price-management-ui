@@ -1,6 +1,6 @@
 import './Pictogram.css'
 
-export type PictogramType = 'vendor' | 'brand' | 'presets' | 'placeholder'
+export type PictogramType = 'vendor' | 'brand' | 'presets' | 'review' | 'placeholder'
 export type PictogramSize = 20 | 24 | 40
 
 export interface PictogramProps {
@@ -10,7 +10,7 @@ export interface PictogramProps {
   className?: string
 }
 
-export const pictogramTypes: PictogramType[] = ['vendor', 'brand', 'presets', 'placeholder']
+export const pictogramTypes: PictogramType[] = ['vendor', 'brand', 'presets', 'review', 'placeholder']
 
 // The exported artwork in src/assets/pictograms is the single source of truth.
 // Keep only the drawing inside each file's <svg> tag (and drop the export's <metadata>).

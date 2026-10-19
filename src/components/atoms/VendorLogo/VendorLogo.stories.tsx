@@ -35,7 +35,7 @@ const meta = {
           'Vendor identity tile. Content=Mono logo: single-color logo (override the Shape image fill with the vendor’s logo; recolor via the Ink layer — text-subtle by default, text-on-primary on teal). ' +
           'Content=Brand logo: brand-color logo, only on white surface-card tiles (override the Logo image fill). Content=Wordmark: fallback for vendors with no logo. ' +
           'Logos are image fills set to Fit, matching object-fit: contain in code, so the tile can be resized freely.\n\n' +
-          'The tile is 56×36, padding 2/4. Result rows (and Review rows) use the mono logo, white on teal when selected. Brand logo is for white tiles only; the Selected item card shows its brand logo without a tile. ' +
+          'The tile is 56×36, padding 2/4. Result rows use the mono logo (Review rows show no logo), white on teal when selected. Brand logo is for white tiles only; the Selected item card shows its brand logo without a tile. ' +
           'Any content falls back to the wordmark when the vendor has no file for it. Brand colors are content, not UI color roles: a red logo doesn\'t mean error. ' +
           'Decorative inside a row or card that names the vendor; standing alone (`isStandalone`) it takes the vendor name as its accessible name.',
       },

@@ -44,6 +44,17 @@
   --border-action-strong: var(--color-teal-700);
 }
 
+/* figma-sync: "Scroll shadow" (step 4 design review R12, Oct 19). The shade on a scrolling list's
+   edge while there's more to scroll to: Neutral/1000 at 10%, the elevation shadows' ink. */
+:root,
+[data-mode="light"] {
+  --scroll-shadow: color-mix(in srgb, var(--color-neutral-1000) 10%, transparent);
+}
+
+[data-mode="on-brand"] {
+  --scroll-shadow: color-mix(in srgb, var(--color-base-black) 30%, transparent);
+}
+
 [data-mode="on-brand"] {
   --fill-group-header: var(--color-teal-900);
   --fill-group-header-hover: var(--color-teal-800);

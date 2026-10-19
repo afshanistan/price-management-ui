@@ -36,5 +36,5 @@
 - "Filled = pressed/active" is a pattern used by nav links and icon buttons (Foundations → Iconography).
 
 ## Flags
-- An **edit** icon is still to come (code-backlog, Button XSmall). Use `placeholder` until it exists, and log it in `docs/open-questions.md`.
+- ~~An **edit** icon is still to come (code-backlog, Button XSmall). Use `placeholder` until it exists, and log it in `docs/open-questions.md`.~~ **Closed Oct 19:** `edit` (stroke + filled) exported from Figma and in the set; Review's Edit buttons use it.
 - The artwork couldn't be previewed during export. Check the Icon story against Figma (Atoms page) before building on it.

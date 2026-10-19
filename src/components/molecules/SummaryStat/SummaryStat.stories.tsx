@@ -30,4 +30,5 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 export const Complete: Story = {}
-export const Optional: Story = { args: { value: '1 of 3', label: 'Presets set', status: 'optional', srLabel: '1 of 3 presets set, optional' } }
+export const Optional: Story = { args: { value: '2', total: 3, label: 'Presets', status: 'optional', srLabel: '2 of 3 presets set, optional' } }
+export const One: Story = { name: 'One (singular label)', args: { value: '1', label: 'Vendor', srLabel: '1 vendor, complete' } }

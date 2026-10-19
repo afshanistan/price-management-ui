@@ -14,7 +14,7 @@ export interface IconProps {
 }
 
 // The exported artwork in src/assets/icons is the single source of truth.
-// Keep only what's inside each file's <svg> tag; the wrapper is drawn below.
+// Keep only what's inside each file's <svg> tag (and drop the export's <metadata>); the wrapper is drawn below.
 const files = import.meta.glob<string>('../../../assets/icons/*.svg', {
   query: '?raw',
   import: 'default',
@@ -24,7 +24,10 @@ const files = import.meta.glob<string>('../../../assets/icons/*.svg', {
 const artwork: Record<string, string> = {}
 for (const [path, svg] of Object.entries(files)) {
   const file = path.split('/').pop()!.replace('.svg', '')
-  artwork[file] = svg.replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '')
+  artwork[file] = svg
+    .replace(/^[\s\S]*?<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '')
+    .replace(/<metadata>[\s\S]*?<\/metadata>/g, '')
 }
 
 export function Icon({ name, filled = false, size = 24, className, ...rest }: IconProps) {

@@ -3,7 +3,7 @@ import './PresetReadout.css'
 export interface PresetReadoutProps {
   /** "Effective date". */
   label: string
-  /** null shows "No default", in subtle text. */
+  /** null shows "Decide later · Fill in per row" on one line, in subtle text, as on step 3 (step 4 review R13, R15, R17). */
   value: string | null
   className?: string
 }
@@ -13,9 +13,14 @@ export function PresetReadout({ label, value, className }: PresetReadoutProps) {
   return (
     <div className={className ? `preset-readout ${className}` : 'preset-readout'}>
       <dt className="preset-readout__label type-body-sm">{label}</dt>
-      <dd className="preset-readout__value" data-empty={value === null || undefined}>
-        {value ?? 'No default'}
-      </dd>
+      {value === null ? (
+        <dd className="preset-readout__value" data-empty>
+          Decide later
+          <span className="preset-readout__hint type-body-sm">Fill in per row</span>
+        </dd>
+      ) : (
+        <dd className="preset-readout__value">{value}</dd>
+      )}
     </div>
   )
 }

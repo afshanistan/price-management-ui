@@ -26,6 +26,8 @@
 
 /* Vendors | Brands: equal columns; the shorter list stretches so the bottoms align. */
 .review-card__scope {
+  /* The Undo toast sits over the lists' bottom edge. */
+  position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-24);
@@ -62,14 +64,32 @@
   color: var(--text-heading);
 }
 
+/* The list's frame: border, the plum accent edge (R11: "what you've got", like the Selected brands
+   panel; teal would read as a list to act on), and the scroll shadows (R12). Scrolls past 230. */
+.review-card__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  max-height: var(--size-230);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-top: var(--border-width-3) solid var(--border-brand-strong);
+  border-radius: var(--radius-12);
+  overflow: hidden;
+}
+
+/* Keyboard focus on the scrolling list rings the whole frame (the frame clips the list's own ring). */
+.review-card__box:has(> .review-card__list:focus-visible) {
+  outline: var(--focus-width-2) solid var(--focus-ring);
+  outline-offset: var(--focus-offset-2);
+}
+
 .review-card__list {
   flex: 1;
-  max-height: var(--size-230);
   margin: 0;
   padding: 0;
   list-style: none;
-  border: var(--border-width-1) solid var(--border-structural);
-  border-radius: var(--radius-12);
   overflow-y: auto;
 }
 
@@ -77,11 +97,98 @@
   outline: none;
 }
 
-.review-card__list:focus-visible {
-  outline: var(--focus-width-2) solid var(--focus-ring);
-  outline-offset: var(--focus-offset-2);
-}
-
 .review-card__list > li + li {
   border-top: var(--border-width-1) solid var(--border-structural);
+}
+
+/* Scroll shadows: a soft shade on an edge with more to scroll to; it fades when you reach that end. */
+.review-card__box::before,
+.review-card__box::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: var(--space-12);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--motion-duration) var(--motion-ease);
+}
+
+.review-card__box::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--scroll-shadow), transparent);
+}
+
+.review-card__box::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--scroll-shadow), transparent);
+}
+
+.review-card__box[data-more-above]::before,
+.review-card__box[data-more-below]::after {
+  opacity: 1;
+}
+
+/* Brands grouped by vendor (R9). Groups butt together; the label carries the rules. */
+.review-card__list > .review-card__group + .review-card__group {
+  border-top: 0;
+}
+
+/* A quiet, read-only label (neutral, not the step 2 teal bar: it does nothing). Sticks while its
+   group scrolls by. Stand-in look until Figma has it (docs/figma-sync.md, "Review group label"). */
+.review-card__group-label {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-8);
+  padding: var(--space-6) var(--space-12);
+  border-top: var(--border-width-1) solid var(--border-structural);
+  border-bottom: var(--border-width-1) solid var(--border-structural);
+  background: var(--surface-page);
+}
+
+.review-card__group:first-child > .review-card__group-label {
+  border-top: 0;
+}
+
+.review-card__group-vendor {
+  min-width: 0;
+  font: var(--type-label-md);
+  letter-spacing: var(--type-label-md-tracking);
+  color: var(--text-heading);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.review-card__group-count {
+  flex-shrink: 0;
+  color: var(--text-subtle);
+}
+
+.review-card__group-rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Each brand row is its own animated item; it clips while it collapses. */
+.review-card__item {
+  overflow: hidden;
+}
+
+.review-card__item + .review-card__item {
+  border-top: var(--border-width-1) solid var(--border-structural);
+}
+
+/* Undo toast: bottom center, over the lists (placement to come from Figma, as on step 1). */
+.review-card__toast {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: var(--space-16);
+  z-index: 3;
 }

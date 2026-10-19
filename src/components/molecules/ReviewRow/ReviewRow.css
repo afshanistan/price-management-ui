@@ -1,4 +1,4 @@
-/* Review row (design/specs/review-row.md). Read-only: no hover, no focus. min-height (Figma's 48 / 40 are fixed). */
+/* Review row (design/specs/review-row.md). No hover fill. min-height (Figma's 48 / 40 are fixed). */
 .review-row {
   display: flex;
   align-items: center;
@@ -13,13 +13,8 @@
 
 .review-row--brand {
   min-height: var(--size-40);
-}
-
-.review-row__start {
-  display: flex;
-  align-items: center;
-  gap: var(--space-12);
-  min-width: 0;
+  /* The 32 trash sits 4 from the edge, centered in the 40 row. */
+  padding-right: var(--space-4);
 }
 
 .review-row__names {
@@ -44,8 +39,46 @@
   color: var(--text-subtle);
 }
 
-/* ESN or the brand's vendor: mono, like an ID (as drawn). */
+/* ESN: mono, like an ID (as drawn). */
 .review-row__end {
   flex-shrink: 0;
   color: var(--text-subtle);
+}
+
+/* The trash (step 4 review R10c): step 1's destructive Icon button, but quiet gray at rest because
+   it repeats on every row; red over its circle on hover and press, as on step 1.
+   Figma: a quiet rest state for Icon button Destructive (docs/figma-sync.md). */
+.review-row__remove.icon-button--destructive:not([data-hovered], [data-pressed]) {
+  --icon-button-ink: var(--icon-subtle);
+}
+
+/* A vendor's last brand (R10a): looks disabled, stays focusable for its tooltip; no hover or press. */
+.review-row__remove.icon-button--destructive[aria-disabled='true'] {
+  --icon-button-fill: transparent;
+  --icon-button-ink: var(--icon-disabled);
+  cursor: default;
+  transform: none;
+}
+
+/* Tooltip stand-in (no Figma design yet): the toast's card look, small. */
+.review-row__tooltip {
+  max-width: 240px;
+  padding: var(--space-4) var(--space-8);
+  border: var(--border-width-1) solid var(--border-structural);
+  border-radius: var(--radius-4);
+  background: var(--surface-card);
+  box-shadow: var(--elevation-2);
+  font: var(--type-body-sm);
+  letter-spacing: var(--type-body-sm-tracking);
+  color: var(--text-default);
+}
+
+.review-row__tooltip[data-entering] {
+  animation: motion-fade-in var(--motion-duration-fast) var(--motion-ease-out);
+}
+
+.review-row__tooltip-arrow svg {
+  display: block;
+  fill: var(--surface-card);
+  stroke: var(--border-structural);
 }

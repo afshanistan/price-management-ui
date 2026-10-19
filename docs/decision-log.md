@@ -670,6 +670,27 @@ From the step 3 design review (`docs/reviews/step-3-design-review.md`, P1–P15)
 
 **Motion:** page load staggers (card, header, the three columns); the radio dot grows in; the Custom tile's text fades when its date changes.
 
+
+## Oct 19 · Review page (step 4) design review
+
+From the step 4 design review (`docs/reviews/step-4-design-review.md`, R1–R16). Will: top to bottom, then one batch.
+
+**Brands are grouped under their vendor, open.** A quiet label per vendor ("Cargill · 8 brands") sticks while its brands scroll by; the mono vendor column is gone (it cut off long names). Will found it elegant at both 13 and 122 brands. Neutral, not the step 2 teal bar: teal says "you can act on this", and the labels do nothing. Rejected: flat list as built, groups collapsed by default (most templates have 1–2 vendors, so it hides too much), counts only, a taller list.
+
+**Brands can be removed on Review; vendors can't.** Each brand row has step 1's trash ("Remove Cheerios"), always visible, quiet gray at rest and red on hover (it repeats on every row, so teal at rest would be loud). Undo toast, as on step 1. A vendor's last brand can't go (every vendor needs a brand): its trash looks disabled but stays focusable, with a tooltip "Each vendor needs a brand", the blocked-Next pattern. Will: removing vendors from Review "is where we get into trouble". Rejected: hiding the last trash, letting it remove the vendor too, no undo, hover-only trash.
+
+**Both lists get the plum top edge and scroll shadows.** Plum, because the lists are "what you've got", like the Selected brands panel; teal would read as a list to pick from. A soft shade on whichever edge has more to scroll (macOS hides scrollbars, so the lists didn't look scrollable). Rejected: a fade-out (covers text, looks like a glitch), a cut-off row (unreliable with group labels), always-on scrollbars. Review only for now; steps 1 and 2 could follow.
+
+**Summary strip: Vendors · Brands · Presets.** Labels follow the count ("1 Vendor"); "Presets set" became "Presets"; in "2 of 3" the "of 3" steps down so the number leads and the optional stat stops outweighing the other two. Rejected: "Defaults set", counting "Decide later" as decided. The strip's thirds don't line up with the lists' halves below; Will: fine.
+
+**One Optional on the page.** The Presets stat keeps its tag; the Global presets header drops its own.
+
+**Vendor rows match step 1:** no wordmark tile, "ESN-70441642". *Supersedes "Review rows show the wordmark tile" (Oct 18).* Lists stay A–Z.
+
+**Presets read like step 3, with a clearer hierarchy.** "Decide later · Fill in per row" on one line, like the step 3 tile (not "No default"), "Canadian dollar (CAD)", the date without "Next month". Labels stay quiet; set values go Body/LG Strong; "Decide later" stays regular and subtle. **Still fits the 644 card:** the hint on two lines plus the taller values made Review 666 (it would have scrolled), so the hint joined "Decide later" on one line and the readouts' padding went 12 → 10 (exactly 644). Rejected: shrinking both lists to 208. Rejected: labels in the mono Data font (mono marks data: IDs, ESNs, SKUs) and values in mono (words read as code).
+
+**Edit icon and Review pictogram** drawn by Will and exported from Figma; the placeholders are gone from Review.
+
 ---
 
 ## Build plan

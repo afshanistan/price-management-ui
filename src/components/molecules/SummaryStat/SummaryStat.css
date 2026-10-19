@@ -13,6 +13,13 @@
   color: var(--text-heading);
 }
 
+/* "of 3": a step down from the number, in subtle text (step 4 review R5). Stand-in style: Body/LG. */
+.summary-stat__total {
+  font: var(--type-body-lg);
+  letter-spacing: var(--type-body-lg-tracking);
+  color: var(--text-subtle);
+}
+
 .summary-stat__meta {
   display: flex;
   align-items: center;

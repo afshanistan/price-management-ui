@@ -1,4 +1,4 @@
-// The 21 icons from the Figma Icons set (design/specs/icon.md).
+// The 22 icons from the Figma Icons set (design/specs/icon.md).
 export const iconNames = [
   'tag',
   'create',
@@ -21,6 +21,7 @@ export const iconNames = [
   'chevron-left',
   'chevron-right',
   'close',
+  'edit',
 ] as const
 
 export type IconName = (typeof iconNames)[number]

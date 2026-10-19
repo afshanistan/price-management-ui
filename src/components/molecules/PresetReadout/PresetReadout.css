@@ -4,20 +4,34 @@
   flex-direction: column;
   gap: var(--space-4);
   min-width: 0;
-  padding: var(--space-12) var(--space-16);
+  /* 10 top and bottom (was 12): with Body/LG Strong values, Review fits the 644 card (step 4 review R17). */
+  padding: var(--space-10) var(--space-16);
 }
 
 .preset-readout__label {
   color: var(--text-subtle);
 }
 
+/* A set value leads: Body/LG Strong (step 4 review R16). The label stays quiet. */
 .preset-readout__value {
   margin: 0;
-  font: var(--type-body-md);
-  letter-spacing: var(--type-body-md-tracking);
+  font: var(--type-body-lg-strong);
+  letter-spacing: var(--type-body-lg-strong-tracking);
   color: var(--text-heading);
 }
 
+/* "Decide later" stays regular and subtle, so set and unset read apart at a glance. "Fill in per row"
+   sits beside it on one line, like step 3's inline tile (R17). */
 .preset-readout__value[data-empty] {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-8);
+  font: var(--type-body-lg);
+  letter-spacing: var(--type-body-lg-tracking);
+  color: var(--text-subtle);
+}
+
+.preset-readout__hint {
   color: var(--text-subtle);
 }
