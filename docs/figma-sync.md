@@ -4,6 +4,25 @@ Gaps code found that Figma has to fix first (decision log, "Code finds gaps; Fig
 
 **How it works:** Claude Code adds an entry here and, if a token is needed to keep building, a stand-in in `src/styles/tokens.pending.css`. Will applies the queue in Figma in batches, then re-exports `tokens.css`. Then the stand-in is deleted and the entry ticked.
 
+## Summary (Oct 19)
+
+**44 open, 17 done.** Tokens and text styles: 8 open, 11 done. Components (including a few tokens logged with them): 36 open, 6 done. The queue is held on purpose. Figma gets synced in one batch once the code reviews are finished, instead of piecemeal.
+
+**Open items, by where they came from:**
+- **Code builds, Oct 17–18 (15):** layout tokens (card height, stage height), `size/128`, Body/LG Strong, the motion tokens, ESN format, Input focus as a 2px border, the label staying on `text-heading` when focused, no helper under the vendor search, Result row without a logo, long names wrapping, tall logos left out, the result count, two stale names and descriptions.
+- **Step 2 design review (8):** Group header redesign (a teal bar that opens and closes) and its tokens, Label/XL, `border-action-strong`, denser Brand list rows, Selected brands panel rework, chip-shaped empty state, retiring the Vendor coverage tile.
+- **Step 3 design review (5):** option tile copy and order, "(optional)" in the card title, the date picker opening above, calendar day styles, the step 3 card hugging its content.
+- **Step 4 design review (11):** brands grouped by vendor on Review, Review row changes (no tile, Remove on brand rows), a new **Tooltip**, the plum top edge and fixed 230 on the lists, `scroll-shadow`, Summary stat and Preset readout wording, spacing.
+- **Stepper review (4):** Complete line at 2px, the fuse tip color, page motion tokens, the 02e comp.
+- **New component (1):** **Toast** (Undo and the download placeholder).
+
+**Needs a decision before syncing:**
+1. Result count in the Results panel: not designed yet.
+2. 02e "Back from review": fix its stepper or retire it (it now matches 02b).
+3. Review vendor labels: built as a stand-in; the final look is still to settle.
+4. Icon button Destructive: how to add the "Quiet" rest look (a new property, or something else).
+5. Tokens left with no users: `focus/offset/4`, `text-label-focus`, `fill-coverage-tile`, `text-on-coverage-tile`. Delete them, or move them to a retired group.
+
 Format: **Token name** · Collection · Light value · On brand value · Used by (component) · What to bind in Figma · Stand-in (in `tokens.pending.css`, or none) · Found while (date)
 
 ---
