@@ -11,6 +11,8 @@ const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(file
 
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
+  // GitHub Pages serves the app from /price-management-app/. The deploy workflow sets BASE_PATH; local dev uses /.
+  base: process.env.BASE_PATH ?? '/',
   plugins: [react()],
   test: {
     projects: [{
